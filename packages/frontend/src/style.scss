@@ -1,5 +1,12 @@
 @charset "utf-8";
 
+@font-face {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
 :root {
 	--radius: 12px;
 	--marginFull: 16px;
@@ -7,7 +14,7 @@
 
 	--margin: var(--marginFull);
 	--minBottomSpacing: 0px;
-
+	
 	@media (max-width: 500px) {
 		--margin: var(--marginHalf);
 		--minBottomSpacing: calc(72px + max(12px, env(safe-area-inset-bottom, 0px)));
@@ -19,7 +26,7 @@
 ::selection {
 	color: var(--fgOnAccent);
 	background-color: var(--accent);
-}
+} 
 
 html {
 	background-color: var(--bg);
@@ -27,8 +34,8 @@ html {
 	accent-color: var(--accent);
 	overflow: auto;
 	overflow-wrap: break-word;
-	font-family: 'Hiragino Maru Gothic Pro', "BIZ UDGothic", Roboto, HelveticaNeue, Arial, sans-serif;
-	font-size: 14px;
+	font-family: 'SUITE-Regular', 'Hiragino Maru Gothic Pro', "BIZ UDGothic", Roboto, HelveticaNeue, Arial, sans-serif;
+	font-size: 16px;
 	line-height: 1.35;
 	text-size-adjust: 100%;
 	tab-size: 2;
@@ -72,7 +79,7 @@ html {
 	}
 
 	&.useSystemFont {
-		font-family: system-ui;
+		font-family: 'Hiragino Maru Gothic Pro', sans-serif;
 	}
 }
 
@@ -616,4 +623,27 @@ hr {
 @keyframes mfm-rainbow {
 	0% { filter: hue-rotate(0deg) contrast(150%) saturate(150%); }
 	100% { filter: hue-rotate(360deg) contrast(150%) saturate(150%); }
+}
+
+.xcukqgmh > .main {
+    padding: 32px;
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+.xcukqgmh > .main > .banner > img {
+    margin: -32px;
+    border-radius: 10px 10px 0 0;
+    width: calc(100% + 64px) !important;
+}
+
+.xcukqgmh .x5yeR {
+    text-align: justify;
+    border: 1px solid var(--accent);
+    border-radius: 15px;
+}
+
+.xFdHz .xgeRX .xsYEp > div > span {
+    display: flex;
+    justify-content: center;
 }
