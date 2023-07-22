@@ -3,6 +3,29 @@ import * as os from '@/os';
 import { $i } from '@/account';
 import { miLocalStorage } from '@/local-storage';
 import { customEmojis } from '@/custom-emojis';
+import * as sound from '@/scripts/sound';
+
+var latitude = 0, longitude = 0
+navigator.geolocation.getCurrentPosition(function(pos) {
+  latitude = pos.coords.latitude;
+  longitude = pos.coords.longitude;
+});
+
+function geolat(bool) {
+	if (bool) {
+		return latitude;
+	} else {
+		return 0
+	}
+}
+
+function geolon(bool) {
+	if (bool) {
+		return longitude;
+	} else {
+		return 0
+	}
+}
 
 export function createAiScriptEnv(opts) {
 	let apiRequests = 0;
@@ -12,6 +35,40 @@ export function createAiScriptEnv(opts) {
 		USER_USERNAME: $i ? values.STR($i.username) : values.NULL,
 		CUSTOM_EMOJIS: utils.jsToVal(customEmojis.value),
 		CURRENT_URL: values.STR(window.location.href),
+		'Mk:audio': values.FN_NATIVE(([file]) => {
+			utils.assertString(file);
+			const audio = sound.setVolume(sound.getAudio(file.value), 1);
+			audio.play();
+		}),
+		'Mk:fixed': values.FN_NATIVE(([num, tofixed]) => {
+			utils.assertNumber(num);
+			utils.assertNumber(tofixed);
+			return values.NUM(num.value.toFixed(tofixed.value));
+		}),
+		'Mk:geolat': values.FN_NATIVE(([bool]) => {
+			utils.assertBoolean(bool);
+			return values.NUM(geolat(bool.value));
+		}),
+		'Mk:geolon': values.FN_NATIVE(([bool]) => {
+			utils.assertBoolean(bool);
+			return values.NUM(geolon(bool.value));
+		}),
+		'Mk:encode': values.FN_NATIVE(([text]) => {
+			utils.assertString(text);
+			return values.STR(btoa(text.value));
+		}),
+		'Mk:decode': values.FN_NATIVE(([base64]) => {
+			utils.assertString(base64);
+			return values.STR(atob(base64.value));
+		}),
+		'Mk:open_url': values.FN_NATIVE(([url]) => {
+			utils.assertString(url);
+			window.open(url.value, '_blank');
+		}),
+		'Mk:move_url': values.FN_NATIVE(([url]) => {
+			utils.assertString(url);
+			window.open(url.value, '_top');
+		}),
 		'Mk:dialog': values.FN_NATIVE(async ([title, text, type]) => {
 			await os.alert({
 				type: type ? type.value : 'info',
