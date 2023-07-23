@@ -29,11 +29,10 @@ html {
 	overflow: auto;
 	overflow-wrap: break-word;
 	font-family: Galmuri11, 'Hiragino Maru Gothic Pro', "BIZ UDGothic", Roboto, HelveticaNeue, Arial, sans-serif;
-	font-size: 16px;
+	font-size: 14px;
 	line-height: 1.35;
 	text-size-adjust: 100%;
 	tab-size: 2;
-	cursor: url(https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/2598379a-e743-4079-96eb-b27da0a0e735.png), auto;
 	
 	&, * {
 		scrollbar-color: var(--scrollbarHandle) transparent;
@@ -93,7 +92,7 @@ html, body {
 
 a {
 	text-decoration: none;
-	cursor: url(https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/2598379a-e743-4079-96eb-b27da0a0e735.png), auto;
+	cursor: pointer;
 	color: inherit;
 	tap-highlight-color: transparent;
 	-webkit-tap-highlight-color: transparent;
@@ -189,7 +188,7 @@ hr {
 	margin: 0; // for Safari
 	background: none;
 	border: none;
-	cursor: url(https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/2598379a-e743-4079-96eb-b27da0a0e735.png), auto;
+	cursor: pointer;
 	color: inherit;
 	touch-action: manipulation;
 	tap-highlight-color: transparent;
@@ -205,7 +204,7 @@ hr {
 
 	&:disabled {
 		opacity: 0.5;
-	cursor: url(https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/2598379a-e743-4079-96eb-b27da0a0e735.png), auto;
+		cursor: default;
 	}
 }
 
@@ -239,7 +238,7 @@ hr {
 
 ._help {
 	color: var(--accent);
-	cursor: url(https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/2598379a-e743-4079-96eb-b27da0a0e735.png), auto;
+	cursor: help
 }
 
 ._textButton {
@@ -641,4 +640,8 @@ hr {
 .xFdHz .xgeRX .xsYEp > div > span {
     display: flex;
     justify-content: center;
+}
+
+.xFdHz .xgeRX .xsYEp > div > span > div {
+	max-height: 300px;
 }
