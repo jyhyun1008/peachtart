@@ -1,4 +1,5 @@
 @charset "utf-8";
+@import url('https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css');
 
 :root {
 	--radius: 12px;
@@ -27,12 +28,13 @@ html {
 	accent-color: var(--accent);
 	overflow: auto;
 	overflow-wrap: break-word;
-	font-family: 'Hiragino Maru Gothic Pro', "BIZ UDGothic", Roboto, HelveticaNeue, Arial, sans-serif;
-	font-size: 14px;
+	font-family: Galmuri11, 'Hiragino Maru Gothic Pro', "BIZ UDGothic", Roboto, HelveticaNeue, Arial, sans-serif;
+	font-size: 16px;
 	line-height: 1.35;
 	text-size-adjust: 100%;
 	tab-size: 2;
-
+	cursor: url(https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/2598379a-e743-4079-96eb-b27da0a0e735.png), auto;
+	
 	&, * {
 		scrollbar-color: var(--scrollbarHandle) transparent;
 		scrollbar-width: thin;
@@ -91,7 +93,7 @@ html, body {
 
 a {
 	text-decoration: none;
-	cursor: pointer;
+	cursor: url(https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/2598379a-e743-4079-96eb-b27da0a0e735.png), auto;
 	color: inherit;
 	tap-highlight-color: transparent;
 	-webkit-tap-highlight-color: transparent;
@@ -187,7 +189,7 @@ hr {
 	margin: 0; // for Safari
 	background: none;
 	border: none;
-	cursor: pointer;
+	cursor: url(https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/2598379a-e743-4079-96eb-b27da0a0e735.png), auto;
 	color: inherit;
 	touch-action: manipulation;
 	tap-highlight-color: transparent;
@@ -203,7 +205,7 @@ hr {
 
 	&:disabled {
 		opacity: 0.5;
-		cursor: default;
+	cursor: url(https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/2598379a-e743-4079-96eb-b27da0a0e735.png), auto;
 	}
 }
 
@@ -237,7 +239,7 @@ hr {
 
 ._help {
 	color: var(--accent);
-	cursor: help
+	cursor: url(https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/2598379a-e743-4079-96eb-b27da0a0e735.png), auto;
 }
 
 ._textButton {
@@ -616,4 +618,27 @@ hr {
 @keyframes mfm-rainbow {
 	0% { filter: hue-rotate(0deg) contrast(150%) saturate(150%); }
 	100% { filter: hue-rotate(360deg) contrast(150%) saturate(150%); }
+}
+
+.xcukqgmh > .main {
+    padding: 32px;
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+.xcukqgmh > .main > .banner > img {
+    margin: -32px;
+    border-radius: 10px 10px 0 0;
+    width: calc(100% + 64px) !important;
+}
+
+.xcukqgmh .x5yeR {
+    text-align: justify;
+    border: 1px solid var(--accent);
+    border-radius: 15px;
+}
+
+.xFdHz .xgeRX .xsYEp > div > span {
+    display: flex;
+    justify-content: center;
 }
