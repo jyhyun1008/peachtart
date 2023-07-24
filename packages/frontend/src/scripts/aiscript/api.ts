@@ -40,10 +40,31 @@ export function createAiScriptEnv(opts) {
 			const audio = sound.setVolume(sound.getAudio(file.value), 1);
 			audio.play();
 		}),
-		'Mk:fixed': values.FN_NATIVE(([num, tofixed]) => {
+		'Math:toFixed': values.FN_NATIVE(([num, tofixed]) => {
 			utils.assertNumber(num);
 			utils.assertNumber(tofixed);
 			return values.NUM(num.value.toFixed(tofixed.value));
+		}),
+		'Date:getTime': values.FN_NATIVE(([year, month, day, hour, minute, second, ms]) => {
+			utils.assertNumber(year);
+			if (month.type !== 'num') {month = 0} else {month = month.value};
+			if (day.type !== 'num') {day = 0} else {day = day.value};
+			if (hour.type !== 'num') {hour = 0} else {hour = hour.value};
+			if (minute.type !== 'num') {minute = 0} else {minute = minute.value};
+			if (second.type !== 'num') {second = 0} else {second = second.value};
+			if (ms.type !== 'num') {ms = 0} else {ms = ms.value};
+			var result = new Date(year.value, month, day, hour, minute, second, ms).getTime();
+			return values.NUM(result);
+		}),
+		'Date:daysFromEpoch': values.FN_NATIVE(([num]) => {
+			utils.assertNumber(num);
+			return values.NUM(Math.floor((num.value + 32400000) / 86400000));
+		}),
+		'Date:dayOfYear': values.FN_NATIVE(([num]) => {
+			utils.assertNumber(num);
+			const currentYear  = new Date().getFullYear();
+			const currentYearMs = new Date(currentYear, 0, 0).getTime();
+			return values.NUM(Math.floor((num.value - currentYearMs) / 1000 / 60 / 60 / 24));
 		}),
 		'Mk:geolat': values.FN_NATIVE(([bool]) => {
 			utils.assertBoolean(bool);
@@ -52,10 +73,6 @@ export function createAiScriptEnv(opts) {
 		'Mk:geolon': values.FN_NATIVE(([bool]) => {
 			utils.assertBoolean(bool);
 			return values.NUM(geolon(bool.value));
-		}),
-		'Mk:day': values.FN_NATIVE(([num]) => {
-			utils.assertNumber(num);
-			return values.NUM(parseInt((num.value - 54000000) / 86400000));
 		}),
 		'Mk:encode': values.FN_NATIVE(([text]) => {
 			utils.assertString(text);
