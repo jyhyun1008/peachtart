@@ -47,7 +47,7 @@ export function createAiScriptEnv(opts) {
 		}),
 		'Date:weekDay': values.FN_NATIVE(([date]) => {
 			utils.assertNumber(date);
-			var result = new Date(date).getDay();
+			var result = new Date(date.value).getDay();
 			return values.NUM(result);
 		}),
 		'Date:getTime': values.FN_NATIVE(([year, month, day, hour, minute, second, ms]) => {
@@ -68,7 +68,7 @@ export function createAiScriptEnv(opts) {
 		}),
 		'Date:dayOfYear': values.FN_NATIVE(([num]) => {
 			utils.assertNumber(num);
-			const currentYear  = new Date(num).getFullYear();
+			const currentYear  = new Date(num.value).getFullYear();
 			const currentYearMs = new Date(currentYear, 0, 0).getTime();
 			return values.NUM(Math.floor((num.value - currentYearMs) / 1000 / 60 / 60 / 24));
 		}),
