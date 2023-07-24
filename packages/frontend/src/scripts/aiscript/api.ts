@@ -45,6 +45,11 @@ export function createAiScriptEnv(opts) {
 			utils.assertNumber(tofixed);
 			return values.NUM(num.value.toFixed(tofixed.value));
 		}),
+		'Date:weekDay': values.FN_NATIVE(([date]) => {
+			utils.assertNumber(date);
+			var result = new Date(date).getDay();
+			return values.NUM(result);
+		}),
 		'Date:getTime': values.FN_NATIVE(([year, month, day, hour, minute, second, ms]) => {
 			utils.assertNumber(year);
 			if (!month) {month = 0} else if (month.type !== 'num') {month = 0} else {month = month.value};
@@ -63,7 +68,7 @@ export function createAiScriptEnv(opts) {
 		}),
 		'Date:dayOfYear': values.FN_NATIVE(([num]) => {
 			utils.assertNumber(num);
-			const currentYear  = new Date().getFullYear();
+			const currentYear  = new Date(num).getFullYear();
 			const currentYearMs = new Date(currentYear, 0, 0).getTime();
 			return values.NUM(Math.floor((num.value - currentYearMs) / 1000 / 60 / 60 / 24));
 		}),
@@ -82,6 +87,10 @@ export function createAiScriptEnv(opts) {
 		'Mk:decode': values.FN_NATIVE(([base64]) => {
 			utils.assertString(base64);
 			return values.STR(atob(base64.value));
+		}),
+		'Mk:open_page': values.FN_NATIVE(([url]) => {
+			utils.assertString(url);
+			os.pageWindow(url.value);
 		}),
 		'Mk:open_url': values.FN_NATIVE(([url]) => {
 			utils.assertString(url);
