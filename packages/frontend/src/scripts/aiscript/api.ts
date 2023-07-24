@@ -53,6 +53,10 @@ export function createAiScriptEnv(opts) {
 			utils.assertBoolean(bool);
 			return values.NUM(geolon(bool.value));
 		}),
+		'Mk:day': values.FN_NATIVE(([num]) => {
+			utils.assertNumber(num);
+			return values.NUM(parseInt((num.value - 54000000) / 86400000));
+		}),
 		'Mk:encode': values.FN_NATIVE(([text]) => {
 			utils.assertString(text);
 			return values.STR(btoa(text.value));
