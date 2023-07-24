@@ -620,9 +620,17 @@ hr {
 	100% { filter: hue-rotate(360deg) contrast(150%) saturate(150%); }
 }
 
+textarea:hover {
+		cursor: url(https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/2598379a-e743-4079-96eb-b27da0a0e735.png), auto;
+}
+
+input:hover {
+		cursor: url(https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/2598379a-e743-4079-96eb-b27da0a0e735.png), auto;
+}
+
 .xcukqgmh > .main {
     padding: 32px;
-    background: #ffffff;
+    background:  var(--navBg);
     border-radius: 10px;
 }
 
