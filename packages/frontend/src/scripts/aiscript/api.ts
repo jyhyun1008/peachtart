@@ -47,18 +47,19 @@ export function createAiScriptEnv(opts) {
 		}),
 		'Date:getTime': values.FN_NATIVE(([year, month, day, hour, minute, second, ms]) => {
 			utils.assertNumber(year);
-			if (month.type !== 'num') {month = 0} else {month = month.value};
-			if (day.type !== 'num') {day = 0} else {day = day.value};
-			if (hour.type !== 'num') {hour = 0} else {hour = hour.value};
-			if (minute.type !== 'num') {minute = 0} else {minute = minute.value};
-			if (second.type !== 'num') {second = 0} else {second = second.value};
-			if (ms.type !== 'num') {ms = 0} else {ms = ms.value};
+			if (!month) {month = 0} else if (month.type !== 'num') {month = 0} else {month = month.value};
+			if (!day) {day = 0} else if (day.type !== 'num') {day = 0} else {day = day.value};
+			if (!hour) {hour = 0} else if (hour.type !== 'num') {hour = 0} else {hour = hour.value};
+			if (!minute) {minute = 0} else if (minute.type !== 'num') {minute = 0} else {minute = minute.value};
+			if (!second) {second = 0} else if (second.type !== 'num') {second = 0} else {second = second.value};
+			if (!ms) {ms = 0} else if (ms.type !== 'num') {ms = 0} else {ms = ms.value};
 			var result = new Date(year.value, month, day, hour, minute, second, ms).getTime();
 			return values.NUM(result);
 		}),
 		'Date:daysFromEpoch': values.FN_NATIVE(([num]) => {
 			utils.assertNumber(num);
-			return values.NUM(Math.floor((num.value + 32400000) / 86400000));
+			const epoch = new Date(1970, 0, 1).getTime();
+			return values.NUM(Math.floor((num.value - epoch) / 86400000));
 		}),
 		'Date:dayOfYear': values.FN_NATIVE(([num]) => {
 			utils.assertNumber(num);
