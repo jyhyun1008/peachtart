@@ -33,6 +33,7 @@ html {
 	line-height: 1.35;
 	text-size-adjust: 100%;
 	tab-size: 2;
+	cursor: url(https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/2598379a-e743-4079-96eb-b27da0a0e735.png), auto;
 	
 	&, * {
 		scrollbar-color: var(--scrollbarHandle) transparent;
@@ -92,7 +93,7 @@ html, body {
 
 a {
 	text-decoration: none;
-	cursor: pointer;
+	cursor: url(https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/2598379a-e743-4079-96eb-b27da0a0e735.png), auto;
 	color: inherit;
 	tap-highlight-color: transparent;
 	-webkit-tap-highlight-color: transparent;
@@ -188,7 +189,7 @@ hr {
 	margin: 0; // for Safari
 	background: none;
 	border: none;
-	cursor: pointer;
+	cursor: url(https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/2598379a-e743-4079-96eb-b27da0a0e735.png), auto;
 	color: inherit;
 	touch-action: manipulation;
 	tap-highlight-color: transparent;
@@ -204,7 +205,7 @@ hr {
 
 	&:disabled {
 		opacity: 0.5;
-		cursor: default;
+		cursor: url(https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/2598379a-e743-4079-96eb-b27da0a0e735.png), auto;
 	}
 }
 
@@ -238,7 +239,7 @@ hr {
 
 ._help {
 	color: var(--accent);
-	cursor: help
+	cursor: url(https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/2598379a-e743-4079-96eb-b27da0a0e735.png), auto;
 }
 
 ._textButton {
