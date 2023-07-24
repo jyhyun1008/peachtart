@@ -119,7 +119,12 @@ export type AsUiPostFormButton = AsUiComponentBase & {
 	};
 };
 
-export type AsUiComponent = AsUiRoot | AsUiContainer | AsUiText | AsUiMfm | AsUiButton | AsUiButtons | AsUiSwitch | AsUiTextarea | AsUiTextInput | AsUiNumberInput | AsUiSelect | AsUiFolder | AsUiPostFormButton;
+export type AsUiCustomChart = AsUiComponentBase & {
+	type: 'customChart';
+	chartId: string;
+};
+
+export type AsUiComponent = AsUiRoot | AsUiContainer | AsUiText | AsUiMfm | AsUiButton | AsUiButtons | AsUiSwitch | AsUiTextarea | AsUiTextInput | AsUiNumberInput | AsUiSelect | AsUiFolder | AsUiPostFormButton | AsUiCustomChart;
 
 export function patch(id: string, def: values.Value, call: (fn: values.VFn, args: values.Value[]) => Promise<values.Value>) {
 	// TODO
@@ -427,6 +432,17 @@ function getFolderOptions(def: values.Value | undefined): Omit<AsUiFolder, 'id' 
 	};
 }
 
+function getCustomChartOptions(def: values.Value | undefined): Omit<AsUiCustomChart, 'id' | 'type'> {
+	utils.assertObject(def);
+
+	const chartId = def.value.get('chartId');
+	if (chartId) utils.assertString(chartId);
+
+	return {
+		chartId: chartId.value,
+	};
+}
+
 function getPostFormButtonOptions(def: values.Value | undefined, call: (fn: values.VFn, args: values.Value[]) => Promise<values.Value>): Omit<AsUiPostFormButton, 'id' | 'type'> {
 	utils.assertObject(def);
 
@@ -563,6 +579,10 @@ export function registerAsUiLib(components: Ref<AsUiComponent>[], done: (root: R
 
 		'Ui:C:postFormButton': values.FN_NATIVE(([def, id], opts) => {
 			return createComponentInstance('postFormButton', def, id, getPostFormButtonOptions, opts.call);
+		}),
+		
+		'Ui:C:customChart': values.FN_NATIVE(([def, id], opts) => {
+			return createComponentInstance('customChart', def, id, getCustomChartOptions, opts.call);
 		}),
 	};
 }
