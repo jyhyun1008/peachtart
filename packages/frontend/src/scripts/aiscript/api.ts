@@ -55,7 +55,7 @@ export function createAiScriptEnv(opts) {
 		}),
 		'Mk:day': values.FN_NATIVE(([num]) => {
 			utils.assertNumber(num);
-			return values.NUM(parseInt((num.value - 5400000) / 86400000));
+			return values.NUM(parseInt((num.value - 54000000) / 86400000));
 		}),
 		'Mk:encode': values.FN_NATIVE(([text]) => {
 			utils.assertString(text);
