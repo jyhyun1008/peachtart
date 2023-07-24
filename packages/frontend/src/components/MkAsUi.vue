@@ -58,6 +58,7 @@ import MkTextarea from '@/components/MkTextarea.vue';
 import MkSelect from '@/components/MkSelect.vue';
 import { AsUiComponent } from '@/scripts/aiscript/ui';
 import MkFolder from '@/components/MkFolder.vue';
+import MkCustomChart from '@/components/MkCustomChart.vue';
 
 const props = withDefaults(defineProps<{
 	component: AsUiComponent;
