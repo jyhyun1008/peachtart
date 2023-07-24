@@ -1,6 +1,6 @@
 {
 	"name": "misskey",
-	"version": "13.14.1+PiScript.0.0.1",
+	"version": "13.14.1+PiScript.0.0.2",
 	"codename": "nasubi",
 	"repository": {
 		"type": "git",
