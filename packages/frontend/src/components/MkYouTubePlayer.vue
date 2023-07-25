@@ -29,6 +29,7 @@ const props = withDefaults(defineProps<{
 	url: string;
 	className?: string;
 }>(), {
+	url: '';
 	className: 'MkYouTubePlayer',
 });
 
