@@ -29,8 +29,8 @@ onMounted(() => {
       datasets: [{
         label: props.label,
         data: props.values,
-        borderColor: 'red',
-        backgroundColor: 'red',
+        borderColor: Utils.CHART_COLORS.red,
+        backgroundColor: Utils.transparentize(Utils.CHART_COLORS.red, 0.5),
         borderWidth: 1,
         borderRadius: 5,
         borderSkipped: false,
