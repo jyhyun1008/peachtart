@@ -11,30 +11,14 @@ import gradient from 'chartjs-plugin-gradient';
 
 Chart.register(...registerables);
 	
-const props = defineProps({
-	chartId: {
-		type: String,
-		required: true,
-	},
-	title: {
-		type: String,
-		required: false,
-		default: 'My Chart',
-	},
-	keys: {
-		type: String[],
-		required: true,
-	},
-	values: {
-		type: Number[],
-		required: true,
-	},
-	label: {
-		type: String,
-		required: false,
-		default: 'Counts',
-	}
-}); 
+
+const props = defineProps<{
+	chartId: string;
+	title: string;
+	keys: string[];
+	values: number[];
+	label: string;
+}>(); 
 
 onMounted(() => {
 	const ctx = document.getElementById(props.chartId);
