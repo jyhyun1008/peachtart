@@ -10,14 +10,9 @@ import { Chart, registerables } from 'chart.js';
 import gradient from 'chartjs-plugin-gradient';
 
 Chart.register(...registerables);
-	
 
 const props = defineProps<{
 	chartId: string;
-	title: string;
-	keys: string[];
-	values: number[];
-	label: string;
 }>(); 
 
 onMounted(() => {
