@@ -26,7 +26,7 @@ const props = defineProps({
 		required: true,
 	},
 	values: {
-		type: number[],
+		type: Number[],
 		required: true,
 	},
 	label: {
