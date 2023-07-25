@@ -1,7 +1,7 @@
 <template>
 <div>
 	<div :class="$style.label" @click="focus"><slot name="label"></slot></div>
-	<div :class="{ [$style.disabled]: disabled, [$style.focused]: focused, [$style.tall]: tall, [$style.pre]: pre }" style="position: relative;">
+	<div :class="[{ [$style.disabled]: disabled, [$style.focused]: focused, [$style.tall]: tall, [$style.pre]: pre }, {className: 'className'}]" style="position: relative;">
 		<textarea
 			ref="inputEl"
 			v-model="v"
@@ -47,7 +47,10 @@ const props = defineProps<{
 	code?: boolean;
 	tall?: boolean;
 	pre?: boolean;
-}>();
+	className?: string;
+}>(), {
+	className: 'MkTextArea',
+});
 
 const emit = defineEmits<{
 	(ev: 'change', _ev: KeyboardEvent): void;
@@ -103,6 +106,8 @@ watch(v, newValue => {
 });
 
 onMounted(() => {
+	
+	this.$refs.inputEl.classList.add(props.className);
 	nextTick(() => {
 		if (autofocus.value) {
 			focus();
