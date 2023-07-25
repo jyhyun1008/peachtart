@@ -122,6 +122,10 @@ export type AsUiPostFormButton = AsUiComponentBase & {
 export type AsUiCustomChart = AsUiComponentBase & {
 	type: 'customChart';
 	chartId: string;
+	title?: string;
+	keys: string[];
+	values: number[];
+	label?: string;
 };
 
 export type AsUiComponent = AsUiRoot | AsUiContainer | AsUiText | AsUiMfm | AsUiButton | AsUiButtons | AsUiSwitch | AsUiTextarea | AsUiTextInput | AsUiNumberInput | AsUiSelect | AsUiFolder | AsUiPostFormButton | AsUiCustomChart;
@@ -437,9 +441,21 @@ function getCustomChartOptions(def: values.Value | undefined): Omit<AsUiCustomCh
 
 	const chartId = def.value.get('chartId');
 	if (chartId) utils.assertString(chartId);
+	const title = def.value.get('title');
+	if (title) utils.assertString(title);
+	const keys = def.value.get('keys');
+	if (keys) utils.assertArray(keys);
+	const values = def.value.get('values');
+	if (values) utils.assertArray(values);
+	const label = def.value.get('label');
+	if (label) utils.assertString(label);
 
 	return {
 		chartId: chartId.value,
+		title: title.value,
+		keys: keys.value,
+		values: values.value,
+		label: label.value
 	};
 }
 
