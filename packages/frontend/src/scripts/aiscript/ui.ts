@@ -14,6 +14,7 @@ export type AsUiRoot = AsUiComponentBase & {
 
 export type AsUiContainer = AsUiComponentBase & {
 	type: 'container';
+	class?: string;
 	children?: AsUiComponent['id'][];
 	align?: 'left' | 'center' | 'right';
 	bgColor?: string;
@@ -28,6 +29,7 @@ export type AsUiContainer = AsUiComponentBase & {
 
 export type AsUiText = AsUiComponentBase & {
 	type: 'text';
+	class?: string;
 	text?: string;
 	size?: number;
 	bold?: boolean;
@@ -37,6 +39,7 @@ export type AsUiText = AsUiComponentBase & {
 
 export type AsUiMfm = AsUiComponentBase & {
 	type: 'mfm';
+	class?: string;
 	text?: string;
 	size?: number;
 	bold?: boolean;
