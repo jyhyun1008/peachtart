@@ -453,8 +453,14 @@ function getCustomChartOptions(def: values.Value | undefined): Omit<AsUiCustomCh
 	return {
 		chartId: chartId.value,
 		title: title?.value ?? '',
-		keys: keys.value,
-		values: values.value,
+		keys: keys ? keys.value.map(v => {
+			utils.assertString(v);
+			return v.value;
+		}) : [],
+		values: values ? values.value.map(v => {
+			utils.assertNumber(v);
+			return v.value;
+		}) : [],
 		label: label?.value ?? '',
 	};
 }
