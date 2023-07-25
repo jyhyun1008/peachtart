@@ -452,10 +452,10 @@ function getCustomChartOptions(def: values.Value | undefined): Omit<AsUiCustomCh
 
 	return {
 		chartId: chartId.value,
-		title: title.value,
+		title: title?.value ?? '',
 		keys: keys.value,
 		values: values.value,
-		label: label.value
+		label: label?.value ?? '',
 	};
 }
 
