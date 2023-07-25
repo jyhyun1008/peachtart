@@ -45,6 +45,10 @@ export function createAiScriptEnv(opts) {
 			utils.assertNumber(tofixed);
 			return values.NUM(num.value.toFixed(tofixed.value));
 		}),
+		'Str:parseFloat': values.FN_NATIVE(([str]) => {
+			utils.assertString(str);
+			return values.NUM(parseFloat(str.value));
+		}),
 		'Date:weekDay': values.FN_NATIVE(([date]) => {
 			utils.assertNumber(date);
 			var result = new Date(date.value).getDay();
