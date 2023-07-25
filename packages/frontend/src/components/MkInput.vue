@@ -1,7 +1,7 @@
 <template>
 <div>
 	<div :class="$style.label" @click="focus"><slot name="label"></slot></div>
-	<div :class="[$style.input, { [$style.inline]: inline, [$style.disabled]: disabled, [$style.focused]: focused }]">
+	<div :class="[$style.input, { [$style.inline]: inline, [$style.disabled]: disabled, [$style.focused]: focused }, {className: 'className'}]">
 		<div ref="prefixEl" :class="$style.prefix"><slot name="prefix"></slot></div>
 		<input
 			ref="inputEl"
@@ -41,7 +41,7 @@ import MkButton from '@/components/MkButton.vue';
 import { useInterval } from '@/scripts/use-interval';
 import { i18n } from '@/i18n';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
 	modelValue: string | number | null;
 	type?: 'text' | 'number' | 'password' | 'email' | 'url' | 'date' | 'time' | 'search' | 'datetime-local';
 	required?: boolean;
@@ -59,7 +59,10 @@ const props = defineProps<{
 	manualSave?: boolean;
 	small?: boolean;
 	large?: boolean;
-}>();
+	className?: string;
+}>(), {
+	className: 'MkInput',
+});
 
 const emit = defineEmits<{
 	(ev: 'change', _ev: KeyboardEvent): void;
@@ -144,6 +147,7 @@ useInterval(() => {
 });
 
 onMounted(() => {
+	this.$refs.inputEl.classList.add(props.className);
 	nextTick(() => {
 		if (autofocus.value) {
 			focus();

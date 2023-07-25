@@ -141,13 +141,13 @@ export type AsUiCustomChart = AsUiComponentBase & {
 	label?: string;
 };
 
-export type AsUiYoutubePlayer = AsUiComponentBase & {
-	type: 'youtubePlayer';
+export type AsUiYouTubePlayer = AsUiComponentBase & {
+	type: 'youTubePlayer';
 	className?: string;
 	url: string;
 };
 
-export type AsUiComponent = AsUiRoot | AsUiContainer | AsUiText | AsUiMfm | AsUiButton | AsUiButtons | AsUiSwitch | AsUiTextarea | AsUiTextInput | AsUiNumberInput | AsUiSelect | AsUiFolder | AsUiPostFormButton | AsUiCustomChart | AsUiYoutubePlayer;
+export type AsUiComponent = AsUiRoot | AsUiContainer | AsUiText | AsUiMfm | AsUiButton | AsUiButtons | AsUiSwitch | AsUiTextarea | AsUiTextInput | AsUiNumberInput | AsUiSelect | AsUiFolder | AsUiPostFormButton | AsUiCustomChart | AsUiYouTubePlayer;
 
 export function patch(id: string, def: values.Value, call: (fn: values.VFn, args: values.Value[]) => Promise<values.Value>) {
 	// TODO
@@ -523,7 +523,7 @@ function getCustomChartOptions(def: values.Value | undefined): Omit<AsUiCustomCh
 	};
 }
 
-function getYoutubePlayerOptions(def: values.Value | undefined): Omit<AsUiCustomChart, 'id' | 'type'> {
+function getYouTubePlayerOptions(def: values.Value | undefined): Omit<AsUiYouTubePlayer, 'id' | 'type'> {
 	utils.assertObject(def);
 
 	const url = def.value.get('url');
@@ -533,7 +533,7 @@ function getYoutubePlayerOptions(def: values.Value | undefined): Omit<AsUiCustom
 
 	return {
 		url: url.value,
-		className: className?.value ?? 'youtubePlayer',
+		className: className?.value ?? 'youTubePlayer',
 	};
 }
 
@@ -679,8 +679,8 @@ export function registerAsUiLib(components: Ref<AsUiComponent>[], done: (root: R
 			return createComponentInstance('customChart', def, id, getCustomChartOptions, opts.call);
 		}),
 		
-		'Ui:C:youtubePlayer': values.FN_NATIVE(([def, id], opts) => {
-			return createComponentInstance('youtubePlayer', def, id, getYoutubePlayerOptions, opts.call);
+		'Ui:C:youTubePlayer': values.FN_NATIVE(([def, id], opts) => {
+			return createComponentInstance('youTubePlayer', def, id, getYouTubePlayerOptions, opts.call);
 		}),
 	};
 }
