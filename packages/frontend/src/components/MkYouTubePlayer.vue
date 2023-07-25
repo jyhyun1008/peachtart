@@ -8,7 +8,7 @@
 	<div class="poamfof">
 		<Transition :name="defaultStore.state.animation ? 'fade' : ''" mode="out-in">
 			<div v-if="player.url && (player.url.startsWith('http://') || player.url.startsWith('https://'))" class="player">
-				<iframe v-if="!fetching" :src="player.url + (player.url.match(/\?/) ? '&autoplay=1&auto_play=1' : '?autoplay=1&auto_play=1')" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen/>
+				<iframe v-if="!fetching" :src="player.url + (player.url.match(/\?/) ? '&autoplay=1&auto_play=1&mute=1&loop=1' : '?autoplay=1&auto_play=1&mute=1&loop=1')" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen/>
 			</div>
 			<span v-else>invalid url</span>
 		</Transition>
