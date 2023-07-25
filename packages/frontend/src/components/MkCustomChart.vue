@@ -1,6 +1,6 @@
 <template>
 <div>
-	<canvas :id="chartId"></canvas>
+	<canvas :id="chartId" :class="[{ title: 'title' }, { keys: 'keys' }, { values: 'values' }, { label: 'label' }]"></canvas>
 </div>
 </template>
 
