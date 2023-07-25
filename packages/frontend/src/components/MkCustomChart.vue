@@ -1,5 +1,5 @@
 <template>
-<div :class="$style.root">
+<div>
 	<canvas :id="chartId"></canvas>
 </div>
 </template>
