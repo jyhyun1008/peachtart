@@ -56,11 +56,11 @@ import MkButton from '@/components/MkButton.vue';
 import MkInput from '@/components/MkInput.vue';
 import MkSwitch from '@/components/MkSwitch.vue';
 import MkTextarea from '@/components/MkTextarea.vue';
-import MkSelect from '@/components/MkSelect.vue';
+import MkSelect from '@/components/MkSelect.vue'; // class binded
 import { AsUiComponent } from '@/scripts/aiscript/ui';
 import MkFolder from '@/components/MkFolder.vue'; // class binded
-import MkCustomChart from '@/components/MkCustomChart.vue';
-import MkYoutubePlayer from '@/components/MkYoutubePlayer.vue';
+import MkCustomChart from '@/components/MkCustomChart.vue'; // class binded
+import MkYoutubePlayer from '@/components/MkYoutubePlayer.vue'; // class binded
 
 const props = withDefaults(defineProps<{
 	component: AsUiComponent;
