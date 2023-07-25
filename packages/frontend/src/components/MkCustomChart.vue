@@ -6,9 +6,11 @@
 
 <script lang="ts" setup>
 import { onMounted, ref, shallowRef, watch, PropType } from 'vue';
-import { Chart } from 'chart.js';
+import { Chart, registerables } from 'chart.js';
 import gradient from 'chartjs-plugin-gradient';
 
+Chart.register(...registerables);
+	
 const props = defineProps<{
 	chartId: string;
 }>(); 
