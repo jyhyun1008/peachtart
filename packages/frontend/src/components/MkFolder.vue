@@ -1,5 +1,5 @@
 <template>
-<div ref="rootEl" :class="$style.root" role="group" :aria-expanded="opened">
+<div ref="rootEl" :class="[$style.root, {className: 'className'}]"role="group" :aria-expanded="opened">
 	<MkStickyContainer>
 		<template #header>
 			<div :class="[$style.header, { [$style.opened]: opened }]" class="_button" role="button" data-cy-folder-header @click="toggle">
@@ -20,7 +20,7 @@
 			</div>
 		</template>
 
-		<div v-if="openedAtLeastOnce" :class="[$style.body, { [$style.bgSame]: bgSame }]" :style="{ maxHeight: maxHeight ? `${maxHeight}px` : null, overflow: maxHeight ? `auto` : null }" :aria-hidden="!opened">
+		<div v-if="openedAtLeastOnce" :flexDisplay="flexDisplay" :class="[$style.body, { [$style.bgSame]: bgSame }]" :style="{ maxHeight: maxHeight ? `${maxHeight}px` : null, overflow: maxHeight ? `auto` : null }" :aria-hidden="!opened">
 			<Transition
 				:enterActiveClass="defaultStore.state.animation ? $style.transition_toggle_enterActive : ''"
 				:leaveActiveClass="defaultStore.state.animation ? $style.transition_toggle_leaveActive : ''"
@@ -32,7 +32,7 @@
 				@afterLeave="afterLeave"
 			>
 				<KeepAlive>
-					<div v-show="opened">
+					<div ref="folderContainer" v-show="opened">
 						<MkSpacer :marginMin="14" :marginMax="22">
 							<slot></slot>
 						</MkSpacer>
@@ -51,9 +51,12 @@ import { defaultStore } from '@/store';
 const props = withDefaults(defineProps<{
 	defaultOpen?: boolean;
 	maxHeight?: number | null;
+	flexDisplay? boolean;
+	className: string;
 }>(), {
 	defaultOpen: false,
 	maxHeight: null,
+	flexDisplay: false
 });
 
 const getBgColor = (el: HTMLElement) => {
@@ -107,6 +110,13 @@ onMounted(() => {
 	const parentBg = getBgColor(rootEl.parentElement);
 	const myBg = computedStyle.getPropertyValue('--panel');
 	bgSame = parentBg === myBg;
+
+	if (props.flexDisplay) {
+		this.$refs.folderContainer.style.display = 'flex';
+	}
+
+	this.$refs.rootEl.classList.add(props.className);
+	
 });
 </script>
 
