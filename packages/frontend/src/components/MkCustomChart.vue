@@ -47,7 +47,7 @@ onMounted(() => {
         label: props.label,
         data: props.values,
         borderColor: red,
-        backgroundColor: transparentize(red, 0.5),
+        backgroundColor: red,
         borderWidth: 1,
         borderRadius: 5,
         borderSkipped: false,
