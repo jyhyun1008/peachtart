@@ -61,23 +61,6 @@ const props = withDefaults(defineProps<{
 	large?: boolean;
 	className?: string;
 }>(), {
-	modelValue: null;
-	type?: 'text';
-	required?: false;
-	readonly?: false;
-	disabled?: false;
-	pattern?: '';
-	placeholder?: '';
-	autofocus?: false;
-	autocomplete?: '';
-	spellcheck?: false;
-	step?: 0;
-	datalist?: [];
-	inline?: false;
-	debounce?: false;
-	manualSave?: false;
-	small?: false;
-	large?: false;
 	className: 'MkInput',
 });
 

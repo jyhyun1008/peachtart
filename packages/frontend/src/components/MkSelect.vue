@@ -46,16 +46,6 @@ const props = withDefaults(defineProps<{
 	large?: boolean;
 	className?: string;
 }>(), {
-	modelValue: null;
-	required?: false;
-	readonly?: false;
-	disabled?: false;
-	placeholder?: '';
-	autofocus?: false;
-	inline?: false;
-	manualSave?: false;
-	small?: false;
-	large?: false;
 	className: 'MkSelect',
 });
 

@@ -27,8 +27,6 @@ const props = withDefaults(defineProps<{
 	disabled?: boolean;
 	className?: string;
 }>(), {
-	modelValue: false;
-	disabled: false;
 	className: 'MkSwitch',
 });
 
