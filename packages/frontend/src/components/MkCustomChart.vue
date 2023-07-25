@@ -5,24 +5,26 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref, shallowRef, watch, PropType } from 'vue';
+import { onMounted, ref } from 'vue';
 import { Chart, registerables } from 'chart.js';
 import gradient from 'chartjs-plugin-gradient';
 
 Chart.register(...registerables);
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
 	chartId: string;
 	title: string;
 	keys: string[];
 	values: number[];
 	label: string;
 	className: string;
-}>(); 
+}>(), {
+	className: 'MkCustomChart',
+});
 
 onMounted(() => {
+	this.$refs.rootEl.classList.add(props.className);
 	const ctx = document.getElementById(props.chartId);
-	this.$refs.canvasEl.classList.add(props.className);
 
   new Chart(ctx, {
     type: 'bar',
