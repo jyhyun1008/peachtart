@@ -13,7 +13,8 @@ const props = defineProps<{
 	chartId: string;
 }>(); 
 
-const ctx = document.getElementById(props.chartId);
+onMounted(() => {
+	const ctx = document.getElementById(props.chartId);
 
   new Chart(ctx, {
     type: 'bar',
@@ -33,6 +34,9 @@ const ctx = document.getElementById(props.chartId);
       }
     }
   });
+});
+
+
 
 </script>
 
