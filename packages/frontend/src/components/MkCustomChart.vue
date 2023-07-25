@@ -13,6 +13,10 @@ Chart.register(...registerables);
 
 const props = defineProps<{
 	chartId: string;
+	title: string;
+	keys: string[];
+	values: number[];
+	label: string;
 }>(); 
 
 onMounted(() => {
