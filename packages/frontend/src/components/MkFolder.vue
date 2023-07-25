@@ -52,11 +52,12 @@ const props = withDefaults(defineProps<{
 	defaultOpen?: boolean;
 	maxHeight?: number | null;
 	flexDisplay? boolean;
-	className: string;
+	className?: string;
 }>(), {
 	defaultOpen: false,
 	maxHeight: null,
-	flexDisplay: false
+	flexDisplay: false,
+	className: 'MkFolder',
 });
 
 const getBgColor = (el: HTMLElement) => {
