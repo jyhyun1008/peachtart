@@ -70,9 +70,6 @@ onMounted(() => {
   });
 });
 
-Chart.defaults.borderColor = '#36A2EB';
-Chart.defaults.color = '#000';
-
 </script>
 
 <style lang="scss" module>
