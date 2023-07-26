@@ -27,8 +27,7 @@ console.log(chartEl);
 
 onMounted(() => {
 
-	document.querySelector('.className').classList.add(props.className);
-	console.log(chartEl)
+	chartEl.classList.add(props.className);
 	const ctx = document.getElementById(props.chartId);
 
   new Chart(ctx, {

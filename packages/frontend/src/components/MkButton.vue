@@ -19,7 +19,7 @@
 	@mousedown="onMousedown"
 >
 	<div ref="ripples" :class="$style.ripples" :data-children-class="$style.ripple"></div>
-	<div :class="$style.content">
+	<div ref="buttonEl" :class="[$style.content, { className: 'className' }]">
 		<slot></slot>
 	</div>
 </MkA>
@@ -49,6 +49,9 @@ const props = withDefaults(defineProps<{
 	className: 'MkButton',
 });
 
+let buttonEl = ref(null);
+console.log(buttonEl);
+
 const emit = defineEmits<{
 	(ev: 'click', payload: MouseEvent): void;
 }>();
@@ -58,7 +61,7 @@ let ripples = $shallowRef<HTMLElement | null>(null);
 
 onMounted(() => {
 
-	document.querySelector('.className').classList.add(props.className);
+	buttonEl.classList.add(props.className);
 
 	if (props.autofocus) {
 		nextTick(() => {
