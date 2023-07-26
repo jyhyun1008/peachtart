@@ -1,6 +1,6 @@
 <template>
 <div>
-	<canvas :id="chartId" :class="[{ title: 'title' }, { keys: 'keys' }, { values: 'values' }, { label: 'label' }, { className: 'className' }]"></canvas>
+	<canvas ref="chartEl" :id="chartId" :class="[{ title: 'title' }, { keys: 'keys' }, { values: 'values' }, { label: 'label' }, { className: 'className' }]"></canvas>
 </div>
 </template>
 
@@ -25,6 +25,7 @@ const props = withDefaults(defineProps<{
 onMounted(() => {
 
 	document.querySelector('.className').classList.add(props.className);
+	console.log(this.$refs.chartEl)
 	const ctx = document.getElementById(props.chartId);
 
   new Chart(ctx, {
