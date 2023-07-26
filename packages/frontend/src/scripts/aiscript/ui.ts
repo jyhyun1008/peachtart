@@ -141,13 +141,8 @@ export type AsUiCustomChart = AsUiComponentBase & {
 	label?: string;
 };
 
-export type AsUiYouTubePlayer = AsUiComponentBase & {
-	type: 'youTubePlayer';
-	//className?: string;
-	url: string;
-};
 
-export type AsUiComponent = AsUiRoot | AsUiContainer | AsUiText | AsUiMfm | AsUiButton | AsUiButtons | AsUiSwitch | AsUiTextarea | AsUiTextInput | AsUiNumberInput | AsUiSelect | AsUiFolder | AsUiPostFormButton | AsUiCustomChart | AsUiYouTubePlayer;
+export type AsUiComponent = AsUiRoot | AsUiContainer | AsUiText | AsUiMfm | AsUiButton | AsUiButtons | AsUiSwitch | AsUiTextarea | AsUiTextInput | AsUiNumberInput | AsUiSelect | AsUiFolder | AsUiPostFormButton | AsUiCustomChart ;
 
 export function patch(id: string, def: values.Value, call: (fn: values.VFn, args: values.Value[]) => Promise<values.Value>) {
 	// TODO
@@ -523,20 +518,6 @@ function getCustomChartOptions(def: values.Value | undefined): Omit<AsUiCustomCh
 	};
 }
 
-function getYouTubePlayerOptions(def: values.Value | undefined): Omit<AsUiYouTubePlayer, 'id' | 'type'> {
-	utils.assertObject(def);
-
-	const url = def.value.get('url');
-	if (url) utils.assertString(url);
-	//const className = def.value.get('className');
-	//if (className) utils.assertString(className);
-
-	return {
-		url: url.value,
-		//className: className?.value ?? 'youTubePlayer',
-	};
-}
-
 function getPostFormButtonOptions(def: values.Value | undefined, call: (fn: values.VFn, args: values.Value[]) => Promise<values.Value>): Omit<AsUiPostFormButton, 'id' | 'type'> {
 	utils.assertObject(def);
 
@@ -683,8 +664,5 @@ export function registerAsUiLib(components: Ref<AsUiComponent>[], done: (root: R
 			return createComponentInstance('customChart', def, id, getCustomChartOptions, opts.call);
 		}),
 
-		'Ui:C:youTubePlayer': values.FN_NATIVE(([def, id], opts) => {
-			return createComponentInstance('youTubePlayer', def, id, getYouTubePlayerOptions, opts.call);
-		}),
 	};
 }
