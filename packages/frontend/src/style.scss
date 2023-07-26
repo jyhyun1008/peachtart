@@ -670,17 +670,24 @@ input:hover {
 
 // kokokara ~~ custom css의 기능들입니다
 
+._container {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
 .displayFlex {
 	display: flex;
 	justify-content: space-around;
+	gap: 12px;
 }
 
 .displayFlexEvenWidth {
 	display: flex;
 	justify-content: space-around;
+	gap: 12px;
 }
 
 .displayFlexEvenWidth div {
 	flex: 1;
-  padding: 5px;
 }
