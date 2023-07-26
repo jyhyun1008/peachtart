@@ -40,6 +40,7 @@
 		</template>
 	</MkFolder>
 	<MkCustomChart v-else-if="c.type === 'customChart'" :chartId="c.chartId" :title="c.title" :keys="c.keys" :values="c.values" :label="c.label" :className="c.className" />
+	<MkYouTubePlayer v-else-if="c.type === 'youTubePlayer'" :url="c.url" />
 	<div v-else-if="c.type === 'container'" :class="[$style.container, { [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace' }]" :style="{ textAlign: c.align ?? null, backgroundColor: c.bgColor ?? null, color: c.fgColor ?? null, borderWidth: c.borderWidth ? `${c.borderWidth}px` : 0, borderColor: c.borderColor ?? 'var(--divider)', padding: c.padding ? `${c.padding}px` : 0, borderRadius: c.rounded ? '8px' : 0 }">
 		<template v-for="child in c.children" :key="child">
 			<MkAsUi v-if="!g(child).hidden" :component="g(child)" :components="props.components" :size="size" :align="c.align"/>
@@ -59,6 +60,7 @@ import MkSelect from '@/components/MkSelect.vue'; // class binded
 import { AsUiComponent } from '@/scripts/aiscript/ui';
 import MkFolder from '@/components/MkFolder.vue'; // class binded
 import MkCustomChart from '@/components/MkCustomChart.vue'; // class binded
+import MkYouTubePlayer from '@/components/MkYouTubePlayer.vue'; // class binded
 
 const props = withDefaults(defineProps<{
 	component: AsUiComponent;
