@@ -96,6 +96,14 @@ function openPostForm() {
 </script>
 
 <style lang="scss" module>
+
+@import url('https://cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.530/neodgm_code/style.css');
+@font-face {
+	font-family: 'HBIOS-SYS';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/HBIOS-SYS.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
 .root {
 	display: flex;
 	flex-direction: column;
@@ -109,10 +117,10 @@ function openPostForm() {
 }
 
 .fontSerif {
-	font-family: serif;
+	font-family: 'HBIOS-SYS', serif;
 }
 
 .fontMonospace {
-	font-family: Fira code, Fira Mono, Consolas, Menlo, Courier, monospace;
+	font-family: 'NeoDunggeunmo Code', Fira code, Fira Mono, Consolas, Menlo, Courier, monospace;
 }
 </style>
