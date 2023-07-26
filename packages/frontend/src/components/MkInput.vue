@@ -1,7 +1,7 @@
 <template>
 <div>
 	<div :class="$style.label" @click="focus"><slot name="label"></slot></div>
-	<div ref="rootEl" :class="[$style.input, { [$style.inline]: inline, [$style.disabled]: disabled, [$style.focused]: focused }, {className: 'className'}]">
+	<div :class="[$style.input, { [$style.inline]: inline, [$style.disabled]: disabled, [$style.focused]: focused }, {className: 'className'}]">
 		<div ref="prefixEl" :class="$style.prefix"><slot name="prefix"></slot></div>
 		<input
 			ref="inputEl"
@@ -147,7 +147,7 @@ useInterval(() => {
 });
 
 onMounted(() => {
-	ref(rootEl).classList.add(props.className);
+	this.$refs.inputEl.classList.add(props.className);
 	nextTick(() => {
 		if (autofocus.value) {
 			focus();

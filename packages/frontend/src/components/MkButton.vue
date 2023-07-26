@@ -2,7 +2,7 @@
 <button
 	v-if="!link"
 	ref="el" class="_button"
-	:class="[$style.root, { [$style.inline]: inline, [$style.primary]: primary, [$style.gradate]: gradate, [$style.danger]: danger, [$style.rounded]: rounded, [$style.full]: full, [$style.small]: small, [$style.large]: large, [$style.transparent]: transparent, [$style.asLike]: asLike }, { className: 'className' }]"
+	:class="[$style.root, { [$style.inline]: inline, [$style.primary]: primary, [$style.gradate]: gradate, [$style.danger]: danger, [$style.rounded]: rounded, [$style.full]: full, [$style.small]: small, [$style.large]: large, [$style.transparent]: transparent, [$style.asLike]: asLike }]"
 	:type="type"
 	@click="emit('click', $event)"
 	@mousedown="onMousedown"
@@ -28,7 +28,7 @@
 <script lang="ts" setup>
 import { nextTick, onMounted } from 'vue';
 
-const props = withDefaults(defineProps<{
+const props = defineProps<{
 	type?: 'button' | 'submit' | 'reset';
 	primary?: boolean;
 	gradate?: boolean;
@@ -44,11 +44,7 @@ const props = withDefaults(defineProps<{
 	large?: boolean;
 	transparent?: boolean;
 	asLike?: boolean;
-	className?: string;
-}>(), {
-	className: 'MkButton',
-});
-
+}>();
 
 const emit = defineEmits<{
 	(ev: 'click', payload: MouseEvent): void;
@@ -58,7 +54,6 @@ let el = $shallowRef<HTMLElement | null>(null);
 let ripples = $shallowRef<HTMLElement | null>(null);
 
 onMounted(() => {
-	this.$refs.el.classList.add(props.className);
 	if (props.autofocus) {
 		nextTick(() => {
 			el!.focus();

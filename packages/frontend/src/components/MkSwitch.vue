@@ -1,5 +1,5 @@
 <template>
-<div ref="rootEl" :class="[$style.root, { [$style.disabled]: disabled, [$style.checked]: checked }, { className: 'className' }]">
+<div :class="[$style.root, { [$style.disabled]: disabled, [$style.checked]: checked }]">
 	<input
 		ref="input"
 		type="checkbox"
@@ -19,16 +19,13 @@
 </template>
 
 <script lang="ts" setup>
-import { toRefs, Ref, onMounted } from 'vue';
+import { toRefs, Ref } from 'vue';
 import { i18n } from '@/i18n';
 
-const props = withDefaults(defineProps<{
+const props = defineProps<{
 	modelValue: boolean | Ref<boolean>;
 	disabled?: boolean;
-	className?: string;
-}>(), {
-	className: 'MkSwitch',
-});
+}>();
 
 const emit = defineEmits<{
 	(ev: 'update:modelValue', v: boolean): void;
@@ -44,11 +41,6 @@ const toggle = () => {
 
 	}
 };
-
-onMounted(() => {
-	this.$refs.rootEl.classList.add(props.className);
-})
-
 </script>
 
 <style lang="scss" module>
