@@ -1,6 +1,6 @@
 <template>
 <div>
-	<canvas ref="chartEl" :id="chartId" :class="[{ title: 'title' }, { keys: 'keys' }, { values: 'values' }, { label: 'label' }, { className: 'className' }]"></canvas>
+	<canvas ref="chartEl" :id="chartId" :class="[{ title: 'title' }, { keys: 'keys' }, { values: 'values' }, { label: 'label' }, { className: 'className' }, props.className]"></canvas>
 </div>
 </template>
 
