@@ -14,7 +14,7 @@ export type AsUiRoot = AsUiComponentBase & {
 
 export type AsUiContainer = AsUiComponentBase & {
 	type: 'container';
-	className?: string;
+	class?: string;
 	children?: AsUiComponent['id'][];
 	align?: 'left' | 'center' | 'right';
 	bgColor?: string;
@@ -29,7 +29,7 @@ export type AsUiContainer = AsUiComponentBase & {
 
 export type AsUiText = AsUiComponentBase & {
 	type: 'text';
-	className?: string;
+	class?: string;
 	text?: string;
 	size?: number;
 	bold?: boolean;
@@ -39,7 +39,7 @@ export type AsUiText = AsUiComponentBase & {
 
 export type AsUiMfm = AsUiComponentBase & {
 	type: 'mfm';
-	className?: string;
+	class?: string;
 	text?: string;
 	size?: number;
 	bold?: boolean;
@@ -49,7 +49,6 @@ export type AsUiMfm = AsUiComponentBase & {
 
 export type AsUiButton = AsUiComponentBase & {
 	type: 'button';
-	className?: string;
 	text?: string;
 	onClick?: () => void;
 	primary?: boolean;
@@ -59,13 +58,11 @@ export type AsUiButton = AsUiComponentBase & {
 
 export type AsUiButtons = AsUiComponentBase & {
 	type: 'buttons';
-	className?: string;
 	buttons?: AsUiButton[];
 };
 
 export type AsUiSwitch = AsUiComponentBase & {
 	type: 'switch';
-	className?: string;
 	onChange?: (v: boolean) => void;
 	default?: boolean;
 	label?: string;
@@ -74,7 +71,6 @@ export type AsUiSwitch = AsUiComponentBase & {
 
 export type AsUiTextarea = AsUiComponentBase & {
 	type: 'textarea';
-	className?: string;
 	onInput?: (v: string) => void;
 	default?: string;
 	label?: string;
@@ -83,7 +79,6 @@ export type AsUiTextarea = AsUiComponentBase & {
 
 export type AsUiTextInput = AsUiComponentBase & {
 	type: 'textInput';
-	className?: string;
 	onInput?: (v: string) => void;
 	default?: string;
 	label?: string;
@@ -92,7 +87,6 @@ export type AsUiTextInput = AsUiComponentBase & {
 
 export type AsUiNumberInput = AsUiComponentBase & {
 	type: 'numberInput';
-	className?: string;
 	onInput?: (v: number) => void;
 	default?: number;
 	label?: string;
@@ -101,7 +95,6 @@ export type AsUiNumberInput = AsUiComponentBase & {
 
 export type AsUiSelect = AsUiComponentBase & {
 	type: 'select';
-	className?: string;
 	items?: {
 		text: string;
 		value: string;
@@ -114,7 +107,6 @@ export type AsUiSelect = AsUiComponentBase & {
 
 export type AsUiFolder = AsUiComponentBase & {
 	type: 'folder';
-	className?: string;
 	children?: AsUiComponent['id'][];
 	title?: string;
 	opened?: boolean;
@@ -122,7 +114,6 @@ export type AsUiFolder = AsUiComponentBase & {
 
 export type AsUiPostFormButton = AsUiComponentBase & {
 	type: 'postFormButton';
-	className?: string;
 	text?: string;
 	primary?: boolean;
 	rounded?: boolean;
@@ -133,7 +124,6 @@ export type AsUiPostFormButton = AsUiComponentBase & {
 
 export type AsUiCustomChart = AsUiComponentBase & {
 	type: 'customChart';
-	className?: string;
 	chartId: string;
 	title?: string;
 	keys: string[];
@@ -141,13 +131,7 @@ export type AsUiCustomChart = AsUiComponentBase & {
 	label?: string;
 };
 
-export type AsUiYoutubePlayer = AsUiComponentBase & {
-	type: 'youtubePlayer';
-	className?: string;
-	url: string;
-};
-
-export type AsUiComponent = AsUiRoot | AsUiContainer | AsUiText | AsUiMfm | AsUiButton | AsUiButtons | AsUiSwitch | AsUiTextarea | AsUiTextInput | AsUiNumberInput | AsUiSelect | AsUiFolder | AsUiPostFormButton | AsUiCustomChart | AsUiYoutubePlayer;
+export type AsUiComponent = AsUiRoot | AsUiContainer | AsUiText | AsUiMfm | AsUiButton | AsUiButtons | AsUiSwitch | AsUiTextarea | AsUiTextInput | AsUiNumberInput | AsUiSelect | AsUiFolder | AsUiPostFormButton | AsUiCustomChart;
 
 export function patch(id: string, def: values.Value, call: (fn: values.VFn, args: values.Value[]) => Promise<values.Value>) {
 	// TODO
@@ -190,8 +174,6 @@ function getContainerOptions(def: values.Value | undefined): Omit<AsUiContainer,
 	if (rounded) utils.assertBoolean(rounded);
 	const hidden = def.value.get('hidden');
 	if (hidden) utils.assertBoolean(hidden);
-	const className = def.value.get('class');
-	if (className) utils.assertString(className);
 
 	return {
 		children: children ? children.value.map(v => {
@@ -207,7 +189,6 @@ function getContainerOptions(def: values.Value | undefined): Omit<AsUiContainer,
 		padding: padding?.value,
 		rounded: rounded?.value,
 		hidden: hidden?.value,
-		className: className?.value ?? 'container',
 	};
 }
 
@@ -224,8 +205,6 @@ function getTextOptions(def: values.Value | undefined): Omit<AsUiText, 'id' | 't
 	if (color) utils.assertString(color);
 	const font = def.value.get('font');
 	if (font) utils.assertString(font);
-	const className = def.value.get('class');
-	if (className) utils.assertString(className);
 
 	return {
 		text: text?.value,
@@ -233,7 +212,6 @@ function getTextOptions(def: values.Value | undefined): Omit<AsUiText, 'id' | 't
 		bold: bold?.value,
 		color: color?.value,
 		font: font?.value,
-		className: className?.value ?? 'plainText',
 	};
 }
 
@@ -250,8 +228,6 @@ function getMfmOptions(def: values.Value | undefined): Omit<AsUiMfm, 'id' | 'typ
 	if (color) utils.assertString(color);
 	const font = def.value.get('font');
 	if (font) utils.assertString(font);
-	const className = def.value.get('class');
-	if (className) utils.assertString(className);
 
 	return {
 		text: text?.value,
@@ -259,7 +235,6 @@ function getMfmOptions(def: values.Value | undefined): Omit<AsUiMfm, 'id' | 'typ
 		bold: bold?.value,
 		color: color?.value,
 		font: font?.value,
-		className: className?.value ?? 'mfmText',
 	};
 }
 
@@ -274,8 +249,6 @@ function getTextInputOptions(def: values.Value | undefined, call: (fn: values.VF
 	if (label) utils.assertString(label);
 	const caption = def.value.get('caption');
 	if (caption) utils.assertString(caption);
-	const className = def.value.get('class');
-	if (className) utils.assertString(className);
 
 	return {
 		onInput: (v) => {
@@ -284,7 +257,6 @@ function getTextInputOptions(def: values.Value | undefined, call: (fn: values.VF
 		default: defaultValue?.value,
 		label: label?.value,
 		caption: caption?.value,
-		className: className?.value ?? 'textInput',
 	};
 }
 
@@ -299,8 +271,6 @@ function getTextareaOptions(def: values.Value | undefined, call: (fn: values.VFn
 	if (label) utils.assertString(label);
 	const caption = def.value.get('caption');
 	if (caption) utils.assertString(caption);
-	const className = def.value.get('class');
-	if (className) utils.assertString(className);
 
 	return {
 		onInput: (v) => {
@@ -309,7 +279,6 @@ function getTextareaOptions(def: values.Value | undefined, call: (fn: values.VFn
 		default: defaultValue?.value,
 		label: label?.value,
 		caption: caption?.value,
-		className: className?.value ?? 'textarea',
 	};
 }
 
@@ -324,8 +293,6 @@ function getNumberInputOptions(def: values.Value | undefined, call: (fn: values.
 	if (label) utils.assertString(label);
 	const caption = def.value.get('caption');
 	if (caption) utils.assertString(caption);
-	const className = def.value.get('class');
-	if (className) utils.assertString(className);
 
 	return {
 		onInput: (v) => {
@@ -334,7 +301,6 @@ function getNumberInputOptions(def: values.Value | undefined, call: (fn: values.
 		default: defaultValue?.value,
 		label: label?.value,
 		caption: caption?.value,
-		className: className?.value ?? 'numberInput',
 	};
 }
 
@@ -351,8 +317,6 @@ function getButtonOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 	if (rounded) utils.assertBoolean(rounded);
 	const disabled = def.value.get('disabled');
 	if (disabled) utils.assertBoolean(disabled);
-	const className = def.value.get('class');
-	if (className) utils.assertString(className);
 
 	return {
 		text: text?.value,
@@ -362,7 +326,6 @@ function getButtonOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 		primary: primary?.value,
 		rounded: rounded?.value,
 		disabled: disabled?.value,
-		className: className?.value ?? 'button',
 	};
 }
 
@@ -371,8 +334,6 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 
 	const buttons = def.value.get('buttons');
 	if (buttons) utils.assertArray(buttons);
-	const className = def.value.get('class');
-	if (className) utils.assertString(className);
 
 	return {
 		buttons: buttons ? buttons.value.map(button => {
@@ -387,8 +348,6 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 			if (rounded) utils.assertBoolean(rounded);
 			const disabled = button.value.get('disabled');
 			if (disabled) utils.assertBoolean(disabled);
-			const className = def.value.get('class');
-			if (className) utils.assertString(className);
 
 			return {
 				text: text.value,
@@ -398,10 +357,8 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 				primary: primary?.value,
 				rounded: rounded?.value,
 				disabled: disabled?.value,
-				className: className?.value ?? 'button',
 			};
 		}) : [],
-		className: className?.value ?? 'buttons',
 	};
 }
 
@@ -416,8 +373,6 @@ function getSwitchOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 	if (label) utils.assertString(label);
 	const caption = def.value.get('caption');
 	if (caption) utils.assertString(caption);
-	const className = def.value.get('class');
-	if (className) utils.assertString(className);
 
 	return {
 		onChange: (v) => {
@@ -426,7 +381,6 @@ function getSwitchOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 		default: defaultValue?.value,
 		label: label?.value,
 		caption: caption?.value,
-		className: className?.value ?? 'switch',
 	};
 }
 
@@ -443,8 +397,6 @@ function getSelectOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 	if (label) utils.assertString(label);
 	const caption = def.value.get('caption');
 	if (caption) utils.assertString(caption);
-	const className = def.value.get('class');
-	if (className) utils.assertString(className);
 
 	return {
 		items: items ? items.value.map(item => {
@@ -464,7 +416,6 @@ function getSelectOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 		default: defaultValue?.value,
 		label: label?.value,
 		caption: caption?.value,
-		className: className?.value ?? 'select',
 	};
 }
 
@@ -477,8 +428,6 @@ function getFolderOptions(def: values.Value | undefined): Omit<AsUiFolder, 'id' 
 	if (title) utils.assertString(title);
 	const opened = def.value.get('opened');
 	if (opened) utils.assertBoolean(opened);
-	const className = def.value.get('class');
-	if (className) utils.assertString(className);
 
 	return {
 		children: children ? children.value.map(v => {
@@ -487,7 +436,6 @@ function getFolderOptions(def: values.Value | undefined): Omit<AsUiFolder, 'id' 
 		}) : [],
 		title: title?.value ?? '',
 		opened: opened?.value ?? true,
-		className: className?.value ?? 'folder',
 	};
 }
 
@@ -504,8 +452,6 @@ function getCustomChartOptions(def: values.Value | undefined): Omit<AsUiCustomCh
 	if (values) utils.assertArray(values);
 	const label = def.value.get('label');
 	if (label) utils.assertString(label);
-	const className = def.value.get('class');
-	if (className) utils.assertString(className);
 
 	return {
 		chartId: chartId.value,
@@ -519,21 +465,6 @@ function getCustomChartOptions(def: values.Value | undefined): Omit<AsUiCustomCh
 			return v.value;
 		}) : [],
 		label: label?.value ?? '',
-		className: className?.value ?? 'customChart',
-	};
-}
-
-function getYoutubePlayerOptions(def: values.Value | undefined): Omit<AsUiCustomChart, 'id' | 'type'> {
-	utils.assertObject(def);
-
-	const url = def.value.get('url');
-	if (url) utils.assertString(url);
-	const className = def.value.get('class');
-	if (className) utils.assertString(className);
-
-	return {
-		url: url.value,
-		className: className?.value ?? 'youtubePlayer',
 	};
 }
 
@@ -677,10 +608,6 @@ export function registerAsUiLib(components: Ref<AsUiComponent>[], done: (root: R
 		
 		'Ui:C:customChart': values.FN_NATIVE(([def, id], opts) => {
 			return createComponentInstance('customChart', def, id, getCustomChartOptions, opts.call);
-		}),
-		
-		'Ui:C:youtubePlayer': values.FN_NATIVE(([def, id], opts) => {
-			return createComponentInstance('youtubePlayer', def, id, getYoutubePlayerOptions, opts.call);
 		}),
 	};
 }
