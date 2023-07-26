@@ -46,21 +46,6 @@ const props = withDefaults(defineProps<{
 	asLike?: boolean;
 	className?: string;
 }>(), {
-	type?: 'button';
-	primary?: false;
-	gradate?: false;
-	rounded?: false;
-	inline?: false;
-	link?: false;
-	to?: '';
-	autofocus?: false;
-	wait?: false;
-	danger?: false;
-	full?: false;
-	small?: false;
-	large?: false;
-	transparent?: false;
-	asLike?: false;
 	className: 'MkButton',
 });
 

@@ -48,20 +48,6 @@ const props = withDefaults(defineProps<{
 	pre?: boolean;
 	className?: string;
 }>(), {
-	modelValue: null;
-	required?: false;
-	readonly?: false;
-	disabled?: false;
-	pattern?: string;
-	placeholder?: '';
-	autofocus?: false;
-	autocomplete?: '';
-	spellcheck?: false;
-	debounce?: false;
-	manualSave?: false;
-	code?: false;
-	tall?: false;
-	pre?: false;
 	className: 'MkTextArea',
 });
 

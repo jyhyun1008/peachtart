@@ -19,11 +19,6 @@ const props = withDefaults(defineProps<{
 	label: string;
 	className: string;
 }>(), {
-	chartId: 'test';
-	title: '';
-	keys: [];
-	values: [];
-	label: '';
 	className: 'MkCustomChart',
 });
 
