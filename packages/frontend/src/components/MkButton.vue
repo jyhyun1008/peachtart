@@ -58,7 +58,7 @@ let ripples = $shallowRef<HTMLElement | null>(null);
 
 onMounted(() => {
 
-	document.querySelector('.className')?.classList.add(props.className);
+	this?.$refs.el.classList.add(props.className);
 
 	if (props.autofocus) {
 		nextTick(() => {
