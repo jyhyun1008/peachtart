@@ -35,17 +35,17 @@
 	<MkButton v-else-if="c.type === 'postFormButton'" :primary="c.primary" :className="c.className" :rounded="c.rounded" :small="size === 'small'" inline @click="openPostForm">{{ c.text }}</MkButton>
 	<MkFolder v-else-if="c.type === 'folder'" :defaultOpen="c.opened" :className="c.className" >
 		<template #label>{{ c.title }}</template>
-		<template v-for="child in c.children" :key="child">
-			<MkAsUi v-if="!g(child).hidden" :component="g(child)" :components="props.components" :size="size"/>
-		</template>
+		<div :class="c.className">
+			<template v-for="child in c.children" :key="child">
+				<MkAsUi v-if="!g(child).hidden" :component="g(child)" :components="props.components" :size="size"/>
+			</template>
+	  </div>
 	</MkFolder>
 	<MkCustomChart v-else-if="c.type === 'customChart'" :chartId="c.chartId" :title="c.title" :keys="c.keys" :values="c.values" :label="c.label" :className="c.className" />
 	<div v-else-if="c.type === 'container'" :class="[$style.container, { [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace' }, c.className]" :style="{ textAlign: c.align ?? null, backgroundColor: c.bgColor ?? null, color: c.fgColor ?? null, borderWidth: c.borderWidth ? `${c.borderWidth}px` : 0, borderColor: c.borderColor ?? 'var(--divider)', padding: c.padding ? `${c.padding}px` : 0, borderRadius: c.rounded ? '8px' : 0 }">
-		<div :class="c.className">
-			<template v-for="child in c.children" :key="child">
-				<MkAsUi v-if="!g(child).hidden" :component="g(child)" :components="props.components" :size="size" :align="c.align"/>
-			</template>
-		</div>
+		<template v-for="child in c.children" :key="child">
+			<MkAsUi v-if="!g(child).hidden" :component="g(child)" :components="props.components" :size="size" :align="c.align"/>
+		</template>
 	</div>
 </div>
 </template>
