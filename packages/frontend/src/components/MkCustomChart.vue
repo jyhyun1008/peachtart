@@ -25,7 +25,7 @@ const props = withDefaults(defineProps<{
 onMounted(() => {
 
 	document.querySelector('.className').classList.add(props.className);
-	console.log(this.$refs.chartEl)
+	console.log(this.querySelector('.className'))
 	const ctx = document.getElementById(props.chartId);
 
   new Chart(ctx, {
