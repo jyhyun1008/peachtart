@@ -1,7 +1,7 @@
 <template>
 <div>
 	<div :class="$style.label" @click="focus"><slot name="label"></slot></div>
-	<div ref="container" :class="[$style.input, { [$style.inline]: inline, [$style.disabled]: disabled, [$style.focused]: focused }, { className: 'className' }, props.className]]" @mousedown.prevent="show">
+	<div ref="container" :class="[$style.input, { [$style.inline]: inline, [$style.disabled]: disabled, [$style.focused]: focused }, { className: 'className' }, props.className]" @mousedown.prevent="show">
 		<div ref="prefixEl" :class="$style.prefix"><slot name="prefix"></slot></div>
 		<select
 			ref="inputEl"

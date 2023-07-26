@@ -1,5 +1,5 @@
 <template>
-<div :class="[$style.root, { [$style.disabled]: disabled, [$style.checked]: checked }, { className: 'className' }, props.className]]">
+<div :class="[$style.root, { [$style.disabled]: disabled, [$style.checked]: checked }, { className: 'className' }, props.className]">
 	<input
 		ref="input"
 		type="checkbox"
