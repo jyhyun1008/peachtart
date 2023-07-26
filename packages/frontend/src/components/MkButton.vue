@@ -2,7 +2,7 @@
 <button
 	v-if="!link"
 	ref="el" class="_button"
-	:class="[$style.root, { [$style.inline]: inline, [$style.primary]: primary, [$style.gradate]: gradate, [$style.danger]: danger, [$style.rounded]: rounded, [$style.full]: full, [$style.small]: small, [$style.large]: large, [$style.transparent]: transparent, [$style.asLike]: asLike }]"
+	:class="[$style.root, { [$style.inline]: inline, [$style.primary]: primary, [$style.gradate]: gradate, [$style.danger]: danger, [$style.rounded]: rounded, [$style.full]: full, [$style.small]: small, [$style.large]: large, [$style.transparent]: transparent, [$style.asLike]: asLike }, { className: 'className' }, props.className]"
 	:type="type"
 	@click="emit('click', $event)"
 	@mousedown="onMousedown"
@@ -19,7 +19,7 @@
 	@mousedown="onMousedown"
 >
 	<div ref="ripples" :class="$style.ripples" :data-children-class="$style.ripple"></div>
-	<div ref="buttonEl" :class="[$style.content, { className: 'className' }, props.className]">
+	<div :class="$style.content">
 		<slot></slot>
 	</div>
 </MkA>
