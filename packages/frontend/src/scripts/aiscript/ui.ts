@@ -51,11 +51,13 @@ export type AsUiButton = AsUiComponentBase & {
 	primary?: boolean;
 	rounded?: boolean;
 	disabled?: boolean;
+	className?: string;
 };
 
 export type AsUiButtons = AsUiComponentBase & {
 	type: 'buttons';
 	buttons?: AsUiButton[];
+	className?: string;
 };
 
 export type AsUiSwitch = AsUiComponentBase & {
@@ -315,6 +317,8 @@ function getButtonOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 	if (rounded) utils.assertBoolean(rounded);
 	const disabled = def.value.get('disabled');
 	if (disabled) utils.assertBoolean(disabled);
+	const className = def.value.get('className');
+	if (className) utils.assertString(className);
 
 	return {
 		text: text?.value,
@@ -324,6 +328,7 @@ function getButtonOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 		primary: primary?.value,
 		rounded: rounded?.value,
 		disabled: disabled?.value,
+		className: className?.value ?? 'MkButton',
 	};
 }
 
@@ -332,6 +337,8 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 
 	const buttons = def.value.get('buttons');
 	if (buttons) utils.assertArray(buttons);
+	const className = def.value.get('className');
+	if (className) utils.assertString(className);
 
 	return {
 		buttons: buttons ? buttons.value.map(button => {
@@ -346,6 +353,8 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 			if (rounded) utils.assertBoolean(rounded);
 			const disabled = button.value.get('disabled');
 			if (disabled) utils.assertBoolean(disabled);
+			const className = def.value.get('className');
+			if (className) utils.assertString(className);
 
 			return {
 				text: text.value,
@@ -355,8 +364,10 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 				primary: primary?.value,
 				rounded: rounded?.value,
 				disabled: disabled?.value,
+				className: className?.value ?? 'MkButton',
 			};
 		}) : [],
+		className: className?.value ?? 'MkButtons',
 	};
 }
 
