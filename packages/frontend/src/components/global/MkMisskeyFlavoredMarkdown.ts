@@ -154,10 +154,11 @@ export default function(props: {
 					}
 					case 'font': {
 						const family =
-							token.props.args.serif ? 'serif' :
-							token.props.args.monospace ? 'monospace' :
-							token.props.args.cursive ? 'cursive' :
-							token.props.args.fantasy ? 'fantasy' :
+							token.props.args.serif ? '"HBIOS-SYS", serif' :
+							token.props.args.monospace ? '"NeoDunggeunmo Code", monospace' :
+							token.props.args.cursive ? '"DOSPilgiMedium", cursive' :
+							token.props.args.fantasy ? '"Sam3KRFont", fantasy' :
+							token.props.args.casual ? '"Ramche", serif' :
 							token.props.args.emoji ? 'emoji' :
 							token.props.args.math ? 'math' :
 							null;

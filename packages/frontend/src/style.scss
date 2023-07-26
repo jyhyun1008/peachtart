@@ -7,6 +7,24 @@
 	font-weight: normal;
 	font-style: normal;
 }
+@font-face {
+	font-family: 'DOSPilgiMedium';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/DOSPilgiMedium.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Sam3KRFont';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/Sam3KRFont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Ramche';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Ramche.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
 
 :root {
 	--radius: 12px;
@@ -399,6 +417,7 @@ hr {
 ._monospace {
 	font-family: 'NeoDunggeunmo Code', Fira code, Fira Mono, Consolas, Menlo, Courier, monospace !important;
 	font-feature-settings: 'calt' on;
+	font-size: 16px;
 }
 
 ._code {
@@ -406,7 +425,7 @@ hr {
 	background: #2d2d2d;
 	font-feature-settings: 'calt' on;
 	color: #ccc;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 1.5;
 	padding: 5px;
 }
