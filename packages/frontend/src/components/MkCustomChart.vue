@@ -22,7 +22,8 @@ const props = withDefaults(defineProps<{
 	className: 'MkCustomChart',
 });
 
-let chartEl = this.querySelector('.className')
+let chartEl = ref(null);
+console.log(chartEl);
 
 onMounted(() => {
 
