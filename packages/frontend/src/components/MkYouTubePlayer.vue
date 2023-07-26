@@ -23,12 +23,10 @@ import MkWindow from '@/components/MkWindow.vue';
 import { versatileLang } from '@/scripts/intl-const';
 import { defaultStore } from '@/store';
 
-const props = withDefaults(defineProps<{
+const props = defineProps<{
 	url: string;
-	className?: string;
-}>(), {
-	className: 'youtubePlayer',
-});
+	className: className;
+}>();
 
 const requestUrl = new URL(props.url);
 if (!['http:', 'https:'].includes(requestUrl.protocol)) throw new Error('invalid url');
