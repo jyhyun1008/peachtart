@@ -11,16 +11,20 @@ import gradient from 'chartjs-plugin-gradient';
 
 Chart.register(...registerables);
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
 	chartId: string;
 	title: string;
 	keys: string[];
 	values: number[];
 	label: string;
 	className: string;
-}>();
+}>(), {
+	className: 'MkCustomChart',
+});
 
 onMounted(() => {
+
+	document.querySelector('.className')?.classList.add(props.className);
 	const ctx = document.getElementById(props.chartId);
 
   new Chart(ctx, {
