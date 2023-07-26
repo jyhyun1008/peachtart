@@ -35,6 +35,10 @@ export function createAiScriptEnv(opts) {
 		USER_USERNAME: $i ? values.STR($i.username) : values.NULL,
 		CUSTOM_EMOJIS: utils.jsToVal(customEmojis.value),
 		CURRENT_URL: values.STR(window.location.href),
+		'Str:parseFloat': values.FN_NATIVE(([str]) => {
+			utils.assertString(str);
+			return values.NUM(parseFloat(str.value));
+		}),
 		'Mk:audio': values.FN_NATIVE(([file]) => {
 			utils.assertString(file);
 			const audio = sound.setVolume(sound.getAudio(file.value), 1);
