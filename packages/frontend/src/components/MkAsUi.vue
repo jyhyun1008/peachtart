@@ -15,7 +15,7 @@
 		<template v-if="c.label" #label>{{ c.label }}</template>
 		<template v-if="c.caption" #caption>{{ c.caption }}</template>
 	</MkSwitch>
-	<MkTextarea v-else-if="c.type === 'textarea'" :modelValue="c.default" @update:modelValue="c.onInput">
+	<MkTextarea v-else-if="c.type === 'textarea'" :modelValue="c.default" :className="c.className" @update:modelValue="c.onInput">
 		<template v-if="c.label" #label>{{ c.label }}</template>
 		<template v-if="c.caption" #caption>{{ c.caption }}</template>
 	</MkTextarea>
@@ -33,14 +33,14 @@
 		<option v-for="item in c.items" :key="item.value" :value="item.value">{{ item.text }}</option>
 	</MkSelect>
 	<MkButton v-else-if="c.type === 'postFormButton'" :primary="c.primary" :className="c.className" :rounded="c.rounded" :small="size === 'small'" inline @click="openPostForm">{{ c.text }}</MkButton>
-	<MkFolder v-else-if="c.type === 'folder'" :defaultOpen="c.opened">
+	<MkFolder v-else-if="c.type === 'folder'" :defaultOpen="c.opened" :className="c.className" >
 		<template #label>{{ c.title }}</template>
 		<template v-for="child in c.children" :key="child">
 			<MkAsUi v-if="!g(child).hidden" :component="g(child)" :components="props.components" :size="size"/>
 		</template>
 	</MkFolder>
 	<MkCustomChart v-else-if="c.type === 'customChart'" :chartId="c.chartId" :title="c.title" :keys="c.keys" :values="c.values" :label="c.label" :className="c.className" />
-	<div v-else-if="c.type === 'container'" :class="[$style.container, { [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace' }]" :style="{ textAlign: c.align ?? null, backgroundColor: c.bgColor ?? null, color: c.fgColor ?? null, borderWidth: c.borderWidth ? `${c.borderWidth}px` : 0, borderColor: c.borderColor ?? 'var(--divider)', padding: c.padding ? `${c.padding}px` : 0, borderRadius: c.rounded ? '8px' : 0 }">
+	<div v-else-if="c.type === 'container'" :class="[$style.container, { [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace' }, c.className]" :style="{ textAlign: c.align ?? null, backgroundColor: c.bgColor ?? null, color: c.fgColor ?? null, borderWidth: c.borderWidth ? `${c.borderWidth}px` : 0, borderColor: c.borderColor ?? 'var(--divider)', padding: c.padding ? `${c.padding}px` : 0, borderRadius: c.rounded ? '8px' : 0 }">
 		<template v-for="child in c.children" :key="child">
 			<MkAsUi v-if="!g(child).hidden" :component="g(child)" :components="props.components" :size="size" :align="c.align"/>
 		</template>
@@ -53,9 +53,9 @@ import { Ref } from 'vue';
 import * as os from '@/os';
 import MkButton from '@/components/MkButton.vue'; // Done!
 import MkInput from '@/components/MkInput.vue'; // Done!
-import MkSwitch from '@/components/MkSwitch.vue';
+import MkSwitch from '@/components/MkSwitch.vue'; // Done!
 import MkTextarea from '@/components/MkTextarea.vue';
-import MkSelect from '@/components/MkSelect.vue';
+import MkSelect from '@/components/MkSelect.vue'; // Done!
 import { AsUiComponent } from '@/scripts/aiscript/ui';
 import MkFolder from '@/components/MkFolder.vue';
 import MkCustomChart from '@/components/MkCustomChart.vue'; // Done!

@@ -46,7 +46,7 @@ const props = withDefaults(defineProps<{
 	large?: boolean;
 	className?: string;
 }>(), {
-	className: 'MkInput',
+	className: 'MkSelect',
 });
 
 const emit = defineEmits<{

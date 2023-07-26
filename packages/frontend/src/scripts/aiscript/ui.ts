@@ -24,6 +24,7 @@ export type AsUiContainer = AsUiComponentBase & {
 	padding?: number;
 	rounded?: boolean;
 	hidden?: boolean;
+	className?: string;
 };
 
 export type AsUiText = AsUiComponentBase & {
@@ -77,6 +78,7 @@ export type AsUiTextarea = AsUiComponentBase & {
 	default?: string;
 	label?: string;
 	caption?: string;
+	className?: string;
 };
 
 export type AsUiTextInput = AsUiComponentBase & {
@@ -115,6 +117,7 @@ export type AsUiFolder = AsUiComponentBase & {
 	children?: AsUiComponent['id'][];
 	title?: string;
 	opened?: boolean;
+	className?: string;
 };
 
 export type AsUiPostFormButton = AsUiComponentBase & {
@@ -181,6 +184,8 @@ function getContainerOptions(def: values.Value | undefined): Omit<AsUiContainer,
 	if (rounded) utils.assertBoolean(rounded);
 	const hidden = def.value.get('hidden');
 	if (hidden) utils.assertBoolean(hidden);
+	const className = def.value.get('className');
+	if (className) utils.assertString(className);
 
 	return {
 		children: children ? children.value.map(v => {
@@ -196,6 +201,7 @@ function getContainerOptions(def: values.Value | undefined): Omit<AsUiContainer,
 		padding: padding?.value,
 		rounded: rounded?.value,
 		hidden: hidden?.value,
+		className: className?.value ?? 'MkComponent',
 	};
 }
 
@@ -287,6 +293,8 @@ function getTextareaOptions(def: values.Value | undefined, call: (fn: values.VFn
 	if (label) utils.assertString(label);
 	const caption = def.value.get('caption');
 	if (caption) utils.assertString(caption);
+	const className = def.value.get('className');
+	if (className) utils.assertString(className);
 
 	return {
 		onInput: (v) => {
@@ -295,6 +303,7 @@ function getTextareaOptions(def: values.Value | undefined, call: (fn: values.VFn
 		default: defaultValue?.value,
 		label: label?.value,
 		caption: caption?.value,
+		className: className?.value ?? 'MkTextArea',
 	};
 }
 
@@ -462,6 +471,8 @@ function getFolderOptions(def: values.Value | undefined): Omit<AsUiFolder, 'id' 
 	if (title) utils.assertString(title);
 	const opened = def.value.get('opened');
 	if (opened) utils.assertBoolean(opened);
+	const className = def.value.get('className');
+	if (className) utils.assertString(className);
 
 	return {
 		children: children ? children.value.map(v => {
@@ -470,6 +481,7 @@ function getFolderOptions(def: values.Value | undefined): Omit<AsUiFolder, 'id' 
 		}) : [],
 		title: title?.value ?? '',
 		opened: opened?.value ?? true,
+		className: className?.value ?? 'MkFolder',
 	};
 }
 

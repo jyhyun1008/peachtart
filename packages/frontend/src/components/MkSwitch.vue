@@ -27,7 +27,7 @@ const props = withDefaults(defineProps<{
 	disabled?: boolean;
 	className?: string;
 }>(), {
-	className: 'MkInput',
+	className: 'MkSwitch',
 });
 
 const emit = defineEmits<{
