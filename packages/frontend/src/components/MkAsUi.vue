@@ -5,11 +5,11 @@
 			<MkAsUi v-if="!g(child).hidden" :component="g(child)" :components="props.components" :size="size"/>
 		</template>
 	</div>
-	<span v-else-if="c.type === 'text'" :class="[{ [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace' }, c.className]" :style="{ fontSize: c.size ? `${c.size * 100}%` : null, fontWeight: c.bold ? 'bold' : null, color: c.color ?? null }">{{ c.text }}</span>
-	<Mfm v-else-if="c.type === 'mfm'" :class="[{ [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace' }, c.className ]" :style="{ fontSize: c.size ? `${c.size * 100}%` : null, fontWeight: c.bold ? 'bold' : null, color: c.color ?? null }" :text="c.text"/>
+	<span v-else-if="c.type === 'text'" :class="[{ [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace', c.className }]" :style="{ fontSize: c.size ? `${c.size * 100}%` : null, fontWeight: c.bold ? 'bold' : null, color: c.color ?? null }">{{ c.text }}</span>
+	<Mfm v-else-if="c.type === 'mfm'" :class="[{ [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace', c.className }]" :style="{ fontSize: c.size ? `${c.size * 100}%` : null, fontWeight: c.bold ? 'bold' : null, color: c.color ?? null }" :text="c.text"/>
 	<MkButton v-else-if="c.type === 'button'" :className="c.className" :primary="c.primary" :rounded="c.rounded" :disabled="c.disabled" :small="size === 'small'" inline @click="c.onClick">{{ c.text }}</MkButton>
-	<div v-else-if="c.type === 'buttons'" :className="c.className" class="_buttons" :style="{ justifyContent: align }">
-		<MkButton v-for="button in c.buttons" :primary="button.primary" :rounded="button.rounded" :disabled="button.disabled" inline :small="size === 'small'" @click="button.onClick">{{ button.text }}</MkButton>
+	<div v-else-if="c.type === 'buttons'" class="_buttons" :style="{ justifyContent: align }">
+		<MkButton v-for="button in c.buttons" :className="button.className" :primary="button.primary" :rounded="button.rounded" :disabled="button.disabled" inline :small="size === 'small'" @click="button.onClick">{{ button.text }}</MkButton>
 	</div>
 	<MkSwitch v-else-if="c.type === 'switch'" :modelValue="valueForSwitch" :className="c.className" @update:modelValue="onSwitchUpdate">
 		<template v-if="c.label" #label>{{ c.label }}</template>
@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Ref } from 'vue';
+import { Ref, onMounted } from 'vue';
 import * as os from '@/os';
 import MkButton from '@/components/MkButton.vue'; //class binded
 import MkInput from '@/components/MkInput.vue'; //class binded
@@ -91,6 +91,11 @@ function openPostForm() {
 		instant: true,
 	});
 }
+
+onMounted(() => {
+	document.querySelector("._buttons").classList.add(c.className);
+});
+
 </script>
 
 <style lang="scss" module>
