@@ -22,10 +22,12 @@ const props = withDefaults(defineProps<{
 	className: 'MkCustomChart',
 });
 
+let chartEl = this.querySelector('.className')
+
 onMounted(() => {
 
 	document.querySelector('.className').classList.add(props.className);
-	console.log(this.querySelector('.className'))
+	console.log(chartEl)
 	const ctx = document.getElementById(props.chartId);
 
   new Chart(ctx, {
