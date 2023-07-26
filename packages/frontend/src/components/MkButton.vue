@@ -61,7 +61,7 @@ let ripples = $shallowRef<HTMLElement | null>(null);
 
 onMounted(() => {
 
-	buttonEl.classList.add(props.className);
+	//buttonEl.classList.add(props.className);
 
 	if (props.autofocus) {
 		nextTick(() => {
