@@ -1,6 +1,6 @@
 <template>
 <div>
-	<canvas :id="chartId" :class="[{ title: 'title' }, { keys: 'keys' }, { values: 'values' }, { label: 'label' }]"></canvas>
+	<canvas :id="chartId" :class="[{ title: 'title' }, { keys: 'keys' }, { values: 'values' }, { label: 'label' }, { className: 'className' }]"></canvas>
 </div>
 </template>
 
@@ -17,7 +17,8 @@ const props = defineProps<{
 	keys: string[];
 	values: number[];
 	label: string;
-}>(); 
+	className: string;
+}>();
 
 onMounted(() => {
 	const ctx = document.getElementById(props.chartId);

@@ -126,6 +126,7 @@ export type AsUiCustomChart = AsUiComponentBase & {
 	keys: string[];
 	values: number[];
 	label?: string;
+	className?: string;
 };
 
 export type AsUiComponent = AsUiRoot | AsUiContainer | AsUiText | AsUiMfm | AsUiButton | AsUiButtons | AsUiSwitch | AsUiTextarea | AsUiTextInput | AsUiNumberInput | AsUiSelect | AsUiFolder | AsUiPostFormButton | AsUiCustomChart;
@@ -449,6 +450,8 @@ function getCustomChartOptions(def: values.Value | undefined): Omit<AsUiCustomCh
 	if (values) utils.assertArray(values);
 	const label = def.value.get('label');
 	if (label) utils.assertString(label);
+	const className = def.value.get('className');
+	if (className) utils.assertString(className);
 
 	return {
 		chartId: chartId.value,
@@ -462,6 +465,7 @@ function getCustomChartOptions(def: values.Value | undefined): Omit<AsUiCustomCh
 			return v.value;
 		}) : [],
 		label: label?.value ?? '',
+		className: className?.value ?? 'MkCustomChart',
 	};
 }
 
@@ -602,7 +606,7 @@ export function registerAsUiLib(components: Ref<AsUiComponent>[], done: (root: R
 		'Ui:C:postFormButton': values.FN_NATIVE(([def, id], opts) => {
 			return createComponentInstance('postFormButton', def, id, getPostFormButtonOptions, opts.call);
 		}),
-		
+
 		'Ui:C:customChart': values.FN_NATIVE(([def, id], opts) => {
 			return createComponentInstance('customChart', def, id, getCustomChartOptions, opts.call);
 		}),
