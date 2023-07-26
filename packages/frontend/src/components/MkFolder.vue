@@ -1,5 +1,5 @@
 <template>
-<div ref="rootEl" :class="[$style.root, {className: 'className'}]"role="group" :aria-expanded="opened">
+<div ref="rootEl" :class="[$style.root, className: 'className']"role="group" :aria-expanded="opened">
 	<MkStickyContainer>
 		<template #header>
 			<div :class="[$style.header, { [$style.opened]: opened }]" class="_button" role="button" data-cy-folder-header @click="toggle">
