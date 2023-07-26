@@ -59,9 +59,9 @@ const props = withDefaults(defineProps<{
 	manualSave?: boolean;
 	small?: boolean;
 	large?: boolean;
-	className: string;
+	className?: string;
 }>(), {
-	className: 'MkButton',
+	className: 'MkInput',
 });
 
 

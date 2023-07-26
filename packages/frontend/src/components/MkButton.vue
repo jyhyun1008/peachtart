@@ -44,7 +44,7 @@ const props = withDefaults(defineProps<{
 	large?: boolean;
 	transparent?: boolean;
 	asLike?: boolean;
-	className: string;
+	className?: string;
 }>(), {
 	className: 'MkButton',
 });
