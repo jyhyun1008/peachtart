@@ -82,6 +82,7 @@ export type AsUiTextInput = AsUiComponentBase & {
 	default?: string;
 	label?: string;
 	caption?: string;
+	className?: string;
 };
 
 export type AsUiNumberInput = AsUiComponentBase & {
@@ -90,6 +91,7 @@ export type AsUiNumberInput = AsUiComponentBase & {
 	default?: number;
 	label?: string;
 	caption?: string;
+	className?: string;
 };
 
 export type AsUiSelect = AsUiComponentBase & {
@@ -119,6 +121,7 @@ export type AsUiPostFormButton = AsUiComponentBase & {
 	form?: {
 		text: string;
 	};
+	className?: string;
 };
 
 export type AsUiCustomChart = AsUiComponentBase & {
@@ -249,6 +252,8 @@ function getTextInputOptions(def: values.Value | undefined, call: (fn: values.VF
 	if (label) utils.assertString(label);
 	const caption = def.value.get('caption');
 	if (caption) utils.assertString(caption);
+	const className = def.value.get('className');
+	if (className) utils.assertString(className);
 
 	return {
 		onInput: (v) => {
@@ -257,6 +262,7 @@ function getTextInputOptions(def: values.Value | undefined, call: (fn: values.VF
 		default: defaultValue?.value,
 		label: label?.value,
 		caption: caption?.value,
+		className: className?.value ?? 'MkTextInput',
 	};
 }
 
@@ -293,6 +299,8 @@ function getNumberInputOptions(def: values.Value | undefined, call: (fn: values.
 	if (label) utils.assertString(label);
 	const caption = def.value.get('caption');
 	if (caption) utils.assertString(caption);
+	const className = def.value.get('className');
+	if (className) utils.assertString(className);
 
 	return {
 		onInput: (v) => {
@@ -301,6 +309,7 @@ function getNumberInputOptions(def: values.Value | undefined, call: (fn: values.
 		default: defaultValue?.value,
 		label: label?.value,
 		caption: caption?.value,
+		className: className?.value ?? 'MkNumberInput',
 	};
 }
 
@@ -491,6 +500,8 @@ function getPostFormButtonOptions(def: values.Value | undefined, call: (fn: valu
 	if (rounded) utils.assertBoolean(rounded);
 	const form = def.value.get('form');
 	if (form) utils.assertObject(form);
+	const className = def.value.get('className');
+	if (className) utils.assertString(className);
 
 	const getForm = () => {
 		const text = form!.value.get('text');
@@ -507,6 +518,7 @@ function getPostFormButtonOptions(def: values.Value | undefined, call: (fn: valu
 		form: form ? getForm() : {
 			text: '',
 		},
+		className: className?.value ?? 'MkPostFormButton',
 	};
 }
 

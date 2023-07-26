@@ -19,11 +19,11 @@
 		<template v-if="c.label" #label>{{ c.label }}</template>
 		<template v-if="c.caption" #caption>{{ c.caption }}</template>
 	</MkTextarea>
-	<MkInput v-else-if="c.type === 'textInput'" :small="size === 'small'" :modelValue="c.default" @update:modelValue="c.onInput">
+	<MkInput v-else-if="c.type === 'textInput'" :small="size === 'small'" :modelValue="c.default" :className="c.className" @update:modelValue="c.onInput">
 		<template v-if="c.label" #label>{{ c.label }}</template>
 		<template v-if="c.caption" #caption>{{ c.caption }}</template>
 	</MkInput>
-	<MkInput v-else-if="c.type === 'numberInput'" :small="size === 'small'" :modelValue="c.default" type="number" @update:modelValue="c.onInput">
+	<MkInput v-else-if="c.type === 'numberInput'" :small="size === 'small'" :modelValue="c.default" type="number" :className="c.className" @update:modelValue="c.onInput">
 		<template v-if="c.label" #label>{{ c.label }}</template>
 		<template v-if="c.caption" #caption>{{ c.caption }}</template>
 	</MkInput>
@@ -32,7 +32,7 @@
 		<template v-if="c.caption" #caption>{{ c.caption }}</template>
 		<option v-for="item in c.items" :key="item.value" :value="item.value">{{ item.text }}</option>
 	</MkSelect>
-	<MkButton v-else-if="c.type === 'postFormButton'" :primary="c.primary" :rounded="c.rounded" :small="size === 'small'" inline @click="openPostForm">{{ c.text }}</MkButton>
+	<MkButton v-else-if="c.type === 'postFormButton'" :primary="c.primary" :rounded="c.rounded" :small="size === 'small'" inline :className="c.className @click="openPostForm">{{ c.text }}</MkButton>
 	<MkFolder v-else-if="c.type === 'folder'" :defaultOpen="c.opened">
 		<template #label>{{ c.title }}</template>
 		<template v-for="child in c.children" :key="child">
@@ -51,14 +51,14 @@
 <script lang="ts" setup>
 import { Ref } from 'vue';
 import * as os from '@/os';
-import MkButton from '@/components/MkButton.vue';
+import MkButton from '@/components/MkButton.vue'; // Done!
 import MkInput from '@/components/MkInput.vue';
 import MkSwitch from '@/components/MkSwitch.vue';
 import MkTextarea from '@/components/MkTextarea.vue';
 import MkSelect from '@/components/MkSelect.vue';
 import { AsUiComponent } from '@/scripts/aiscript/ui';
 import MkFolder from '@/components/MkFolder.vue';
-import MkCustomChart from '@/components/MkCustomChart.vue';
+import MkCustomChart from '@/components/MkCustomChart.vue'; // Done!
 
 const props = withDefaults(defineProps<{
 	component: AsUiComponent;

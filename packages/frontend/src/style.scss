@@ -34,7 +34,7 @@ html {
 	text-size-adjust: 100%;
 	tab-size: 2;
 	cursor: url(https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/2598379a-e743-4079-96eb-b27da0a0e735.png), auto;
-	
+
 	&, * {
 		scrollbar-color: var(--scrollbarHandle) transparent;
 		scrollbar-width: thin;
@@ -666,4 +666,11 @@ input:hover {
 
 .xn5WL {
     display: none;
+}
+
+// kokokara ~~ custom css의 기능들입니다
+
+.displayFlex {
+	display: flex;
+	justify-content: space-between;
 }
