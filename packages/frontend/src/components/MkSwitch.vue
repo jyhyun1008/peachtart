@@ -1,5 +1,5 @@
 <template>
-<div ref="rootEl" :class="[$style.root, { [$style.disabled]: disabled, [$style.checked]: checked }, { className: 'className' }]">
+<div ref="rootEl" :class="[$style.root, { [$style.disabled]: disabled, [$style.checked]: checked }, {className: 'className'}]">
 	<input
 		ref="input"
 		type="checkbox"
@@ -44,10 +44,6 @@ const toggle = () => {
 
 	}
 };
-
-onMounted(() => {
-	this.$refs.rootEl.classList.add(props.className);
-})
 
 </script>
 

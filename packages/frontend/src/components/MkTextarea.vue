@@ -105,8 +105,6 @@ watch(v, newValue => {
 });
 
 onMounted(() => {
-
-	this.$refs.inputEl.classList.add(props.className);
 	nextTick(() => {
 		if (autofocus.value) {
 			focus();

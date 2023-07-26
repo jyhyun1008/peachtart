@@ -147,7 +147,6 @@ useInterval(() => {
 });
 
 onMounted(() => {
-	ref(rootEl).classList.add(props.className);
 	nextTick(() => {
 		if (autofocus.value) {
 			focus();
