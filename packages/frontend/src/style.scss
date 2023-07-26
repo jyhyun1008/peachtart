@@ -678,12 +678,14 @@ input:hover {
 
 .displayFlex {
 	display: flex;
+	flex-direction: row !important;
 	justify-content: space-around;
 	gap: 12px;
 }
 
 .displayFlexEvenWidth {
 	display: flex;
+	flex-direction: row !important;
 	justify-content: space-around;
 	gap: 12px;
 }
