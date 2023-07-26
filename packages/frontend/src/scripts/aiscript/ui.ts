@@ -190,7 +190,7 @@ function getContainerOptions(def: values.Value | undefined): Omit<AsUiContainer,
 	if (rounded) utils.assertBoolean(rounded);
 	const hidden = def.value.get('hidden');
 	if (hidden) utils.assertBoolean(hidden);
-	const className = def.value.get('class');
+	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 
 	return {
@@ -224,7 +224,7 @@ function getTextOptions(def: values.Value | undefined): Omit<AsUiText, 'id' | 't
 	if (color) utils.assertString(color);
 	const font = def.value.get('font');
 	if (font) utils.assertString(font);
-	const className = def.value.get('class');
+	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 
 	return {
@@ -250,7 +250,7 @@ function getMfmOptions(def: values.Value | undefined): Omit<AsUiMfm, 'id' | 'typ
 	if (color) utils.assertString(color);
 	const font = def.value.get('font');
 	if (font) utils.assertString(font);
-	const className = def.value.get('class');
+	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 
 	return {
@@ -274,7 +274,7 @@ function getTextInputOptions(def: values.Value | undefined, call: (fn: values.VF
 	if (label) utils.assertString(label);
 	const caption = def.value.get('caption');
 	if (caption) utils.assertString(caption);
-	const className = def.value.get('class');
+	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 
 	return {
@@ -299,7 +299,7 @@ function getTextareaOptions(def: values.Value | undefined, call: (fn: values.VFn
 	if (label) utils.assertString(label);
 	const caption = def.value.get('caption');
 	if (caption) utils.assertString(caption);
-	const className = def.value.get('class');
+	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 
 	return {
@@ -324,7 +324,7 @@ function getNumberInputOptions(def: values.Value | undefined, call: (fn: values.
 	if (label) utils.assertString(label);
 	const caption = def.value.get('caption');
 	if (caption) utils.assertString(caption);
-	const className = def.value.get('class');
+	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 
 	return {
@@ -351,7 +351,7 @@ function getButtonOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 	if (rounded) utils.assertBoolean(rounded);
 	const disabled = def.value.get('disabled');
 	if (disabled) utils.assertBoolean(disabled);
-	const className = def.value.get('class');
+	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 
 	return {
@@ -371,7 +371,7 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 
 	const buttons = def.value.get('buttons');
 	if (buttons) utils.assertArray(buttons);
-	const className = def.value.get('class');
+	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 
 	return {
@@ -387,7 +387,7 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 			if (rounded) utils.assertBoolean(rounded);
 			const disabled = button.value.get('disabled');
 			if (disabled) utils.assertBoolean(disabled);
-			const className = def.value.get('class');
+			const className = def.value.get('className');
 			if (className) utils.assertString(className);
 
 			return {
@@ -416,7 +416,7 @@ function getSwitchOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 	if (label) utils.assertString(label);
 	const caption = def.value.get('caption');
 	if (caption) utils.assertString(caption);
-	const className = def.value.get('class');
+	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 
 	return {
@@ -443,7 +443,7 @@ function getSelectOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 	if (label) utils.assertString(label);
 	const caption = def.value.get('caption');
 	if (caption) utils.assertString(caption);
-	const className = def.value.get('class');
+	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 
 	return {
@@ -477,7 +477,7 @@ function getFolderOptions(def: values.Value | undefined): Omit<AsUiFolder, 'id' 
 	if (title) utils.assertString(title);
 	const opened = def.value.get('opened');
 	if (opened) utils.assertBoolean(opened);
-	const className = def.value.get('class');
+	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 
 	return {
@@ -504,7 +504,7 @@ function getCustomChartOptions(def: values.Value | undefined): Omit<AsUiCustomCh
 	if (values) utils.assertArray(values);
 	const label = def.value.get('label');
 	if (label) utils.assertString(label);
-	const className = def.value.get('class');
+	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 
 	return {
@@ -528,7 +528,7 @@ function getYouTubePlayerOptions(def: values.Value | undefined): Omit<AsUiYouTub
 
 	const url = def.value.get('url');
 	if (url) utils.assertString(url);
-	const className = def.value.get('class');
+	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 
 	return {
@@ -548,6 +548,9 @@ function getPostFormButtonOptions(def: values.Value | undefined, call: (fn: valu
 	if (rounded) utils.assertBoolean(rounded);
 	const form = def.value.get('form');
 	if (form) utils.assertObject(form);
+	const className = def.value.get('className');
+	if (className) utils.assertString(className);
+
 
 	const getForm = () => {
 		const text = form!.value.get('text');
@@ -564,6 +567,7 @@ function getPostFormButtonOptions(def: values.Value | undefined, call: (fn: valu
 		form: form ? getForm() : {
 			text: '',
 		},
+		className: className?.value ?? 'postFormButton',
 	};
 }
 
@@ -674,11 +678,11 @@ export function registerAsUiLib(components: Ref<AsUiComponent>[], done: (root: R
 		'Ui:C:postFormButton': values.FN_NATIVE(([def, id], opts) => {
 			return createComponentInstance('postFormButton', def, id, getPostFormButtonOptions, opts.call);
 		}),
-		
+
 		'Ui:C:customChart': values.FN_NATIVE(([def, id], opts) => {
 			return createComponentInstance('customChart', def, id, getCustomChartOptions, opts.call);
 		}),
-		
+
 		'Ui:C:youTubePlayer': values.FN_NATIVE(([def, id], opts) => {
 			return createComponentInstance('youTubePlayer', def, id, getYouTubePlayerOptions, opts.call);
 		}),
