@@ -7,7 +7,7 @@
 
 	<div class="poamfof">
 		<Transition :name="defaultStore.state.animation ? 'fade' : ''" mode="out-in">
-			<div ref="ytEl" v-if="player.url && (player.url.startsWith('http://') || player.url.startsWith('https://'))" class="player" :className="className">
+			<div v-if="player.url && (player.url.startsWith('http://') || player.url.startsWith('https://'))" class="player">
 				<iframe v-if="!fetching" :src="player.url + (player.url.match(/\?/) ? '&autoplay=1&auto_play=1&mute=1&loop=1' : '?autoplay=1&auto_play=1&mute=1&loop=1')" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen/>
 			</div>
 			<span v-else>invalid url</span>
@@ -25,7 +25,6 @@ import { defaultStore } from '@/store';
 
 const props = defineProps<{
 	url: string;
-	className: className;
 }>();
 
 const requestUrl = new URL(props.url);
@@ -41,7 +40,6 @@ let player = $ref({
 
 const ytFetch = (): void => {
 	fetching = true;
-	this.$refs.ytEl.classList.add(props.className);
 	window.fetch(`/url?url=${encodeURIComponent(requestUrl.href)}&lang=${versatileLang}`).then(res => {
 		res.json().then(info => {
 			if (info.url == null) return;
