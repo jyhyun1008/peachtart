@@ -1,5 +1,5 @@
 <template>
-<div ref="rootEl" :class="$style.root" role="group" :aria-expanded="opened">
+<div ref="rootEl" :class="[$style.root, {className: 'className'}]" role="group" :aria-expanded="opened">
 	<MkStickyContainer>
 		<template #header>
 			<div :class="[$style.header, { [$style.opened]: opened }]" class="_button" role="button" data-cy-folder-header @click="toggle">
@@ -48,11 +48,17 @@
 import { nextTick, onMounted } from 'vue';
 import { defaultStore } from '@/store';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
 	defaultOpen?: boolean;
 	maxHeight?: number | null;
 	flexDisplay? boolean;
-}>();
+	className?: string;
+}>(), {
+	defaultOpen: false,
+	maxHeight: null,
+	flexDisplay: false,
+	className: 'MkFolder',
+});
 
 const getBgColor = (el: HTMLElement) => {
 	const style = window.getComputedStyle(el);

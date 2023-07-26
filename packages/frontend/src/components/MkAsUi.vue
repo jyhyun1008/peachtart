@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Ref } from 'vue';
+import { Ref, onMounted } from 'vue';
 import * as os from '@/os';
 import MkButton from '@/components/MkButton.vue'; //class binded
 import MkInput from '@/components/MkInput.vue'; //class binded

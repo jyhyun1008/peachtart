@@ -1,7 +1,7 @@
 <template>
 <div>
 	<div ref="inputEl" :class="$style.label" @click="focus"><slot name="label"></slot></div>
-	<div :class="[{ [$style.disabled]: disabled, [$style.focused]: focused, [$style.tall]: tall, [$style.pre]: pre }]" style="position: relative;">
+	<div :class="[{ [$style.disabled]: disabled, [$style.focused]: focused, [$style.tall]: tall, [$style.pre]: pre }, {className: 'className'}]" style="position: relative;">
 		<textarea
 			v-model="v"
 			v-adaptive-border
@@ -31,7 +31,7 @@ import { debounce } from 'throttle-debounce';
 import MkButton from '@/components/MkButton.vue';
 import { i18n } from '@/i18n';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
 	modelValue: string | null;
 	required?: boolean;
 	readonly?: boolean;
@@ -46,7 +46,10 @@ const props = defineProps<{
 	code?: boolean;
 	tall?: boolean;
 	pre?: boolean;
-}>();
+	className?: string;
+}>(), {
+	className: 'MkTextArea',
+});
 
 const emit = defineEmits<{
 	(ev: 'change', _ev: KeyboardEvent): void;
