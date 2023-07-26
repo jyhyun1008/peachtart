@@ -201,7 +201,7 @@ function getContainerOptions(def: values.Value | undefined): Omit<AsUiContainer,
 		padding: padding?.value,
 		rounded: rounded?.value,
 		hidden: hidden?.value,
-		className: className?.value ?? 'MkComponent',
+		className: className?.value ?? 'MkContainer',
 	};
 }
 
