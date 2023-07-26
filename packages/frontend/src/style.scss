@@ -674,3 +674,12 @@ input:hover {
 	display: flex;
 	justify-content: space-around;
 }
+
+.displayFlexEvenWidth {
+	display: flex;
+	justify-content: space-around;
+}
+
+.displayFlexEvenWidth div {
+	flex: 1;
+}
