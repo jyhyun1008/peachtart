@@ -1,5 +1,5 @@
 <template>
-<div :class="[$style.root, { [$style.disabled]: disabled, [$style.checked]: checked }]">
+<div :class="[$style.root, { [$style.disabled]: disabled, [$style.checked]: checked }, { className: 'className' }, props.className]]">
 	<input
 		ref="input"
 		type="checkbox"
@@ -22,10 +22,13 @@
 import { toRefs, Ref } from 'vue';
 import { i18n } from '@/i18n';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
 	modelValue: boolean | Ref<boolean>;
 	disabled?: boolean;
-}>();
+	className?: string;
+}>(), {
+	className: 'MkInput',
+});
 
 const emit = defineEmits<{
 	(ev: 'update:modelValue', v: boolean): void;

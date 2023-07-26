@@ -1,7 +1,7 @@
 <template>
 <div>
 	<div :class="$style.label" @click="focus"><slot name="label"></slot></div>
-	<div ref="container" :class="[$style.input, { [$style.inline]: inline, [$style.disabled]: disabled, [$style.focused]: focused }]" @mousedown.prevent="show">
+	<div ref="container" :class="[$style.input, { [$style.inline]: inline, [$style.disabled]: disabled, [$style.focused]: focused }, { className: 'className' }, props.className]]" @mousedown.prevent="show">
 		<div ref="prefixEl" :class="$style.prefix"><slot name="prefix"></slot></div>
 		<select
 			ref="inputEl"
@@ -33,7 +33,7 @@ import * as os from '@/os';
 import { useInterval } from '@/scripts/use-interval';
 import { i18n } from '@/i18n';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
 	modelValue: string | null;
 	required?: boolean;
 	readonly?: boolean;
@@ -44,7 +44,10 @@ const props = defineProps<{
 	manualSave?: boolean;
 	small?: boolean;
 	large?: boolean;
-}>();
+	className?: string;
+}>(), {
+	className: 'MkInput',
+});
 
 const emit = defineEmits<{
 	(ev: 'change', _ev: KeyboardEvent): void;

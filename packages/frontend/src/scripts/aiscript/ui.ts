@@ -33,6 +33,7 @@ export type AsUiText = AsUiComponentBase & {
 	bold?: boolean;
 	color?: string;
 	font?: 'serif' | 'sans-serif' | 'monospace';
+	className?: string;
 };
 
 export type AsUiMfm = AsUiComponentBase & {
@@ -42,6 +43,7 @@ export type AsUiMfm = AsUiComponentBase & {
 	bold?: boolean;
 	color?: string;
 	font?: 'serif' | 'sans-serif' | 'monospace';
+	className?: string;
 };
 
 export type AsUiButton = AsUiComponentBase & {
@@ -66,6 +68,7 @@ export type AsUiSwitch = AsUiComponentBase & {
 	default?: boolean;
 	label?: string;
 	caption?: string;
+	className?: string;
 };
 
 export type AsUiTextarea = AsUiComponentBase & {
@@ -104,6 +107,7 @@ export type AsUiSelect = AsUiComponentBase & {
 	default?: string;
 	label?: string;
 	caption?: string;
+	className?: string;
 };
 
 export type AsUiFolder = AsUiComponentBase & {
@@ -208,6 +212,8 @@ function getTextOptions(def: values.Value | undefined): Omit<AsUiText, 'id' | 't
 	if (color) utils.assertString(color);
 	const font = def.value.get('font');
 	if (font) utils.assertString(font);
+	const className = def.value.get('className');
+	if (className) utils.assertString(className);
 
 	return {
 		text: text?.value,
@@ -215,6 +221,7 @@ function getTextOptions(def: values.Value | undefined): Omit<AsUiText, 'id' | 't
 		bold: bold?.value,
 		color: color?.value,
 		font: font?.value,
+		className: className?.value ?? 'MkText',
 	};
 }
 
@@ -231,6 +238,8 @@ function getMfmOptions(def: values.Value | undefined): Omit<AsUiMfm, 'id' | 'typ
 	if (color) utils.assertString(color);
 	const font = def.value.get('font');
 	if (font) utils.assertString(font);
+	const className = def.value.get('className');
+	if (className) utils.assertString(className);
 
 	return {
 		text: text?.value,
@@ -238,6 +247,7 @@ function getMfmOptions(def: values.Value | undefined): Omit<AsUiMfm, 'id' | 'typ
 		bold: bold?.value,
 		color: color?.value,
 		font: font?.value,
+		className: className?.value ?? 'MkMfm',
 	};
 }
 
@@ -391,6 +401,8 @@ function getSwitchOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 	if (label) utils.assertString(label);
 	const caption = def.value.get('caption');
 	if (caption) utils.assertString(caption);
+	const className = def.value.get('className');
+	if (className) utils.assertString(className);
 
 	return {
 		onChange: (v) => {
@@ -399,6 +411,7 @@ function getSwitchOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 		default: defaultValue?.value,
 		label: label?.value,
 		caption: caption?.value,
+		className: className?.value ?? 'MkSwitch',
 	};
 }
 
@@ -415,6 +428,8 @@ function getSelectOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 	if (label) utils.assertString(label);
 	const caption = def.value.get('caption');
 	if (caption) utils.assertString(caption);
+	const className = def.value.get('className');
+	if (className) utils.assertString(className);
 
 	return {
 		items: items ? items.value.map(item => {
@@ -434,6 +449,7 @@ function getSelectOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 		default: defaultValue?.value,
 		label: label?.value,
 		caption: caption?.value,
+		className: className?.value ?? 'MkSelect',
 	};
 }
 
