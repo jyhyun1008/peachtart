@@ -2,7 +2,7 @@
 <button
 	v-if="!link"
 	ref="el" class="_button"
-	:class="[$style.root, { [$style.inline]: inline, [$style.primary]: primary, [$style.gradate]: gradate, [$style.danger]: danger, [$style.rounded]: rounded, [$style.full]: full, [$style.small]: small, [$style.large]: large, [$style.transparent]: transparent, [$style.asLike]: asLike }, { className: 'className' }]"
+	:class="[$style.root, { [$style.inline]: inline, [$style.primary]: primary, [$style.gradate]: gradate, [$style.danger]: danger, [$style.rounded]: rounded, [$style.full]: full, [$style.small]: small, [$style.large]: large, [$style.transparent]: transparent, [$style.asLike]: asLike }]"
 	:type="type"
 	@click="emit('click', $event)"
 	@mousedown="onMousedown"
@@ -19,14 +19,14 @@
 	@mousedown="onMousedown"
 >
 	<div ref="ripples" :class="$style.ripples" :data-children-class="$style.ripple"></div>
-	<div ref="buttonEl" :class="[$style.content, { className: 'className' }]">
+	<div ref="buttonEl" :class="[$style.content, { className: 'className' }, props.className]">
 		<slot></slot>
 	</div>
 </MkA>
 </template>
 
 <script lang="ts" setup>
-import { nextTick, onMounted } from 'vue';
+import { nextTick, onMounted, } from 'vue';
 
 const props = withDefaults(defineProps<{
 	type?: 'button' | 'submit' | 'reset';
@@ -49,8 +49,8 @@ const props = withDefaults(defineProps<{
 	className: 'MkButton',
 });
 
-let buttonEl = ref(null);
-console.log(buttonEl);
+//let buttonEl = ref(null);
+//console.log(buttonEl);
 
 const emit = defineEmits<{
 	(ev: 'click', payload: MouseEvent): void;
