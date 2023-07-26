@@ -28,9 +28,8 @@ const props = withDefaults(defineProps<{
 });
 
 onMounted(() => {
+	this.$refs.rootEl.classList.add(props.className);
 	const ctx = document.getElementById(props.chartId);
-
-	document.querySelector('.className').classList.add(props.className);
 
   new Chart(ctx, {
     type: 'bar',

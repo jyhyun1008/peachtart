@@ -92,9 +92,9 @@ function openPostForm() {
 	});
 }
 
-//onMounted(() => {
-//	document.querySelector("._buttons").classList.add(c.className);
-//});
+onMounted(() => {
+	document.querySelector("._buttons").classList.add(c.className);
+});
 
 </script>
 

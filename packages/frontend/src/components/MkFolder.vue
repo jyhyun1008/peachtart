@@ -112,10 +112,12 @@ onMounted(() => {
 	const myBg = computedStyle.getPropertyValue('--panel');
 	bgSame = parentBg === myBg;
 
-	//if (props.flexDisplay) {
-	//	this.$refs.folderContainer.style.display = 'flex';
-	//}
+	if (props.flexDisplay) {
+		this.$refs.folderContainer.style.display = 'flex';
+	}
 
+	this.$refs.rootEl.classList.add(props.className);
+	
 });
 </script>
 

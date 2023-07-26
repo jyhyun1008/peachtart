@@ -1,11 +1,11 @@
 {
 	"recommendations": [
-		"sdras.vue-vscode-snippets",
 		"editorconfig.editorconfig",
 		"dbaeumer.vscode-eslint",
-		"vue.volar",
-		"vue.vscode-typescript-vue-plugin",
-		"orta.vscode-jest",
-		"mrmlnc.vscode-json5",
+		"Vue.volar",
+		"Vue.vscode-typescript-vue-plugin",
+		"Orta.vscode-jest",
+		"dbaeumer.vscode-eslint",
+		"mrmlnc.vscode-json5"
 	]
 }
