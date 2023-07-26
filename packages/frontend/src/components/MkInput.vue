@@ -1,13 +1,13 @@
 <template>
 <div>
 	<div :class="$style.label" @click="focus"><slot name="label"></slot></div>
-	<div :class="[$style.input, { [$style.inline]: inline, [$style.disabled]: disabled, [$style.focused]: focused }, { className: 'className' }]">
+	<div :class="[$style.input, { [$style.inline]: inline, [$style.disabled]: disabled, [$style.focused]: focused }, { className: 'className' }, props.className]">
 		<div ref="prefixEl" :class="$style.prefix"><slot name="prefix"></slot></div>
 		<input
 			ref="inputEl"
 			v-model="v"
 			v-adaptive-border
-			:class="['$style.inputCore', props.className]"
+			:class="$style.inputCore"
 			:type="type"
 			:disabled="disabled"
 			:required="required"
