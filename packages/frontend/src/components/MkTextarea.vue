@@ -32,7 +32,7 @@ import { debounce } from 'throttle-debounce';
 import MkButton from '@/components/MkButton.vue';
 import { i18n } from '@/i18n';
 
-const props = withDefaults(defineProps<{
+const props = defineProps<{
 	modelValue: string | null;
 	required?: boolean;
 	readonly?: boolean;
