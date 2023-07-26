@@ -1,6 +1,6 @@
 <template>
-<div ref="rootEl">
-	<canvas :id="chartId" :class="[{ title: 'title' }, { keys: 'keys' }, { values: 'values' }, { label: 'label' }, { className: 'className' }]"></canvas>
+<div>
+	<canvas :id="chartId" :class="[{ title: 'title' }, { keys: 'keys' }, { values: 'values' }, { label: 'label' }]"></canvas>
 </div>
 </template>
 
@@ -17,12 +17,10 @@ const props = defineProps<{
 	keys: string[];
 	values: number[];
 	label: string;
-	className: string;
 }>(); 
 
 onMounted(() => {
 	const ctx = document.getElementById(props.chartId);
-	this.$refs.canvasEl.classList.add(props.className);
 
   new Chart(ctx, {
     type: 'bar',
