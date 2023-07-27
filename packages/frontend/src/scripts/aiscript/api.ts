@@ -35,6 +35,16 @@ export function createAiScriptEnv(opts) {
 		USER_USERNAME: $i ? values.STR($i.username) : values.NULL,
 		CUSTOM_EMOJIS: utils.jsToVal(customEmojis.value),
 		CURRENT_URL: values.STR(window.location.href),
+		'Mk:clipboard': values.FN_NATIVE(([str]) => {
+			utils.assertString(str);
+			navigator.clipboard.writeText(str.value)
+				.then(() => {
+				return values.TRUE;
+			})
+				.catch(err => {
+				return values.FALSE;
+			})
+		}),
 		'Str:parseFloat': values.FN_NATIVE(([str]) => {
 			utils.assertString(str);
 			return values.NUM(parseFloat(str.value));
@@ -139,6 +149,9 @@ export function createAiScriptEnv(opts) {
 		'Mk:load': values.FN_NATIVE(([key]) => {
 			utils.assertString(key);
 			return utils.jsToVal(JSON.parse(miLocalStorage.getItem(`aiscript:${opts.storageKey}:${key.value}`)));
+		}),
+		'Mk:url': values.FN_NATIVE(() => {
+			return values.STR(window.location.href);
 		}),
 	};
 }

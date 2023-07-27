@@ -706,6 +706,12 @@ input:hover {
     display: none;
 }
 
+// font family: serif
+
+.xlF22 {
+	font-family: 'HBIOS-SYS', serif;
+}
+
 // kokokara ~~ custom css의 기능들입니다
 
 ._container {
@@ -732,8 +738,29 @@ input:hover {
 	flex: 1;
 }
 
-// font family: serif
+.maxHeight-300 {
+	max-height: 300px;
+	overflow: hidden;
+}
 
-.xlF22 {
-	font-family: 'HBIOS-SYS', serif;
+.maxHeight-400 {
+	max-height: 400px;
+	overflow: hidden;
+}
+
+.maxHeight-500 {
+	max-height: 500px;
+	overflow: hidden;
+}
+
+.textWrap-nowrap {
+	margin-left: -100%;
+	margin-right: -100%;
+}
+
+.textWrap-nowrap-center {
+	margin-left: -100%;
+	margin-right: -100%;
+	text-wrap: nowrap !important;
+	white-space: nowrap !important;
 }
