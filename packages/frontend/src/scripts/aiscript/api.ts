@@ -39,10 +39,18 @@ export function createAiScriptEnv(opts) {
 			utils.assertString(str);
 			navigator.clipboard.writeText(str.value)
 				.then(() => {
-				return values.TRUE;
+					os.alert({
+						type: 'info',
+						title: '클립보드',
+						text: '클립보드에 저장되었습니다.',
+					});
 			})
 				.catch(err => {
-				return values.FALSE;
+					os.alert({
+						type: 'info',
+						title: '클립보드',
+						text: '클립보드 저장에 실패하였습니다.',
+					});
 			})
 		}),
 		'Str:parseFloat': values.FN_NATIVE(([str]) => {
