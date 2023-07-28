@@ -53,6 +53,15 @@ export function createAiScriptEnv(opts) {
 					});
 			})
 		}),
+		'Mk:keyDown': values.FN_NATIVE(([key, fn]) => {
+			utils.assertNumber(key)
+			utils.assertFunction(fn);
+			window.addEventListener("keydown", async (e) => {
+				if (e.key == key.value) {
+					await opts.call(fn)
+				}
+			})
+		}),
 		'Str:parseFloat': values.FN_NATIVE(([str]) => {
 			utils.assertString(str);
 			return values.NUM(parseFloat(str.value));
