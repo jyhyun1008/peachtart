@@ -57,7 +57,7 @@ export function createAiScriptEnv(opts) {
 			utils.assertNumber(key)
 			utils.assertFunction(fn);
 			window.addEventListener("keydown", async (e) => {
-				if (e.key == key.value) {
+				if (e.keyCode == key.value) {
 					await opts.call(fn)
 				}
 			})
