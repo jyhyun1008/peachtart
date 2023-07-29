@@ -63,7 +63,7 @@ export function createAiScriptEnv(opts) {
 			fetch(url)
 			.then(res => res.text())
 			.then((out) => {
-				let form = document.querySelector("."+className)
+				let form = document.querySelector("."+className.value)
 				if (form != null) {
 					form.innerHTML = out
 				} else {
