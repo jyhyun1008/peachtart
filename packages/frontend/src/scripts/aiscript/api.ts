@@ -38,23 +38,45 @@ export function createAiScriptEnv(opts) {
 		'Mk:clipboard': values.FN_NATIVE(([str]) => {
 			utils.assertString(str);
 			navigator.clipboard.writeText(str.value)
-				.then(() => {
-					os.alert({
-						type: 'info',
-						title: '클립보드',
-						text: '클립보드에 저장되었습니다.',
-					});
+			.then(() => {
+				os.alert({
+					type: 'info',
+					title: '클립보드',
+					text: '클립보드에 저장되었습니다.',
+				});
 			})
-				.catch(err => {
+			.catch(err => {
+				os.alert({
+					type: 'info',
+					title: '클립보드',
+					text: '클립보드 저장에 실패하였습니다.',
+				});
+			})
+		}),
+		'Mk:fetchMd': values.FN_NATIVE(([githubUserName, repoName, branchName, fileName, className]) => {
+			utils.assertString(githubUserName);
+			utils.assertString(repoName);
+			utils.assertString(branchName);
+			utils.assertString(fileName);
+			utils.assertString(className);
+			var url = "https://raw.githubusercontent.com/"+githubUserName.value+"/"+repoName.value+"/"+branchName.value+"/"+fileName.value+".md"
+			fetch(url)
+			.then(res => res.text())
+			.then((out) => {
+				let form = document.querySelector("."+className)
+				if (form != null) {
+					form.innerHTML = out
+				} else {
 					os.alert({
 						type: 'info',
-						title: '클립보드',
-						text: '클립보드 저장에 실패하였습니다.',
+						title: '렌더링 실패',
+						text: '올바르지 않은 className',
 					});
+				}
 			})
 		}),
 		'Mk:keyDown': values.FN_NATIVE(([key, fn], opts) => {
-			utils.assertNumber(key)
+			utils.assertNumber(key);
 			utils.assertFunction(fn);
 			window.addEventListener("keydown", async (e) => {
 				if (e.keyCode == key.value) {
