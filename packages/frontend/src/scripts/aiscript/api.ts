@@ -76,6 +76,10 @@ export function createAiScriptEnv(opts) {
 			var markdown = await response.text();
 			return values.STR(markdown)
 		}),
+		'Str:encodeURI': values.FN_NATIVE(([url]) => {
+			utils.assertString(url);
+			return values.STR(encodeURI(url.value))
+		}),
 		'Mk:keyDown': values.FN_NATIVE(([key, fn], opts) => {
 			utils.assertNumber(key);
 			utils.assertFunction(fn);
