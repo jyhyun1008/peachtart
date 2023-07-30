@@ -61,9 +61,9 @@ export function createAiScriptEnv(opts) {
 		}),
 		'Str:regExReplace': values.FN_NATIVE(([str, regEx, replace]) => {
 			utils.assertString(str);
-			utils.assertString(regEx, 'gm');
+			utils.assertString(regEx);
 			utils.assertString(replace);
-			regEx = new RegExp(regEx.value);
+			regEx = new RegExp(regEx.value, 'gm');
 			return values.STR(str.value.replace(regEx, replace.value))
 		}),
 		'Mk:fetchMd': values.FN_NATIVE(async([githubUserName, repoName, branchName, fileName]) => {
