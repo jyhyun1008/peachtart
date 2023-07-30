@@ -61,7 +61,7 @@ export function createAiScriptEnv(opts) {
 		}),
 		'Str:regExReplace': values.FN_NATIVE(([str, regEx, replace]) => {
 			utils.assertString(str);
-			utils.assertString(regEx);
+			utils.assertString(regEx, 'gm');
 			utils.assertString(replace);
 			regEx = new RegExp(regEx.value);
 			return values.STR(str.value.replace(regEx, replace.value))
