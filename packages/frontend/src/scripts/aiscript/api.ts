@@ -68,9 +68,8 @@ export function createAiScriptEnv(opts) {
 		}),
 		'Str:URIReplace': values.FN_NATIVE(([str]) => {
 			utils.assertString(str);
-			var regEx0 = new RegExp('\(https\:\/\/([^\)]+)\)', 'gm');
-			var regEx1 = new RegExp('https\:\/\/([^\)\s\n]+)\s', 'gm');
-			return values.STR(str.value.replace(regEx0, encodeURI).replace(regEx1, encodeURI))
+			var regEx = new RegExp('\(https\:\/\/([^\)]+)\)', 'gm');
+			return values.STR(str.value.replace(regEx, encodeURI))
 		}),
 		'Str:encodeURI': values.FN_NATIVE(([url]) => {
 			utils.assertString(url);
