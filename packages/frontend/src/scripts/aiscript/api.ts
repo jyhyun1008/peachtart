@@ -5,6 +5,8 @@ import { miLocalStorage } from '@/local-storage';
 import { customEmojis } from '@/custom-emojis';
 import * as sound from '@/scripts/sound';
 
+// 사전 선언.
+
 var latitude = 0, longitude = 0
 navigator.geolocation.getCurrentPosition(function(pos) {
   latitude = pos.coords.latitude;
@@ -26,6 +28,10 @@ function geolon(bool) {
 		return 0
 	}
 }
+
+
+
+// 이제부터 함수.
 
 export function createAiScriptEnv(opts) {
 	let apiRequests = 0;
@@ -53,27 +59,19 @@ export function createAiScriptEnv(opts) {
 				});
 			})
 		}),
-		'Mk:fetchMd': values.FN_NATIVE(([githubUserName, repoName, branchName, fileName, className]) => {
+		'Mk:fetchMd': values.FN_NATIVE(async([githubUserName, repoName, branchName, fileName, className]) => {
 			utils.assertString(githubUserName);
 			utils.assertString(repoName);
 			utils.assertString(branchName);
 			utils.assertString(fileName);
 			utils.assertString(className);
 			var url = "https://raw.githubusercontent.com/"+githubUserName.value+"/"+repoName.value+"/"+branchName.value+"/"+fileName.value+".md"
-			fetch(url)
+			await fetch(url)
 			.then(res => res.text())
 			.then((out) => {
-				let form = document.querySelector("."+className.value)
-				if (form != null) {
-					form.innerHTML = out
-				} else {
-					os.alert({
-						type: 'info',
-						title: '렌더링 실패',
-						text: '올바르지 않은 className',
-					});
-				}
+				document.body.innerHTML += '<div class="'+className.value+'" style="display:none;">'+out+'</div>'
 			})
+			return document.querySelector('.'+className.value).innerHTML
 		}),
 		'Mk:keyDown': values.FN_NATIVE(([key, fn], opts) => {
 			utils.assertNumber(key);
