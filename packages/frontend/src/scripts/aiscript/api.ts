@@ -66,6 +66,16 @@ export function createAiScriptEnv(opts) {
 			regEx = new RegExp(regEx.value, 'gm');
 			return values.STR(str.value.replace(regEx, replace.value))
 		}),
+		'Str:encodeURI': values.FN_NATIVE(([url]) => {
+			utils.assertString(url);
+			return values.STR(encodeURI(url.value))
+		}),
+		'Str:URIReplace': values.FN_NATIVE(([str]) => {
+			utils.assertString(str);
+			var regEx0 = new RegExp('\(https\:\/\/([^\)\s]+)\)\s', 'gm');
+			var regEx1 = new RegExp('https\:\/\/([^\s]+)\s', 'gm');
+			return values.STR(str.value.replace(regEx0, encodeURI).replace(regEx1, encodeURI))
+		}),
 		'Mk:fetchMd': values.FN_NATIVE(async([githubUserName, repoName, branchName, fileName]) => {
 			utils.assertString(githubUserName);
 			utils.assertString(repoName);
@@ -75,10 +85,6 @@ export function createAiScriptEnv(opts) {
 			var response = await fetch(url)
 			var markdown = await response.text();
 			return values.STR(markdown)
-		}),
-		'Str:encodeURI': values.FN_NATIVE(([url]) => {
-			utils.assertString(url);
-			return values.STR(encodeURI(url.value))
 		}),
 		'Mk:keyDown': values.FN_NATIVE(([key, fn], opts) => {
 			utils.assertNumber(key);
