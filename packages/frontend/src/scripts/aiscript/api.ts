@@ -66,18 +66,9 @@ export function createAiScriptEnv(opts) {
 			utils.assertString(fileName);
 			utils.assertString(className);
 			var url = "https://raw.githubusercontent.com/"+githubUserName.value+"/"+repoName.value+"/"+branchName.value+"/"+fileName.value+".md"
-			await fetch(url)
-			.then(res => res.text())
-			.then((out) => {
-				document.body.innerHTML += '<div class="'+className.value+'" style="display:none;">'+out+'</div>'
-				return;
-			})
-			if (document.querySelector('.'+className.value) != null) {
-				var txt = document.querySelector('.'+className.value).innerHTML
-				return values.STR(txt)
-			} else {
-				console.log('error....')
-			}
+			var response = await fetch(url)
+			var markdown = await response.text();
+			return values.STR(markdown)
 		}),
 		'Mk:keyDown': values.FN_NATIVE(([key, fn], opts) => {
 			utils.assertNumber(key);
