@@ -72,8 +72,8 @@ export function createAiScriptEnv(opts) {
 		}),
 		'Str:URIReplace': values.FN_NATIVE(([str]) => {
 			utils.assertString(str);
-			var regEx0 = new RegExp('\(https\:\/\/([^\)\s]+)\)\s', 'gm');
-			var regEx1 = new RegExp('https\:\/\/([^\s]+)\s', 'gm');
+			var regEx0 = new RegExp('\(https\:\/\/([^\)\s]+)\)', 'gm');
+			var regEx1 = new RegExp('https\:\/\/([^\)\s]+)\s', 'gm');
 			return values.STR(str.value.replace(regEx0, encodeURI).replace(regEx1, encodeURI))
 		}),
 		'Mk:fetchMd': values.FN_NATIVE(async([githubUserName, repoName, branchName, fileName]) => {
