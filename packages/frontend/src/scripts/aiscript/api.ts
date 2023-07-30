@@ -66,12 +66,11 @@ export function createAiScriptEnv(opts) {
 			regEx = new RegExp(regEx.value);
 			return values.STR(str.value.replace(regEx, replace.value))
 		}),
-		'Mk:fetchMd': values.FN_NATIVE(async([githubUserName, repoName, branchName, fileName, className]) => {
+		'Mk:fetchMd': values.FN_NATIVE(async([githubUserName, repoName, branchName, fileName]) => {
 			utils.assertString(githubUserName);
 			utils.assertString(repoName);
 			utils.assertString(branchName);
 			utils.assertString(fileName);
-			utils.assertString(className);
 			var url = "https://raw.githubusercontent.com/"+githubUserName.value+"/"+repoName.value+"/"+branchName.value+"/"+fileName.value+".md"
 			var response = await fetch(url)
 			var markdown = await response.text();
