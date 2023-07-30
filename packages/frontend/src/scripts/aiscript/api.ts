@@ -71,7 +71,7 @@ export function createAiScriptEnv(opts) {
 			.then((out) => {
 				document.body.innerHTML += '<div class="'+className.value+'" style="display:none;">'+out+'</div>'
 			})
-			return document.querySelector('.'+className.value).innerHTML
+			return values.STR(document.querySelector('.'+className.value).innerHTML)
 		}),
 		'Mk:keyDown': values.FN_NATIVE(([key, fn], opts) => {
 			utils.assertNumber(key);
