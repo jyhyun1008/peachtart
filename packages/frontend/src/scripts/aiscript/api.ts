@@ -71,9 +71,12 @@ export function createAiScriptEnv(opts) {
 			.then((out) => {
 				document.body.innerHTML += '<div class="'+className.value+'" style="display:none;">'+out+'</div>'
 			})
+			await new Promise(r => setTimeout(r, 500));
 			if (document.querySelector('.'+className.value) != null) {
 				var txt = document.querySelector('.'+className.value).innerHTML
 				return values.STR(txt)
+			} else {
+				console.log('error....')
 			}
 		}),
 		'Mk:keyDown': values.FN_NATIVE(([key, fn], opts) => {
