@@ -59,6 +59,13 @@ export function createAiScriptEnv(opts) {
 				});
 			})
 		}),
+		'Str:regExReplace': values.FN_NATIVE(([str, regEx, replace]) => {
+			utils.assertString(str);
+			utils.assertString(regEx);
+			utils.assertString(replace);
+			regEx = new RegExp(regEx.value);
+			return str.value.replace(regEx, replace.value)
+		}),
 		'Mk:fetchMd': values.FN_NATIVE(async([githubUserName, repoName, branchName, fileName, className]) => {
 			utils.assertString(githubUserName);
 			utils.assertString(repoName);
