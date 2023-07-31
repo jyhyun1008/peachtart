@@ -143,6 +143,14 @@ export function createAiScriptEnv(opts) {
 			utils.assertBoolean(bool);
 			return values.NUM(geolon(bool.value));
 		}),
+		'Str:encodeB64': values.FN_NATIVE(([text]) => {
+			utils.assertString(text);
+			return values.STR(btoa(text.value));
+		}),
+		'Str:decodeB64': values.FN_NATIVE(([base64]) => {
+			utils.assertString(base64);
+			return values.STR(atob(base64.value));
+		}),
 		'Mk:encode': values.FN_NATIVE(([text]) => {
 			utils.assertString(text);
 			return values.STR(btoa(text.value));
