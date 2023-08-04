@@ -89,7 +89,7 @@ export function createAiScriptEnv(opts) {
 			utils.assertNumber(key);
 			utils.assertFunction(fn);
 			window.addEventListener("keydown", async (e) => {
-				if (e.keyCode === key.value && e.ctrlKey) {
+				if (e.keyCode == key.value && (e.ctrlKey || e.metaKey)) {
 					e.preventDefault();
 					await opts.call(fn)
 				}
