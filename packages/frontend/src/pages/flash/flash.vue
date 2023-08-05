@@ -225,6 +225,7 @@ onMounted(() => {
 	&:global {
 		> .main {
 			padding: 32px;
+      display: none;
 
 			> .title {
 				font-size: 1.4em;
