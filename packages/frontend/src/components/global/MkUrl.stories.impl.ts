@@ -57,7 +57,7 @@ export const Default = {
 				rest.get('/url', (req, res, ctx) => {
 					return res(ctx.json({
 						title: 'Misskey Hub',
-						icon: 'https://misskey-hub.net/favicon.ico',
+						icon: 'https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/db12f392-a8ba-46d0-bb81-b24d8b7268ea.png',
 						description: 'Misskeyはオープンソースの分散型ソーシャルネットワーキングプラットフォームです。',
 						thumbnail: null,
 						player: {
