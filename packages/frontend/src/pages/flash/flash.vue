@@ -190,6 +190,10 @@ async function run() {
 	}
 }
 
+onMounted(() => {
+	start();
+});
+
 onDeactivated(() => {
 	if (aiscript) aiscript.abort();
 });
