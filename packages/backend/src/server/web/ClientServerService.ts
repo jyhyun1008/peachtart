@@ -234,11 +234,11 @@ export class ClientServerService {
 		});
 
 		fastify.get('/favicon.ico', async (request, reply) => {
-			return reply.sendFile('/favicon.ico', staticAssets);
+			return reply.sendFile('https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/9652e6f0-0362-4b06-a5f7-8e49e8955317.png', staticAssets);
 		});
 
 		fastify.get('/apple-touch-icon.png', async (request, reply) => {
-			return reply.sendFile('/apple-touch-icon.png', staticAssets);
+			return reply.sendFile('https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/9652e6f0-0362-4b06-a5f7-8e49e8955317.png', staticAssets);
 		});
 
 		fastify.get<{ Params: { path: string } }>('/fluent-emoji/:path(.*)', async (request, reply) => {
