@@ -51,7 +51,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onDeactivated, onUnmounted, Ref, ref, watch } from 'vue';
+import { computed, onMounted, onDeactivated, onUnmounted, Ref, ref, watch } from 'vue';
 import { Interpreter, Parser, values } from '@syuilo/aiscript';
 import MkButton from '@/components/MkButton.vue';
 import * as os from '@/os';
