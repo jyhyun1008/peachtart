@@ -190,10 +190,6 @@ async function run() {
 	}
 }
 
-onMounted(() => {
-	start();
-});
-
 onDeactivated(() => {
 	if (aiscript) aiscript.abort();
 });
@@ -215,6 +211,13 @@ definePageMetadata(computed(() => flash ? {
 		text: flash.summary,
 	},
 } : null));
+
+onMounted(() => {
+	setTimeout(() => {
+	  start();
+	}, "1000");
+});
+	
 </script>
 
 <style lang="scss" module>
