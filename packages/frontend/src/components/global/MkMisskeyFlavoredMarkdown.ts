@@ -64,7 +64,15 @@ export default function(props: {
 					res.shift();
 					return res;
 				} else {
-					return [text.replace(/\n/g, ' ')];
+					if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text)) {
+						var result = text.replace(/^\|/g, '<table><th><td>')
+						result = result.replace(/\n\n\|/g, '<table><th><td>')
+						result = result.replace(/\|\n\n/g, '</td><tr></table>')
+						result = result.replace(/\|\n(\-){2,}\n\|/g, '</td></th><tr><td>')
+						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
+						result = result.replace(/\|/g, '</td><td>')
+						return [text.replace(/\n/g, ' ')];
+					}
 				}
 			}
 
