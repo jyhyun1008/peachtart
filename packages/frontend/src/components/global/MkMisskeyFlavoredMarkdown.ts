@@ -56,14 +56,6 @@ export default function(props: {
 				const text = token.props.text.replace(/(\r\n|\n|\r)/g, '\n');
 
 				if (!props.plain) {
-					const res: (VNode | string)[] = [];
-					for (const t of text.split('\n')) {
-						res.push(h('br'));
-						res.push(t);
-					}
-					res.shift();
-					return res;
-				} else {
 					if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text)) {
 						var result = text.replace(/^\|/g, '<table><th><td>')
 						result = result.replace(/\n\n\|/g, '<table><th><td>')
@@ -71,7 +63,24 @@ export default function(props: {
 						result = result.replace(/\|\n(\-){2,}\n\|/g, '</td></th><tr><td>')
 						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
 						result = result.replace(/\|/g, '</td><td>')
-						return [text.replace(/\n/g, ' ')];
+					}
+					const res: (VNode | string)[] = [];
+					for (const t of result.split('\n')) {
+						res.push(h('br'));
+						res.push(t);
+					}
+					res.shift();
+					return res;
+				} else {
+						if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text)) {
+							var result = text.replace(/^\|/g, '<table><th><td>')
+							result = result.replace(/\n\n\|/g, '<table><th><td>')
+							result = result.replace(/\|\n\n/g, '</td><tr></table>')
+							result = result.replace(/\|\n(\-){2,}\n\|/g, '</td></th><tr><td>')
+							result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
+							result = result.replace(/\|/g, '</td><td>')
+							return [result.replace(/\n/g, ' ')];
+						}
 					}
 				}
 			}
