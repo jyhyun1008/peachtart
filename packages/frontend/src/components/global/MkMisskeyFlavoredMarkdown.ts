@@ -80,7 +80,6 @@ export default function(props: {
 							result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
 							result = result.replace(/\|/g, '</td><td>')
 							return [result.replace(/\n/g, ' ')];
-						}
 					}
 				}
 			}
