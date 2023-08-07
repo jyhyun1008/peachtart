@@ -63,6 +63,8 @@ export default function(props: {
 						result = result.replace(/\|\n(\-){2,}\n\|/g, '</td></th><tr><td>')
 						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
 						result = result.replace(/\|/g, '</td><td>')
+					} else {
+						result = text
 					}
 					const res: (VNode | string)[] = [];
 					for (const t of result.split('\n')) {
@@ -72,14 +74,16 @@ export default function(props: {
 					res.shift();
 					return res;
 				} else {
-						if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text)) {
-							var result = text.replace(/^\|/g, '<table><th><td>')
-							result = result.replace(/\n\n\|/g, '<table><th><td>')
-							result = result.replace(/\|\n\n/g, '</td><tr></table>')
-							result = result.replace(/\|\n(\-){2,}\n\|/g, '</td></th><tr><td>')
-							result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
-							result = result.replace(/\|/g, '</td><td>')
-							return [result.replace(/\n/g, ' ')];
+					if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text)) {
+						var result = text.replace(/^\|/g, '<table><th><td>')
+						result = result.replace(/\n\n\|/g, '<table><th><td>')
+						result = result.replace(/\|\n\n/g, '</td><tr></table>')
+						result = result.replace(/\|\n(\-){2,}\n\|/g, '</td></th><tr><td>')
+						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
+						result = result.replace(/\|/g, '</td><td>')
+						return [result.replace(/\n/g, ' ')];
+					} else {
+						return [text.replace(/\n/g, ' ')];
 					}
 				}
 			}
