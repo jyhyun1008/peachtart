@@ -6,7 +6,7 @@
 		</template>
 	</div>
 	<span v-else-if="c.type === 'text'" :class="[{ [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace' }, c.className]" :style="{ fontSize: c.size ? `${c.size * 100}%` : null, fontWeight: c.bold ? 'bold' : null, color: c.color ?? null }">{{ c.text }}</span>
-	<Mfm v-else-if="c.type === 'mfm'" :class="[{ [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace' }, c.className]" :style="{ fontSize: c.size ? `${c.size * 100}%` : null, fontWeight: c.bold ? 'bold' : null, color: c.color ?? null }" :text="c.text"/>
+	<Mfm v-else-if="c.type === 'mfm'" :class="[{ [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace' }, c.className]" :style="{ fontSize: c.size ? `${c.size * 100}%` : null, fontWeight: c.bold ? 'bold' : null, color: c.color ?? null }" v-html="c.text"/>
 	<MkButton v-else-if="c.type === 'button'" :primary="c.primary" :className="c.className" :rounded="c.rounded" :disabled="c.disabled" :small="size === 'small'" inline @click="c.onClick">{{ c.text }}</MkButton>
 	<div v-else-if="c.type === 'buttons'" :class="['_buttons', c.className ]" :style="{ justifyContent: align }">
 		<MkButton v-for="button in c.buttons" :primary="button.primary" :className="button.className" :rounded="button.rounded" :disabled="button.disabled" inline :small="size === 'small'" @click="button.onClick">{{ button.text }}</MkButton>
