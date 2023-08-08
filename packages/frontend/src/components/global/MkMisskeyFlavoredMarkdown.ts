@@ -62,10 +62,10 @@ export default function(props: {
 					  result = result.replace(/\|{3}/g, '</td><td colspan="3">')
 					  result = result.replace(/\|{2}/g, '</td><td colspan="2">')
 					  result = result.replace(/\|{1}/g, '</td><td>')
-						result = result.replace(/\<td\>\n\<\/td\>/g, '</tr><tr>')
 						result = result.replace(/\<td\>\n(.+)\-{2,}(.+)\n\<\/td\>/g, '</tr></thead><tbody><tr>')
-						result = result.replace(/^\<\/td\>/g, '<table><thead><tr>')
-						result = result.replace(/\n\n\<\/td\>/g, '\n<table><thead><tr>')
+						result = result.replace(/\<td\>\n\<\/td\>/g, '</tr><tr>')
+						result = result.replace(/^\<\/td\>/g, '<table style="border: 1px solid var(--accent); border-spacing: 0px;><thead style="background: var(--bg); font-weight: bold;"><tr>')
+						result = result.replace(/\n\n\<\/td\>/g, '\n<table style="border: 1px solid var(--accent); border-spacing: 0px;><thead style="background: var(--bg); font-weight: bold;"><tr>')
 						result = result.replace(/\<td\>\n\n/g, '</tr></tbody></table>\n')
 						result = result.replace(/\<td\>$/g, '</tr></tbody></table>')
 						var result2: (VNode | string)[] = [];
@@ -75,60 +75,6 @@ export default function(props: {
 						}
 						result2.shift();
 						return result2;
-					} else if (/\n\n\|([\s\S]+)\|(.+)$/.test(text) || /^\|([\s\S]+)\|(.+)$/.test(text)) { // 링크 앞쪽 표
-						var result = text.replace(/^\|/g, '<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg);"><tr><td>')
-						result = result.replace(/\n\n\|/g, '\n<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg);"><tr><td>')
-						result = result.replace(/\|\n\|(\-){2,}(.+)\n\|/g, '</td></tr></thead><tbody><tr><td>')
-						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
-						result = result.replace(/\|/g, '</td><td>')
-						var result2: (VNode | string)[] = [];
-						for (var r of result.split('\n')) {
-							result2.push(h('br'));
-							result2.push(h('span', {innerHTML: r}));
-						}
-						result2.shift();
-						return result2;
-					} else if (/^[^\n]([\s\S]+)\n?\|\n\n/.test(text)) { // 링크 뒤쪽 표
-						result = result.replace(/\|\n\n/g, '</td></tr></tbody></table>\n')
-						result = result.replace(/\|\n\|(\-){2,}(.+)\n\|/g, '</td></tr></thead><tbody><tr><td>')
-						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
-						result = result.replace(/\|/g, '</td><td>')
-						var result2: (VNode | string)[] = [];
-						for (var r of result.split('\n')) {
-							result2.push(h('br'));
-							result2.push(h('span', {innerHTML: r}));
-						}
-						result2.shift();
-						return result2;
-					} else if (/^(.+)\n?\|(.+)$/.test(text)) {
-						result = result.replace(/\|\n\|(\-){2,}(.+)\n\|/g, '</td></tr></thead><tbody><tr><td>')
-						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
-						result = result.replace(/\|/g, '</td><td>')
-						var result2: (VNode | string)[] = [];
-						for (var r of result.split('\n')) {
-							result2.push(h('br'));
-							result2.push(h('span', {innerHTML: r}));
-						}
-						result2.shift();
-						return result2;
-					} else {
-						const res: (VNode | string)[] = [];
-						for (const t of text.split('\n')) {
-							res.push(h('br'));
-							res.push(t);
-						}
-						res.shift();
-						return res;
-					}
-				} else {
-					if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text)) {
-						var result = text.replace(/^\|/g, '<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg);"><tr><td>')
-						result = result.replace(/\n\n\|/g, '\n<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg);"><tr><td>')
-						result = result.replace(/\|\n\n/g, '</td></tr></tbody></table>\n')
-						result = result.replace(/\|\n\|(\-){2,}(.+)\n\|/g, '</td></tr></thead><tbody><tr><td>')
-						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
-						result = result.replace(/\|/g, '</td><td>')
-						return h('span', { domProps: { innerHTML: result }});
 					} else {
 						return [text.replace(/\n/g, ' ')];
 					}
