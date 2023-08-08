@@ -63,7 +63,7 @@ export default function(props: {
 						result = result.replace(/\|\n(\-){2,}\n\|/g, '</td></th><tr><td>')
 						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
 						result = result.replace(/\|/g, '</td><td>')
-						var result2 = h('div', { innerHTML: result });
+						var result2 = h('div', { domProps: { innerHTML: result }});
 					} else {
 						var result2 = text
 					}
