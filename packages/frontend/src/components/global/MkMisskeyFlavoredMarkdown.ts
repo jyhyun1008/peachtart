@@ -36,16 +36,6 @@ export default function(props: {
 
 	if (props.text == null || props.text === '') return;
 
-	if (/\n\n\|([\s\S]+)\|\n\n/.test(props.text) || /^\|([\s\S]+)\|\n\n/.test(props.text)) {
-		var result = props.text.replace(/^\|/g, '<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="font-weight: bold; background: var(--bg);"><tr><td>')
-		result = result.replace(/\n\n\|/g, '\n<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="font-weight: bold; background: var(--bg);"><tr><td>')
-		result = result.replace(/\|\n\n/g, '</td></tr></tbody></table>\n')
-		result = result.replace(/\|\n\|(\-){2,}(.+)\n\|/g, '</td></tr></thead><tbody><tr><td>')
-		result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
-		result = result.replace(/\|/g, '</td><td>')
-		props.text = result
-	}
-
 	const ast = (props.plain ? mfm.parseSimple : mfm.parse)(props.text);
 
 	const validTime = (t: string | null | undefined) => {
@@ -64,16 +54,25 @@ export default function(props: {
 		switch (token.type) {
 			case 'text': {
 				const text = token.props.text.replace(/(\r\n|\n|\r)/g, '\n');
+
 				if (!props.plain) {
-						const res: (VNode | string)[] = [];
-						for (const t of text.split('\n')) {
-							res.push(h('br'));
-							res.push(t);
+					if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text)) {
+						var result = text.replace(/^\|/g, '<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg); font-weight: bold;"><tr><td>')
+						result = result.replace(/\n\n\|/g, '\n<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg); font-weight: bold;"><tr><td>')
+						result = result.replace(/\|\n\n/g, '</td></tr></tbody></table>\n')
+						result = result.replace(/\|\n\|(\-){2,}(.+)\n\|/g, '</td></tr></thead><tbody><tr><td>')
+						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
+						result = result.replace(/\|/g, '</td><td>')
+						const result2: (VNode | string)[] = [];
+						for (const r of result.split('\n')) {
+							result2.push(h('br'));
+							result2.push(h('span', {innerHTML: r}));
 						}
-						res.shift();
-						return res;
-				} else {
-					return [text.replace(/\n/g, ' ')];
+						result2.shift();
+						return result2;
+					} else {
+						return [text.replace(/\n/g, ' ')];
+					}
 				}
 			}
 
@@ -370,12 +369,8 @@ export default function(props: {
 		}
 	}).flat(Infinity) as (VNode | string)[];
 
-	var returnvalue = h('span', {
+	return h('span', {
 		// https://codeday.me/jp/qa/20190424/690106.html
 		style: props.nowrap ? 'white-space: pre; word-wrap: normal; overflow: hidden; text-overflow: ellipsis;' : 'white-space: pre-wrap;',
 	}, genEl(ast, props.rootScale ?? 1));
-
-	console.log(returnvalue)
-
-	return returnvalue
 }
