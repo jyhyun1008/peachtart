@@ -63,11 +63,12 @@ export default function(props: {
 						result = result.replace(/\|\n(\-){2,}\n\|/g, '</td></th><tr><td>')
 						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
 						result = result.replace(/\|/g, '</td><td>')
+						var result2 = h('div', { innerHTML: result });
 					} else {
-						var result = text
+						var result2 = text
 					}
 					const res: (VNode | string)[] = [];
-					for (const t of result.split('\n')) {
+					for (const t of result2.split('\n')) {
 						res.push(h('br'));
 						res.push(t);
 					}
@@ -81,7 +82,7 @@ export default function(props: {
 						result = result.replace(/\|\n(\-){2,}\n\|/g, '</td></th><tr><td>')
 						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
 						result = result.replace(/\|/g, '</td><td>')
-						return [result.replace(/\n/g, ' ')];
+						return h('div', { innerHTML: result });
 					} else {
 						return [text.replace(/\n/g, ' ')];
 					}
