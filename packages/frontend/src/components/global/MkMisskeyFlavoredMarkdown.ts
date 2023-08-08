@@ -57,14 +57,50 @@ export default function(props: {
 
 				if (!props.plain) {
 					if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text)) {
-						var result = text.replace(/^\|/g, '<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg); font-weight: bold;"><tr><td>')
-						result = result.replace(/\n\n\|/g, '\n<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg); font-weight: bold;"><tr><td>')
+						var result = text.replace(/^\|/g, '<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg);"><tr><td>')
+						result = result.replace(/\n\n\|/g, '\n<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg);"><tr><td>')
 						result = result.replace(/\|\n\n/g, '</td></tr></tbody></table>\n')
 						result = result.replace(/\|\n\|(\-){2,}(.+)\n\|/g, '</td></tr></thead><tbody><tr><td>')
 						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
 						result = result.replace(/\|/g, '</td><td>')
-						const result2: (VNode | string)[] = [];
-						for (const r of result.split('\n')) {
+						var result2: (VNode | string)[] = [];
+						for (var r of result.split('\n')) {
+							result2.push(h('br'));
+							result2.push(h('span', {innerHTML: r}));
+						}
+						result2.shift();
+						return result2;
+					} else if (/\n\n\|([\s\S]+)\|(.+)$/.test(text) || /^\|([\s\S]+)\|(.+)$/.test(text)) { // 링크 앞쪽 표
+						var result = text.replace(/^\|/g, '<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg);"><tr><td>')
+						result = result.replace(/\n\n\|/g, '\n<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg);"><tr><td>')
+						result = result.replace(/\|\n\|(\-){2,}(.+)\n\|/g, '</td></tr></thead><tbody><tr><td>')
+						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
+						result = result.replace(/\|/g, '</td><td>')
+						var result2: (VNode | string)[] = [];
+						for (var r of result.split('\n')) {
+							result2.push(h('br'));
+							result2.push(h('span', {innerHTML: r}));
+						}
+						result2.shift();
+						return result2;
+					} else if (/^[^\n]([\s\S]+)\n?\|\n\n/.test(text)) { // 링크 뒤쪽 표
+						result = result.replace(/\|\n\n/g, '</td></tr></tbody></table>\n')
+						result = result.replace(/\|\n\|(\-){2,}(.+)\n\|/g, '</td></tr></thead><tbody><tr><td>')
+						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
+						result = result.replace(/\|/g, '</td><td>')
+						var result2: (VNode | string)[] = [];
+						for (var r of result.split('\n')) {
+							result2.push(h('br'));
+							result2.push(h('span', {innerHTML: r}));
+						}
+						result2.shift();
+						return result2;
+					} else if (/^(.+)\n?\|(.+)$/.test(text)) {
+						result = result.replace(/\|\n\|(\-){2,}(.+)\n\|/g, '</td></tr></thead><tbody><tr><td>')
+						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
+						result = result.replace(/\|/g, '</td><td>')
+						var result2: (VNode | string)[] = [];
+						for (var r of result.split('\n')) {
 							result2.push(h('br'));
 							result2.push(h('span', {innerHTML: r}));
 						}
