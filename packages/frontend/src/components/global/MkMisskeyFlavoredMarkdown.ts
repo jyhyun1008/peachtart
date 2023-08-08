@@ -76,6 +76,24 @@ export default function(props: {
 						result2.shift();
 						return result2;
 					} else {
+						const res: (VNode | string)[] = [];
+						for (const t of text.split('\n')) {
+							res.push(h('br'));
+							res.push(t);
+						}
+						res.shift();
+						return res;
+					}
+				} else {
+					if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text)) {
+						var result = text.replace(/^\|/g, '<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg);"><tr><td>')
+						result = result.replace(/\n\n\|/g, '\n<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg);"><tr><td>')
+						result = result.replace(/\|\n\n/g, '</td></tr></tbody></table>\n')
+						result = result.replace(/\|\n\|(\-){2,}(.+)\n\|/g, '</td></tr></thead><tbody><tr><td>')
+						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
+						result = result.replace(/\|/g, '</td><td>')
+						return h('span', { domProps: { innerHTML: result }});
+					} else {
 						return [text.replace(/\n/g, ' ')];
 					}
 				}
