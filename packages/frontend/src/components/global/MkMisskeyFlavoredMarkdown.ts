@@ -56,7 +56,7 @@ export default function(props: {
 				const text = token.props.text.replace(/(\r\n|\n|\r)/g, '\n');
 
 				if (!props.plain) {
-					if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text)) {
+					if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text) || /\n\n\|([\s\S]+)\|$/.test(text) || /^\|([\s\S]+)\|$/.test(text) ) {
 						var result = text.replace(/\|{5}/g, '</td><td colspan="5">')
 					  result = result.replace(/\|{4}/g, '</td><td colspan="4">')
 					  result = result.replace(/\|{3}/g, '</td><td colspan="3">')
