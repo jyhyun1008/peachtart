@@ -66,7 +66,7 @@ export default function(props: {
 						const result2: (VNode | string)[] = [];
 						for (const r of text.split('\n')) {
 							result2.push(h('br'));
-							result2.push(h('div', {domProps: {innerHTML: r}}));
+							result2.push(h('div', {innerHTML: r}));
 						}
 						result2.shift();
 						return result2;
