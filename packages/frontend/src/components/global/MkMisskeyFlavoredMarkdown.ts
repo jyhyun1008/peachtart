@@ -66,7 +66,7 @@ export default function(props: {
 						const result2: (VNode | string)[] = [];
 						for (const r of result.split('\n')) {
 							result2.push(h('br'));
-							result2.push(h('div', {innerHTML: r}));
+							result2.push(h('span', {innerHTML: r}));
 						}
 						result2.shift();
 						return result2;
@@ -87,7 +87,7 @@ export default function(props: {
 						result = result.replace(/\|\n\|(\-){2,}(.+)\n\|/g, '</td></tr></thead><tbody><tr><td>')
 						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
 						result = result.replace(/\|/g, '</td><td>')
-						return h('div', { domProps: { innerHTML: result }});
+						return h('span', { domProps: { innerHTML: result }});
 					} else {
 						return [text.replace(/\n/g, ' ')];
 					}
