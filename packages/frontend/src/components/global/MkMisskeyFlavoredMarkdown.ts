@@ -58,13 +58,18 @@ export default function(props: {
 				if (!props.plain) {
 					if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text)) {
 						var result = text.replace(/^\|/g, '<table><th><td>')
-						result = result.replace(/\n\n\|/g, '<table><th><td>')
-						result = result.replace(/\|\n\n/g, '</td><tr></table>')
+						result = result.replace(/\n\n\|/g, '\n<table><th><td>')
+						result = result.replace(/\|\n\n/g, '</td><tr></table>\n')
 						result = result.replace(/\|\n(\-){2,}\n\|/g, '</td></th><tr><td>')
 						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
 						result = result.replace(/\|/g, '</td><td>')
-						result = result.replace(/\n\n/g, '<br>')
-						return h('div', { domProps: { innerHTML: result }});
+						const result2: (VNode | string)[] = [];
+						for (const r of text.split('\n')) {
+							result2.push(h('br'));
+							result2.push(h('div', {domProps: {innerHTML: r}}));
+						}
+						result2.shift();
+						return result2;
 					} else {
 						const res: (VNode | string)[] = [];
 						for (const t of text.split('\n')) {
@@ -77,8 +82,8 @@ export default function(props: {
 				} else {
 					if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text)) {
 						var result = text.replace(/^\|/g, '<table><th><td>')
-						result = result.replace(/\n\n\|/g, '<table><th><td>')
-						result = result.replace(/\|\n\n/g, '</td><tr></table>')
+						result = result.replace(/\n\n\|/g, '\n<table><th><td>')
+						result = result.replace(/\|\n\n/g, '</td><tr></table>\n')
 						result = result.replace(/\|\n(\-){2,}\n\|/g, '</td></th><tr><td>')
 						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
 						result = result.replace(/\|/g, '</td><td>')
