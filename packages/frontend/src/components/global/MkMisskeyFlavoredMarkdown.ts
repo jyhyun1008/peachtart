@@ -63,17 +63,18 @@ export default function(props: {
 						result = result.replace(/\|\n(\-){2,}\n\|/g, '</td></th><tr><td>')
 						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
 						result = result.replace(/\|/g, '</td><td>')
+						result = result.replace(/\n\n/g, '<br>')
 						var result2 = h('div', { domProps: { innerHTML: result }});
+						return result2
 					} else {
-						var result2 = text
+						const res: (VNode | string)[] = [];
+						for (const t of text.split('\n')) {
+							res.push(h('br'));
+							res.push(t);
+						}
+						res.shift();
+						return res;
 					}
-					const res: (VNode | string)[] = [];
-					for (const t of result2.split('\n')) {
-						res.push(h('br'));
-						res.push(t);
-					}
-					res.shift();
-					return res;
 				} else {
 					if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text)) {
 						var result = text.replace(/^\|/g, '<table><th><td>')
