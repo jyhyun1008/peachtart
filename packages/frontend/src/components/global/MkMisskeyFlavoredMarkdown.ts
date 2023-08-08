@@ -60,7 +60,7 @@ export default function(props: {
 						var result = text.replace(/^\|/g, '<table style="border: 1px solid var(--accent);"><thead><th><td>')
 						result = result.replace(/\n\n\|/g, '\n<table style="border: 1px solid var(--accent);"><thead><th><td>')
 						result = result.replace(/\|\n\n/g, '</td><tr></tbody></table>\n')
-						result = result.replace(/\|\n(\-){2,}\n\|/g, '</td></th></thead><tbody><tr><td>')
+						result = result.replace(/\|\n\|(\-){2,}(.+)\n\|/g, '</td></th></thead><tbody><tr><td>')
 						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
 						result = result.replace(/\|/g, '</td><td>')
 						const result2: (VNode | string)[] = [];
@@ -84,7 +84,7 @@ export default function(props: {
 						var result = text.replace(/^\|/g, '<table style="border: 1px solid var(--accent);"><thead><th><td>')
 						result = result.replace(/\n\n\|/g, '\n<table><thead><th><td>')
 						result = result.replace(/\|\n\n/g, '</td><tr></tbody></table>\n')
-						result = result.replace(/\|\n(\-){2,}\n\|/g, '</td></th></thead><tbody><tr><td>')
+						result = result.replace(/\|\n\|(\-){2,}(.+)\n\|/g, '</td></th></thead><tbody><tr><td>')
 						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
 						result = result.replace(/\|/g, '</td><td>')
 						return h('div', { domProps: { innerHTML: result }});
