@@ -58,7 +58,7 @@ export default function(props: {
 				if (!props.plain) {
 					if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text)) {
 						var result = text.replace(/^\|/g, '<table style="border: 1px solid var(--accent);"><thead><th><td>')
-						result = result.replace(/\n\n\|/g, '\n<table><thead><th><td>')
+						result = result.replace(/\n\n\|/g, '\n<table style="border: 1px solid var(--accent);"><thead><th><td>')
 						result = result.replace(/\|\n\n/g, '</td><tr></tbody></table>\n')
 						result = result.replace(/\|\n(\-){2,}\n\|/g, '</td></th></thead><tbody><tr><td>')
 						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
