@@ -370,8 +370,12 @@ export default function(props: {
 		}
 	}).flat(Infinity) as (VNode | string)[];
 
-	return h('span', {
+	var returnvalue = h('span', {
 		// https://codeday.me/jp/qa/20190424/690106.html
 		style: props.nowrap ? 'white-space: pre; word-wrap: normal; overflow: hidden; text-overflow: ellipsis;' : 'white-space: pre-wrap;',
 	}, genEl(ast, props.rootScale ?? 1));
+
+	console.log(returnvalue)
+
+	return returnvalue
 }
