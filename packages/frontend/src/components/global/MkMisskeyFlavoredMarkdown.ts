@@ -64,8 +64,7 @@ export default function(props: {
 						result = result.replace(/\|\n\|/g, '</td></tr><tr><td>')
 						result = result.replace(/\|/g, '</td><td>')
 						result = result.replace(/\n\n/g, '<br>')
-						var result2 = h('div', { domProps: { innerHTML: result }});
-						return result2
+						return h('div', { innerHTML: result });
 					} else {
 						const res: (VNode | string)[] = [];
 						for (const t of text.split('\n')) {
