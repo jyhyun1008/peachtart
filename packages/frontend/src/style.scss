@@ -767,6 +767,10 @@ input:hover {
 	white-space: nowrap !important;
 }
 
+table {
+	word-break:keep-all;
+}
+
 table a {
 	color: var(--accent);
 }
