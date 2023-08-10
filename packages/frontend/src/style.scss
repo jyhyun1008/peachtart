@@ -740,6 +740,31 @@ input:hover {
 	flex: 1;
 }
 
+.width-100 {
+	width: 100px;
+	overflow: hidden;
+}
+
+.width-200 {
+	width: 200px;
+	overflow: hidden;
+}
+
+.width-300 {
+	width: 300px;
+	overflow: hidden;
+}
+
+.width-400 {
+	width: 400px;
+	overflow: hidden;
+}
+
+.width-500 {
+	width: 500px;
+	overflow: hidden;
+}
+
 .maxHeight-300 {
 	max-height: 300px;
 	overflow: hidden;
@@ -753,6 +778,10 @@ input:hover {
 .maxHeight-500 {
 	max-height: 500px;
 	overflow: hidden;
+}
+
+.scollable {
+	overflow-y: auto !important;
 }
 
 .textWrap-nowrap {
