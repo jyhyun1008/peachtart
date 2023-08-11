@@ -736,6 +736,12 @@ input:hover {
 	gap: 12px;
 }
 
+@media (max-width: 800px) {
+	.displayFlexEvenWidth {
+		flex-direction: column !important;
+	}
+  }
+
 .displayFlexEvenWidth div {
 	flex: 1;
 }
