@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: syuilo and other misskey contributors
+SPDX-License-Identifier: AGPL-3.0-only
+-->
+
 <template>
 <div>
 	<div v-if="c.type === 'root'" :class="$style.root">
@@ -32,8 +37,15 @@
 		<template v-if="c.caption" #caption>{{ c.caption }}</template>
 		<option v-for="item in c.items" :key="item.value" :value="item.value">{{ item.text }}</option>
 	</MkSelect>
-	<MkButton v-else-if="c.type === 'postFormButton'" :primary="c.primary" :className="c.className" :rounded="c.rounded" :small="size === 'small'" inline @click="openPostForm">{{ c.text }}</MkButton>
-	<MkFolder v-else-if="c.type === 'folder'" :defaultOpen="c.opened" :className="c.className" >
+	<MkButton v-else-if="c.type === 'postFormButton'" :primary="c.primary" :rounded="c.rounded" :small="size === 'small'" inline @click="openPostForm">{{ c.text }}</MkButton>
+	<div v-else-if="c.type === 'postForm'" :class="$style.postForm">
+		<MkPostForm
+			fixed
+			:instant="true"
+			:initialText="c.form.text"
+		/>
+	</div>
+	<MkFolder v-else-if="c.type === 'folder'" :defaultOpen="c.opened">
 		<template #label>{{ c.title }}</template>
 		<div :class="c.className">
 			<template v-for="child in c.children" :key="child">
@@ -54,15 +66,15 @@
 
 <script lang="ts" setup>
 import { Ref } from 'vue';
-import * as os from '@/os';
-import MkButton from '@/components/MkButton.vue'; // Done!
-import MkInput from '@/components/MkInput.vue'; // Done!
-import MkSwitch from '@/components/MkSwitch.vue'; // Done!
+import * as os from '@/os.js';
+import MkButton from '@/components/MkButton.vue';
+import MkInput from '@/components/MkInput.vue';
+import MkSwitch from '@/components/MkSwitch.vue';
 import MkTextarea from '@/components/MkTextarea.vue';
-import MkSelect from '@/components/MkSelect.vue'; // Done!
-import { AsUiComponent } from '@/scripts/aiscript/ui';
+import MkSelect from '@/components/MkSelect.vue';
+import { AsUiComponent } from '@/scripts/aiscript/ui.js';
 import MkFolder from '@/components/MkFolder.vue';
-import MkCustomChart from '@/components/MkCustomChart.vue'; // Done!
+import MkPostForm from '@/components/MkPostForm.vue';
 
 const props = withDefaults(defineProps<{
 	component: AsUiComponent;
@@ -122,5 +134,10 @@ function openPostForm() {
 
 .fontMonospace {
 	font-family: 'NeoDunggeunmo Code', Fira code, Fira Mono, Consolas, Menlo, Courier, monospace;
+}
+
+.postForm {
+	background: var(--bg);
+	border-radius: 8px;
 }
 </style>

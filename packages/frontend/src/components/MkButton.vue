@@ -1,9 +1,16 @@
+<!--
+SPDX-FileCopyrightText: syuilo and other misskey contributors
+SPDX-License-Identifier: AGPL-3.0-only
+-->
+
 <template>
 <button
 	v-if="!link"
 	ref="el" class="_button"
 	:class="[$style.root, { [$style.inline]: inline, [$style.primary]: primary, [$style.gradate]: gradate, [$style.danger]: danger, [$style.rounded]: rounded, [$style.full]: full, [$style.small]: small, [$style.large]: large, [$style.transparent]: transparent, [$style.asLike]: asLike }, { className: 'className' }, props.className]"
 	:type="type"
+	:name="name"
+	:value="value"
 	@click="emit('click', $event)"
 	@mousedown="onMousedown"
 >
@@ -45,12 +52,11 @@ const props = withDefaults(defineProps<{
 	transparent?: boolean;
 	asLike?: boolean;
 	className?: string;
+	name?: string;
+	value?: string;
 }>(), {
 	className: 'MkButton',
 });
-
-//let buttonEl = ref(null);
-//console.log(buttonEl);
 
 const emit = defineEmits<{
 	(ev: 'click', payload: MouseEvent): void;
