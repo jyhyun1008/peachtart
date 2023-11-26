@@ -92,3 +92,5 @@ export const CURRENT_STICKY_BOTTOM = 'CURRENT_STICKY_BOTTOM';
 export const DEFAULT_SERVER_ERROR_IMAGE_URL = 'https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/39f07d6e-8688-4f54-8b55-18e6c1a7d348.png';
 export const DEFAULT_NOT_FOUND_IMAGE_URL = 'https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/7139c9d2-5906-4337-9c79-035295eb5859.webp';
 export const DEFAULT_INFO_IMAGE_URL = 'https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/3be24f47-92fa-42de-bff7-f55b324c5bde.webp';
+
+export const MFM_TAGS = ['tada', 'jelly', 'twitch', 'shake', 'spin', 'jump', 'bounce', 'flip', 'x2', 'x3', 'x4', 'scale', 'position', 'fg', 'bg', 'font', 'blur', 'rainbow', 'sparkle', 'rotate', 'ruby', 'unixtime'];
