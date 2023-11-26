@@ -830,3 +830,12 @@ table {
 table a {
 	color: var(--accent);
 }
+
+.banner {
+	margin: -32px -32px 0 -32px;
+}
+
+.banner .thumbnail {
+	aspect-ratio: 4/1 !important;
+	border-radius: 10px 10px 0 0 !important;
+}

@@ -14,27 +14,27 @@ import * as sound from '@/scripts/sound.js';
 
 // 사전 선언.
 
-var latitude = 0, longitude = 0
-navigator.geolocation.getCurrentPosition(function(pos) {
-  latitude = pos.coords.latitude;
-  longitude = pos.coords.longitude;
-});
+//var latitude = 0, longitude = 0
+//navigator.geolocation.getCurrentPosition(function(pos) {
+//  latitude = pos.coords.latitude;
+//  longitude = pos.coords.longitude;
+//});
 
-function geolat(bool) {
-	if (bool) {
-		return latitude;
-	} else {
-		return 0
-	}
-}
+//function geolat(bool) {
+//	if (bool) {
+//		return latitude;
+//	} else {
+//		return 0
+//	}
+//}
 
-function geolon(bool) {
-	if (bool) {
-		return longitude;
-	} else {
-		return 0
-	}
-}
+//function geolon(bool) {
+//	if (bool) {
+//		return longitude;
+//	} else {
+//		return 0
+//	}
+//}
 
 
 
@@ -144,14 +144,14 @@ export function createAiScriptEnv(opts) {
 			const currentYearMs = new Date(currentYear, 0, 0).getTime();
 			return values.NUM(Math.floor((num.value - currentYearMs) / 1000 / 60 / 60 / 24));
 		}),
-		'Mk:geolat': values.FN_NATIVE(([bool]) => {
-			utils.assertBoolean(bool);
-			return values.NUM(geolat(bool.value));
-		}),
-		'Mk:geolon': values.FN_NATIVE(([bool]) => {
-			utils.assertBoolean(bool);
-			return values.NUM(geolon(bool.value));
-		}),
+		//'Mk:geolat': values.FN_NATIVE(([bool]) => {
+		//	utils.assertBoolean(bool);
+		//	return values.NUM(geolat(bool.value));
+		//}),
+		//'Mk:geolon': values.FN_NATIVE(([bool]) => {
+		//	utils.assertBoolean(bool);
+		//	return values.NUM(geolon(bool.value));
+		//}),
 		'Str:encodeB64': values.FN_NATIVE(([text]) => {
 			utils.assertString(text);
 			return values.STR(btoa(text.value));
