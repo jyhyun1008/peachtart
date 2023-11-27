@@ -381,6 +381,8 @@ export class ApPersonService implements OnModuleInit {
 		// ハッシュタグ更新
 		this.hashtagService.updateUsertags(user, tags);
 
+		this.avatarDecorationService.remoteUserUpdate(user);
+
 		//#region アバターとヘッダー画像をフェッチ
 		try {
 			const updates = await this.resolveAvatarAndBanner(user, person.icon, person.image);
@@ -521,8 +523,6 @@ export class ApPersonService implements OnModuleInit {
 
 		// ハッシュタグ更新
 		this.hashtagService.updateUsertags(exist, tags);
-
-		this.avatarDecorationService.remoteUserUpdate(user);
 
 		// 該当ユーザーが既にフォロワーになっていた場合はFollowingもアップデートする
 		await this.followingsRepository.update(
