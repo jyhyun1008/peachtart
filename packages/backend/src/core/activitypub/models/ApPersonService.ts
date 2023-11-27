@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: syuilo and other misskey contributors
+ * SPDX-FileCopyrightText: syuilo and other misskey, cherrypick contributors
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
@@ -37,8 +37,8 @@ import { bindThis } from '@/decorators.js';
 import { MetaService } from '@/core/MetaService.js';
 import { DriveFileEntityService } from '@/core/entities/DriveFileEntityService.js';
 import type { AccountMoveService } from '@/core/AccountMoveService.js';
-import { AvatarDecorationService } from '@/core/AvatarDecorationService.js';
 import { checkHttps } from '@/misc/check-https.js';
+import { AvatarDecorationService } from '@/core/AvatarDecorationService.js';
 import { getApId, getApType, getOneApHrefNullable, isActor, isCollection, isCollectionOrOrderedCollection, isPropertyValue } from '../type.js';
 import { extractApHashtags } from './tag.js';
 import type { OnModuleInit } from '@nestjs/common';
@@ -156,6 +156,21 @@ export class ApPersonService implements OnModuleInit {
 			throw new Error('invalid Actor: wrong inbox');
 		}
 
+		try {
+			new URL(x.inbox);
+		} catch {
+			throw new Error('invalid Actor: wrong inbox');
+		}
+
+		const sharedInbox = x.sharedInbox ?? x.endpoints?.sharedInbox;
+		if (typeof sharedInbox === 'string') {
+			try {
+				new URL(sharedInbox);
+			} catch {
+				throw new Error('invalid Actor: wrong sharedInbox');
+			}
+		}
+
 		if (!(typeof x.preferredUsername === 'string' && x.preferredUsername.length > 0 && x.preferredUsername.length <= 128 && /^\w([\w-.]*\w)?$/.test(x.preferredUsername))) {
 			throw new Error('invalid Actor: wrong username');
 		}
@@ -238,8 +253,8 @@ export class ApPersonService implements OnModuleInit {
 		return {
 			avatarId: avatar?.id ?? null,
 			bannerId: banner?.id ?? null,
-			avatarUrl: avatar ? this.driveFileEntityService.getPublicUrl(avatar, 'avatar') : null,
-			bannerUrl: banner ? this.driveFileEntityService.getPublicUrl(banner) : null,
+			avatarUrl: avatar ? this.driveFileEntityService.getPublicUrl(avatar, 'avatar', false) : null,
+			bannerUrl: banner ? this.driveFileEntityService.getPublicUrl(banner, undefined, false) : null,
 			avatarBlurhash: avatar?.blurhash ?? null,
 			bannerBlurhash: banner?.blurhash ?? null,
 		};
@@ -282,6 +297,51 @@ export class ApPersonService implements OnModuleInit {
 			throw new Error('unexpected schema of person url: ' + url);
 		}
 
+		let followersCount: number | undefined;
+
+		if (typeof person.followers === 'string') {
+			try {
+				const data = await fetch(person.followers, {
+					headers: { Accept: 'application/json' },
+				});
+				const jsonData = JSON.parse(await data.text());
+
+				followersCount = jsonData.totalItems;
+			} catch {
+				followersCount = undefined;
+			}
+		}
+
+		let followingCount: number | undefined;
+
+		if (typeof person.following === 'string') {
+			try {
+				const data = await fetch(person.following, {
+					headers: { Accept: 'application/json' },
+				});
+				const jsonData = JSON.parse(await data.text());
+
+				followingCount = jsonData.totalItems;
+			} catch (e) {
+				followingCount = undefined;
+			}
+		}
+
+		let notesCount: number | undefined;
+
+		if (typeof person.outbox === 'string') {
+			try {
+				const data = await fetch(person.outbox, {
+					headers: { Accept: 'application/json' },
+				});
+				const jsonData = JSON.parse(await data.text());
+
+				notesCount = jsonData.totalItems;
+			} catch (e) {
+				notesCount = undefined;
+			}
+		}
+
 		// Create user
 		let user: MiRemoteUser | null = null;
 
@@ -314,6 +374,30 @@ export class ApPersonService implements OnModuleInit {
 					inbox: person.inbox,
 					sharedInbox: person.sharedInbox ?? person.endpoints?.sharedInbox,
 					followersUri: person.followers ? getApId(person.followers) : undefined,
+					followersCount:
+						followersCount !== undefined
+							? followersCount
+							: person.followers &&
+							typeof person.followers !== 'string' &&
+							isCollectionOrOrderedCollection(person.followers)
+								? person.followers.totalItems
+								: undefined,
+					followingCount:
+						followingCount !== undefined
+							? followingCount
+							: person.following &&
+							typeof person.following !== 'string' &&
+							isCollectionOrOrderedCollection(person.following)
+								? person.following.totalItems
+								: undefined,
+					notesCount:
+						notesCount !== undefined
+							? notesCount
+							: person.outbox &&
+							typeof person.outbox !== 'string' &&
+							isCollectionOrOrderedCollection(person.outbox)
+								? person.outbox.totalItems
+								: undefined,
 					featured: person.featured ? getApId(person.featured) : undefined,
 					uri: person.id,
 					tags,
@@ -452,11 +536,80 @@ export class ApPersonService implements OnModuleInit {
 			throw new Error('unexpected schema of person url: ' + url);
 		}
 
+		let followersCount: number | undefined;
+
+		if (typeof person.followers === 'string') {
+			try {
+				const data = await fetch(person.followers, {
+					headers: { Accept: 'application/json' },
+				});
+				const jsonData = JSON.parse(await data.text());
+
+				followersCount = jsonData.totalItems;
+			} catch {
+				followersCount = undefined;
+			}
+		}
+
+		let followingCount: number | undefined;
+
+		if (typeof person.following === 'string') {
+			try {
+				const data = await fetch(person.following, {
+					headers: { Accept: 'application/json' },
+				});
+				const jsonData = JSON.parse(await data.text());
+
+				followingCount = jsonData.totalItems;
+			} catch {
+				followingCount = undefined;
+			}
+		}
+
+		let notesCount: number | undefined;
+
+		if (typeof person.outbox === 'string') {
+			try {
+				const data = await fetch(person.outbox, {
+					headers: { Accept: 'application/json' },
+				});
+				const jsonData = JSON.parse(await data.text());
+
+				notesCount = jsonData.totalItems;
+			} catch (e) {
+				notesCount = undefined;
+			}
+		}
+
 		const updates = {
 			lastFetchedAt: new Date(),
 			inbox: person.inbox,
 			sharedInbox: person.sharedInbox ?? person.endpoints?.sharedInbox,
 			followersUri: person.followers ? getApId(person.followers) : undefined,
+			followersCount:
+				followersCount !== undefined
+					? followersCount
+					: person.followers &&
+					typeof person.followers !== 'string' &&
+					isCollectionOrOrderedCollection(person.followers)
+						? person.followers.totalItems
+						: undefined,
+			followingCount:
+				followingCount !== undefined
+					? followingCount
+					: person.following &&
+					typeof person.following !== 'string' &&
+					isCollectionOrOrderedCollection(person.following)
+						? person.following.totalItems
+						: undefined,
+			notesCount:
+				notesCount !== undefined
+					? notesCount
+					: person.outbox &&
+					typeof person.outbox !== 'string' &&
+					isCollectionOrOrderedCollection(person.outbox)
+						? person.outbox.totalItems
+						: undefined,
 			featured: person.featured,
 			emojis: emojiNames,
 			name: truncate(person.name, nameLength),
@@ -491,7 +644,6 @@ export class ApPersonService implements OnModuleInit {
 		if (moving) updates.movedAt = new Date();
 
 		// Update user
-
 		const user = await this.usersRepository.findOneByOrFail({ id: exist.id });
 		await this.avatarDecorationService.remoteUserUpdate(user);
 		await this.usersRepository.update(exist.id, updates);
