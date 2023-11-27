@@ -37,6 +37,7 @@ import { bindThis } from '@/decorators.js';
 import { MetaService } from '@/core/MetaService.js';
 import { DriveFileEntityService } from '@/core/entities/DriveFileEntityService.js';
 import type { AccountMoveService } from '@/core/AccountMoveService.js';
+import { AvatarDecorationService } from '@/core/AvatarDecorationService.js';
 import { checkHttps } from '@/misc/check-https.js';
 import { getApId, getApType, getOneApHrefNullable, isActor, isCollection, isCollectionOrOrderedCollection, isPropertyValue } from '../type.js';
 import { extractApHashtags } from './tag.js';
@@ -100,6 +101,8 @@ export class ApPersonService implements OnModuleInit {
 
 		@Inject(DI.followingsRepository)
 		private followingsRepository: FollowingsRepository,
+
+		private avatarDecorationService: AvatarDecorationService,
 	) {
 	}
 
@@ -486,6 +489,9 @@ export class ApPersonService implements OnModuleInit {
 		if (moving) updates.movedAt = new Date();
 
 		// Update user
+
+		const user = await this.usersRepository.findOneByOrFail({ id: exist.id });
+		await this.avatarDecorationService.remoteUserUpdate(user);
 		await this.usersRepository.update(exist.id, updates);
 
 		if (person.publicKey) {
@@ -515,6 +521,8 @@ export class ApPersonService implements OnModuleInit {
 
 		// ハッシュタグ更新
 		this.hashtagService.updateUsertags(exist, tags);
+
+		this.avatarDecorationService.remoteUserUpdate(user);
 
 		// 該当ユーザーが既にフォロワーになっていた場合はFollowingもアップデートする
 		await this.followingsRepository.update(
