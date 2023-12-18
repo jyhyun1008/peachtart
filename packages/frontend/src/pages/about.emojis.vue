@@ -8,7 +8,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 	<MkButton v-if="$i && ($i.isModerator || $i.policies.canManageCustomEmojis)" primary link to="/custom-emojis-manager">{{ i18n.ts.manageCustomEmojis }}</MkButton>
 
 	<div class="query">
-		<MkInput v-model="q" class="" :placeholder="i18n.ts.search" autocapitalize="off">
+		<MkInput v-on:input="typing" v-bind:value="q" class="" :placeholder="i18n.ts.search" autocapitalize="off">
 			<template #prefix><i class="ti ti-search"></i></template>
 		</MkInput>
 
@@ -50,6 +50,10 @@ const customEmojiTags = getCustomEmojiTags();
 let q = $ref('');
 let searchEmojis = $ref<Misskey.entities.CustomEmoji[]>(null);
 let selectedTags = $ref(new Set());
+
+function typing(e) {
+   this.q = e.target.value
+}
 
 function search() {
 	if ((q === '' || q == null) && selectedTags.size === 0) {
