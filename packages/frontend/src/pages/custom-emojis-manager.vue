@@ -35,6 +35,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 									<div class="body">
 										<div class="name _monospace">{{ emoji.name }}</div>
 										<div class="info">{{ emoji.category }}</div>
+                   <div class="info">{{ emoji.aliases.join(' ') }}</div>
 									</div>
 								</button>
 							</div>
