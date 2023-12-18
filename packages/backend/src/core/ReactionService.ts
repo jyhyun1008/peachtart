@@ -161,7 +161,7 @@ export class ReactionService {
 						// Word mute
 						mutedWordsCache.fetch(() => this.userProfilesRepository.find({
 							where: {
-								userId: user.id,
+								userId: note.userId,
 							},
 							select: ['mutedWords'],
 						})).then(us => {
