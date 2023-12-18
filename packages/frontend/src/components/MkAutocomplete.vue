@@ -77,11 +77,12 @@ const emojiDb = computed(() => {
 		url: char2path(x.char),
 	}));
 
-	for (const x of lib.value) {
+	for (const x of lib) {
 		unicodeEmojiDB.push({
 					name: x.aliases,
 					aliasOf: x.name,
 					emoji: x.char,
+		      url: char2path(x.char),
 		})
 	}
 
