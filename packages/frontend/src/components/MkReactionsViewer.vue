@@ -80,7 +80,15 @@ watch([() => props.note.reactions, () => props.maxNumber], ([newSource, maxNumbe
 		newReactions.push([props.note.myReaction, newSource[props.note.myReaction]]);
 	}
 
-	reactions = newReactions;
+	const newNewReactions = Object.keys(newReactions)
+    .filter((key) => defaultStore.state.mutedWords.some((el) => key.includes(el)))
+    .reduce((obj, key) => {
+        return Object.assign(obj, {
+          [key]: newReactions[key]
+        });
+  }, {});
+	
+	reactions = newNewReactions;
 }, { immediate: true, deep: true });
 </script>
 
