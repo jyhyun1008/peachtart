@@ -52,11 +52,7 @@ let searchEmojis = $ref<Misskey.entities.CustomEmoji[]>(null);
 let selectedTags = $ref(new Set());
 
 function typing(e) {
-	if (e.target.value.length > 1) {
-		this.q = e.target.value.slice(0, -1)
-	} else {
-		this.q = ''
-	}
+	this.q = e.target.value.slice
 }
 
 function search() {
