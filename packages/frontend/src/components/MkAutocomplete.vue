@@ -83,7 +83,7 @@ const emojiDb = computed(() => {
 					aliasOf: x.name,
 					emoji: x.char,
 		      url: char2path(x.char),
-		})
+		});
 	}
 
 	for (const index of Object.values(defaultStore.state.additionalUnicodeEmojiIndexes)) {
