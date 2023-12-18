@@ -65,7 +65,7 @@ type EmojiDef = {
 };
 
 //const lib = emojilist.filter(x => x.category !== 'flags');
-const lib = emojilist
+const lib = emojilist;
 
 const emojiDb = computed(() => {
 	//#region Unicode Emoji
@@ -79,7 +79,7 @@ const emojiDb = computed(() => {
 
 	for (const x of lib) {
 		unicodeEmojiDB.push({
-					name: x.aliases,
+					name: x.aliases[0],
 					aliasOf: x.name,
 					emoji: x.char,
 		      url: char2path(x.char),
