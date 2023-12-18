@@ -153,8 +153,6 @@ const mfmTags = ref<string[]>([]);
 const select = ref(-1);
 const zIndex = os.claimZIndex('high');
 
-const korean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
-
 function complete(type: string, value: any) {
 	emit('done', { type, value });
 	emit('closed');
@@ -219,15 +217,7 @@ function exec() {
 			hashtags.value = JSON.parse(miLocalStorage.getItem('hashtags') ?? '[]');
 			fetching.value = false;
 		} else {
-			if (props.q.length > 1 && korean.test(props.q[props.q.length-1]) === true) {
-				if (props.q[props.q.length-1] == props.q[props.q.length-2]) {
-					const cacheKey = `autocomplete:hashtag:${props.q.substring(0, props.q.length)}`;
-				} else {
-					const cacheKey = `autocomplete:hashtag:${props.q}`;
-				}
-			} else {
-				const cacheKey = `autocomplete:hashtag:${props.q}`;
-			}
+			const cacheKey = `autocomplete:hashtag:${props.q}`;
 			const cache = sessionStorage.getItem(cacheKey);
 			if (cache) {
 				const hashtags = JSON.parse(cache);
@@ -250,58 +240,31 @@ function exec() {
 			// 最近使った絵文字をサジェスト
 			emojis.value = defaultStore.state.recentlyUsedEmojis.map(emoji => emojiDb.value.find(dbEmoji => dbEmoji.emoji === emoji)).filter(x => x) as EmojiDef[];
 			return;
-		} else if (props.q.length > 1 && korean.test(props.q[props.q.length-1]) === true) {
-			
-			const matched: EmojiDef[] = [];
-			const max = 30;
-	
-			emojiDb.value.some(x => {
-				if (x.name.startsWith(props.q.substring(0, props.q.length) ?? '') && !x.aliasOf && !matched.some(y => y.emoji === x.emoji)) matched.push(x);
-				return matched.length === max;
-			});
-	
-			if (matched.length < max) {
-				emojiDb.value.some(x => {
-					if (x.name.startsWith(props.q.substring(0, props.q.length) ?? '') && !matched.some(y => y.emoji === x.emoji)) matched.push(x);
-					return matched.length === max;
-				});
-			}
-	
-			if (matched.length < max) {
-				emojiDb.value.some(x => {
-					if (x.name.includes(props.q.substring(0, props.q.length) ?? '') && !matched.some(y => y.emoji === x.emoji)) matched.push(x);
-					return matched.length === max;
-				});
-			}
-	
-			emojis.value = matched;
-		} else {
-				
-			const matched: EmojiDef[] = [];
-			const max = 30;
-	
-			emojiDb.value.some(x => {
-				if (x.name.startsWith(props.q ?? '') && !x.aliasOf && !matched.some(y => y.emoji === x.emoji)) matched.push(x);
-				return matched.length === max;
-			});
-	
-			if (matched.length < max) {
-				emojiDb.value.some(x => {
-					if (x.name.startsWith(props.q ?? '') && !matched.some(y => y.emoji === x.emoji)) matched.push(x);
-					return matched.length === max;
-				});
-			}
-	
-			if (matched.length < max) {
-				emojiDb.value.some(x => {
-					if (x.name.includes(props.q ?? '') && !matched.some(y => y.emoji === x.emoji)) matched.push(x);
-					return matched.length === max;
-				});
-			}
-	
-			emojis.value = matched;
 		}
 
+		const matched: EmojiDef[] = [];
+		const max = 30;
+
+		emojiDb.value.some(x => {
+			if (x.name.startsWith(props.q ?? '') && !x.aliasOf && !matched.some(y => y.emoji === x.emoji)) matched.push(x);
+			return matched.length === max;
+		});
+
+		if (matched.length < max) {
+			emojiDb.value.some(x => {
+				if (x.name.startsWith(props.q ?? '') && !matched.some(y => y.emoji === x.emoji)) matched.push(x);
+				return matched.length === max;
+			});
+		}
+
+		if (matched.length < max) {
+			emojiDb.value.some(x => {
+				if (x.name.includes(props.q ?? '') && !matched.some(y => y.emoji === x.emoji)) matched.push(x);
+				return matched.length === max;
+			});
+		}
+
+		emojis.value = matched;
 	} else if (props.type === 'mfmTag') {
 		if (!props.q || props.q === '') {
 			mfmTags.value = MFM_TAGS;
