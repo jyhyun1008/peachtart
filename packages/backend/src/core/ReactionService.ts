@@ -161,27 +161,26 @@ export class ReactionService {
 						// Word mute
 						mutedWordsCache.fetch(() => this.userProfilesRepository.find({
 							where: {
-								userId: User['id'],
+								userId: user.id,
 							},
 							select: ['mutedWords'],
 						})).then(us => {
 							for (const u of us) {
-								for (const word of u.mutedWords) {
 									
-									if (mutedWords.length > 0) {
+									if (u.mutedWords.length > 0) {
 
-										const matched = mutedWords.some(word => {
+										const matched = u.mutedWords.some(word => {
 											if (Array.isArray(word)) {
-													return word.every(keyword => emoji.name.includes(keyword));
+													return word.every(keyword => name.includes(keyword));
 											} else {
 													return false;
 											}
 										});
+										
 										if (matched) {
 											reaction = FALLBACK;
 										}
 									}
-								}
 							}
 						});
 						
