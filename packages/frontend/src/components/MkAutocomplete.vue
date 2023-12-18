@@ -311,9 +311,17 @@ function onKeydown(event: KeyboardEvent) {
 
 		case 'Tab':
 		case 'ArrowDown':
-			cancel();
-			selectNext();
-			break;
+			if (select.value == -1) {
+				if (!event.isComposing) {
+					cancel();
+					selectNext();
+					break;
+				}
+			} else {
+				cancel();
+				selectNext();
+				break;
+			}
 
 		default:
 			event.stopPropagation();
