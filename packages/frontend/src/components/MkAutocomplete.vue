@@ -73,10 +73,17 @@ const emojiDb = computed(() => {
 
 	const unicodeEmojiDB: EmojiDef[] = lib.map(x => ({
 		emoji: x.char,
-		aliasOf: x.name,
-		name: x.aliases,
+		name: x.name,
 		url: char2path(x.char),
 	}));
+
+	for (const x of lib) {
+		unicodeEmojiDB.push({
+					name: x.aliases,
+					aliasOf: x.name,
+					emoji: x.char,
+		})
+	}
 
 	for (const index of Object.values(defaultStore.state.additionalUnicodeEmojiIndexes)) {
 		for (const [emoji, keywords] of Object.entries(index)) {
