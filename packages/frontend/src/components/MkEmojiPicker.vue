@@ -247,7 +247,15 @@ watch(q, () => {
 			}
 		} else {
 			for (const emoji of emojis) {
-				if (emoji.name.startsWith(newQ) || emoji.aliases[0].includes(newQ)) {
+				if (emoji.name.startsWith(newQ)) {
+					matches.add(emoji);
+					if (matches.size >= max) break;
+				}
+			}
+			if (matches.size >= max) return matches;
+			
+			for (const emoji of emojis) {
+				if (emoji.aliases.some(alias => alias.startsWith(newQ))) {
 					matches.add(emoji);
 					if (matches.size >= max) break;
 				}
@@ -270,6 +278,13 @@ watch(q, () => {
 				}
 			}
 			if (matches.size >= max) return matches;
+			
+			for (const emoji of emojis) {
+				if (emoji.aliases.some(alias => alias.includes(newQ))) {
+					matches.add(emoji);
+					if (matches.size >= max) break;
+				}
+			}
 
 			for (const index of Object.values(defaultStore.state.additionalUnicodeEmojiIndexes)) {
 				for (const emoji of emojis) {
