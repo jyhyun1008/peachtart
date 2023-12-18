@@ -311,6 +311,13 @@ function onKeydown(event: KeyboardEvent) {
 
 		case 'Tab':
 		case 'ArrowDown':
+			var korean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+			if (select.value == -1) {
+				if (props.q.length > 1 && korean.test(props.q[props.q.length-1])) {
+					if (props.q[props.q.length-1] == props.q[props.q.length-2]) {
+						props.q = props.q.substring(0, props.q.length)
+				}
+			}
 			cancel();
 			selectNext();
 			break;
