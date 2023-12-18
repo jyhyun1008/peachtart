@@ -247,7 +247,7 @@ watch(q, () => {
 			}
 		} else {
 			for (const emoji of emojis) {
-				if (emoji.name.startsWith(newQ) || emoji.aliases[0].includes(keyword)) {
+				if (emoji.name.startsWith(newQ) || emoji.aliases[0].includes(newQ)) {
 					matches.add(emoji);
 					if (matches.size >= max) break;
 				}
