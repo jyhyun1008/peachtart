@@ -423,11 +423,43 @@ export class ReactionService {
 			const name = custom[1];
 			const host = custom[2] ?? null;
 
-			return {
+			let reaction = {
 				reaction: `:${name}@${host ?? '.'}:`,	// ローカル分は@以降を省略するのではなく.にする
 				name,
 				host,
 			};
+			
+						// Word mute
+						mutedWordsCache.fetch(() => this.userProfilesRepository.find({
+							where: {
+								userId: note.userId,
+							},
+							select: ['mutedWords'],
+						})).then(us => {
+							for (const u of us) {
+									
+									if (u.mutedWords.length > 0) {
+
+										const matched = u.mutedWords.some(word => {
+											if (Array.isArray(word)) {
+													return word.every(keyword => name.includes(keyword));
+											} else {
+													return false;
+											}
+										});
+										
+										if (matched) {
+											reaction = {
+												reaction: FALLBACK,
+												name: undefined,
+												host: undefined,
+											};;
+										} 
+									}
+							}
+						});
+
+			return reaction;
 		}
 
 		return {
