@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import RE2 from 're2';
 import { Inject, Injectable } from '@nestjs/common';
 import * as Redis from 'ioredis';
 import { DI } from '@/di-symbols.js';
@@ -21,13 +22,25 @@ import { ApDeliverManagerService } from '@/core/activitypub/ApDeliverManagerServ
 import { NoteEntityService } from '@/core/entities/NoteEntityService.js';
 import { UserEntityService } from '@/core/entities/UserEntityService.js';
 import { ApRendererService } from '@/core/activitypub/ApRendererService.js';
+import { MemorySingleCache } from '@/misc/cache.js';
 import { MetaService } from '@/core/MetaService.js';
 import { bindThis } from '@/decorators.js';
 import { UtilityService } from '@/core/UtilityService.js';
+import type { User, LocalUser, RemoteUser } from '@/models/entities/User.js';
+import type { UserProfile } from '@/models/entities/UserProfile.js';
 import { UserBlockingService } from '@/core/UserBlockingService.js';
 import { CustomEmojiService } from '@/core/CustomEmojiService.js';
 import { RoleService } from '@/core/RoleService.js';
 import { FeaturedService } from '@/core/FeaturedService.js';
+
+const mutedWordsCache = new MemorySingleCache<{ mutedWords: UserProfile['mutedWords']; }[]>(1000 * 60 * 5);
+
+type MinimumUser = {
+	id: User['id'];
+	host: User['host'];
+	username: User['username'];
+	uri: User['uri'];
+};
 
 const FALLBACK = '❤';
 const PER_NOTE_REACTION_USER_PAIR_CACHE_MAX = 16;
@@ -83,6 +96,9 @@ export class ReactionService {
 
 		@Inject(DI.emojisRepository)
 		private emojisRepository: EmojisRepository,
+		
+		@Inject(DI.userProfilesRepository)
+		private userProfilesRepository: UserProfilesRepository,
 
 		private utilityService: UtilityService,
 		private metaService: MetaService,
@@ -141,6 +157,34 @@ export class ReactionService {
 						if ((note.reactionAcceptance === 'nonSensitiveOnly') && emoji.isSensitive) {
 							reaction = FALLBACK;
 						}
+						
+						// Word mute
+						mutedWordsCache.fetch(() => this.userProfilesRepository.find({
+							where: {
+								userId: User['id'],
+							},
+							select: ['mutedWords'],
+						})).then(us => {
+							for (const u of us) {
+								for (const word of u.mutedWords) {
+									
+									if (mutedWords.length > 0) {
+
+										const matched = mutedWords.some(word => {
+											if (Array.isArray(word)) {
+													return word.every(keyword => emoji.name.includes(keyword));
+											} else {
+													return false;
+											}
+										});
+										if (matched) {
+											reaction = FALLBACK;
+										}
+									}
+								}
+							}
+						});
+						
 					} else {
 						// リアクションとして使う権限がない
 						reaction = FALLBACK;
