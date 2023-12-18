@@ -22,6 +22,7 @@ import * as Misskey from 'misskey-js';
 import { inject, watch } from 'vue';
 import XReaction from '@/components/MkReactionsViewer.reaction.vue';
 import { defaultStore } from '@/store.js';
+import { $i } from '@/account.js';
 
 const props = withDefaults(defineProps<{
 	note: Misskey.entities.Note;
@@ -80,7 +81,7 @@ watch([() => props.note.reactions, () => props.maxNumber], ([newSource, maxNumbe
 		newReactions.push([props.note.myReaction, newSource[props.note.myReaction]]);
 	}
 
-	const newNewReactions = newReactions.filter((key) => defaultStore.state.mutedWords.some((el) => !key[0].includes(el)))
+	const newNewReactions = newReactions.filter((key) => $i.mutedWords.some((el) => !key[0].includes(el)))
 	
 	reactions = newNewReactions;
 }, { immediate: true, deep: true });
