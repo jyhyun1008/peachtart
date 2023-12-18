@@ -153,6 +153,8 @@ const mfmTags = ref<string[]>([]);
 const select = ref(-1);
 const zIndex = os.claimZIndex('high');
 
+const korean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+
 function complete(type: string, value: any) {
 	emit('done', { type, value });
 	emit('closed');
@@ -311,7 +313,6 @@ function onKeydown(event: KeyboardEvent) {
 
 		case 'Tab':
 		case 'ArrowDown':
-			var korean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
 			if (select.value == -1) {
 				if (props.q.length > 1 && korean.test(props.q[props.q.length-1])) {
 					if (props.q[props.q.length-1] == props.q[props.q.length-2]) {
