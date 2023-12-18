@@ -348,8 +348,6 @@ function onKeydown(event: KeyboardEvent) {
 
 		case 'Tab':
 		case 'ArrowDown':
-			if (select.value === -1) {
-			}
 			cancel();
 			selectNext();
 			break;
