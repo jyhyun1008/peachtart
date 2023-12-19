@@ -51,6 +51,7 @@ import { i18n } from '@/i18n.js';
 import { miLocalStorage } from '@/local-storage.js';
 import { customEmojis } from '@/custom-emojis.js';
 import { MFM_TAGS } from '@/const.js';
+import { $i } from '@/account.js';
 
 type EmojiDef = {
 	emoji: string;
@@ -63,6 +64,10 @@ type EmojiDef = {
 	aliasOf?: string;
 	isCustomEmoji?: true;
 };
+
+const function isMuted(emojiName) {
+	return $i.mutedWords.some((el) => emojiName.includes(el))
+}
 
 //const lib = emojilist.filter(x => x.category !== 'flags');
 const lib = emojilist;
@@ -106,20 +111,22 @@ const emojiDb = computed(() => {
 	const customEmojiDB: EmojiDef[] = [];
 
 	for (const x of customEmojis.value) {
-		customEmojiDB.push({
-			name: x.name,
-			emoji: `:${x.name}:`,
-			isCustomEmoji: true,
-		});
-
-		if (x.aliases) {
-			for (const alias of x.aliases) {
-				customEmojiDB.push({
-					name: alias,
-					aliasOf: x.name,
-					emoji: `:${x.name}:`,
-					isCustomEmoji: true,
-				});
+		if (isMuted(x.name) === false) {
+			customEmojiDB.push({
+				name: x.name,
+				emoji: `:${x.name}:`,
+				isCustomEmoji: true,
+			});
+	
+			if (x.aliases) {
+				for (const alias of x.aliases) {
+					customEmojiDB.push({
+						name: alias,
+						aliasOf: x.name,
+						emoji: `:${x.name}:`,
+						isCustomEmoji: true,
+					});
+				}
 			}
 		}
 	}
