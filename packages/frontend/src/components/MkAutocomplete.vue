@@ -66,7 +66,7 @@ type EmojiDef = {
 };
 
 const function isMuted(emojiName) {
-	return $i.mutedWords.some((el) => emojiName.includes(el))
+	return $i.mutedWords.some((el) => emojiName.includes(el));
 }
 
 //const lib = emojilist.filter(x => x.category !== 'flags');
