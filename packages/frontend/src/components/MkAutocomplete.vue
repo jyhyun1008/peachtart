@@ -65,7 +65,7 @@ type EmojiDef = {
 	isCustomEmoji?: true;
 };
 
-const function isMuted(emojiName) {
+function isMuted(emojiName){
 	return $i.mutedWords.some((el) => emojiName.includes(el));
 }
 
@@ -111,7 +111,7 @@ const emojiDb = computed(() => {
 	const customEmojiDB: EmojiDef[] = [];
 
 	for (const x of customEmojis.value) {
-		if (isMuted(x.name) === false) {
+		if (isMuted(x.name) !== true) {
 			customEmojiDB.push({
 				name: x.name,
 				emoji: `:${x.name}:`,
