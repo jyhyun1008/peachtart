@@ -37,7 +37,15 @@ const emit = defineEmits<{
 	(ev: 'mockUpdateMyReaction', emoji: string, delta: number): void;
 }>();
 
-const initialReactions = new Set(Object.keys(props.note.reactions));
+const filteredInitialReactions = Object.keys(props.note.reactions)
+    .filter((key) => $i.mutedWords.some((el) => !key.includes(el)))
+    .reduce((obj, key) => {
+        return Object.assign(obj, {
+          [key]: user[key]
+        });
+  }, {});
+
+const initialReactions = new Set(filteredInitialReactions);
 
 let reactions = $ref<[string, number][]>([]);
 let hasMoreReactions = $ref(false);
@@ -81,7 +89,7 @@ watch([() => props.note.reactions, () => props.maxNumber], ([newSource, maxNumbe
 		newReactions.push([props.note.myReaction, newSource[props.note.myReaction]]);
 	}
 
-	const newNewReactions = newReactions.filter((key) => !$i.mutedWords.some((el) => key[0].includes(el)))
+	const newNewReactions = newReactions.filter((key) => $i.mutedWords.some((el) => !key[0].includes(el)))
 	
 	reactions = newNewReactions;
 }, { immediate: true, deep: true });
