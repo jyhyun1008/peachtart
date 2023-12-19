@@ -144,7 +144,7 @@ const searchResultCustom = ref<Misskey.entities.CustomEmoji[]>([]);
 const searchResultUnicode = ref<UnicodeEmojiDef[]>([]);
 const tab = ref<'index' | 'custom' | 'unicode' | 'tags'>('index');
 	
-const function isNotMuted(emojiName) {
+function isNotMuted(emojiName) {
 	if ($i.mutedWords.some((el) => emojiName.includes(el))) {
 		return false;
 	} else {
