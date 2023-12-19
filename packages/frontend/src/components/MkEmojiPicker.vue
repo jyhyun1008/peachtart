@@ -143,6 +143,14 @@ const q = ref<string>('');
 const searchResultCustom = ref<Misskey.entities.CustomEmoji[]>([]);
 const searchResultUnicode = ref<UnicodeEmojiDef[]>([]);
 const tab = ref<'index' | 'custom' | 'unicode' | 'tags'>('index');
+	
+const function isNotMuted(emojiName) {
+	if ($i.mutedWords.some((el) => emojiName.includes(el))) {
+		return false;
+	} else {
+		return true;
+	}
+}
 
 watch(q, () => {
 	if (emojisEl.value) emojisEl.value.scrollTop = 0;
@@ -158,16 +166,17 @@ watch(q, () => {
 	const searchCustom = () => {
 		const max = 100;
 		const emojis = customEmojis.value;
+		const filteredEmojis = emojis.filter((emoji) => isNotMuted(emoji.name));
 		const matches = new Set<Misskey.entities.CustomEmoji>();
 
-		const exactMatch = emojis.find(emoji => emoji.name === newQ);
+		const exactMatch = filteredEmojis.find(emoji => emoji.name === newQ);
 		if (exactMatch) matches.add(exactMatch);
 
 		if (newQ.includes(' ')) { // AND検索
 			const keywords = newQ.split(' ');
 
 			// 名前にキーワードが含まれている
-			for (const emoji of emojis) {
+			for (const emoji of filteredEmojis) {
 				if (keywords.every(keyword => emoji.name.includes(keyword))) {
 					matches.add(emoji);
 					if (matches.size >= max) break;
@@ -176,14 +185,14 @@ watch(q, () => {
 			if (matches.size >= max) return matches;
 
 			// 名前またはエイリアスにキーワードが含まれている
-			for (const emoji of emojis) {
+			for (const emoji of filteredEmojis) {
 				if (keywords.every(keyword => emoji.name.includes(keyword) || emoji.aliases.some(alias => alias.includes(keyword)))) {
 					matches.add(emoji);
 					if (matches.size >= max) break;
 				}
 			}
 		} else {
-			for (const emoji of emojis) {
+			for (const emoji of filteredEmojis) {
 				if (emoji.name.startsWith(newQ)) {
 					matches.add(emoji);
 					if (matches.size >= max) break;
@@ -191,7 +200,7 @@ watch(q, () => {
 			}
 			if (matches.size >= max) return matches;
 
-			for (const emoji of emojis) {
+			for (const emoji of filteredEmojis) {
 				if (emoji.aliases.some(alias => alias.startsWith(newQ))) {
 					matches.add(emoji);
 					if (matches.size >= max) break;
@@ -199,7 +208,7 @@ watch(q, () => {
 			}
 			if (matches.size >= max) return matches;
 
-			for (const emoji of emojis) {
+			for (const emoji of filteredEmojis) {
 				if (emoji.name.includes(newQ)) {
 					matches.add(emoji);
 					if (matches.size >= max) break;
@@ -207,7 +216,7 @@ watch(q, () => {
 			}
 			if (matches.size >= max) return matches;
 
-			for (const emoji of emojis) {
+			for (const emoji of filteredEmojis) {
 				if (emoji.aliases.some(alias => alias.includes(newQ))) {
 					matches.add(emoji);
 					if (matches.size >= max) break;
