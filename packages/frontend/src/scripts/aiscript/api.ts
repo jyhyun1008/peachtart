@@ -234,12 +234,12 @@ export function createAiScriptEnv(opts) {
 			fetch(url.value, param)
 			.then(apiData => {
 				if (apiData) {
-					result = apiData.json();
+					apiData.json();
 				} else {
-					result = {};
+					result = {response: ''};
 				}
 			})
-			if (result !== {}) {
+			if (result !== {response: ''}) {
 				.then(apiRes => {
 	        result = apiRes;
 	      })
