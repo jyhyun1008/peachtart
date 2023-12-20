@@ -615,7 +615,7 @@ function getHTMLOptions(def: values.Value | undefined): Omit<AsUiMfm, 'id' | 'ty
 		bold: bold?.value,
 		color: color?.value,
 		font: font?.value,
-		className: className?.value ?? 'MkMfm',
+		className: className?.value ?? 'MkHTML',
 	};
 }
 
