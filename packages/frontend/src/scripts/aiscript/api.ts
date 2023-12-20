@@ -226,7 +226,7 @@ export function createAiScriptEnv(opts) {
 			utils.assertString(method);
 			const param = {
 				method: method.value,
-				headers: headers,
+				headers: JSON.parse(JSON.stringify(headers)),
 				body: JSON.stringify(body)
 			}
 			fetch(url.value, param)
