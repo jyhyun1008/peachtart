@@ -230,16 +230,16 @@ export function createAiScriptEnv(opts) {
 				headers: JSON.parse(headers.value.replace(/\'/g, '"')),
 				body: JSON.stringify(utils.valToJs(body))
 			}
-			var result = {};
+			var result;
 			await fetch(url.value, param)
-			.then(apiData => {
+			.then((apiData) => {
 				if (apiData) {
-					apiData.json();
+					return apiData.json();
 				} else {
 					result = {response: ''};
 				}
 			})
-			if (result == {}) {
+			if (!result) {
 				.then(apiRes => {
 	        result = apiRes;
 	      })
