@@ -231,7 +231,7 @@ export function createAiScriptEnv(opts) {
 				body: JSON.stringify(utils.valToJs(body))
 			}
 			var result = {};
-			fetch(url.value, param)
+			await fetch(url.value, param)
 			.then(apiData => {
 				if (apiData) {
 					apiData.json();
