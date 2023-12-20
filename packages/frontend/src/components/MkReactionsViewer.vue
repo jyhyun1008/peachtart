@@ -19,7 +19,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 
 <script lang="ts" setup>
 import * as Misskey from 'misskey-js';
-import { inject, watch } from 'vue';
+import { inject, watch, onMounted } from 'vue';
 import XReaction from '@/components/MkReactionsViewer.reaction.vue';
 import { defaultStore } from '@/store.js';
 import { $i } from '@/account.js';
@@ -60,11 +60,6 @@ if (props.note.myReaction && !Object.keys(reactions).includes(props.note.myReact
 	reactions[props.note.myReaction] = props.note.reactions[props.note.myReaction];
 }
 
-if (Object.keys(reactions).includes('♥️')) {
-	reactions['♥️'] = props.note.reactions['♥️'] + diff
-} else {
-	reactions['♥️'] = diff
-}
 
 function onMockToggleReaction(emoji: string, count: number) {
 	if (!mock) return;
@@ -74,6 +69,14 @@ function onMockToggleReaction(emoji: string, count: number) {
 
 	emit('mockUpdateMyReaction', emoji, (count - reactions[i][1]));
 }
+
+onMounted(() => {
+	if (Object.keys(reactions).includes('♥️')) {
+		reactions['♥️'] = props.note.reactions['♥️'] + diff
+	} else {
+		reactions['♥️'] = diff
+	}
+});
 
 watch([() => props.note.reactions, () => props.maxNumber], ([newSource, maxNumber]) => {
 	let newReactions: [string, number][] = [];
