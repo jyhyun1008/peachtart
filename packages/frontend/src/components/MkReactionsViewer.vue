@@ -39,11 +39,6 @@ const emit = defineEmits<{
 
 const filteredInitialReactions = Object.keys(props.note.reactions)
     .filter((key) => $i.mutedWords.some((el) => !key.includes(el)))
-    .reduce((obj, key) => {
-        return Object.assign(obj, {
-          [key]: props.note.reactions[key]
-        });
-  }, {});
 
 const initialReactions = new Set(filteredInitialReactions);
 
