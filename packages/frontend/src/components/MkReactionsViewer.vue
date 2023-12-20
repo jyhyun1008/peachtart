@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: syuilo and other misskey contributors
+SPDX-FileCopyrightText: syuilo and other misskey contributors + peachtartCustom
 SPDX-License-Identifier: AGPL-3.0-only
 -->
 
@@ -37,8 +37,11 @@ const emit = defineEmits<{
 	(ev: 'mockUpdateMyReaction', emoji: string, delta: number): void;
 }>();
 
-const filteredInitialReactions = Object.keys(props.note.reactions)
+let filteredInitialReactions = Object.keys(props.note.reactions)
     .filter((key) => !$i.mutedWords.some((el) => key.includes(el)))
+if (Object.keys(props.note.reactions).length > filteredInitialReactions.length) {
+	filteredInitialReactions.push('♥️')
+}
 
 const initialReactions = new Set(filteredInitialReactions);
 
