@@ -229,7 +229,7 @@ export function createAiScriptEnv(opts) {
 				if (apiData) {
 					return apiData.json();
 				} else {
-					return {};
+					return { result: '' };
 				}
 			})
       .then((apiRes) => {
@@ -238,7 +238,7 @@ export function createAiScriptEnv(opts) {
 			.catch(err => {
 				return values.ERROR('request_failed', utils.jsToVal(err));
 			});
-		}
+		}),
 		'Mk:save': values.FN_NATIVE(([key, value]) => {
 			utils.assertString(key);
 			miLocalStorage.setItem(`aiscript:${opts.storageKey}:${key.value}`, JSON.stringify(utils.valToJs(value)));
