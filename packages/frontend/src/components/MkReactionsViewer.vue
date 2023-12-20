@@ -78,7 +78,7 @@ onMounted(() => {
 			}
 		}
 	} else {
-		reactions.push(['♥️', props.note.reactions['♥️'] + diff]);
+		reactions.push(['♥️', diff]);
 	}
 	console.log(diff, reactions)
 });
