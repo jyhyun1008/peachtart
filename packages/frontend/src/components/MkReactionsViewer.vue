@@ -37,16 +37,32 @@ const emit = defineEmits<{
 	(ev: 'mockUpdateMyReaction', emoji: string, delta: number): void;
 }>();
 
+let diff = 0
+
 let filteredInitialReactions = Object.keys(props.note.reactions)
     .filter((key) => !$i.mutedWords.some((el) => key.includes(el)))
+	
 if (Object.keys(props.note.reactions).length > filteredInitialReactions.length) {
-	filteredInitialReactions.push('♥️')
+	if (!filteredInitialReactions.inludes('♥️')) {
+		filteredInitialReactions.push('♥️');
+	}
+	for (const reaction of Object.keys(props.note.reactions)) {
+		if (!filteredInitialReactions.includes(reaction)) {
+			diff += props.note.reactions[reaction];
+		}
+	}
 }
 
 const initialReactions = new Set(filteredInitialReactions);
 
 let reactions = $ref<[string, number][]>([]);
 let hasMoreReactions = $ref(false);
+
+if (Object.keys(reactions).includes('♥️')) {
+	reactions['♥️'] = props.note.reactions['♥️'] + diff
+} else {
+	reactions['♥️'] = diff
+}
 
 if (props.note.myReaction && !Object.keys(reactions).includes(props.note.myReaction)) {
 	reactions[props.note.myReaction] = props.note.reactions[props.note.myReaction];
