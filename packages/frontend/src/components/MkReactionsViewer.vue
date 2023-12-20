@@ -61,9 +61,9 @@ if (props.note.myReaction && !Object.keys(reactions).includes(props.note.myReact
 }
 
 if (Object.keys(reactions).includes('♥️')) {
-	reactions['♥️'][1] = props.note.reactions['♥️'] + diff
+	reactions['♥️'] = props.note.reactions['♥️'] + diff
 } else {
-	reactions['♥️'][1] = diff
+	reactions['♥️'] = diff
 }
 
 function onMockToggleReaction(emoji: string, count: number) {
