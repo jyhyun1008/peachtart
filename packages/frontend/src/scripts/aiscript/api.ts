@@ -221,9 +221,15 @@ export function createAiScriptEnv(opts) {
 				return values.ERROR('request_failed', utils.jsToVal(err));
 			});
 		}),
-		'Mk:apiFetch': values.FN_NATIVE(async ([url, param]) => {
+		'Mk:apiFetch': values.FN_NATIVE(async ([url, method, headers, body]) => {
 			utils.assertString(url);
-			fetch(url.value, utils.valToJs(param))
+			utils.assertString(method);
+			const param = {
+				method: method.value,
+				headers: jsToVal(headers),
+				body: JSON.stringify(jsToVal(body))
+			}
+			fetch(url.value, param)
 			.then((apiData) => {
 				if (apiData) {
 					return apiData.json();
