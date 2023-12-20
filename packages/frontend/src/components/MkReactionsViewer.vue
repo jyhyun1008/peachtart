@@ -71,15 +71,19 @@ function onMockToggleReaction(emoji: string, count: number) {
 }
 
 onMounted(() => {
-	if (Object.keys(reactions).includes('♥️')) {
-	  for (let i = 0; i < reactions.length; i++) {
-			if (reactions[i][0] == '♥️') {
-				reactions[i][1] += diff;
+
+	if (filteredInitialReactions.includes('♥️')) {
+		if (Object.keys(reactions).includes('♥️')) {
+		  for (let i = 0; i < reactions.length; i++) {
+				if (reactions[i][0] == '♥️') {
+					reactions[i][1] += diff;
+				}
 			}
+		} else {
+			reactions.push(['♥️', diff]);
 		}
-	} else {
-		reactions.push(['♥️', diff]);
 	}
+	
 	console.log(diff, reactions)
 });
 
