@@ -71,6 +71,7 @@ function onMockToggleReaction(emoji: string, count: number) {
 }
 
 onMounted(() => {
+	console.log(diff, reactions)
 	if (Object.keys(reactions).includes('♥️')) {
 		reactions['♥️'] = props.note.reactions['♥️'] + diff
 	} else {
