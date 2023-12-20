@@ -230,18 +230,9 @@ export function createAiScriptEnv(opts) {
 				headers: JSON.parse(headers.value.replace(/\'/g, '"')),
 				body: JSON.stringify(utils.valToJs(body))
 			}
-			fetch(url.value, param)
-			.then((apiData) => {
-				if (apiData) {
-					apiData.json();
-				} else {
-					apiData;
-				}
-			})
-      .then((apiRes) => {
+			return fetch(url.value, param).then(apiData => {apiData.json()}, err => return {}).then(apiRes => {
         return utils.jsToVal(apiRes);
-      })
-			.catch(err => {
+      }, err => {
 				return values.ERROR('request_failed', utils.jsToVal(err));
 			});
 		}),
