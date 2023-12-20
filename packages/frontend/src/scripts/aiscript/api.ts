@@ -236,14 +236,12 @@ export function createAiScriptEnv(opts) {
 				if (apiData) {
 					return apiData.json();
 				} else {
-					result = {response: ''};
+					result = {response: ''}
 				}
 			})
-			if (!result) {
 				.then(apiRes => {
 	        result = apiRes;
 	      })
-			}
 			return utils.jsToVal(result);
 		}),
 		'Mk:save': values.FN_NATIVE(([key, value]) => {
