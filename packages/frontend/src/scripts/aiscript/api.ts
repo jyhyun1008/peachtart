@@ -223,8 +223,7 @@ export function createAiScriptEnv(opts) {
 		}),
 		'Mk:apiFetch': values.FN_NATIVE(async ([url, param]) => {
 			utils.assertString(url);
-			utils.assertString(param);
-			fetch(url.value, JSON.parse(param.value))
+			fetch(url.value, utils.valToJs(param))
 			.then((apiData) => {
 				if (apiData) {
 					return apiData.json();
