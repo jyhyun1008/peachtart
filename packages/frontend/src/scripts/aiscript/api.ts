@@ -224,9 +224,10 @@ export function createAiScriptEnv(opts) {
 		'Mk:apiFetch': values.FN_NATIVE(async ([url, method, headers, body]) => {
 			utils.assertString(url);
 			utils.assertString(method);
+			utils.assertString(headers);
 			const param = {
 				method: method.value,
-				headers: JSON.parse(JSON.stringify(headers)),
+				headers: JSON.parse(headers.value.replace(/\'/g, '"')),
 				body: JSON.stringify(body)
 			}
 			fetch(url.value, param)
