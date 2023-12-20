@@ -43,14 +43,12 @@ let filteredInitialReactions = Object.keys(props.note.reactions)
     .filter((key) => !$i.mutedWords.some((el) => key.includes(el)))
 	
 if (Object.keys(props.note.reactions).length > filteredInitialReactions.length) {
-	if (!filteredInitialReactions.inludes('♥️')) {
-		filteredInitialReactions.push('♥️');
-	}
-	for (const reaction of Object.keys(props.note.reactions)) {
-		if (!filteredInitialReactions.includes(reaction)) {
-			diff += props.note.reactions[reaction];
+	for (const r of Object.keys(props.note.reactions)) {
+		if (!filteredInitialReactions.includes(r)) {
+			diff += props.note.reactions[r];
 		}
 	}
+		filteredInitialReactions.push('♥️');
 }
 
 const initialReactions = new Set(filteredInitialReactions);
@@ -58,14 +56,14 @@ const initialReactions = new Set(filteredInitialReactions);
 let reactions = $ref<[string, number][]>([]);
 let hasMoreReactions = $ref(false);
 
-if (Object.keys(reactions).includes('♥️')) {
-	reactions['♥️'] = props.note.reactions['♥️'] + diff
-} else {
-	reactions['♥️'] = diff
-}
-
 if (props.note.myReaction && !Object.keys(reactions).includes(props.note.myReaction)) {
 	reactions[props.note.myReaction] = props.note.reactions[props.note.myReaction];
+}
+
+if (Object.keys(reactions).includes('♥️')) {
+	reactions['♥️'][1] = props.note.reactions['♥️'] + diff
+} else {
+	reactions['♥️'][1] = diff
 }
 
 function onMockToggleReaction(emoji: string, count: number) {
