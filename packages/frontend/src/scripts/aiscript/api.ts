@@ -221,6 +221,24 @@ export function createAiScriptEnv(opts) {
 				return values.ERROR('request_failed', utils.jsToVal(err));
 			});
 		}),
+		'Mk:apiFetch': values.FN_NATIVE(async ([url, param]) => {
+			utils.assertString(url);
+			utils.assertString(param);
+			fetch(url.value, JSON.parse(param.value))
+			.then((apiData) => {
+				if (apiData) {
+					return apiData.json();
+				} else {
+					return {};
+				}
+			})
+      .then((apiRes) => {
+        return utils.jsToVal(apiRes);
+      })
+			.catch(err => {
+				return values.ERROR('request_failed', utils.jsToVal(err));
+			});
+		}
 		'Mk:save': values.FN_NATIVE(([key, value]) => {
 			utils.assertString(key);
 			miLocalStorage.setItem(`aiscript:${opts.storageKey}:${key.value}`, JSON.stringify(utils.valToJs(value)));
