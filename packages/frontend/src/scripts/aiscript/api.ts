@@ -242,6 +242,7 @@ export function createAiScriptEnv(opts) {
 				.then(apiRes => {
 	        result = apiRes;
 	      })
+			.catch(err => {return utils.jsToVal(result)});
 			return utils.jsToVal(result);
 		}),
 		'Mk:save': values.FN_NATIVE(([key, value]) => {
