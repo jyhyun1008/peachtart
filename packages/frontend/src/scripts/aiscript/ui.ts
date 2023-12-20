@@ -146,7 +146,14 @@ export type AsUiCustomChart = AsUiComponentBase & {
 	className?: string;
 };
 
-export type AsUiComponent = AsUiRoot | AsUiContainer | AsUiText | AsUiMfm | AsUiButton | AsUiButtons | AsUiSwitch | AsUiTextarea | AsUiTextInput | AsUiNumberInput | AsUiSelect | AsUiFolder | AsUiPostFormButton | AsUiCustomChart;
+export type AsUiHTML = AsUiComponentBase & {
+	type: 'HTML';
+	HTML?: string;
+	css?: string;
+	className?: string;
+};
+
+export type AsUiComponent = AsUiRoot | AsUiContainer | AsUiText | AsUiMfm | AsUiButton | AsUiButtons | AsUiSwitch | AsUiTextarea | AsUiTextInput | AsUiNumberInput | AsUiSelect | AsUiFolder | AsUiPostFormButton | AsUiCustomChart | AsUiHTML;
 export type AsUiPostForm = AsUiComponentBase & {
 	type: 'postForm';
 	form?: {
@@ -154,7 +161,7 @@ export type AsUiPostForm = AsUiComponentBase & {
 	};
 };
 
-export type AsUiComponent = AsUiRoot | AsUiContainer | AsUiText | AsUiMfm | AsUiButton | AsUiButtons | AsUiSwitch | AsUiTextarea | AsUiTextInput | AsUiNumberInput | AsUiSelect | AsUiFolder | AsUiPostFormButton | AsUiPostForm;
+export type AsUiComponent = AsUiRoot | AsUiContainer | AsUiText | AsUiMfm | AsUiButton | AsUiButtons | AsUiSwitch | AsUiTextarea | AsUiTextInput | AsUiNumberInput | AsUiSelect | AsUiFolder | AsUiPostFormButton | AsUiPostForm | AsUiHTML;
 
 export function patch(id: string, def: values.Value, call: (fn: values.VFn, args: values.Value[]) => Promise<values.Value>) {
 	// TODO
@@ -584,6 +591,34 @@ function getPostFormOptions(def: values.Value | undefined, call: (fn: values.VFn
 	};
 }
 
+function getHTMLOptions(def: values.Value | undefined): Omit<AsUiMfm, 'id' | 'type'> {
+	utils.assertObject(def);
+
+	const HTML = def.value.get('HTML');
+	if (HTML) utils.assertString(HTML);
+	const css = def.value.get('css');
+	if (css) utils.assertString(css);
+	const size = def.value.get('size');
+	if (size) utils.assertNumber(size);
+	const bold = def.value.get('bold');
+	if (bold) utils.assertBoolean(bold);
+	const color = def.value.get('color');
+	if (color) utils.assertString(color);
+	const font = def.value.get('font');
+	if (font) utils.assertString(font);
+	const className = def.value.get('className');
+	if (className) utils.assertString(className);
+
+	return {
+		text: text?.value,
+		size: size?.value,
+		bold: bold?.value,
+		color: color?.value,
+		font: font?.value,
+		className: className?.value ?? 'MkMfm',
+	};
+}
+
 export function registerAsUiLib(components: Ref<AsUiComponent>[], done: (root: Ref<AsUiRoot>) => void) {
 	const instances = {};
 
@@ -698,6 +733,10 @@ export function registerAsUiLib(components: Ref<AsUiComponent>[], done: (root: R
 
 		'Ui:C:customChart': values.FN_NATIVE(([def, id], opts) => {
 			return createComponentInstance('customChart', def, id, getCustomChartOptions, opts.call);
+		}),
+
+		'Ui:C:HTML': values.FN_NATIVE(([def, id], opts) => {
+			return createComponentInstance('HTML', def, id, getHTMLOptions, opts.call);
 		}),
 	};
 }
