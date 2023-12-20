@@ -230,11 +230,21 @@ export function createAiScriptEnv(opts) {
 				headers: JSON.parse(headers.value.replace(/\'/g, '"')),
 				body: JSON.stringify(utils.valToJs(body))
 			}
-			return fetch(url.value, param).then(apiData => {apiData.json()}, err => return {}).then(apiRes => {
-        return utils.jsToVal(apiRes);
-      }, err => {
-				return values.ERROR('request_failed', utils.jsToVal(err));
-			});
+			var result = {}
+			fetch(url.value, param)
+			.then(apiData => {
+				if (apiData) {
+					result = apiData.json()
+				} else {
+					result = {}
+				}
+			})
+			if (result !== {}) {
+				.then(apiRes => {
+	        result = utils.jsToVal(apiRes);
+	      })
+			}
+			return result;
 		}),
 		'Mk:save': values.FN_NATIVE(([key, value]) => {
 			utils.assertString(key);
