@@ -233,9 +233,9 @@ export function createAiScriptEnv(opts) {
 			fetch(url.value, param)
 			.then((apiData) => {
 				if (apiData) {
-					return apiData.json();
+					apiData.json();
 				} else {
-					return { result: '' };
+					apiData;
 				}
 			})
       .then((apiRes) => {
