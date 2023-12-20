@@ -239,7 +239,7 @@ export function createAiScriptEnv(opts) {
 					result = {response: ''};
 				}
 			})
-			if (result !== {response: ''}) {
+			if (result == {}) {
 				.then(apiRes => {
 	        result = apiRes;
 	      })
