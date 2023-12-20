@@ -228,7 +228,7 @@ export function createAiScriptEnv(opts) {
 			const param = {
 				method: method.value,
 				headers: JSON.parse(headers.value.replace(/\'/g, '"')),
-				body: JSON.stringify(body)
+				body: JSON.stringify(utils.valToJs(body))
 			}
 			fetch(url.value, param)
 			.then((apiData) => {
