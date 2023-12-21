@@ -263,7 +263,7 @@ export function createAiScriptEnv(opts) {
 			utils.assertString(text);
 			return values.STR(nyaize(text.value));
 		}),
-		'Mk:ioConnect': values.FN_NATIVE(([url]) => {
+		'Mk:ioConnect': values.FN_NATIVE(([url, arr]) => {
 			utils.assertString(url);
 			socket = io.connect(url.value);
 		}),
@@ -274,8 +274,8 @@ export function createAiScriptEnv(opts) {
 		'Mk:socketOn': values.FN_NATIVE(([event, fn], opts) => {
 			utils.assertString(event);
 			utils.assertFunction(fn);
-			socket.on(event, async (res) => {
-				await opts.call(fn(res))
+			socket.on(event, (res) => {
+				opts.call(fn(res))
 			});
 		}),
 	};
