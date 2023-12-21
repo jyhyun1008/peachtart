@@ -603,10 +603,7 @@ function getHTMLOptions(def: values.Value | undefined): Omit<AsUiMfm, 'id' | 'ty
 
 	return {
 		HTML: HTML?.value,
-		size: size?.value,
-		bold: bold?.value,
-		color: color?.value,
-		font: font?.value,
+		css: css?.value,
 		className: className?.value ?? 'MkHTML',
 	};
 }
