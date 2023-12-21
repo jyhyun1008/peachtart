@@ -598,14 +598,6 @@ function getHTMLOptions(def: values.Value | undefined): Omit<AsUiMfm, 'id' | 'ty
 	if (HTML) utils.assertString(HTML);
 	const css = def.value.get('css');
 	if (css) utils.assertString(css);
-	const size = def.value.get('size');
-	if (size) utils.assertNumber(size);
-	const bold = def.value.get('bold');
-	if (bold) utils.assertBoolean(bold);
-	const color = def.value.get('color');
-	if (color) utils.assertString(color);
-	const font = def.value.get('font');
-	if (font) utils.assertString(font);
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 
