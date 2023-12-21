@@ -276,7 +276,7 @@ export function createAiScriptEnv(opts) {
 			utils.assertString(event);
 			utils.assertFunction(fn);
 			socket.on(event.value, function (res) {
-				opts.call(fn(res))
+				opts.call(fn, [res])
 				console.log(event.value)
 			});
 		}),
