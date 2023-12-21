@@ -14,6 +14,8 @@ import * as sound from '@/scripts/sound.js';
 
 // 사전 선언.
 
+var socket
+
 //var latitude = 0, longitude = 0
 //navigator.geolocation.getCurrentPosition(function(pos) {
 //  latitude = pos.coords.latitude;
@@ -263,7 +265,7 @@ export function createAiScriptEnv(opts) {
 		}),
 		'Mk:ioConnect': values.FN_NATIVE(([url]) => {
 			utils.assertString(url);
-			var socket = io.connect(url.value);
+			socket = io.connect(url.value);
 		}),
 		'Mk:socketEmit': values.FN_NATIVE(([event, param]) => {
 			utils.assertString(event);
