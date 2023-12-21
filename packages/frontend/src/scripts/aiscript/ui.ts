@@ -602,7 +602,7 @@ function getHTMLOptions(def: values.Value | undefined): Omit<AsUiMfm, 'id' | 'ty
 	if (className) utils.assertString(className);
 
 	return {
-		text: text?.value,
+		HTML: HTML?.value,
 		size: size?.value,
 		bold: bold?.value,
 		color: color?.value,
