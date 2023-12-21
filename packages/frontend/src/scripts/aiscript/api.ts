@@ -281,5 +281,17 @@ export function createAiScriptEnv(opts) {
 				await opts.call(fn, [utils.jsToVal(res)])
 			});
 		}),
+		'Mk:beforeUnload': values.FN_NATIVE(([fn], opts) => {
+			utils.assertFunction(fn);
+			window.addEventListener('beforeunload', async ( ) => {
+				await opts.call(fn)
+			});
+		}),
+		'Mk:Unload': values.FN_NATIVE(([fn], opts) => {
+			utils.assertFunction(fn);
+			window.addEventListener('unload', async ( ) => {
+				await opts.call(fn)
+			});
+		}),
 	};
 }
