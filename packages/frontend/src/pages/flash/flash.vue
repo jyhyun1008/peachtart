@@ -38,7 +38,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 
 					<MkCode :code="flash.script" lang="is" :inline="false" class="_monospace"/>
 				</MkFolder>
-				<component is="script" src="https://cdn.socket.io/4.7.2/socket.io.esm.min.js" type="module" async></component>
+				<component is="script" src="https://cdn.socket.io/4.7.2/socket.io.min.js" type="module" async></component>
 				<div :class="$style.footer">
 					<Mfm :text="`By @${flash.user.username}`"/>
 					<div class="date">
