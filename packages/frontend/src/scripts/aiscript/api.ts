@@ -261,5 +261,20 @@ export function createAiScriptEnv(opts) {
 			utils.assertString(text);
 			return values.STR(nyaize(text.value));
 		}),
+		'Mk:ioConnect': values.FN_NATIVE(([url]) => {
+			utils.assertString(url);
+			return io.connect(url.value);
+		}),
+		'Mk:socketEmit': values.FN_NATIVE(([event, param]) => {
+			utils.assertString(event);
+			socket.emit(event, utils.valToJs(param));
+		}),
+		'Mk:socketOn': values.FN_NATIVE(([event, fn], opts) => {
+			utils.assertString(event);
+			utils.assertFunction(fn);
+			socket.on(event, async (res) => {
+				await opts.call(fn(res))
+			});
+		}),
 	};
 }
