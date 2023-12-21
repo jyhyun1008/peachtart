@@ -278,7 +278,7 @@ export function createAiScriptEnv(opts) {
 			socket.on(event.value, async (res) => {
 				console.log(res)
 				console.log(event.value)
-				await opts.call(fn, [res])
+				await opts.call(fn, [utils.jsToVal(res)])
 			});
 		}),
 	};
