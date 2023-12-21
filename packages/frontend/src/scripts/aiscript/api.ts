@@ -265,7 +265,7 @@ export function createAiScriptEnv(opts) {
 		}),
 		'Mk:ioConnect': values.FN_NATIVE(([url, arr]) => {
 			utils.assertString(url);
-			socket = io.connect(url.value);
+			socket = io.connect(url.value, {transports: ['websocket']});
 		}),
 		'Mk:socketEmit': values.FN_NATIVE(([event, param]) => {
 			utils.assertString(event);
