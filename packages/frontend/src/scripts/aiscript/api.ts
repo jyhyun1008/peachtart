@@ -272,11 +272,11 @@ export function createAiScriptEnv(opts) {
 			socket.emit(event.value, utils.valToJs(param));
 			console.log(event.value)
 		}),
-		'Mk:socketOn': values.FN_NATIVE(([event, fn]) => {
+		'Mk:socketOn': values.FN_NATIVE(([event, fn], opts) => {
 			utils.assertString(event);
 			utils.assertFunction(fn);
 			socket.on(event.value, function (res) {
-				call(fn(res))
+				opts.call(fn(res))
 				console.log(event.value)
 			});
 		}),
