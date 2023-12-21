@@ -263,7 +263,7 @@ export function createAiScriptEnv(opts) {
 		}),
 		'Mk:ioConnect': values.FN_NATIVE(([url]) => {
 			utils.assertString(url);
-			return io.connect(url.value);
+			var socket = io.connect(url.value);
 		}),
 		'Mk:socketEmit': values.FN_NATIVE(([event, param]) => {
 			utils.assertString(event);
