@@ -55,7 +55,6 @@ SPDX-License-Identifier: AGPL-3.0-only
 			</template>
 	  </div>
 	</MkFolder>
-<<<<<<< HEAD
 	<MkCustomChart v-else-if="c.type === 'customChart'" :chartId="c.chartId" :title="c.title" :keys="c.keys" :values="c.values" :label="c.label" :className="c.className" />
 	<div v-else-if="c.type === 'container'" :class="[$style.container, { [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace' }]" :style="{ textAlign: c.align ?? null, backgroundColor: c.bgColor ?? null, color: c.fgColor ?? null, borderWidth: c.borderWidth ? `${c.borderWidth}px` : 0, borderColor: c.borderColor ?? 'var(--divider)', padding: c.padding ? `${c.padding}px` : 0, borderRadius: c.rounded ? '8px' : 0 }">
 		<div :class="['_container', c.className]">
@@ -63,12 +62,6 @@ SPDX-License-Identifier: AGPL-3.0-only
 				<MkAsUi v-if="!g(child).hidden" :component="g(child)" :components="props.components" :size="size" :align="c.align"/>
 			</template>
 		</div>
-=======
-	<div v-else-if="c.type === 'container'" :class="[$style.container, { [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace' }]" :style="{ textAlign: c.align, backgroundColor: c.bgColor, color: c.fgColor, borderWidth: c.borderWidth ? `${c.borderWidth}px` : 0, borderColor: c.borderColor ?? 'var(--divider)', padding: c.padding ? `${c.padding}px` : 0, borderRadius: c.rounded ? '8px' : 0 }">
-		<template v-for="child in c.children" :key="child">
-			<MkAsUi v-if="!g(child).hidden" :component="g(child)" :components="props.components" :size="size" :align="c.align"/>
-		</template>
->>>>>>> 96c7c85ad008a71fb03198a708c8531aacbb39e0
 	</div>
 </div>
 </template>
