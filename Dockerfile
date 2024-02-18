@@ -82,17 +82,17 @@ RUN apt-get update \
 USER peachtart
 WORKDIR /peachtart
 
-COPY --chown=peachtart:peachtart --from=target-builder /misskey/node_modules ./node_modules
-COPY --chown=peachtart:peachtart --from=target-builder /misskey/packages/backend/node_modules ./packages/backend/node_modules
-COPY --chown=peachtart:peachtart --from=target-builder /misskey/packages/misskey-js/node_modules ./packages/misskey-js/node_modules
-COPY --chown=peachtart:peachtart --from=target-builder /misskey/packages/misskey-reversi/node_modules ./packages/misskey-reversi/node_modules
-COPY --chown=peachtart:peachtart --from=target-builder /misskey/packages/misskey-bubble-game/node_modules ./packages/misskey-bubble-game/node_modules
-COPY --chown=peachtart:peachtart --from=native-builder /misskey/built ./built
-COPY --chown=peachtart:peachtart --from=native-builder /misskey/packages/misskey-js/built ./packages/misskey-js/built
-COPY --chown=peachtart:peachtart --from=native-builder /misskey/packages/misskey-reversi/built ./packages/misskey-reversi/built
-COPY --chown=peachtart:peachtart --from=native-builder /misskey/packages/misskey-bubble-game/built ./packages/misskey-bubble-game/built
-COPY --chown=peachtart:peachtart --from=native-builder /misskey/packages/backend/built ./packages/backend/built
-COPY --chown=peachtart:peachtart --from=native-builder /misskey/fluent-emojis /misskey/fluent-emojis
+COPY --chown=peachtart:peachtart --from=target-builder /peachtart/node_modules ./node_modules
+COPY --chown=peachtart:peachtart --from=target-builder /peachtart/packages/backend/node_modules ./packages/backend/node_modules
+COPY --chown=peachtart:peachtart --from=target-builder /peachtart/packages/misskey-js/node_modules ./packages/misskey-js/node_modules
+COPY --chown=peachtart:peachtart --from=target-builder /peachtart/packages/misskey-reversi/node_modules ./packages/misskey-reversi/node_modules
+COPY --chown=peachtart:peachtart --from=target-builder /peachtart/packages/misskey-bubble-game/node_modules ./packages/misskey-bubble-game/node_modules
+COPY --chown=peachtart:peachtart --from=native-builder /peachtart/built ./built
+COPY --chown=peachtart:peachtart --from=native-builder /peachtart/packages/misskey-js/built ./packages/misskey-js/built
+COPY --chown=peachtart:peachtart --from=native-builder /peachtart/packages/misskey-reversi/built ./packages/misskey-reversi/built
+COPY --chown=peachtart:peachtart --from=native-builder /peachtart/packages/misskey-bubble-game/built ./packages/misskey-bubble-game/built
+COPY --chown=peachtart:peachtart --from=native-builder /peachtart/packages/backend/built ./packages/backend/built
+COPY --chown=peachtart:peachtart --from=native-builder /peachtart/fluent-emojis /misskey/fluent-emojis
 COPY --chown=peachtart:peachtart . ./
 
 ENV LD_PRELOAD=/usr/local/lib/libjemalloc.so
