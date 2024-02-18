@@ -34,7 +34,7 @@ import { RoleService } from '@/core/RoleService.js';
 import { FeaturedService } from '@/core/FeaturedService.js';
 import { trackPromise } from '@/misc/promise-tracker.js';
 
-const mutedWordsCache = new MemorySingleCache<{ mutedWords: UserProfile['mutedWords']; }[]>(1000 * 60 * 5);
+const mutedWordsCache = new MemorySingleCache<{ mutedWords: UserProfile['hardMutedWords']; }[]>(1000 * 60 * 5);
 
 type MinimumUser = {
 	id: User['id'];
