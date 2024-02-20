@@ -27,14 +27,14 @@ import { MetaService } from '@/core/MetaService.js';
 import { bindThis } from '@/decorators.js';
 import { UtilityService } from '@/core/UtilityService.js';
 import type { User, LocalUser, RemoteUser } from '@/models/entities/User.js';
-import type { UserProfile } from '@/models/entities/UserProfile.js';
+import type { UserProfilesRepository } from '@/models/_.js';
 import { UserBlockingService } from '@/core/UserBlockingService.js';
 import { CustomEmojiService } from '@/core/CustomEmojiService.js';
 import { RoleService } from '@/core/RoleService.js';
 import { FeaturedService } from '@/core/FeaturedService.js';
 import { trackPromise } from '@/misc/promise-tracker.js';
 
-const mutedWordsCache = new MemorySingleCache<{ mutedWords: UserProfile['hardMutedWords']; }[]>(1000 * 60 * 5);
+const mutedWordsCache = new MemorySingleCache<{ mutedWords: UserProfilesRepository['hardMutedWords']; }[]>(1000 * 60 * 5);
 
 type MinimumUser = {
 	id: User['id'];
