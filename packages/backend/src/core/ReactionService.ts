@@ -469,7 +469,7 @@ export class ReactionService {
 	}
 
 	@bindThis
-	public async decodeReaction(str: string): Promise<DecodedReaction> {
+	public decodeReaction(str: string) {
 		const custom = str.match(decodeCustomEmojiRegexp);
 
 		if (custom) {
@@ -482,18 +482,21 @@ export class ReactionService {
 				host,
 			};
 
-						// // Word mute
-						if (await checkEmojiMute(reaction, this.userProfilesRepository?.hardMutedWords ?? [])) {
+			// Word mute
+			async function isEmojiMuted() {
+				if (await checkEmojiMute(reaction, this.userProfilesRepository?.hardMutedWords ?? [])) {
+					reaction = {
+						reaction: FALLBACK,
+					  name,
+						host,
+					};
+				}
+			}
 
-						 					reaction = {
-						 						reaction: FALLBACK,
-												name,
-						 						host,
-						 					};
-											return reaction;
-						} else {
-							return reaction;
-						};
+			isEmojiMuted();
+			return reaction;
+
+						//
 						// mutedWordsCache.fetch(() => this.userProfilesRepository.find({
 						// 	where: {
 						// 		userId: note.userId,
@@ -523,13 +526,14 @@ export class ReactionService {
 						// 	}
 						// });
 
+		} else {
+			return {
+				reaction: str,
+				name: undefined,
+				host: undefined,
+			}
 		}
 
-		return {
-			reaction: str,
-			name: undefined,
-			host: undefined,
-		};
 	}
 
 	@bindThis
