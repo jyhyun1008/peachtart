@@ -476,64 +476,32 @@ export class ReactionService {
 			const name = custom[1];
 			const host = custom[2] ?? null;
 
-			let reaction = {
+			return {
 				reaction: `:${name}@${host ?? '.'}:`,	// ローカル分は@以降を省略するのではなく.にする
 				name,
 				host,
 			};
-
 			// Word mute
-			async function isEmojiMuted() {
-				if (await checkEmojiMute(reaction, this.userProfilesRepository?.hardMutedWords ?? [])) {
-					reaction = {
-						reaction: FALLBACK,
-					  name,
-						host,
-					};
-				}
-			}
+			// async function isEmojiMuted(this: any) {
+			// 	if (await checkEmojiMute(reaction, this.userProfilesRepository?.hardMutedWords ?? [])) {
+			// 		reaction = {
+			// 			reaction: FALLBACK,
+			// 		  name,
+			// 			host,
+			// 		};
+			// 	}
+			// }
 
-			isEmojiMuted();
-			return reaction;
+			// isEmojiMuted();
+			// return reaction;
 
-						//
-						// mutedWordsCache.fetch(() => this.userProfilesRepository.find({
-						// 	where: {
-						// 		userId: note.userId,
-						// 	},
-						// 	select: ['hardMutedWords'],
-						// })).then(us => {
-						// 	for (const u of us) {
-
-						// 			if (u.mutedWords.length > 0) {
-
-						// 				const matched = u.mutedWords.some(word => {
-						// 					if (Array.isArray(word)) {
-						// 							return word.every(keyword => name.includes(keyword));
-						// 					} else {
-						// 							return false;
-						// 					}
-						// 				});
-
-						// 				if (matched) {
-						// 					reaction = {
-						// 						reaction: FALLBACK,
-						// 						name,
-						// 						host,
-						// 					};;
-						// 				}
-						// 			}
-						// 	}
-						// });
-
-		} else {
-			return {
-				reaction: str,
-				name: undefined,
-				host: undefined,
-			}
 		}
 
+		return {
+			reaction: str,
+			name: undefined,
+			host: undefined,
+		}
 	}
 
 	@bindThis
