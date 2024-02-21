@@ -69,7 +69,11 @@ export async function checkEmojiMute(emoji: EmojiLike, mutedWords: Array<string 
 
 		const matched = unacable.some(filter => {
 			if (Array.isArray(filter)) {
-				return filter.every(keyword => text.includes(keyword));
+				if (text) {
+					return filter.every(keyword => text.includes(keyword));
+				} else {
+					return false;
+				}
 			} else {
 				// represents RegExp
 				const regexp = filter.match(/^\/(.+)\/(.*)$/);
