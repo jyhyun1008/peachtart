@@ -3,9 +3,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import RE2 from 're2';
+//import RE2 from 're2';
 import { Inject, Injectable } from '@nestjs/common';
-import * as Redis from 'ioredis';
+//import * as Redis from 'ioredis';
 import { DI } from '@/di-symbols.js';
 import type { EmojisRepository, NoteReactionsRepository, UsersRepository, NotesRepository } from '@/models/_.js';
 import { IdentifiableError } from '@/misc/identifiable-error.js';
@@ -75,9 +75,9 @@ const decodeCustomEmojiRegexp = /^:([\w+-]+)(?:@([\w.-]+))?:$/;
 
 @Injectable()
 export class ReactionService {
-	constructor(
-		@Inject(DI.redis)
-		private redisClient: Redis.Redis,
+	// constructor(
+	// 	@Inject(DI.redis)
+	// 	private redisClient: Redis.Redis,
 
 		@Inject(DI.usersRepository)
 		private usersRepository: UsersRepository,
@@ -163,7 +163,7 @@ export class ReactionService {
 
 									if (u.mutedWords.length > 0) {
 
-										const matched = u.mutedWords.some(word => {
+										const matched = u.mutedWords.some((word: any[]) => {
 											if (Array.isArray(word)) {
 													return word.every(keyword => name.includes(keyword));
 											} else {
@@ -300,7 +300,7 @@ export class ReactionService {
 				dm.addFollowersRecipe();
 			} else if (note.visibility === 'specified') {
 				const visibleUsers = await Promise.all(note.visibleUserIds.map(id => this.usersRepository.findOneBy({ id })));
-				for (const u of visibleUsers.filter(u => u && this.userEntityService.isRemoteUser(u))) {
+				for (const u of visibleUsers.filter((u: any) => u && this.userEntityService.isRemoteUser(u))) {
 					dm.addDirectRecipe(u as MiRemoteUser);
 				}
 			}
