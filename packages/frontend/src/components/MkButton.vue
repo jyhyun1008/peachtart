@@ -33,11 +33,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 </template>
 
 <script lang="ts" setup>
-<<<<<<< HEAD
-import { nextTick, onMounted, } from 'vue';
-=======
 import { nextTick, onMounted, shallowRef } from 'vue';
->>>>>>> 96c7c85ad008a71fb03198a708c8531aacbb39e0
 
 const props = withDefaults(defineProps<{
 	type?: 'button' | 'submit' | 'reset';

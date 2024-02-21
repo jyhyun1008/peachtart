@@ -58,12 +58,8 @@ SPDX-License-Identifier: AGPL-3.0-only
 </template>
 
 <script lang="ts" setup>
-<<<<<<< HEAD
-import { computed, onMounted, onDeactivated, onUnmounted, Ref, ref, watch } from 'vue';
-=======
-import { computed, onDeactivated, onUnmounted, Ref, ref, watch, shallowRef } from 'vue';
+import { computed, onMounted, onDeactivated, onUnmounted, Ref, ref, watch, shallowRef } from 'vue';
 import * as Misskey from 'misskey-js';
->>>>>>> 96c7c85ad008a71fb03198a708c8531aacbb39e0
 import { Interpreter, Parser, values } from '@syuilo/aiscript';
 import MkButton from '@/components/MkButton.vue';
 import * as os from '@/os.js';
@@ -210,24 +206,6 @@ const headerActions = computed(() => []);
 
 const headerTabs = computed(() => []);
 
-<<<<<<< HEAD
-definePageMetadata(computed(() => flash ? {
-	title: flash.title,
-	avatar: flash.user,
-	path: `/play/${flash.id}`,
-	share: {
-		title: flash.title,
-		text: flash.summary,
-	},
-} : null));
-
-onMounted(() => {
-	setTimeout(() => {
-	  start();
-	}, "1000");
-});
-	
-=======
 definePageMetadata(() => ({
 	title: flash.value ? flash.value.title : 'Play',
 	...flash.value ? {
@@ -239,7 +217,12 @@ definePageMetadata(() => ({
 		},
 	} : {},
 }));
->>>>>>> 96c7c85ad008a71fb03198a708c8531aacbb39e0
+
+onMounted(() => {
+	setTimeout(() => {
+	  start();
+	}, "1000");
+});
 </script>
 
 <style lang="scss" module>

@@ -1,9 +1,5 @@
 <!--
-<<<<<<< HEAD
 SPDX-FileCopyrightText: syuilo and other misskey contributors + peachtartCustom
-=======
-SPDX-FileCopyrightText: syuilo and misskey-project
->>>>>>> 96c7c85ad008a71fb03198a708c8531aacbb39e0
 SPDX-License-Identifier: AGPL-3.0-only
 -->
 
@@ -23,11 +19,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 
 <script lang="ts" setup>
 import * as Misskey from 'misskey-js';
-<<<<<<< HEAD
-import { inject, watch, onMounted } from 'vue';
-=======
-import { inject, watch, ref } from 'vue';
->>>>>>> 96c7c85ad008a71fb03198a708c8531aacbb39e0
+import { inject, watch, ref, onMounted } from 'vue';
 import XReaction from '@/components/MkReactionsViewer.reaction.vue';
 import { defaultStore } from '@/store.js';
 import { $i } from '@/account.js';
@@ -49,7 +41,7 @@ let diff = 0
 
 let filteredInitialReactions = Object.keys(props.note.reactions)
     .filter((key) => !$i.mutedWords.some((el) => key.includes(el)))
-	
+
 if (Object.keys(props.note.reactions).length > filteredInitialReactions.length) {
 	for (const r of Object.keys(props.note.reactions)) {
 		if (!filteredInitialReactions.includes(r)) {
@@ -91,7 +83,7 @@ onMounted(() => {
 			reactions.push(['♥️', diff]);
 		}
 	}
-	
+
 	console.log(diff, reactions)
 });
 
@@ -121,13 +113,8 @@ watch([() => props.note.reactions, () => props.maxNumber], ([newSource, maxNumbe
 		newReactions.push([props.note.myReaction, newSource[props.note.myReaction]]);
 	}
 
-<<<<<<< HEAD
 	const newNewReactions = newReactions.filter((key) => !$i.mutedWords.some((el) => key[0].includes(el)))
-	
-	reactions = newNewReactions;
-=======
-	reactions.value = newReactions;
->>>>>>> 96c7c85ad008a71fb03198a708c8531aacbb39e0
+	reactions.value = newNewReactions;
 }, { immediate: true, deep: true });
 </script>
 

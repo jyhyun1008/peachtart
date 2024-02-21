@@ -4,11 +4,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 -->
 
 <template>
-<<<<<<< HEAD
-<div :class="[$style.root, { [$style.disabled]: disabled, [$style.checked]: checked }, { className: 'className' }, props.className]">
-=======
-<div :class="[$style.root, { [$style.disabled]: disabled }]">
->>>>>>> 96c7c85ad008a71fb03198a708c8531aacbb39e0
+<div :class="[$style.root, { [$style.disabled]: disabled }, { className: 'className' }, props.className]">
 	<input
 		ref="input"
 		type="checkbox"

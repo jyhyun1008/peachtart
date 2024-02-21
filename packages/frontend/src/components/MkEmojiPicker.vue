@@ -154,7 +154,7 @@ const q = ref<string>('');
 const searchResultCustom = ref<Misskey.entities.EmojiSimple[]>([]);
 const searchResultUnicode = ref<UnicodeEmojiDef[]>([]);
 const tab = ref<'index' | 'custom' | 'unicode' | 'tags'>('index');
-	
+
 function isNotMuted(emojiName) {
 	if ($i.mutedWords.some((el) => emojiName.includes(el))) {
 		return false;
@@ -206,12 +206,8 @@ watch(q, () => {
 	const searchCustom = () => {
 		const max = 100;
 		const emojis = customEmojis.value;
-<<<<<<< HEAD
 		const filteredEmojis = emojis.filter((emoji) => isNotMuted(emoji.name));
-		const matches = new Set<Misskey.entities.CustomEmoji>();
-=======
 		const matches = new Set<Misskey.entities.EmojiSimple>();
->>>>>>> 96c7c85ad008a71fb03198a708c8531aacbb39e0
 
 		const exactMatch = filteredEmojis.find(emoji => emoji.name === newQ);
 		if (exactMatch) matches.add(exactMatch);
@@ -236,15 +232,12 @@ watch(q, () => {
 				}
 			}
 		} else {
-<<<<<<< HEAD
-			for (const emoji of filteredEmojis) {
-=======
 			if (customEmojisMap.has(newQ)) {
 				matches.add(customEmojisMap.get(newQ)!);
 			}
 			if (matches.size >= max) return matches;
 
-			for (const emoji of emojis) {
+			for (const emoji of filteredEmojis) {
 				if (emoji.aliases.some(alias => alias === newQ)) {
 					matches.add(emoji);
 					if (matches.size >= max) break;
@@ -252,8 +245,7 @@ watch(q, () => {
 			}
 			if (matches.size >= max) return matches;
 
-			for (const emoji of emojis) {
->>>>>>> 96c7c85ad008a71fb03198a708c8531aacbb39e0
+			for (const emoji of filteredEmojis) {
 				if (emoji.name.startsWith(newQ)) {
 					matches.add(emoji);
 					if (matches.size >= max) break;
@@ -323,7 +315,7 @@ watch(q, () => {
 				}
 			}
 			if (matches.size >= max) return matches;
-			
+
 			for (const emoji of emojis) {
 				if (emoji.aliases.some(alias => alias.startsWith(newQ))) {
 					matches.add(emoji);
@@ -348,7 +340,7 @@ watch(q, () => {
 				}
 			}
 			if (matches.size >= max) return matches;
-			
+
 			for (const emoji of emojis) {
 				if (emoji.aliases.some(alias => alias.includes(newQ))) {
 					matches.add(emoji);

@@ -56,12 +56,8 @@ import { emojilist, getEmojiName } from '@/scripts/emojilist.js';
 import { i18n } from '@/i18n.js';
 import { miLocalStorage } from '@/local-storage.js';
 import { customEmojis } from '@/custom-emojis.js';
-<<<<<<< HEAD
-import { MFM_TAGS } from '@/const.js';
-import { $i } from '@/account.js';
-=======
 import { MFM_TAGS, MFM_PARAMS } from '@/const.js';
->>>>>>> 96c7c85ad008a71fb03198a708c8531aacbb39e0
+import { $i } from '@/account.js';
 
 type EmojiDef = {
 	emoji: string;
@@ -127,7 +123,7 @@ const emojiDb = computed(() => {
 				emoji: `:${x.name}:`,
 				isCustomEmoji: true,
 			});
-	
+
 			if (x.aliases) {
 				for (const alias of x.aliases) {
 					customEmojiDB.push({

@@ -25,11 +25,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 			</div>
 		</template>
 
-<<<<<<< HEAD
-		<div v-if="openedAtLeastOnce" :class="[$style.body, { [$style.bgSame]: bgSame }, { className: 'className' }]" :style="{ maxHeight: maxHeight ? `${maxHeight}px` : null, overflow: maxHeight ? `auto` : null }" :aria-hidden="!opened">
-=======
-		<div v-if="openedAtLeastOnce" :class="[$style.body, { [$style.bgSame]: bgSame }]" :style="{ maxHeight: maxHeight ? `${maxHeight}px` : undefined, overflow: maxHeight ? `auto` : undefined }" :aria-hidden="!opened">
->>>>>>> 96c7c85ad008a71fb03198a708c8531aacbb39e0
+		<div v-if="openedAtLeastOnce" :class="[$style.body, { [$style.bgSame]: bgSame }, { className: 'className' }]" :style="{ maxHeight: maxHeight ? `${maxHeight}px` : undefined, overflow: maxHeight ? `auto` : undefined }" :aria-hidden="!opened">
 			<Transition
 				:enterActiveClass="defaultStore.state.animation ? $style.transition_toggle_enterActive : ''"
 				:leaveActiveClass="defaultStore.state.animation ? $style.transition_toggle_leaveActive : ''"

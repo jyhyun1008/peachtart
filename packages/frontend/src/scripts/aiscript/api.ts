@@ -235,34 +235,7 @@ export function createAiScriptEnv(opts) {
 				return values.ERROR('request_failed', utils.jsToVal(err));
 			});
 		}),
-<<<<<<< HEAD
-		'Mk:apiFetch': values.FN_NATIVE(async ([url, method, headers, body]) => {
-			utils.assertString(url);
-			utils.assertString(method);
-			utils.assertString(headers);
-			const param = {
-				method: method.value,
-				headers: JSON.parse(headers.value.replace(/\'/g, '"')),
-				body: JSON.stringify(utils.valToJs(body))
-			}
-			var result;
-			await fetch(url.value, param)
-			.then((apiData) => {
-				if (apiData) {
-					return apiData.json();
-				} else {
-					result = {response: ''}
-				}
-			})
-				.then(apiRes => {
-	        result = apiRes;
-	      })
-			.catch(err => {return utils.jsToVal(result)});
-			return utils.jsToVal(result);
-		}),
-=======
 		*/
->>>>>>> 96c7c85ad008a71fb03198a708c8531aacbb39e0
 		'Mk:save': values.FN_NATIVE(([key, value]) => {
 			utils.assertString(key);
 			miLocalStorage.setItem(`aiscript:${opts.storageKey}:${key.value}`, JSON.stringify(utils.valToJs(value)));

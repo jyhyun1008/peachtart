@@ -49,11 +49,8 @@ export type AsUiMfm = AsUiComponentBase & {
 	bold?: boolean;
 	color?: string;
 	font?: 'serif' | 'sans-serif' | 'monospace';
-<<<<<<< HEAD
 	className?: string;
-=======
-	onClickEv?: (evId: string) => void
->>>>>>> 96c7c85ad008a71fb03198a708c8531aacbb39e0
+	onClickEv?: (evId: string) => void;
 };
 
 export type AsUiButton = AsUiComponentBase & {
@@ -270,13 +267,10 @@ function getMfmOptions(def: values.Value | undefined, call: (fn: values.VFn, arg
 	if (color) utils.assertString(color);
 	const font = def.value.get('font');
 	if (font) utils.assertString(font);
-<<<<<<< HEAD
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
-=======
 	const onClickEv = def.value.get('onClickEv');
 	if (onClickEv) utils.assertFunction(onClickEv);
->>>>>>> 96c7c85ad008a71fb03198a708c8531aacbb39e0
 
 	return {
 		text: text?.value,
@@ -284,13 +278,10 @@ function getMfmOptions(def: values.Value | undefined, call: (fn: values.VFn, arg
 		bold: bold?.value,
 		color: color?.value,
 		font: font?.value,
-<<<<<<< HEAD
 		className: className?.value ?? 'MkMfm',
-=======
 		onClickEv: (evId: string) => {
 			if (onClickEv) call(onClickEv, [values.STR(evId)]);
 		},
->>>>>>> 96c7c85ad008a71fb03198a708c8531aacbb39e0
 	};
 }
 
