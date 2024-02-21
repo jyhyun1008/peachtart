@@ -28,13 +28,69 @@ import { bindThis } from '@/decorators.js';
 import { UtilityService } from '@/core/UtilityService.js';
 //import type { User, LocalUser, RemoteUser } from '@/models/entities/User.js';
 import type { UserProfilesRepository } from '@/models/_.js';
+import type { MiUserProfile } from '@/models/UserProfile.js';
 import { UserBlockingService } from '@/core/UserBlockingService.js';
 import { CustomEmojiService } from '@/core/CustomEmojiService.js';
 import { RoleService } from '@/core/RoleService.js';
 import { FeaturedService } from '@/core/FeaturedService.js';
 import { trackPromise } from '@/misc/promise-tracker.js';
 
-const mutedWordsCache = new MemorySingleCache<{ mutedWords: UserProfilesRepository['hardMutedWords']; }[]>(1000 * 60 * 5);
+import { AhoCorasick } from 'slacc';
+
+type EmojiLike = {
+	reaction: string;
+	name?: string;
+	host?: string;
+};
+
+const acCache = new Map<string, AhoCorasick>();
+
+export async function checkEmojiMute(emoji: EmojiLike, mutedWords: Array<string | string[]>): Promise<boolean> {
+
+	if (mutedWords.length > 0) {
+		const text = emoji.name;
+
+		if (text === '') return false;
+
+		const acable = mutedWords.filter(filter => Array.isArray(filter) && filter.length === 1).map(filter => filter[0]).sort();
+		const unacable = mutedWords.filter(filter => !Array.isArray(filter) || filter.length !== 1);
+		const acCacheKey = acable.join('\n');
+		const ac = acCache.get(acCacheKey) ?? AhoCorasick.withPatterns(acable);
+		acCache.delete(acCacheKey);
+		for (const obsoleteKeys of acCache.keys()) {
+			if (acCache.size > 1000) {
+				acCache.delete(obsoleteKeys);
+			}
+		}
+		acCache.set(acCacheKey, ac);
+		if (ac.isMatch(text)) {
+			return true;
+		}
+
+		const matched = unacable.some(filter => {
+			if (Array.isArray(filter)) {
+				return filter.every(keyword => text.includes(keyword));
+			} else {
+				// represents RegExp
+				const regexp = filter.match(/^\/(.+)\/(.*)$/);
+
+				// This should never happen due to input sanitisation.
+				if (!regexp) return false;
+
+				try {
+					return new RE2(regexp[1], regexp[2]).test(text);
+				} catch (err) {
+					// This should never happen due to input sanitisation.
+					return false;
+				}
+			}
+		});
+
+		if (matched) return true;
+	}
+
+	return false;
+}
 
 const FALLBACK = '\u2764';
 const PER_NOTE_REACTION_USER_PAIR_CACHE_MAX = 16;
@@ -153,30 +209,33 @@ export class ReactionService {
 						}
 
 						// Word mute
-						mutedWordsCache.fetch(() => this.userProfilesRepository.find({
-							where: {
-								userId: note.userId,
-							},
-							select: ['mutedWords'],
-						})).then(us => {
-							for (const u of us) {
+						if (await checkEmojiMute(emoji, this.userProfilesRepository?.hardMutedWords ?? [])) {
+							reaction = FALLBACK;
+						};
+						// mutedWordsCache.fetch(() => this.userProfile?.find({
+						// 	where: {
+						// 		userId: note.userId,
+						// 	},
+						// 	select: ['mutedWords'],
+						// })).then(us => {
+						// 	for (const u of us) {
 
-									if (u.mutedWords.length > 0) {
+						// 			if (u.mutedWords.length > 0) {
 
-										const matched = u.mutedWords.some((word: any[]) => {
-											if (Array.isArray(word)) {
-													return word.every(keyword => name.includes(keyword));
-											} else {
-													return false;
-											}
-										});
+						// 				const matched = u.mutedWords.some((word: any[]) => {
+						// 					if (Array.isArray(word)) {
+						// 							return word.every(keyword => name.includes(keyword));
+						// 					} else {
+						// 							return false;
+						// 					}
+						// 				});
 
-										if (matched) {
-											reaction = FALLBACK;
-										}
-									}
-							}
-						});
+						// 				if (matched) {
+						// 					reaction = FALLBACK;
+						// 				}
+						// 			}
+						// 	}
+						// });
 
 					} else {
 						// リアクションとして使う権限がない
@@ -410,7 +469,7 @@ export class ReactionService {
 	}
 
 	@bindThis
-	public decodeReaction(str: string): DecodedReaction {
+	public async decodeReaction(str: string): Promise<DecodedReaction> {
 		const custom = str.match(decodeCustomEmojiRegexp);
 
 		if (custom) {
@@ -424,6 +483,17 @@ export class ReactionService {
 			};
 
 						// // Word mute
+						if (await checkEmojiMute(reaction, this.userProfilesRepository?.hardMutedWords ?? [])) {
+
+						 					reaction = {
+						 						reaction: FALLBACK,
+												name,
+						 						host,
+						 					};
+											return reaction;
+						} else {
+							return reaction;
+						};
 						// mutedWordsCache.fetch(() => this.userProfilesRepository.find({
 						// 	where: {
 						// 		userId: note.userId,
@@ -453,7 +523,6 @@ export class ReactionService {
 						// 	}
 						// });
 
-			return reaction;
 		}
 
 		return {
