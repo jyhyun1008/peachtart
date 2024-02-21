@@ -405,6 +405,8 @@ function onKeydown(event: KeyboardEvent) {
 					cancel();
 					selectNext();
 					break;
+				} else {
+					break;
 				}
 			} else {
 				cancel();
