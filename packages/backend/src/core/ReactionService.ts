@@ -75,7 +75,7 @@ const decodeCustomEmojiRegexp = /^:([\w+-]+)(?:@([\w.-]+))?:$/;
 
 @Injectable()
 export class ReactionService {
-	// constructor(
+	constructor(
 	// 	@Inject(DI.redis)
 	// 	private redisClient: Redis.Redis,
 
