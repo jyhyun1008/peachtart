@@ -264,16 +264,12 @@ export class ApPersonService implements OnModuleInit {
 			returns the special {id:null}&c value, and we return those
 		*/
 		return {
-			...( avatar ? {
-				avatarId: avatar.id,
-				avatarUrl: avatar.url ? this.driveFileEntityService.getPublicUrl(avatar, 'avatar') : null,
-				avatarBlurhash: avatar.blurhash,
-			} : {}),
-			...( banner ? {
-				bannerId: banner.id,
-				bannerUrl: banner.url ? this.driveFileEntityService.getPublicUrl(banner) : null,
-				bannerBlurhash: banner.blurhash,
-			} : {}),
+			avatarId: avatar?.id ?? null,
+			bannerId: banner?.id ?? null,
+			avatarUrl: avatar ? this.driveFileEntityService.getPublicUrl(avatar, 'avatar') : null,
+			bannerUrl: banner ? this.driveFileEntityService.getPublicUrl(banner) : null,
+			avatarBlurhash: avatar?.blurhash ?? null,
+			bannerBlurhash: banner?.blurhash ?? null,
 		};
 	}
 
