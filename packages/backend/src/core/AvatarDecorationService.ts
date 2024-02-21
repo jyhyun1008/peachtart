@@ -16,7 +16,7 @@ import { ModerationLogService } from '@/core/ModerationLogService.js';
 import { HttpRequestService } from "@/core/HttpRequestService.js";
 import { appendQuery, query } from '@/misc/prelude/url.js';
 import type { Config } from '@/config.js';
-import {IsNull} from "typeorm";
+import { IsNull } from "typeorm";
 
 @Injectable()
 export class AvatarDecorationService implements OnApplicationShutdown {
