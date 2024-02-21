@@ -36,13 +36,6 @@ import { trackPromise } from '@/misc/promise-tracker.js';
 
 const mutedWordsCache = new MemorySingleCache<{ mutedWords: UserProfilesRepository['hardMutedWords']; }[]>(1000 * 60 * 5);
 
-type MinimumUser = {
-	id: UsersRepository['id'];
-	host: UsersRepository['host'];
-	username: UsersRepository['username'];
-	uri: UsersRepository['uri'];
-};
-
 const FALLBACK = '\u2764';
 const PER_NOTE_REACTION_USER_PAIR_CACHE_MAX = 16;
 
@@ -430,35 +423,35 @@ export class ReactionService {
 				host,
 			};
 
-						// Word mute
-						mutedWordsCache.fetch(() => this.userProfilesRepository.find({
-							where: {
-								userId: note.userId,
-							},
-							select: ['mutedWords'],
-						})).then(us => {
-							for (const u of us) {
+						// // Word mute
+						// mutedWordsCache.fetch(() => this.userProfilesRepository.find({
+						// 	where: {
+						// 		userId: note.userId,
+						// 	},
+						// 	select: ['hardMutedWords'],
+						// })).then(us => {
+						// 	for (const u of us) {
 
-									if (u.mutedWords.length > 0) {
+						// 			if (u.mutedWords.length > 0) {
 
-										const matched = u.mutedWords.some(word => {
-											if (Array.isArray(word)) {
-													return word.every(keyword => name.includes(keyword));
-											} else {
-													return false;
-											}
-										});
+						// 				const matched = u.mutedWords.some(word => {
+						// 					if (Array.isArray(word)) {
+						// 							return word.every(keyword => name.includes(keyword));
+						// 					} else {
+						// 							return false;
+						// 					}
+						// 				});
 
-										if (matched) {
-											reaction = {
-												reaction: FALLBACK,
-												name: undefined,
-												host: undefined,
-											};;
-										}
-									}
-							}
-						});
+						// 				if (matched) {
+						// 					reaction = {
+						// 						reaction: FALLBACK,
+						// 						name,
+						// 						host,
+						// 					};;
+						// 				}
+						// 			}
+						// 	}
+						// });
 
 			return reaction;
 		}
