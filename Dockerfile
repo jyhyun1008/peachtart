@@ -92,7 +92,7 @@ COPY --chown=peachtart:peachtart --from=native-builder /peachtart/packages/missk
 COPY --chown=peachtart:peachtart --from=native-builder /peachtart/packages/misskey-reversi/built ./packages/misskey-reversi/built
 COPY --chown=peachtart:peachtart --from=native-builder /peachtart/packages/misskey-bubble-game/built ./packages/misskey-bubble-game/built
 COPY --chown=peachtart:peachtart --from=native-builder /peachtart/packages/backend/built ./packages/backend/built
-COPY --chown=peachtart:peachtart --from=native-builder /peachtart/fluent-emojis /misskey/fluent-emojis
+COPY --chown=peachtart:peachtart --from=native-builder /peachtart/fluent-emojis /peachtart/fluent-emojis
 COPY --chown=peachtart:peachtart . ./
 
 ENV LD_PRELOAD=/usr/local/lib/libjemalloc.so

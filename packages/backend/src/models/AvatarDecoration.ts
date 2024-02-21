@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: syuilo and other misskey, cherrypick contributors
+ * SPDX-FileCopyrightText: syuilo and other misskey contributors
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
@@ -38,12 +38,12 @@ export class MiAvatarDecoration {
 	public roleIdsThatCanBeUsedThisDecoration: string[];
 
 	@Column('varchar', {
-		length: 32, nullable: true,
+		length: 32,
 	})
-	public remoteId: string | null;
+	public remoteId: string;
 
 	@Column('varchar', {
-		length: 128, nullable: true,
+		length: 128, nullable: true
 	})
 	public host: string | null;
 }
