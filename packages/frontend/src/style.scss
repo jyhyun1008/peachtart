@@ -437,7 +437,6 @@ rt {
 ._monospace {
 	font-family: 'NeoDunggeunmo Code', Fira code, Fira Mono, Consolas, Menlo, Courier, monospace !important;
 	font-feature-settings: 'calt' on;
-	font-size: 18px;
 }
 
 ._code {
@@ -445,19 +444,20 @@ rt {
 	background: #2d2d2d;
 	font-feature-settings: 'calt' on;
 	color: #ccc;
-	font-size: 18px;
 	line-height: 1.5;
 	padding: 5px;
 }
 
 code {
 	font-family: 'NeoDunggeunmo Code', Fira code, Fira Mono, Consolas, Menlo, Courier, monospace !important;
-	font-size: 18px;
 }
 
 pre {
 	font-family: 'NeoDunggeunmo Code', Fira code, Fira Mono, Consolas, Menlo, Courier, monospace !important;
-	font-size: 18px;
+}
+
+.xuT74 {
+font-family: 'NeoDunggeunmo Code' !important;
 }
 
 .prism-editor__textarea:focus {
