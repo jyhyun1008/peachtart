@@ -253,10 +253,8 @@ export function createAiScriptEnv(opts) {
 			return values.STR(nyaize(text.value));
 		}),
 		'Mk:ioConnect': values.FN_NATIVE(([url]) => {
-			setTimeout(() => {
-				utils.assertString(url);
-				socket = io.connect(url.value);
-			}, 1000);
+			utils.assertString(url);
+			socket = io.connect(url.value, {transports: ['websocket']});
 		}),
 		'Mk:socketEmit': values.FN_NATIVE(([event, param]) => {
 			utils.assertString(event);
