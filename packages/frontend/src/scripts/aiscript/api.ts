@@ -12,10 +12,11 @@ import { customEmojis } from '@/custom-emojis.js';
 import { url, lang } from '@/config.js';
 import { nyaize } from '@/scripts/nyaize.js';
 import * as sound from '@/scripts/sound.js';
+import { io } from "socket.io-client";
 
 // 사전 선언.
 
-var socket
+var socket = io();
 
 //var latitude = 0, longitude = 0
 //navigator.geolocation.getCurrentPosition(function(pos) {
