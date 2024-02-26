@@ -240,6 +240,11 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 						style = `animation: mfm-rainbow ${speed} linear infinite; animation-delay: ${delay};`;
 						break;
 					}
+     case 'gray': {
+return h('span', {
+class: '_mfm_gray',
+}, genEl(token.children, scale));
+}
 					case 'sparkle': {
 						if (!useAnim) {
 							return genEl(token.children, scale);
