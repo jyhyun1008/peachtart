@@ -108,7 +108,7 @@ export const DEFAULT_SERVER_ERROR_IMAGE_URL = 'https://peachtart2.s3.ap-northeas
 export const DEFAULT_NOT_FOUND_IMAGE_URL = 'https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/7139c9d2-5906-4337-9c79-035295eb5859.webp';
 export const DEFAULT_INFO_IMAGE_URL = 'https://peachtart2.s3.ap-northeast-1.amazonaws.com/tart/3be24f47-92fa-42de-bff7-f55b324c5bde.webp';
 
-export const MFM_TAGS = ['tada', 'jelly', 'twitch', 'shake', 'spin', 'jump', 'bounce', 'flip', 'x2', 'x3', 'x4', 'scale', 'position', 'fg', 'bg', 'border', 'font', 'blur', 'rainbow', 'sparkle', 'rotate', 'ruby', 'unixtime'];
+export const MFM_TAGS = ['tada', 'jelly', 'twitch', 'shake', 'spin', 'jump', 'bounce', 'flip', 'x2', 'x3', 'x4', 'scale', 'position', 'fg', 'bg', 'border', 'font', 'blur', 'rainbow', 'gray', 'sparkle', 'rotate', 'ruby', 'unixtime'];
 export const MFM_PARAMS: Record<typeof MFM_TAGS[number], string[]> = {
 	tada: ['speed=', 'delay='],
 	jelly: ['speed=', 'delay='],
@@ -128,6 +128,7 @@ export const MFM_PARAMS: Record<typeof MFM_TAGS[number], string[]> = {
   border: ['width=', 'style=', 'color=', 'radius=', 'noclip'],
 	font: ['serif', 'monospace', 'cursive', 'fantasy', 'emoji', 'math'],
 	blur: [],
+ gray: [],
 	rainbow: ['speed=', 'delay='],
 	rotate: ['deg='],
 	ruby: [],
