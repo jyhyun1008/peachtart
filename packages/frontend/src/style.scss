@@ -846,3 +846,13 @@ table a {
 .banner .thumbnail {
 	border-radius: 10px 10px 0 0 !important;
 }
+
+.x48yH .xagin,.xpUJO .xagin,.main .xagin {
+  height: 2em;
+  vertical-align: middle;
+  transition: transform .2s ease;
+}
+
+.x48yH .xagin:hover,.xpUJO .xagin:hover,.main .xagin:hover {
+    transform: scale(1.2);
+}
