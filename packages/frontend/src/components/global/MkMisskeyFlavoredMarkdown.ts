@@ -434,6 +434,7 @@ class: '_mfm_gray',
 						useOriginalSize: scale >= 2.5,
 						menu: props.enableEmojiMenu,
 						menuReaction: props.enableEmojiMenuReaction,
+						fallbackToImage: false,
 					})];
 				} else {
 					// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
