@@ -40,6 +40,7 @@ export type AsUiText = AsUiComponentBase & {
 	color?: string;
 	font?: 'serif' | 'sans-serif' | 'monospace';
 	className?: string;
+	img?: string;
 };
 
 export type AsUiMfm = AsUiComponentBase & {
@@ -155,7 +156,6 @@ export type AsUiHTML = AsUiComponentBase & {
 	className?: string;
 };
 
-export type AsUiComponent = AsUiRoot | AsUiContainer | AsUiText | AsUiMfm | AsUiButton | AsUiButtons | AsUiSwitch | AsUiTextarea | AsUiTextInput | AsUiNumberInput | AsUiSelect | AsUiFolder | AsUiPostFormButton | AsUiCustomChart | AsUiHTML;
 export type AsUiPostForm = AsUiComponentBase & {
 	type: 'postForm';
 	form?: {
@@ -164,8 +164,7 @@ export type AsUiPostForm = AsUiComponentBase & {
 	};
 };
 
-export type AsUiComponent = AsUiRoot | AsUiContainer | AsUiText | AsUiMfm | AsUiButton | AsUiButtons | AsUiSwitch | AsUiTextarea | AsUiTextInput | AsUiNumberInput | AsUiSelect | AsUiFolder | AsUiPostFormButton | AsUiPostForm | AsUiHTML;
-
+export type AsUiComponent = AsUiRoot | AsUiContainer | AsUiText | AsUiMfm | AsUiButton | AsUiButtons | AsUiSwitch | AsUiTextarea | AsUiTextInput | AsUiNumberInput | AsUiSelect | AsUiFolder | AsUiPostFormButton | AsUiPostForm | AsUiCustomChart | AsUiHTML;
 export function patch(id: string, def: values.Value, call: (fn: values.VFn, args: values.Value[]) => Promise<values.Value>) {
 	// TODO
 }
@@ -243,6 +242,8 @@ function getTextOptions(def: values.Value | undefined): Omit<AsUiText, 'id' | 't
 	if (font) utils.assertString(font);
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
+	const img = def.value.get('img');
+	if (img) utils.assertString(img);
 
 	return {
 		text: text?.value,
@@ -251,6 +252,7 @@ function getTextOptions(def: values.Value | undefined): Omit<AsUiText, 'id' | 't
 		color: color?.value,
 		font: font?.value,
 		className: className?.value ?? 'MkText',
+		img: img?.value ?? 'none',
 	};
 }
 

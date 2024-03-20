@@ -848,6 +848,14 @@ input:hover {
 	overflow: hidden;
 }
 
+.fullscreen {
+	position:fixed;
+	height: 100vh;
+	width: 100vw;
+	z-index: 9999999;
+	overflow: hidden;
+}
+
 .scollable {
 	overflow-y: auto !important;
 }
