@@ -252,7 +252,7 @@ function getTextOptions(def: values.Value | undefined): Omit<AsUiText, 'id' | 't
 		color: color?.value,
 		font: font?.value,
 		className: className?.value ?? 'MkText',
-		img: img?.value ?? 'none',
+		img: 'url('+img?.value+')' ?? 'none',
 	};
 }
 
