@@ -850,8 +850,8 @@ input:hover {
 
 .fullscreen {
 	position:fixed;
-    min-height: 100vh;
-    max-height: 100vh;
+    min-height: calc(100vh - 50px);
+    max-height: calc(100vh - 50px);
     width: calc(100% + 96px + 64px);
     top: calc(-24px - 32px);
     left: calc(-48px - 32px);
