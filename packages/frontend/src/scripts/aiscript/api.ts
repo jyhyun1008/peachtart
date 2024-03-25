@@ -140,7 +140,7 @@ export function createAiScriptEnv(opts) {
 		}),
 		'Mk:audio': values.FN_NATIVE(([file]) => {
 			utils.assertString(file);
-			sound.playUrl(file.value, {volume: 1});
+			sound.playMisskeySfxFile(file.value);
 			//const audio = sound.playUrl(file.value, {volume: 1});
 			//audio.play();
 		}),
