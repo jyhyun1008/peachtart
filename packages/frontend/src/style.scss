@@ -871,6 +871,11 @@ input:hover {
 	justify-content: space-between;
 }
 
+.fullscreen > div {
+    align-self: stretch;
+    flex: auto;
+}
+
 @media (max-width: 500px) {
 	.fullscreen {
 		position:fixed;
