@@ -848,6 +848,16 @@ input:hover {
 	overflow: hidden;
 }
 
+.noheight {
+	height: 0 !important;
+	max-height: 0 !important;
+  display: block;
+  line-height: 1rem;
+}
+.nogap {
+    gap: 0 !important;
+}
+
 .fullscreen {
 	position:fixed;
     min-height: calc(100vh - 50px);
@@ -858,6 +868,7 @@ input:hover {
 	z-index: 9999999;
 	overflow: hidden;
 	background-color: white;
+	justify-content: space-between;
 }
 
 @media (max-width: 500px) {

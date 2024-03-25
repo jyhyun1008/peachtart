@@ -30,6 +30,7 @@ export type AsUiContainer = AsUiComponentBase & {
 	rounded?: boolean;
 	hidden?: boolean;
 	className?: string;
+	height? : string;
 };
 
 export type AsUiText = AsUiComponentBase & {
@@ -209,6 +210,8 @@ function getContainerOptions(def: values.Value | undefined): Omit<AsUiContainer,
 	if (hidden) utils.assertBoolean(hidden);
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
+	const height = def.value.get('height');
+	if (height) = utils.assertString(height);
 
 	return {
 		children: children ? children.value.map(v => {
@@ -225,6 +228,7 @@ function getContainerOptions(def: values.Value | undefined): Omit<AsUiContainer,
 		rounded: rounded?.value,
 		hidden: hidden?.value,
 		className: className?.value ?? 'MkContainer',
+		height: height?.value ?? 'auto',
 	};
 }
 
@@ -256,7 +260,7 @@ function getTextOptions(def: values.Value | undefined): Omit<AsUiText, 'id' | 't
 		font: font?.value,
 		className: className?.value ?? 'MkText',
 		img: img?.value ?? 'none',
-		height: height?.value ?? '300px',
+		height: height?.value ?? 'auto',
 	};
 }
 
