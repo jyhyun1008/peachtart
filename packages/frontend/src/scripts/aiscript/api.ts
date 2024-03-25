@@ -147,8 +147,6 @@ export function createAiScriptEnv(opts) {
 		'Mk:audioUrl': values.FN_NATIVE(([file]) => {
 			utils.assertString(file);
 			sound.playUrl(file.value, {volume: 1});
-			//const audio = sound.playUrl(file.value, {volume: 1});
-			//audio.play();
 		}),
 		'Math:toFixed': values.FN_NATIVE(([num, tofixed]) => {
 			utils.assertNumber(num);
