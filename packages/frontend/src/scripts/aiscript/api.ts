@@ -95,7 +95,7 @@ export function createAiScriptEnv(opts) {
 		'Mk:elementWidth': values.FN_NATIVE(([str]) => {
 			utils.assertString(str);
 			var element = document.querySelector<HTMLElement>('.'+str.value)
-			if (element) {
+			if (element != null) {
 				return values.NUM(element.offsetWidth)
 			} else {
 				return values.NUM(0)
@@ -104,7 +104,7 @@ export function createAiScriptEnv(opts) {
 		'Mk:elementHeight': values.FN_NATIVE(([str]) => {
 			utils.assertString(str);
 			var element = document.querySelector<HTMLElement>('.'+str.value)
-			if (element) {
+			if (element != null) {
 				return values.NUM(element.offsetHeight)
 			} else {
 				return values.NUM(0)
