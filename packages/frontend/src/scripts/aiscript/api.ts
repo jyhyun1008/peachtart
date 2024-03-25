@@ -16,7 +16,6 @@ import * as sound from '@/scripts/sound.js';
 // 사전 선언.
 
 var socket
-var fscreen = document.querySelector<HTMLElement>('.fullscreen')
 
 //var latitude = 0, longitude = 0
 //navigator.geolocation.getCurrentPosition(function(pos) {
@@ -63,8 +62,8 @@ export function createAiScriptEnv(opts) {
 		CURRENT_URL: values.STR(window.location.href),
 		LOCALE: values.STR(lang),
 		SERVER_URL: values.STR(url),
-		FULLSCREEN_W: fscreen ? values.NUM(fscreen.offsetWidth): values.num(0),
-		FULLSCREEN_H: fscreen ? values.NUM(fscreen.offsetHeight): values.num(0),
+		FULLSCREEN_W: document.querySelector<HTMLElement>('.fullscreen') ? values.NUM(document.querySelector<HTMLElement>('.fullscreen').offsetWidth): values.num(0),
+		FULLSCREEN_H: document.querySelector<HTMLElement>('.fullscreen') ? values.NUM(document.querySelector<HTMLElement>('.fullscreen').offsetHeight): values.num(0),
 		'Mk:clipboard': values.FN_NATIVE(([str]) => {
 			utils.assertString(str);
 			navigator.clipboard.writeText(str.value)
