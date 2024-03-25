@@ -140,8 +140,9 @@ export function createAiScriptEnv(opts) {
 		}),
 		'Mk:audio': values.FN_NATIVE(([file]) => {
 			utils.assertString(file);
-			const audio = sound.setVolume(sound.getAudio(file.value), 1);
-			audio.play();
+			sound.playUrl(file.value, {volume: 1});
+			//const audio = sound.playUrl(file.value, {volume: 1});
+			//audio.play();
 		}),
 		'Math:toFixed': values.FN_NATIVE(([num, tofixed]) => {
 			utils.assertNumber(num);
