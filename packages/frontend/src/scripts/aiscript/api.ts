@@ -62,8 +62,6 @@ export function createAiScriptEnv(opts) {
 		CURRENT_URL: values.STR(window.location.href),
 		LOCALE: values.STR(lang),
 		SERVER_URL: values.STR(url),
-		FULLSCREEN_W: document.querySelector<HTMLElement>('.fullscreen') ? values.NUM(document.querySelector<HTMLElement>('.fullscreen').offsetWidth): values.NUM(0),
-		FULLSCREEN_H: document.querySelector<HTMLElement>('.fullscreen') ? values.NUM(document.querySelector<HTMLElement>('.fullscreen').offsetHeight): values.NUM(0),
 		'Mk:clipboard': values.FN_NATIVE(([str]) => {
 			utils.assertString(str);
 			navigator.clipboard.writeText(str.value)
@@ -93,6 +91,24 @@ export function createAiScriptEnv(opts) {
 			utils.assertString(str);
 			var regEx = new RegExp('\(https\:\/\/([^\)]+)\)', 'gm');
 			return values.STR(str.value.replace(regEx, encodeURI))
+		}),
+		'Mk:elementWidth': values.FN_NATIVE(([str]) => {
+			utils.assertString(str);
+			var element = document.querySelector<HTMLElement>('.'+str.value)
+			if (element) {
+				return values.NUM(element.offsetWidth)
+			} else {
+				return values.NUM(0)
+			}
+		}),
+		'Mk:elementHeight': values.FN_NATIVE(([str]) => {
+			utils.assertString(str);
+			var element = document.querySelector<HTMLElement>('.'+str.value)
+			if (element) {
+				return values.NUM(element.offsetHeight)
+			} else {
+				return values.NUM(0)
+			}
 		}),
 		'Str:encodeURI': values.FN_NATIVE(([url]) => {
 			utils.assertString(url);
