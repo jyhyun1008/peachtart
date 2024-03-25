@@ -41,6 +41,7 @@ export type AsUiText = AsUiComponentBase & {
 	font?: 'serif' | 'sans-serif' | 'monospace';
 	className?: string;
 	img?: string;
+	height?: number;
 };
 
 export type AsUiMfm = AsUiComponentBase & {
@@ -244,6 +245,8 @@ function getTextOptions(def: values.Value | undefined): Omit<AsUiText, 'id' | 't
 	if (className) utils.assertString(className);
 	const img = def.value.get('img');
 	if (img) utils.assertString(img);
+	const height = def.value.get('height');
+	if (height) utils.assertNumber(height);
 
 	return {
 		text: text?.value,
@@ -253,6 +256,7 @@ function getTextOptions(def: values.Value | undefined): Omit<AsUiText, 'id' | 't
 		font: font?.value,
 		className: className?.value ?? 'MkText',
 		img: img?.value ?? 'none',
+		height: height?.value ?? 300,
 	};
 }
 
