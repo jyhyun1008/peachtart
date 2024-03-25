@@ -211,7 +211,7 @@ function getContainerOptions(def: values.Value | undefined): Omit<AsUiContainer,
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 	const height = def.value.get('height');
-	if (height) = utils.assertString(height);
+	if (height) utils.assertString(height);
 
 	return {
 		children: children ? children.value.map(v => {
