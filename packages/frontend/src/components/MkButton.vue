@@ -12,7 +12,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 	:name="name"
 	:value="value"
 	@click="emit('click', $event)"
-	@touchend="emit('click', $event)"
+	@touchstart="emit('click', $event)"
 	@mousedown="onMousedown"
 >
 	<div ref="ripples" :class="$style.ripples" :data-children-class="$style.ripple"></div>
