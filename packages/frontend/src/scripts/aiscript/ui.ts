@@ -441,13 +441,13 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 			return {
 				text: text.value,
 				onClick: () => {
-					call(onClick, []);
+					if (onClick) call(onClick, []);
 				},
 				onTouchDown: () => {
-					call(onTouchDown, []);
+					if (onTouchDown) call(onTouchDown, []);
 				},
 				onTouchUp: () => {
-					call(onTouchUp, []);
+					if (onTouchUp) call(onTouchUp, []);
 				},
 				primary: primary?.value,
 				rounded: rounded?.value,
