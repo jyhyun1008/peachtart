@@ -424,11 +424,11 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 			const text = button.value.get('text');
 			utils.assertString(text);
 			const onClick = button.value.get('onClick');
-			utils.assertFunction(onClick);
+			if(onClick) utils.assertFunction(onClick);
 			const onTouchDown = button.value.get('onTouchDown');
-			utils.assertFunction(onTouchDown);
+			if(onTouchDown) utils.assertFunction(onTouchDown);
 			const onTouchUp = button.value.get('onTouchUp');
-			utils.assertFunction(onTouchUp);
+			if(onTouchUp) utils.assertFunction(onTouchUp);
 			const primary = button.value.get('primary');
 			if (primary) utils.assertBoolean(primary);
 			const rounded = button.value.get('rounded');
