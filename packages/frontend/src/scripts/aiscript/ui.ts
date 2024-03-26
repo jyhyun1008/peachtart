@@ -60,6 +60,8 @@ export type AsUiButton = AsUiComponentBase & {
 	type: 'button';
 	text?: string;
 	onClick?: () => void;
+	onTouchDown?: () => void;
+	onTouchUp?: () => void;
 	primary?: boolean;
 	rounded?: boolean;
 	disabled?: boolean;
@@ -377,6 +379,10 @@ function getButtonOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 	if (text) utils.assertString(text);
 	const onClick = def.value.get('onClick');
 	if (onClick) utils.assertFunction(onClick);
+	const onTouchDown = def.value.get('onTouchDown');
+	if (onTouchDown) utils.assertFunction(onTouchDown);
+	const onTouchUp = def.value.get('onTouchUp');
+	if (onTouchUp) utils.assertFunction(onTouchUp);
 	const primary = def.value.get('primary');
 	if (primary) utils.assertBoolean(primary);
 	const rounded = def.value.get('rounded');
@@ -390,6 +396,12 @@ function getButtonOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 		text: text?.value,
 		onClick: () => {
 			if (onClick) call(onClick, []);
+		},
+		onTouchDown: () => {
+			if (onTouchDown) call(onTouchDown, []);
+		},
+		onTouchUp: () => {
+			if (onTouchUp) call(onTouchUp, []);
 		},
 		primary: primary?.value,
 		rounded: rounded?.value,
@@ -413,6 +425,10 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 			utils.assertString(text);
 			const onClick = button.value.get('onClick');
 			utils.assertFunction(onClick);
+			const onTouchDown = button.value.get('onTouchDown');
+			utils.assertFunction(onTouchDown);
+			const onTouchUp = button.value.get('onTouchUp');
+			utils.assertFunction(onTouchUp);
 			const primary = button.value.get('primary');
 			if (primary) utils.assertBoolean(primary);
 			const rounded = button.value.get('rounded');
@@ -426,6 +442,12 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 				text: text.value,
 				onClick: () => {
 					call(onClick, []);
+				},
+				onTouchDown: () => {
+					call(onTouchDown, []);
+				},
+				onTouchUp: () => {
+					call(onTouchUp, []);
 				},
 				primary: primary?.value,
 				rounded: rounded?.value,
