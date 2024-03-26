@@ -105,7 +105,7 @@ export async function loadAudio(url: string, options?: { useCache?: boolean; }) 
 	let response: Response;
 
 	try {
-		response = await fetch(url);
+		response = await fetch(url, {mode: 'no-cors'});
 	} catch (err) {
 		return;
 	}
