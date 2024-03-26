@@ -62,6 +62,10 @@ export function createAiScriptEnv(opts) {
 		CURRENT_URL: values.STR(window.location.href),
 		LOCALE: values.STR(lang),
 		SERVER_URL: values.STR(url),
+		'Mk:console': values.FN_NATIVE(([str]) => {
+			utils.assertString(str);
+			console.log(str.value)
+		}),
 		'Mk:clipboard': values.FN_NATIVE(([str]) => {
 			utils.assertString(str);
 			navigator.clipboard.writeText(str.value)
