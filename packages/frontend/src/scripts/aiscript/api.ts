@@ -146,7 +146,7 @@ export function createAiScriptEnv(opts) {
 		}),
 		'Mk:audioUrl': values.FN_NATIVE(([file]) => {
 			utils.assertString(file);
-			document.querySelector<HTMLElement>('body').innerHTML += '<audio style="display:none;"><source src="'+file.value+'"></audio>'
+			document.querySelector<HTMLElement>('.actions').innerHTML += '<audio style="display:none;"><source src="'+file.value+'"></audio>'
 			var audio = document.querySelector("audio") as HTMLAudioElement;
 			audio.play()
 		}),
