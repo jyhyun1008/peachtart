@@ -146,7 +146,9 @@ export function createAiScriptEnv(opts) {
 		}),
 		'Mk:audioUrl': values.FN_NATIVE(([file]) => {
 			utils.assertString(file);
-			sound.playUrl(file.value, {volume: 1});
+			document.querySelector<HTMLElement>('body').innerHTML += '<video style="display:none;" controls autoplay name="media"><source src="'+file.value+'" type="audio/mpeg" class="audio"></video>'
+			var audio = document.querySelector(".audio") as HTMLAudioElement;
+			audio.play()
 		}),
 		'Math:toFixed': values.FN_NATIVE(([num, tofixed]) => {
 			utils.assertNumber(num);
