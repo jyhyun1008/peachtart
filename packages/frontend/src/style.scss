@@ -791,6 +791,13 @@ input:hover {
 	gap: 12px;
 }
 
+.displayCenter {
+	display: flex;
+	flex-direction: row !important;
+	justify-content: center;
+	gap: 12px;
+}
+
 .displayFlexEvenWidth {
 	display: flex;
 	flex-direction: row !important;
