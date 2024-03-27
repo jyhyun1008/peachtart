@@ -62,6 +62,8 @@ const props = withDefaults(defineProps<{
 
 const emit = defineEmits<{
 	(ev: 'click', payload: MouseEvent): void;
+	(ev: 'touchstart', payload: TouchEvent): void;
+	(ev: 'touchend', payload: TouchEvent): void;
 }>();
 
 const el = shallowRef<HTMLElement | null>(null);
