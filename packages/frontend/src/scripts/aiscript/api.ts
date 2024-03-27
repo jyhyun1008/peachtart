@@ -156,7 +156,9 @@ export function createAiScriptEnv(opts) {
 			utils.assertString(file);
 			document.querySelector<HTMLElement>('audio').innerHTML = '<source src="'+file.value+'">'
 			var audio = document.querySelector("audio") as HTMLAudioElement;
-			audio.play()
+			setTimeout(() => {
+				audio.play()
+			}, 500);
 		}),
 		'Math:toFixed': values.FN_NATIVE(([num, tofixed]) => {
 			utils.assertNumber(num);
