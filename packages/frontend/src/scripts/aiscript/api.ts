@@ -150,7 +150,7 @@ export function createAiScriptEnv(opts) {
 		}),
 		'Mk:addAudio': values.FN_NATIVE(([className]) => {
 			utils.assertString(className);
-			document.querySelector<HTMLElement>('.'+className).innerHTML += '<audio style="display:none;"></audio>'
+			document.querySelector<HTMLElement>('.'+className.value).innerHTML += '<audio style="display:none;"></audio>'
 		}),
 		'Mk:audioUrl': values.FN_NATIVE(([file]) => {
 			utils.assertString(file);
