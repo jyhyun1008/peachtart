@@ -148,13 +148,13 @@ export function createAiScriptEnv(opts) {
 			//const audio = sound.playUrl(file.value, {volume: 1});
 			//audio.play();
 		}),
+		'Mk:addAudio': values.FN_NATIVE(([className]) => {
+			utils.assertString(className);
+			document.querySelector<HTMLElement>('.'+className).innerHTML += '<audio style="display:none;"></audio>'
+		}),
 		'Mk:audioUrl': values.FN_NATIVE(([file]) => {
 			utils.assertString(file);
-			if (document.querySelector("audio") == values.NULL) {
-				document.querySelector<HTMLElement>('.actions').innerHTML += '<audio style="display:none;"><source src="'+file.value+'"></audio>'
-			} else {
-				document.querySelector<HTMLElement>('audio').innerHTML == '<source src="'+file.value+'">'
-			}
+			document.querySelector<HTMLElement>('audio').innerHTML = '<source src="'+file.value+'">'
 			var audio = document.querySelector("audio") as HTMLAudioElement;
 			audio.play()
 		}),
