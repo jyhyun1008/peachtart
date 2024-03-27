@@ -892,6 +892,11 @@ input:hover {
 		top: -24px;
 		left: -24px;
 	}
+
+	.mk-app {
+		max-height: calc(100vh - 100px);
+		min-height: calc(100vh - 100px);
+	}
 }
 
 .scollable {
