@@ -61,6 +61,7 @@ export type AsUiButton = AsUiComponentBase & {
 	text?: string;
 	onClick?: () => void;
 	onTouchDown?: () => void;
+	onTouchMove?: () => void;
 	onTouchUp?: () => void;
 	primary?: boolean;
 	rounded?: boolean;
@@ -381,6 +382,8 @@ function getButtonOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 	if (onClick) utils.assertFunction(onClick);
 	const onTouchDown = def.value.get('onTouchDown');
 	if (onTouchDown) utils.assertFunction(onTouchDown);
+	const onTouchMove = def.value.get('onTouchMove');
+	if (onTouchMove) utils.assertFunction(onTouchMove);
 	const onTouchUp = def.value.get('onTouchUp');
 	if (onTouchUp) utils.assertFunction(onTouchUp);
 	const primary = def.value.get('primary');
@@ -399,6 +402,9 @@ function getButtonOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 		},
 		onTouchDown: () => {
 			if (onTouchDown) call(onTouchDown, []);
+		},
+		onTouchMove: () => {
+			if (onTouchMove) call(onTouchMove, []);
 		},
 		onTouchUp: () => {
 			if (onTouchUp) call(onTouchUp, []);
@@ -427,6 +433,8 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 			if(onClick) utils.assertFunction(onClick);
 			const onTouchDown = button.value.get('onTouchDown');
 			if(onTouchDown) utils.assertFunction(onTouchDown);
+			const onTouchMove = button.value.get('onTouchMove');
+			if(onTouchMove) utils.assertFunction(onTouchMove);
 			const onTouchUp = button.value.get('onTouchUp');
 			if(onTouchUp) utils.assertFunction(onTouchUp);
 			const primary = button.value.get('primary');
@@ -445,6 +453,9 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 				},
 				onTouchDown: () => {
 					if (onTouchDown) call(onTouchDown, []);
+				},
+				onTouchMove: () => {
+					if (onTouchMove) call(onTouchMove, []);
 				},
 				onTouchUp: () => {
 					if (onTouchUp) call(onTouchUp, []);

@@ -13,6 +13,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 	:value="value"
 	@click="emit('click', $event)"
 	@touchstart="emit('touchstart', $event)"
+	@touchmove="emit('touchmove', $event)"
 	@touchend="emit('touchend', $event)"
 	@mousedown="onMousedown"
 >
@@ -63,6 +64,7 @@ const props = withDefaults(defineProps<{
 const emit = defineEmits<{
 	(ev: 'click', payload: MouseEvent): void;
 	(ev: 'touchstart', payload: TouchEvent): void;
+	(ev: 'touchmove', payload: TouchEvent): void;
 	(ev: 'touchend', payload: TouchEvent): void;
 }>();
 
