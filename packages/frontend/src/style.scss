@@ -885,17 +885,16 @@ input:hover {
 
 @media (max-width: 500px) {
 	.fullscreen {
-		position:fixed;
-		min-height: calc(100vh - 180px);
-		max-height: calc(100vh - 180px);
-		width: calc(100% + 48px);
-		top: -24px;
-		left: -24px;
+		min-height: calc(100dvh - 135px);
+		max-height: calc(100dvh - 135px);
+		width: calc(100% + 24px);
+		top: -12px;
+		left: -12px;
 	}
 
 	.mk-app {
-		max-height: calc(100vh - 120px) !important;
-		min-height: calc(100vh - 120px) !important;
+		max-height: calc(100dvh - 120px) !important;
+		min-height: calc(100dvh - 120px) !important;
 	}
 }
 
