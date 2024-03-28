@@ -157,7 +157,6 @@ export type AsUiCustomChart = AsUiComponentBase & {
 export type AsUiHTML = AsUiComponentBase & {
 	type: 'HTML';
 	HTML?: string;
-	css?: string;
 	className?: string;
 };
 
@@ -653,14 +652,11 @@ function getHTMLOptions(def: values.Value | undefined): Omit<AsUiMfm, 'id' | 'ty
 
 	const HTML = def.value.get('HTML');
 	if (HTML) utils.assertString(HTML);
-	const css = def.value.get('css');
-	if (css) utils.assertString(css);
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 
 	return {
 		HTML: HTML?.value,
-		css: css?.value,
 		className: className?.value ?? 'MkHTML',
 	};
 }

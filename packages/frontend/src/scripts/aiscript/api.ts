@@ -152,13 +152,12 @@ export function createAiScriptEnv(opts) {
 			utils.assertString(className);
 			document.querySelector<HTMLElement>('.'+className.value).innerHTML += '<audio style="display:none;"></audio>'
 		}),
-		'Mk:audioUrl': values.FN_NATIVE(([file]) => {
+		'Mk:audioUrl': values.FN_NATIVE(async([file]) => {
 			utils.assertString(file);
 			document.querySelector<HTMLElement>('audio').innerHTML = '<source src="'+file.value+'">'
 			var audio = document.querySelector("audio") as HTMLAudioElement;
-			setTimeout(() => {
-				audio.play()
-			}, 500);
+			await audio.play()
+			return values.NUM(new Date())
 		}),
 		'Math:toFixed': values.FN_NATIVE(([num, tofixed]) => {
 			utils.assertNumber(num);
