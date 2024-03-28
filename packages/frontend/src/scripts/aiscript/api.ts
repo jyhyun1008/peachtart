@@ -159,7 +159,7 @@ export function createAiScriptEnv(opts) {
 			await audio.play()
 			return values.NUM(new Date())
 		}),
-		'Mk:addCss': values.FN_NATIVE(async([css]) => {
+		'Mk:addCss': values.FN_NATIVE(([css]) => {
 			utils.assertString(css);
 			document.querySelector<HTMLElement>('head').innerHTML += '<style>'+css.value+'</style>'
 		}),
