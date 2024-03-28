@@ -233,7 +233,7 @@ function getContainerOptions(def: values.Value | undefined): Omit<AsUiContainer,
 	const height = def.value.get('height');
 	if (height) utils.assertString(height);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertArray(customCss);
+	if (customCss) utils. assertString(customCss);
 
 	return {
 		children: children ? children.value.map(v => {
@@ -252,7 +252,7 @@ function getContainerOptions(def: values.Value | undefined): Omit<AsUiContainer,
 		className: className?.value ?? 'MkContainer',
 		img: img?.value ?? 'none',
 		height: height?.value ?? 'auto',
-		customCss: customCss?.value.join()+',' ?? '',
+		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -276,7 +276,7 @@ function getTextOptions(def: values.Value | undefined): Omit<AsUiText, 'id' | 't
 	const height = def.value.get('height');
 	if (height) utils.assertString(height);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertArray(customCss);
+	if (customCss) utils. assertString(customCss);
 
 	return {
 		text: text?.value,
@@ -287,7 +287,7 @@ function getTextOptions(def: values.Value | undefined): Omit<AsUiText, 'id' | 't
 		className: className?.value ?? 'MkText',
 		img: img?.value ?? 'none',
 		height: height?.value ?? 'auto',
-		customCss: customCss?.value.join()+',' ?? '',
+		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -309,7 +309,7 @@ function getMfmOptions(def: values.Value | undefined, call: (fn: values.VFn, arg
 	const onClickEv = def.value.get('onClickEv');
 	if (onClickEv) utils.assertFunction(onClickEv);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertArray(customCss);
+	if (customCss) utils. assertString(customCss);
 
 	return {
 		text: text?.value,
@@ -321,7 +321,7 @@ function getMfmOptions(def: values.Value | undefined, call: (fn: values.VFn, arg
 		onClickEv: (evId: string) => {
 			if (onClickEv) call(onClickEv, [values.STR(evId)]);
 		},
-		customCss: customCss?.value.join()+',' ?? '',
+		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -339,7 +339,7 @@ function getTextInputOptions(def: values.Value | undefined, call: (fn: values.VF
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertArray(customCss);
+	if (customCss) utils. assertString(customCss);
 
 	return {
 		onInput: (v) => {
@@ -349,7 +349,7 @@ function getTextInputOptions(def: values.Value | undefined, call: (fn: values.VF
 		label: label?.value,
 		caption: caption?.value,
 		className: className?.value ?? 'MkTextInput',
-		customCss: customCss?.value.join()+',' ?? '',
+		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -367,7 +367,7 @@ function getTextareaOptions(def: values.Value | undefined, call: (fn: values.VFn
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertArray(customCss);
+	if (customCss) utils. assertString(customCss);
 
 	return {
 		onInput: (v) => {
@@ -377,7 +377,7 @@ function getTextareaOptions(def: values.Value | undefined, call: (fn: values.VFn
 		label: label?.value,
 		caption: caption?.value,
 		className: className?.value ?? 'MkTextArea',
-		customCss: customCss?.value.join()+',' ?? '',
+		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -395,7 +395,7 @@ function getNumberInputOptions(def: values.Value | undefined, call: (fn: values.
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertArray(customCss);
+	if (customCss) utils. assertString(customCss);
 
 	return {
 		onInput: (v) => {
@@ -405,7 +405,7 @@ function getNumberInputOptions(def: values.Value | undefined, call: (fn: values.
 		label: label?.value,
 		caption: caption?.value,
 		className: className?.value ?? 'MkNumberInput',
-		customCss: customCss?.value.join()+',' ?? '',
+		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -431,7 +431,7 @@ function getButtonOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertArray(customCss);
+	if (customCss) utils. assertString(customCss);
 
 	return {
 		text: text?.value,
@@ -451,7 +451,7 @@ function getButtonOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 		rounded: rounded?.value,
 		disabled: disabled?.value,
 		className: className?.value ?? 'MkButton',
-		customCss: customCss?.value.join()+',' ?? '',
+		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -462,7 +462,7 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 	if (buttons) utils.assertArray(buttons);
 	const className = def.value.get('className');
 	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertArray(customCss);
+	if (customCss) utils. assertString(customCss);
 	if (className) utils.assertString(className);
 
 	return {
@@ -487,7 +487,7 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 			const className = def.value.get('className');
 			if (className) utils.assertString(className);
 			const customCss = def.value.get('customCss');
-			if (customCss) utils.assertArray(customCss);
+			if (customCss) utils. assertString(customCss);
 
 			return {
 				text: text.value,
@@ -507,11 +507,11 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 				rounded: rounded?.value,
 				disabled: disabled?.value,
 				className: className?.value ?? 'MkButton',
-				customCss: customCss?.value.join() ?? [],
+				customCss: customCss?.value ?? [],
 			};
 		}) : [],
 		className: className?.value ?? 'MkButtons',
-		customCss: customCss?.value.join()+',' ?? '',
+		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -529,7 +529,7 @@ function getSwitchOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertArray(customCss);
+	if (customCss) utils. assertString(customCss);
 
 	return {
 		onChange: (v) => {
@@ -539,7 +539,7 @@ function getSwitchOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 		label: label?.value,
 		caption: caption?.value,
 		className: className?.value ?? 'MkSwitch',
-		customCss: customCss?.value.join()+',' ?? '',
+		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -559,7 +559,7 @@ function getSelectOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertArray(customCss);
+	if (customCss) utils. assertString(customCss);
 
 	return {
 		items: items ? items.value.map(item => {
@@ -580,7 +580,7 @@ function getSelectOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 		label: label?.value,
 		caption: caption?.value,
 		className: className?.value ?? 'MkSelect',
-		customCss: customCss?.value.join()+',' ?? '',
+		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -596,7 +596,7 @@ function getFolderOptions(def: values.Value | undefined): Omit<AsUiFolder, 'id' 
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertArray(customCss);
+	if (customCss) utils. assertString(customCss);
 
 	return {
 		children: children ? children.value.map(v => {
@@ -606,7 +606,7 @@ function getFolderOptions(def: values.Value | undefined): Omit<AsUiFolder, 'id' 
 		title: title?.value ?? '',
 		opened: opened?.value ?? true,
 		className: className?.value ?? 'MkFolder',
-		customCss: customCss?.value.join()+',' ?? '',
+		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -626,7 +626,7 @@ function getCustomChartOptions(def: values.Value | undefined): Omit<AsUiCustomCh
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertArray(customCss);
+	if (customCss) utils. assertString(customCss);
 
 	return {
 		chartId: chartId.value,
@@ -641,7 +641,7 @@ function getCustomChartOptions(def: values.Value | undefined): Omit<AsUiCustomCh
 		}) : [],
 		label: label?.value ?? '',
 		className: className?.value ?? 'MkCustomChart',
-		customCss: customCss?.value.join()+',' ?? '',
+		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -659,7 +659,7 @@ function getPostFormButtonOptions(def: values.Value | undefined, call: (fn: valu
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertArray(customCss);
+	if (customCss) utils. assertString(customCss);
 
 	const getForm = () => {
 		const text = form!.value.get('text');
@@ -680,7 +680,7 @@ function getPostFormButtonOptions(def: values.Value | undefined, call: (fn: valu
 			text: '',
 		},
 		className: className?.value ?? 'MkPostFormButton',
-		customCss: customCss?.value.join()+',' ?? '',
+		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -690,7 +690,7 @@ function getPostFormOptions(def: values.Value | undefined, call: (fn: values.VFn
 	const form = def.value.get('form');
 	if (form) utils.assertObject(form);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertArray(customCss);
+	if (customCss) utils. assertString(customCss);
 
 	const getForm = () => {
 		const text = form!.value.get('text');
@@ -707,7 +707,7 @@ function getPostFormOptions(def: values.Value | undefined, call: (fn: values.VFn
 		form: form ? getForm() : {
 			text: '',
 		},
-		customCss: customCss?.value.join()+',' ?? '',
+		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -719,12 +719,12 @@ function getHTMLOptions(def: values.Value | undefined): Omit<AsUiHTML, 'id' | 't
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertArray(customCss);
+	if (customCss) utils. assertString(customCss);
 
 	return {
 		HTML: HTML?.value,
 		className: className?.value ?? 'MkHTML',
-		customCss: customCss?.value.join() ?? '',
+		customCss: customCss?.value ?? '',
 	};
 }
 
