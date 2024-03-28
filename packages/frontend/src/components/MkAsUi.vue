@@ -16,7 +16,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 	<Mfm v-else-if="c.type === 'mfm'"  :class="[{ [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace' }, c.className]" :style="{ fontSize: c.size ? `${c.size * 100}%` : null, fontWeight: c.bold ? 'bold' : null, color: c.color ?? null, c.customCss }" :text="c.text"/>
 	<MkButton v-else-if="c.type === 'button'"  :primary="c.primary" :className="c.className" :style="{ cursor: pointer, c.customCss }" :rounded="c.rounded" :disabled="c.disabled" :small="size === 'small'" inline @click="c.onClick" @touchstart="c.onTouchDown" @touchend="c.onTouchUp" @touchmove="c.onTouchMove">{{ c.text }}</MkButton>
 	<div v-else-if="c.type === 'buttons'"  :class="['_buttons', c.className ]" :style="{ justifyContent: align, c.customCss }">
-		<MkButton v-for="button in c.buttons" :primary="button.primary" :style="{ cursor: pointer, button.css }" :className="button.className" :rounded="button.rounded" :disabled="button.disabled" inline :small="size === 'small'" @click="button.onClick" @touchstart="button.onTouchDown" @touchend="button.onTouchUp" @touchmove="button.onTouchMove">{{ button.text }}</MkButton>
+		<MkButton v-for="button in c.buttons" :primary="button.primary" :style="{ cursor: pointer, button.customCss }" :className="button.className" :rounded="button.rounded" :disabled="button.disabled" inline :small="size === 'small'" @click="button.onClick" @touchstart="button.onTouchDown" @touchend="button.onTouchUp" @touchmove="button.onTouchMove">{{ button.text }}</MkButton>
 	</div>
 	<MkSwitch v-else-if="c.type === 'switch'"  :modelValue="valueForSwitch" :className="c.className" @update:modelValue="onSwitchUpdate">
 		<template v-if="c.label" #label>{{ c.label }}</template>
@@ -90,10 +90,6 @@ const props = withDefaults(defineProps<{
 });
 
 const c = props.component;
-
-if (c.HTML) {
-
-}
 
 function g(id) {
 	const v = props.components.find(x => x.value.id === id)?.value;
