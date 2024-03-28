@@ -484,9 +484,9 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 			if (rounded) utils.assertBoolean(rounded);
 			const disabled = button.value.get('disabled');
 			if (disabled) utils.assertBoolean(disabled);
-			const className = def.value.get('className');
+			const className = button.value.get('className');
 			if (className) utils.assertString(className);
-			const customCss = def.value.get('customCss');
+			const customCss = button.value.get('customCss');
 			if (customCss) utils.assertString(customCss);
 
 			return {

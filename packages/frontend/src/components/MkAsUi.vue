@@ -18,28 +18,28 @@ SPDX-License-Identifier: AGPL-3.0-only
 	<div v-else-if="c.type === 'buttons'"  :class="['_buttons', c.className ]" :style="{ justifyContent: align }" v-bind:style="c.customCss" >
 		<MkButton v-for="button in c.buttons" :primary="button.primary" :style="{ cursor: pointer }" :className="button.className" :rounded="button.rounded" :disabled="button.disabled" inline :small="size === 'small'" @click="button.onClick" @touchstart="button.onTouchDown" @touchend="button.onTouchUp" @touchmove="button.onTouchMove" v-bind:style="button.customCss" >{{ button.text }}</MkButton>
 	</div>
-	<MkSwitch v-else-if="c.type === 'switch'"  :modelValue="valueForSwitch" :className="c.className" @update:modelValue="onSwitchUpdate">
+	<MkSwitch v-else-if="c.type === 'switch'"  :modelValue="valueForSwitch" :className="c.className" @update:modelValue="onSwitchUpdate" v-bind:style="c.customCss" >
 		<template v-if="c.label" #label>{{ c.label }}</template>
 		<template v-if="c.caption" #caption>{{ c.caption }}</template>
 	</MkSwitch>
-	<MkTextarea v-else-if="c.type === 'textarea'"  :modelValue="c.default ?? null" :className="c.className" @update:modelValue="c.onInput">
+	<MkTextarea v-else-if="c.type === 'textarea'"  :modelValue="c.default ?? null" :className="c.className" @update:modelValue="c.onInput" v-bind:style="c.customCss" >
 		<template v-if="c.label" #label>{{ c.label }}</template>
 		<template v-if="c.caption" #caption>{{ c.caption }}</template>
 	</MkTextarea>
-	<MkInput v-else-if="c.type === 'textInput'"  :small="size === 'small'" :modelValue="c.default ?? null" :className="c.className" @update:modelValue="c.onInput">
+	<MkInput v-else-if="c.type === 'textInput'"  :small="size === 'small'" :modelValue="c.default ?? null" :className="c.className" @update:modelValue="c.onInput" v-bind:style="c.customCss" >
 		<template v-if="c.label" #label>{{ c.label }}</template>
 		<template v-if="c.caption" #caption>{{ c.caption }}</template>
 	</MkInput>
-	<MkInput v-else-if="c.type === 'numberInput'"  :small="size === 'small'" :modelValue="c.default ?? null" type="number" :className="c.className" @update:modelValue="c.onInput">
+	<MkInput v-else-if="c.type === 'numberInput'"  :small="size === 'small'" :modelValue="c.default ?? null" type="number" :className="c.className" @update:modelValue="c.onInput" v-bind:style="c.customCss" >
 		<template v-if="c.label" #label>{{ c.label }}</template>
 		<template v-if="c.caption" #caption>{{ c.caption }}</template>
 	</MkInput>
-	<MkSelect v-else-if="c.type === 'select'"  :small="size === 'small'" :className="c.className" :modelValue="c.default ?? null" @update:modelValue="c.onChange">
+	<MkSelect v-else-if="c.type === 'select'"  :small="size === 'small'" :className="c.className" :modelValue="c.default ?? null" @update:modelValue="c.onChange" v-bind:style="c.customCss" >
 		<template v-if="c.label" #label>{{ c.label }}</template>
 		<template v-if="c.caption" #caption>{{ c.caption }}</template>
 		<option v-for="item in c.items" :key="item.value" :value="item.value">{{ item.text }}</option>
 	</MkSelect>
-	<MkButton v-else-if="c.type === 'postFormButton'"  :primary="c.primary" :rounded="c.rounded" :small="size === 'small'" inline @click="openPostForm">{{ c.text }}</MkButton>
+	<MkButton v-else-if="c.type === 'postFormButton'"  :primary="c.primary" :rounded="c.rounded" :small="size === 'small'" inline @click="openPostForm" v-bind:style="c.customCss" >{{ c.text }}</MkButton>
 	<div v-else-if="c.type === 'postForm'"  :class="$style.postForm">
 		<MkPostForm
 			fixed
