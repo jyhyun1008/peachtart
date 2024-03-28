@@ -30,6 +30,7 @@ export type AsUiContainer = AsUiComponentBase & {
 	rounded?: boolean;
 	hidden?: boolean;
 	className?: string;
+	img?: string;
 	height? : string;
 };
 
@@ -212,6 +213,8 @@ function getContainerOptions(def: values.Value | undefined): Omit<AsUiContainer,
 	if (hidden) utils.assertBoolean(hidden);
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
+	const img = def.value.get('img');
+	if (img) utils.assertString(img);
 	const height = def.value.get('height');
 	if (height) utils.assertString(height);
 
@@ -230,6 +233,7 @@ function getContainerOptions(def: values.Value | undefined): Omit<AsUiContainer,
 		rounded: rounded?.value,
 		hidden: hidden?.value,
 		className: className?.value ?? 'MkContainer',
+		img: img?.value ?? 'none',
 		height: height?.value ?? 'auto',
 	};
 }
