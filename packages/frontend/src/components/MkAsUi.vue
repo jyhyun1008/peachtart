@@ -10,37 +10,37 @@ SPDX-License-Identifier: AGPL-3.0-only
 			<MkAsUi v-if="!g(child).hidden" :component="g(child)" :components="props.components" :size="size"/>
 		</template>
 	</div>
-	<div v-else-if="c.type === 'HTML'" :class="[ c.className ]" v-html="c.HTML" v-bind:style="{ c.css }"></div>
-	<div v-else-if="c.type === 'text' v-bind:style="{ c.css }" && c.img !== 'none'" :class="[{ [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace' }, c.className]" :style="{ height: c.height, backgroundImage: 'url('+c.img+')', backgroundSize: 'cover', fontSize: c.size ? `${c.size * 100}%` : null, fontWeight: c.bold ? 'bold' : null, color: c.color ?? null }">{{ c.text }}</div>
-	<span v-else-if="c.type === 'text'" v-bind:style="{ c.css }" :class="[{ [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace' }, c.className]" :style="{ fontSize: c.size ? `${c.size * 100}%` : null, fontWeight: c.bold ? 'bold' : null, color: c.color ?? null }">{{ c.text }}</span>
-	<Mfm v-else-if="c.type === 'mfm'" v-bind:style="{ c.css }" :class="[{ [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace' }, c.className]" :style="{ fontSize: c.size ? `${c.size * 100}%` : null, fontWeight: c.bold ? 'bold' : null, color: c.color ?? null }" :text="c.text"/>
-	<MkButton v-else-if="c.type === 'button'" v-bind:style="{ c.css }" :primary="c.primary" :className="c.className" :style="{ cursor: pointer }" :rounded="c.rounded" :disabled="c.disabled" :small="size === 'small'" inline @click="c.onClick" @touchstart="c.onTouchDown" @touchend="c.onTouchUp" @touchmove="c.onTouchMove">{{ c.text }}</MkButton>
-	<div v-else-if="c.type === 'buttons'" v-bind:style="{ c.css }" :class="['_buttons', c.className ]" :style="{ justifyContent: align }">
-		<MkButton v-for="button in c.buttons" :primary="button.primary" :style="{ cursor: pointer }" :className="button.className" :rounded="button.rounded" :disabled="button.disabled" inline :small="size === 'small'" @click="button.onClick" @touchstart="button.onTouchDown" @touchend="button.onTouchUp" @touchmove="button.onTouchMove">{{ button.text }}</MkButton>
+	<div v-else-if="c.type === 'HTML'" :class="[ c.className ]" v-html="c.HTML" :style="{ c.css }></div>
+	<div v-else-if="c.type === 'text'  && c.img !== 'none'" :class="[{ [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace' }, c.className]" :style="{ height: c.height, backgroundImage: 'url('+c.img+')', backgroundSize: 'cover', fontSize: c.size ? `${c.size * 100}%` : null, fontWeight: c.bold ? 'bold' : null, color: c.color ?? null, c.css }">{{ c.text }}</div>
+	<span v-else-if="c.type === 'text'"  :class="[{ [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace' }, c.className]" :style="{ fontSize: c.size ? `${c.size * 100}%` : null, fontWeight: c.bold ? 'bold' : null, color: c.color ?? null, c.css }">{{ c.text }}</span>
+	<Mfm v-else-if="c.type === 'mfm'"  :class="[{ [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace' }, c.className]" :style="{ fontSize: c.size ? `${c.size * 100}%` : null, fontWeight: c.bold ? 'bold' : null, color: c.color ?? null, c.css }" :text="c.text"/>
+	<MkButton v-else-if="c.type === 'button'"  :primary="c.primary" :className="c.className" :style="{ cursor: pointer, c.css }" :rounded="c.rounded" :disabled="c.disabled" :small="size === 'small'" inline @click="c.onClick" @touchstart="c.onTouchDown" @touchend="c.onTouchUp" @touchmove="c.onTouchMove">{{ c.text }}</MkButton>
+	<div v-else-if="c.type === 'buttons'"  :class="['_buttons', c.className ]" :style="{ justifyContent: align, c.css }">
+		<MkButton v-for="button in c.buttons" :primary="button.primary" :style="{ cursor: pointer, button.css }" :className="button.className" :rounded="button.rounded" :disabled="button.disabled" inline :small="size === 'small'" @click="button.onClick" @touchstart="button.onTouchDown" @touchend="button.onTouchUp" @touchmove="button.onTouchMove">{{ button.text }}</MkButton>
 	</div>
-	<MkSwitch v-else-if="c.type === 'switch'" v-bind:style="{ c.css }" :modelValue="valueForSwitch" :className="c.className" @update:modelValue="onSwitchUpdate">
+	<MkSwitch v-else-if="c.type === 'switch'"  :modelValue="valueForSwitch" :className="c.className" @update:modelValue="onSwitchUpdate">
 		<template v-if="c.label" #label>{{ c.label }}</template>
 		<template v-if="c.caption" #caption>{{ c.caption }}</template>
 	</MkSwitch>
-	<MkTextarea v-else-if="c.type === 'textarea'" v-bind:style="{ c.css }" :modelValue="c.default ?? null" :className="c.className" @update:modelValue="c.onInput">
+	<MkTextarea v-else-if="c.type === 'textarea'"  :modelValue="c.default ?? null" :className="c.className" @update:modelValue="c.onInput">
 		<template v-if="c.label" #label>{{ c.label }}</template>
 		<template v-if="c.caption" #caption>{{ c.caption }}</template>
 	</MkTextarea>
-	<MkInput v-else-if="c.type === 'textInput'" v-bind:style="{ c.css }" :small="size === 'small'" :modelValue="c.default ?? null" :className="c.className" @update:modelValue="c.onInput">
+	<MkInput v-else-if="c.type === 'textInput'"  :small="size === 'small'" :modelValue="c.default ?? null" :className="c.className" @update:modelValue="c.onInput">
 		<template v-if="c.label" #label>{{ c.label }}</template>
 		<template v-if="c.caption" #caption>{{ c.caption }}</template>
 	</MkInput>
-	<MkInput v-else-if="c.type === 'numberInput'" v-bind:style="{ c.css }" :small="size === 'small'" :modelValue="c.default ?? null" type="number" :className="c.className" @update:modelValue="c.onInput">
+	<MkInput v-else-if="c.type === 'numberInput'"  :small="size === 'small'" :modelValue="c.default ?? null" type="number" :className="c.className" @update:modelValue="c.onInput">
 		<template v-if="c.label" #label>{{ c.label }}</template>
 		<template v-if="c.caption" #caption>{{ c.caption }}</template>
 	</MkInput>
-	<MkSelect v-else-if="c.type === 'select'" v-bind:style="{ c.css }" :small="size === 'small'" :className="c.className" :modelValue="c.default ?? null" @update:modelValue="c.onChange">
+	<MkSelect v-else-if="c.type === 'select'"  :small="size === 'small'" :className="c.className" :modelValue="c.default ?? null" @update:modelValue="c.onChange">
 		<template v-if="c.label" #label>{{ c.label }}</template>
 		<template v-if="c.caption" #caption>{{ c.caption }}</template>
 		<option v-for="item in c.items" :key="item.value" :value="item.value">{{ item.text }}</option>
 	</MkSelect>
-	<MkButton v-else-if="c.type === 'postFormButton'" v-bind:style="{ c.css }" :primary="c.primary" :rounded="c.rounded" :small="size === 'small'" inline @click="openPostForm">{{ c.text }}</MkButton>
-	<div v-else-if="c.type === 'postForm'" v-bind:style="{ c.css }" :class="$style.postForm">
+	<MkButton v-else-if="c.type === 'postFormButton'"  :primary="c.primary" :rounded="c.rounded" :small="size === 'small'" inline @click="openPostForm">{{ c.text }}</MkButton>
+	<div v-else-if="c.type === 'postForm'"  :class="$style.postForm">
 		<MkPostForm
 			fixed
 			:instant="true"
@@ -50,15 +50,15 @@ SPDX-License-Identifier: AGPL-3.0-only
 	</div>
 	<MkFolder v-else-if="c.type === 'folder'" :defaultOpen="c.opened">
 		<template #label>{{ c.title }}</template>
-		<div v-bind:style="{ c.css }" :class="c.className">
+		<div  :class="c.className">
 			<template v-for="child in c.children" :key="child">
 				<MkAsUi v-if="!g(child).hidden" :component="g(child)" :components="props.components" :size="size"/>
 			</template>
 	  </div>
 	</MkFolder>
-	<MkCustomChart v-else-if="c.type === 'customChart'" v-bind:style="{ c.css }" :chartId="c.chartId" :title="c.title" :keys="c.keys" :values="c.values" :label="c.label" :className="c.className" />
+	<MkCustomChart v-else-if="c.type === 'customChart'"  :chartId="c.chartId" :title="c.title" :keys="c.keys" :values="c.values" :label="c.label" :className="c.className" />
 	<div v-else-if="c.type === 'container'" :class="[$style.container, { [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace' }]" :style="{ height: c.height ?? auto, textAlign: c.align ?? null, backgroundColor: c.bgColor ?? null, color: c.fgColor ?? null, borderWidth: c.borderWidth ? `${c.borderWidth}px` : 0, borderColor: c.borderColor ?? 'var(--divider)', padding: c.padding ? `${c.padding}px` : 0, borderRadius: c.rounded ? '8px' : 0 }">
-		<div v-bind:style="{ c.css }" :class="['_container', c.className]" :style="{ backgroundImage: 'url('+c.img+')', height: 'inherit', backgroundSize: 'cover' }">
+		<div  :class="['_container', c.className]" :style="{ backgroundImage: 'url('+c.img+')', height: 'inherit', backgroundSize: 'cover', c.css }">
 			<template v-for="child in c.children" :key="child">
 				<MkAsUi v-if="!g(child).hidden" :component="g(child)" :components="props.components" :size="size" :align="c.align"/>
 			</template>
