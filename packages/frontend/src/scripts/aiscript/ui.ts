@@ -161,11 +161,6 @@ export type AsUiHTML = AsUiComponentBase & {
 	className?: string;
 };
 
-export type AsUiCss = AsUiComponentBase & {
-	type: 'css';
-	css?: string;
-};
-
 export type AsUiPostForm = AsUiComponentBase & {
 	type: 'postForm';
 	form?: {
@@ -174,7 +169,7 @@ export type AsUiPostForm = AsUiComponentBase & {
 	};
 };
 
-export type AsUiComponent = AsUiRoot | AsUiContainer | AsUiText | AsUiMfm | AsUiButton | AsUiButtons | AsUiSwitch | AsUiTextarea | AsUiTextInput | AsUiNumberInput | AsUiSelect | AsUiFolder | AsUiPostFormButton | AsUiPostForm | AsUiCustomChart | AsUiHTML | AsUiCss;
+export type AsUiComponent = AsUiRoot | AsUiContainer | AsUiText | AsUiMfm | AsUiButton | AsUiButtons | AsUiSwitch | AsUiTextarea | AsUiTextInput | AsUiNumberInput | AsUiSelect | AsUiFolder | AsUiPostFormButton | AsUiPostForm | AsUiCustomChart | AsUiHTML;
 export function patch(id: string, def: values.Value, call: (fn: values.VFn, args: values.Value[]) => Promise<values.Value>) {
 	// TODO
 }
@@ -670,17 +665,6 @@ function getHTMLOptions(def: values.Value | undefined): Omit<AsUiHTML, 'id' | 't
 	};
 }
 
-function getCssOptions(def: values.Value | undefined): Omit<AsUiCss, 'id' | 'type'> {
-	utils.assertObject(def);
-
-	const css = def.value.get('css');
-	if (css) utils.assertString(css);
-
-	return {
-		css: css?.value,
-	};
-}
-
 export function registerAsUiLib(components: Ref<AsUiComponent>[], done: (root: Ref<AsUiRoot>) => void) {
 	const instances = {};
 
@@ -801,8 +785,5 @@ export function registerAsUiLib(components: Ref<AsUiComponent>[], done: (root: R
 			return createComponentInstance('HTML', def, id, getHTMLOptions, opts.call);
 		}),
 
-		'Ui:C:css': values.FN_NATIVE(([def, id], opts) => {
-			return createComponentInstance('css', def, id, getCssOptions, opts.call);
-		}),
 	};
 }
