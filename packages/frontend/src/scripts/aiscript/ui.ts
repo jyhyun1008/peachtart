@@ -32,7 +32,6 @@ export type AsUiContainer = AsUiComponentBase & {
 	className?: string;
 	img?: string;
 	height? : string;
-	customCss?:string;
 };
 
 export type AsUiText = AsUiComponentBase & {
@@ -45,7 +44,6 @@ export type AsUiText = AsUiComponentBase & {
 	className?: string;
 	img?: string;
 	height?: string;
-	customCss?:string;
 };
 
 export type AsUiMfm = AsUiComponentBase & {
@@ -57,7 +55,6 @@ export type AsUiMfm = AsUiComponentBase & {
 	font?: 'serif' | 'sans-serif' | 'monospace';
 	className?: string;
 	onClickEv?: (evId: string) => void;
-	customCss?:string;
 };
 
 export type AsUiButton = AsUiComponentBase & {
@@ -71,14 +68,12 @@ export type AsUiButton = AsUiComponentBase & {
 	rounded?: boolean;
 	disabled?: boolean;
 	className?: string;
-	customCss?:string;
 };
 
 export type AsUiButtons = AsUiComponentBase & {
 	type: 'buttons';
 	buttons?: AsUiButton[];
 	className?: string;
-	customCss?:string;
 };
 
 export type AsUiSwitch = AsUiComponentBase & {
@@ -88,7 +83,6 @@ export type AsUiSwitch = AsUiComponentBase & {
 	label?: string;
 	caption?: string;
 	className?: string;
-	customCss?:string;
 };
 
 export type AsUiTextarea = AsUiComponentBase & {
@@ -98,7 +92,6 @@ export type AsUiTextarea = AsUiComponentBase & {
 	label?: string;
 	caption?: string;
 	className?: string;
-	customCss?:string;
 };
 
 export type AsUiTextInput = AsUiComponentBase & {
@@ -108,7 +101,6 @@ export type AsUiTextInput = AsUiComponentBase & {
 	label?: string;
 	caption?: string;
 	className?: string;
-	customCss?:string;
 };
 
 export type AsUiNumberInput = AsUiComponentBase & {
@@ -118,7 +110,6 @@ export type AsUiNumberInput = AsUiComponentBase & {
 	label?: string;
 	caption?: string;
 	className?: string;
-	customCss?:string;
 };
 
 export type AsUiSelect = AsUiComponentBase & {
@@ -132,7 +123,6 @@ export type AsUiSelect = AsUiComponentBase & {
 	label?: string;
 	caption?: string;
 	className?: string;
-	customCss?:string;
 };
 
 export type AsUiFolder = AsUiComponentBase & {
@@ -141,7 +131,6 @@ export type AsUiFolder = AsUiComponentBase & {
 	title?: string;
 	opened?: boolean;
 	className?: string;
-	customCss?:string;
 };
 
 export type AsUiPostFormButton = AsUiComponentBase & {
@@ -154,7 +143,6 @@ export type AsUiPostFormButton = AsUiComponentBase & {
 		cw?: string;
 	};
 	className?: string;
-	customCss?:string;
 };
 
 export type AsUiCustomChart = AsUiComponentBase & {
@@ -165,14 +153,12 @@ export type AsUiCustomChart = AsUiComponentBase & {
 	values: number[];
 	label?: string;
 	className?: string;
-	customCss?:string;
 };
 
 export type AsUiHTML = AsUiComponentBase & {
 	type: 'HTML';
 	HTML?: string;
 	className?: string;
-	customCss?:string;
 };
 
 export type AsUiPostForm = AsUiComponentBase & {
@@ -181,7 +167,6 @@ export type AsUiPostForm = AsUiComponentBase & {
 		text: string;
 		cw?: string;
 	};
-	customCss?:string;
 };
 
 export type AsUiComponent = AsUiRoot | AsUiContainer | AsUiText | AsUiMfm | AsUiButton | AsUiButtons | AsUiSwitch | AsUiTextarea | AsUiTextInput | AsUiNumberInput | AsUiSelect | AsUiFolder | AsUiPostFormButton | AsUiPostForm | AsUiCustomChart | AsUiHTML ;
@@ -232,8 +217,6 @@ function getContainerOptions(def: values.Value | undefined): Omit<AsUiContainer,
 	if (img) utils.assertString(img);
 	const height = def.value.get('height');
 	if (height) utils.assertString(height);
-	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertString(customCss);
 
 	return {
 		children: children ? children.value.map(v => {
@@ -252,7 +235,6 @@ function getContainerOptions(def: values.Value | undefined): Omit<AsUiContainer,
 		className: className?.value ?? 'MkContainer',
 		img: img?.value ?? 'none',
 		height: height?.value ?? 'auto',
-		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -275,8 +257,6 @@ function getTextOptions(def: values.Value | undefined): Omit<AsUiText, 'id' | 't
 	if (img) utils.assertString(img);
 	const height = def.value.get('height');
 	if (height) utils.assertString(height);
-	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertString(customCss);
 
 	return {
 		text: text?.value,
@@ -287,7 +267,6 @@ function getTextOptions(def: values.Value | undefined): Omit<AsUiText, 'id' | 't
 		className: className?.value ?? 'MkText',
 		img: img?.value ?? 'none',
 		height: height?.value ?? 'auto',
-		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -308,8 +287,6 @@ function getMfmOptions(def: values.Value | undefined, call: (fn: values.VFn, arg
 	if (className) utils.assertString(className);
 	const onClickEv = def.value.get('onClickEv');
 	if (onClickEv) utils.assertFunction(onClickEv);
-	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertString(customCss);
 
 	return {
 		text: text?.value,
@@ -321,7 +298,6 @@ function getMfmOptions(def: values.Value | undefined, call: (fn: values.VFn, arg
 		onClickEv: (evId: string) => {
 			if (onClickEv) call(onClickEv, [values.STR(evId)]);
 		},
-		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -338,8 +314,6 @@ function getTextInputOptions(def: values.Value | undefined, call: (fn: values.VF
 	if (caption) utils.assertString(caption);
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
-	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertString(customCss);
 
 	return {
 		onInput: (v) => {
@@ -349,7 +323,6 @@ function getTextInputOptions(def: values.Value | undefined, call: (fn: values.VF
 		label: label?.value,
 		caption: caption?.value,
 		className: className?.value ?? 'MkTextInput',
-		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -366,8 +339,6 @@ function getTextareaOptions(def: values.Value | undefined, call: (fn: values.VFn
 	if (caption) utils.assertString(caption);
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
-	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertString(customCss);
 
 	return {
 		onInput: (v) => {
@@ -377,7 +348,6 @@ function getTextareaOptions(def: values.Value | undefined, call: (fn: values.VFn
 		label: label?.value,
 		caption: caption?.value,
 		className: className?.value ?? 'MkTextArea',
-		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -394,8 +364,6 @@ function getNumberInputOptions(def: values.Value | undefined, call: (fn: values.
 	if (caption) utils.assertString(caption);
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
-	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertString(customCss);
 
 	return {
 		onInput: (v) => {
@@ -405,7 +373,6 @@ function getNumberInputOptions(def: values.Value | undefined, call: (fn: values.
 		label: label?.value,
 		caption: caption?.value,
 		className: className?.value ?? 'MkNumberInput',
-		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -430,8 +397,6 @@ function getButtonOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 	if (disabled) utils.assertBoolean(disabled);
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
-	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertString(customCss);
 
 	return {
 		text: text?.value,
@@ -451,7 +416,6 @@ function getButtonOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 		rounded: rounded?.value,
 		disabled: disabled?.value,
 		className: className?.value ?? 'MkButton',
-		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -461,8 +425,6 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 	const buttons = def.value.get('buttons');
 	if (buttons) utils.assertArray(buttons);
 	const className = def.value.get('className');
-	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertString(customCss);
 	if (className) utils.assertString(className);
 
 	return {
@@ -486,8 +448,6 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 			if (disabled) utils.assertBoolean(disabled);
 			const className = def.value.get('className');
 			if (className) utils.assertString(className);
-			const customCss = def.value.get('customCss');
-			if (customCss) utils.assertString(customCss);
 
 			return {
 				text: text.value,
@@ -507,11 +467,9 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 				rounded: rounded?.value,
 				disabled: disabled?.value,
 				className: className?.value ?? 'MkButton',
-				customCss: customCss?.value ?? '',
 			};
 		}) : [],
 		className: className?.value ?? 'MkButtons',
-		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -528,8 +486,6 @@ function getSwitchOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 	if (caption) utils.assertString(caption);
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
-	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertString(customCss);
 
 	return {
 		onChange: (v) => {
@@ -539,7 +495,6 @@ function getSwitchOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 		label: label?.value,
 		caption: caption?.value,
 		className: className?.value ?? 'MkSwitch',
-		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -558,8 +513,6 @@ function getSelectOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 	if (caption) utils.assertString(caption);
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
-	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertString(customCss);
 
 	return {
 		items: items ? items.value.map(item => {
@@ -580,7 +533,6 @@ function getSelectOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 		label: label?.value,
 		caption: caption?.value,
 		className: className?.value ?? 'MkSelect',
-		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -595,8 +547,6 @@ function getFolderOptions(def: values.Value | undefined): Omit<AsUiFolder, 'id' 
 	if (opened) utils.assertBoolean(opened);
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
-	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertString(customCss);
 
 	return {
 		children: children ? children.value.map(v => {
@@ -606,7 +556,6 @@ function getFolderOptions(def: values.Value | undefined): Omit<AsUiFolder, 'id' 
 		title: title?.value ?? '',
 		opened: opened?.value ?? true,
 		className: className?.value ?? 'MkFolder',
-		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -625,8 +574,6 @@ function getCustomChartOptions(def: values.Value | undefined): Omit<AsUiCustomCh
 	if (label) utils.assertString(label);
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
-	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertString(customCss);
 
 	return {
 		chartId: chartId.value,
@@ -641,7 +588,6 @@ function getCustomChartOptions(def: values.Value | undefined): Omit<AsUiCustomCh
 		}) : [],
 		label: label?.value ?? '',
 		className: className?.value ?? 'MkCustomChart',
-		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -658,8 +604,6 @@ function getPostFormButtonOptions(def: values.Value | undefined, call: (fn: valu
 	if (form) utils.assertObject(form);
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
-	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertString(customCss);
 
 	const getForm = () => {
 		const text = form!.value.get('text');
@@ -680,7 +624,6 @@ function getPostFormButtonOptions(def: values.Value | undefined, call: (fn: valu
 			text: '',
 		},
 		className: className?.value ?? 'MkPostFormButton',
-		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -689,8 +632,6 @@ function getPostFormOptions(def: values.Value | undefined, call: (fn: values.VFn
 
 	const form = def.value.get('form');
 	if (form) utils.assertObject(form);
-	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertString(customCss);
 
 	const getForm = () => {
 		const text = form!.value.get('text');
@@ -707,7 +648,6 @@ function getPostFormOptions(def: values.Value | undefined, call: (fn: values.VFn
 		form: form ? getForm() : {
 			text: '',
 		},
-		customCss: customCss?.value ?? '',
 	};
 }
 
@@ -718,13 +658,10 @@ function getHTMLOptions(def: values.Value | undefined): Omit<AsUiHTML, 'id' | 't
 	if (HTML) utils.assertString(HTML);
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
-	const customCss = def.value.get('customCss');
-	if (customCss) utils.assertString(customCss);
 
 	return {
 		HTML: HTML?.value,
 		className: className?.value ?? 'MkHTML',
-		customCss: customCss?.value ?? '',
 	};
 }
 
