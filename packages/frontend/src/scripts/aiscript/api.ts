@@ -159,10 +159,6 @@ export function createAiScriptEnv(opts) {
 			await audio.play()
 			return values.NUM(new Date())
 		}),
-		'Mk:addCss': values.FN_NATIVE(([css]) => {
-			utils.assertString(css);
-			document.querySelector<HTMLElement>('head').innerHTML += '<style>'+css.value+'</style>'
-		}),
 		'Math:toFixed': values.FN_NATIVE(([num, tofixed]) => {
 			utils.assertNumber(num);
 			utils.assertNumber(tofixed);
