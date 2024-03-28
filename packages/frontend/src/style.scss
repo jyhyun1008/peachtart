@@ -956,3 +956,33 @@ table a {
 .eftoefju>.banner {
  margin: 0 !important;
 }
+
+// 여기는 진짜 순전히 어드민의장난질커스텀css
+
+.ab-conversation {
+    position: absolute;
+    bottom: 8px;
+    z-index: 10;
+    width: calc(100vw - 16px);
+}
+.ab-controller {
+    bottom: 8px;
+    width: 100vw !important;
+    height: calc(100dvh - 135px);
+    position: absolute;
+    display: flex;
+    z-index: 10;
+    justify-content: flex-end;
+    }
+
+.ab-controller .MkButtons {
+    justify-content: flex-end !important;
+}
+
+.ab-controller .MkButton {
+     background-color: #ff9899;
+     color: white;
+     width: 100px;
+     height: 60px;
+     border-radius: 30px;
+}
