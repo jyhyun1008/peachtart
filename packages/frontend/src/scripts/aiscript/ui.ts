@@ -233,7 +233,7 @@ function getContainerOptions(def: values.Value | undefined): Omit<AsUiContainer,
 	const height = def.value.get('height');
 	if (height) utils.assertString(height);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils. assertString(customCss);
+	if (customCss) utils.assertString(customCss);
 
 	return {
 		children: children ? children.value.map(v => {
@@ -276,7 +276,7 @@ function getTextOptions(def: values.Value | undefined): Omit<AsUiText, 'id' | 't
 	const height = def.value.get('height');
 	if (height) utils.assertString(height);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils. assertString(customCss);
+	if (customCss) utils.assertString(customCss);
 
 	return {
 		text: text?.value,
@@ -309,7 +309,7 @@ function getMfmOptions(def: values.Value | undefined, call: (fn: values.VFn, arg
 	const onClickEv = def.value.get('onClickEv');
 	if (onClickEv) utils.assertFunction(onClickEv);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils. assertString(customCss);
+	if (customCss) utils.assertString(customCss);
 
 	return {
 		text: text?.value,
@@ -339,7 +339,7 @@ function getTextInputOptions(def: values.Value | undefined, call: (fn: values.VF
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils. assertString(customCss);
+	if (customCss) utils.assertString(customCss);
 
 	return {
 		onInput: (v) => {
@@ -367,7 +367,7 @@ function getTextareaOptions(def: values.Value | undefined, call: (fn: values.VFn
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils. assertString(customCss);
+	if (customCss) utils.assertString(customCss);
 
 	return {
 		onInput: (v) => {
@@ -395,7 +395,7 @@ function getNumberInputOptions(def: values.Value | undefined, call: (fn: values.
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils. assertString(customCss);
+	if (customCss) utils.assertString(customCss);
 
 	return {
 		onInput: (v) => {
@@ -431,7 +431,7 @@ function getButtonOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils. assertString(customCss);
+	if (customCss) utils.assertString(customCss);
 
 	return {
 		text: text?.value,
@@ -462,7 +462,7 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 	if (buttons) utils.assertArray(buttons);
 	const className = def.value.get('className');
 	const customCss = def.value.get('customCss');
-	if (customCss) utils. assertString(customCss);
+	if (customCss) utils.assertString(customCss);
 	if (className) utils.assertString(className);
 
 	return {
@@ -487,7 +487,7 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 			const className = def.value.get('className');
 			if (className) utils.assertString(className);
 			const customCss = def.value.get('customCss');
-			if (customCss) utils. assertString(customCss);
+			if (customCss) utils.assertString(customCss);
 
 			return {
 				text: text.value,
@@ -529,7 +529,7 @@ function getSwitchOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils. assertString(customCss);
+	if (customCss) utils.assertString(customCss);
 
 	return {
 		onChange: (v) => {
@@ -559,7 +559,7 @@ function getSelectOptions(def: values.Value | undefined, call: (fn: values.VFn, 
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils. assertString(customCss);
+	if (customCss) utils.assertString(customCss);
 
 	return {
 		items: items ? items.value.map(item => {
@@ -596,7 +596,7 @@ function getFolderOptions(def: values.Value | undefined): Omit<AsUiFolder, 'id' 
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils. assertString(customCss);
+	if (customCss) utils.assertString(customCss);
 
 	return {
 		children: children ? children.value.map(v => {
@@ -626,7 +626,7 @@ function getCustomChartOptions(def: values.Value | undefined): Omit<AsUiCustomCh
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils. assertString(customCss);
+	if (customCss) utils.assertString(customCss);
 
 	return {
 		chartId: chartId.value,
@@ -659,7 +659,7 @@ function getPostFormButtonOptions(def: values.Value | undefined, call: (fn: valu
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils. assertString(customCss);
+	if (customCss) utils.assertString(customCss);
 
 	const getForm = () => {
 		const text = form!.value.get('text');
@@ -690,7 +690,7 @@ function getPostFormOptions(def: values.Value | undefined, call: (fn: values.VFn
 	const form = def.value.get('form');
 	if (form) utils.assertObject(form);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils. assertString(customCss);
+	if (customCss) utils.assertString(customCss);
 
 	const getForm = () => {
 		const text = form!.value.get('text');
@@ -719,7 +719,7 @@ function getHTMLOptions(def: values.Value | undefined): Omit<AsUiHTML, 'id' | 't
 	const className = def.value.get('className');
 	if (className) utils.assertString(className);
 	const customCss = def.value.get('customCss');
-	if (customCss) utils. assertString(customCss);
+	if (customCss) utils.assertString(customCss);
 
 	return {
 		HTML: HTML?.value,
