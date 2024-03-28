@@ -885,8 +885,8 @@ input:hover {
 
 @media (max-width: 500px) {
 	.fullscreen {
-		min-height: calc(100dvh - 135px);
-		max-height: calc(100dvh - 135px);
+		min-height: calc(100dvh - 135px - env(safe-area-inset-bottom));
+		max-height: calc(100dvh - 135px - env(safe-area-inset-bottom));
 		width: calc(100% + 24px);
 		top: -12px;
 		left: -12px;
