@@ -161,6 +161,11 @@ export type AsUiHTML = AsUiComponentBase & {
 	className?: string;
 };
 
+export type AsUiCss = AsUiComponentBase & {
+	type: 'css';
+	css?: string;
+};
+
 export type AsUiPostForm = AsUiComponentBase & {
 	type: 'postForm';
 	form?: {
@@ -169,7 +174,7 @@ export type AsUiPostForm = AsUiComponentBase & {
 	};
 };
 
-export type AsUiComponent = AsUiRoot | AsUiContainer | AsUiText | AsUiMfm | AsUiButton | AsUiButtons | AsUiSwitch | AsUiTextarea | AsUiTextInput | AsUiNumberInput | AsUiSelect | AsUiFolder | AsUiPostFormButton | AsUiPostForm | AsUiCustomChart | AsUiHTML;
+export type AsUiComponent = AsUiRoot | AsUiContainer | AsUiText | AsUiMfm | AsUiButton | AsUiButtons | AsUiSwitch | AsUiTextarea | AsUiTextInput | AsUiNumberInput | AsUiSelect | AsUiFolder | AsUiPostFormButton | AsUiPostForm | AsUiCustomChart | AsUiHTML | AsUiCss;
 export function patch(id: string, def: values.Value, call: (fn: values.VFn, args: values.Value[]) => Promise<values.Value>) {
 	// TODO
 }
@@ -651,7 +656,7 @@ function getPostFormOptions(def: values.Value | undefined, call: (fn: values.VFn
 	};
 }
 
-function getHTMLOptions(def: values.Value | undefined): Omit<AsUiMfm, 'id' | 'type'> {
+function getHTMLOptions(def: values.Value | undefined): Omit<AsUiHTML, 'id' | 'type'> {
 	utils.assertObject(def);
 
 	const HTML = def.value.get('HTML');
@@ -662,6 +667,17 @@ function getHTMLOptions(def: values.Value | undefined): Omit<AsUiMfm, 'id' | 'ty
 	return {
 		HTML: HTML?.value,
 		className: className?.value ?? 'MkHTML',
+	};
+}
+
+function getCssOptions(def: values.Value | undefined): Omit<AsUiCss, 'id' | 'type'> {
+	utils.assertObject(def);
+
+	const css = def.value.get('css');
+	if (css) utils.assertString(css);
+
+	return {
+		css: css?.value,
 	};
 }
 
@@ -783,6 +799,10 @@ export function registerAsUiLib(components: Ref<AsUiComponent>[], done: (root: R
 
 		'Ui:C:HTML': values.FN_NATIVE(([def, id], opts) => {
 			return createComponentInstance('HTML', def, id, getHTMLOptions, opts.call);
+		}),
+
+		'Ui:C:css': values.FN_NATIVE(([def, id], opts) => {
+			return createComponentInstance('css', def, id, getCssOptions, opts.call);
 		}),
 	};
 }

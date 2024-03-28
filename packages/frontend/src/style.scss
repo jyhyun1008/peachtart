@@ -960,20 +960,21 @@ table a {
 // 여기는 진짜 순전히 어드민의장난질커스텀css
 
 .ab-conversation {
-    position: absolute;
-    bottom: 8px;
-    z-index: 10;
-    width: calc(100vw - 16px);
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	z-index: 10;
+	width: 100vw;
 }
 .ab-controller {
-    bottom: 8px;
-    width: 100vw !important;
-    height: calc(100dvh - 135px);
+    bottom: 8px;right: 8px;
+	width: calc(100vw - 16px)!important;
+	height: calc(100dvh - 135px - env(safe-area-inset-bottom));
     position: absolute;
     display: flex;
     z-index: 10;
     justify-content: flex-end;
-    }
+}
 
 .ab-controller .MkButtons {
     justify-content: flex-end !important;
