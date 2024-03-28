@@ -507,7 +507,7 @@ function getButtonsOptions(def: values.Value | undefined, call: (fn: values.VFn,
 				rounded: rounded?.value,
 				disabled: disabled?.value,
 				className: className?.value ?? 'MkButton',
-				customCss: customCss?.value ?? [],
+				customCss: customCss?.value ?? '',
 			};
 		}) : [],
 		className: className?.value ?? 'MkButtons',
