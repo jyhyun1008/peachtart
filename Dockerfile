@@ -73,13 +73,13 @@ RUN apt-get update \
 	&& ln -s /usr/lib/$(uname -m)-linux-gnu/libjemalloc.so.2 /usr/local/lib/libjemalloc.so \
 	&& corepack enable \
 	&& groupadd -g "${GID}" misskey \
-	&& useradd -l -u "${UID}" -g "${GID}" -m -d /misskey misskey \
+	&& useradd -l -u "${UID}" -g "${GID}" -m -d /peachtart peachtart \
 	&& find / -type d -path /sys -prune -o -type d -path /proc -prune -o -type f -perm /u+s -ignore_readdir_race -exec chmod u-s {} \; \
 	&& find / -type d -path /sys -prune -o -type d -path /proc -prune -o -type f -perm /g+s -ignore_readdir_race -exec chmod g-s {} \; \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists
 
-USER peachtart:peachtart
+USER peachtart
 WORKDIR /peachtart
 
 COPY --chown=peachtart:peachtart ./package.json ./package.json
