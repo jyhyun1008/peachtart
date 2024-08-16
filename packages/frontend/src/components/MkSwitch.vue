@@ -38,7 +38,7 @@ const props = withDefaults(defineProps<{
 	noBody?: boolean;
 }>(), {
 	className: 'MkSwitch',
-};
+});
 
 const emit = defineEmits<{
 	(ev: 'update:modelValue', v: boolean): void;
