@@ -1,6 +1,6 @@
 # syntax = docker/dockerfile:1.4
 
-ARG NODE_VERSION=20.10.0-bullseye
+ARG NODE_VERSION=20.16.0-bullseye
 
 # build assets & compile TypeScript
 
@@ -81,6 +81,9 @@ RUN apt-get update \
 
 USER peachtart
 WORKDIR /peachtart
+
+COPY --chown=peachtart:peachtart ./package.json ./package.json
+RUN corepack install
 
 COPY --chown=peachtart:peachtart --from=target-builder /peachtart/node_modules ./node_modules
 COPY --chown=peachtart:peachtart --from=target-builder /peachtart/packages/backend/node_modules ./packages/backend/node_modules

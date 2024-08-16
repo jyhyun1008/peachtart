@@ -46,6 +46,8 @@ SPDX-License-Identifier: AGPL-3.0-only
 			:instant="true"
 			:initialText="c.form?.text"
 			:initialCw="c.form?.cw"
+			:initialVisibility="c.form?.visibility"
+			:initialLocalOnly="c.form?.localOnly"
 		/>
 	</div>
 	<MkFolder v-else-if="c.type === 'folder'" :defaultOpen="c.opened">
@@ -118,6 +120,8 @@ function openPostForm() {
 	os.post({
 		initialText: form.text,
 		initialCw: form.cw,
+		initialVisibility: form.visibility,
+		initialLocalOnly: form.localOnly,
 		instant: true,
 	});
 }

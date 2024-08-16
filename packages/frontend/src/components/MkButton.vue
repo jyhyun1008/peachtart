@@ -11,6 +11,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 	:type="type"
 	:name="name"
 	:value="value"
+	:disabled="disabled"
 	@click="emit('click', $event)"
 	@touchstart="emit('touchstart', $event)"
 	@touchmove="emit('touchmove', $event)"
@@ -26,6 +27,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 	v-else class="_button"
 	:class="[$style.root, { [$style.inline]: inline, [$style.primary]: primary, [$style.gradate]: gradate, [$style.danger]: danger, [$style.rounded]: rounded, [$style.full]: full, [$style.small]: small, [$style.large]: large, [$style.transparent]: transparent, [$style.asLike]: asLike }]"
 	:to="to ?? '#'"
+	:behavior="linkBehavior"
 	@mousedown="onMousedown"
 >
 	<div ref="ripples" :class="$style.ripples" :data-children-class="$style.ripple"></div>
@@ -46,6 +48,7 @@ const props = withDefaults(defineProps<{
 	inline?: boolean;
 	link?: boolean;
 	to?: string;
+	linkBehavior?: null | 'window' | 'browser';
 	autofocus?: boolean;
 	wait?: boolean;
 	danger?: boolean;
@@ -57,6 +60,7 @@ const props = withDefaults(defineProps<{
 	className?: string;
 	name?: string;
 	value?: string;
+	disabled?: boolean;
 }>(), {
 	className: 'MkButton',
 });
@@ -258,7 +262,6 @@ function onMousedown(evt: MouseEvent): void {
 	}
 
 	&:focus-visible {
-		outline: solid 2px var(--focus);
 		outline-offset: 2px;
 	}
 
