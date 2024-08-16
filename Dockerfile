@@ -80,6 +80,7 @@ RUN apt-get update \
 	&& rm -rf /var/lib/apt/lists
 
 USER peachtart
+RUN useradd peachtart
 WORKDIR /peachtart
 
 COPY --chown=peachtart:peachtart ./package.json ./package.json
