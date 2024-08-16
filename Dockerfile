@@ -79,8 +79,7 @@ RUN apt-get update \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists
 
-USER peachtart
-RUN useradd peachtart
+USER peachtart:peachtart
 WORKDIR /peachtart
 
 COPY --chown=peachtart:peachtart ./package.json ./package.json
