@@ -5,7 +5,7 @@
 
 import { Injectable } from '@nestjs/common';
 import * as mfm from 'mfm-js';
-import { marked } from 'marked';
+import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 import { MfmService } from '@/core/MfmService.js';
 import type { MiNote } from '@/models/Note.js';
 import { bindThis } from '@/decorators.js';
