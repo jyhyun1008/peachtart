@@ -5,6 +5,7 @@
 
 import { Injectable } from '@nestjs/common';
 import * as mfm from 'mfm-js';
+import { marked } from 'marked';
 import { MfmService } from '@/core/MfmService.js';
 import type { MiNote } from '@/models/Note.js';
 import { bindThis } from '@/decorators.js';
@@ -29,7 +30,8 @@ export class ApMfmService {
 		let noMisskeyContent = false;
 		const srcMfm = (note.text ?? '') + (apAppend ?? '');
 
-		const parsed = mfm.parse(srcMfm);
+		const parsed1 = mfm.parse(srcMfm);
+		const parsed = marked.parse(parsed1);
 
 		if (!apAppend && parsed?.every(n => ['text', 'unicodeEmoji', 'emojiCode', 'mention', 'hashtag', 'url'].includes(n.type))) {
 			noMisskeyContent = true;

@@ -58,7 +58,8 @@
 		"terser": "5.31.3",
 		"typescript": "5.5.4",
 		"esbuild": "0.23.0",
-		"glob": "11.0.0"
+		"glob": "11.0.0",
+		"marked": "14.0.0"
 	},
 	"devDependencies": {
 		"@misskey-dev/eslint-plugin": "2.0.2",
