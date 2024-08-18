@@ -5,6 +5,7 @@
 
 import { Injectable } from '@nestjs/common';
 import * as mfm from 'mfm-js';
+import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 import { MfmService } from '@/core/MfmService.js';
 import type { MiNote } from '@/models/Note.js';
 import { bindThis } from '@/decorators.js';
@@ -29,16 +30,13 @@ export class ApMfmService {
 		let noMisskeyContent = false;
 		const srcMfm = (note.text ?? '') + (apAppend ?? '');
 
-		let md1 = srcMfm.replace(/\n[\#]{3}(.+)/g, '<h3>$1</h3>');
-		let md2 = md1.replace(/\n[\#]{2}(.+)/g, '<h2>$1</h2>');
-		let md3 = md2.replace(/\n[\#]{1}(.+)/g, '</h1>$1</h1>');
-		const parsed = mfm.parse(md3);
+		const parsed = mfm.parse(srcMfm);
 
 		if (!apAppend && parsed?.every(n => ['text', 'unicodeEmoji', 'emojiCode', 'mention', 'hashtag', 'url'].includes(n.type))) {
 			noMisskeyContent = true;
 		}
 
-		const content = this.mfmService.toHtml(parsed, JSON.parse(note.mentionedRemoteUsers));
+		const content = marked.parse(this.mfmService.toHtml(parsed, JSON.parse(note.mentionedRemoteUsers)));
 
 		return {
 			content,
