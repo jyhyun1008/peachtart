@@ -45,6 +45,9 @@ importers:
       typescript:
         specifier: 5.5.4
         version: 5.5.4
+      marked:
+        specifier: 14.0.0
+        version: 14.0.0
     optionalDependencies:
       '@tensorflow/tfjs-core':
         specifier: 4.4.0
@@ -290,9 +293,6 @@ importers:
       mfm-js:
         specifier: 0.24.0
         version: 0.24.0
-      marked:
-        specifier: 14.0.0
-        version: 14.0.0
       microformats-parser:
         specifier: 2.0.2
         version: 2.0.2
