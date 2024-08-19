@@ -143,7 +143,7 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 						const res: (VNode | string)[] = [];
 						for (const t of text.split('\n')) {
 							res.push(h('br'));
-							res.push(t);
+							res.push(h('span', {innerHTML: t}));
 						}
 						res.shift();
 						return res;
@@ -274,11 +274,11 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 						style = `animation: mfm-rainbow ${speed} linear infinite; animation-delay: ${delay};`;
 						break;
 					}
-     case 'gray': {
-return h('span', {
-class: '_mfm_gray',
-}, genEl(token.children, scale));
-}
+					case 'gray': {
+						return h('span', {
+						class: '_mfm_gray',
+						}, genEl(token.children, scale));
+						}
 					case 'sparkle': {
 						if (!useAnim) {
 							return genEl(token.children, scale);
