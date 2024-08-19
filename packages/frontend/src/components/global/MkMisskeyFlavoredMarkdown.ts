@@ -96,7 +96,7 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 					text = text.replace(/^\*\s(.+)/gm, '<li>$1</li>');
 
 					//ul
-					text = text.replace(/^[\s]{0,1}\-\s/gm, '<ul>\n* ');
+					text = text.replace(/^[\s]{0,1}\-\s/gm, '<ul>\n- ');
 					text = text.replace(/^(\-\s.+)\s*\n([^\-])/gm, '$1\n</ul>\n\n$2');
 					text = text.replace(/^\-\s(.+)/gm, '<li>$1</li>');
 
