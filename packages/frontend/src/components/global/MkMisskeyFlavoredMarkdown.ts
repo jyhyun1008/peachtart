@@ -89,34 +89,34 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 					text = doNyaize(text);
 				}
 
+				function minmark(text) {
+					//ul
+					text = text.replace(/^\s*\n\*\s/gm, '<ul>\n* ');
+					text = text.replace(/^(\*\s.+)\s*\n([^\*])/gm, '$1\n</ul>\n\n$2');
+					text = text.replace(/^\*\s(.+)/gm, '<li>$1</li>');
+
+					//ul
+					text = text.replace(/^\s*\n\-\s/gm, '<ul>\n* ');
+					text = text.replace(/^(\-\s.+)\s*\n([^\-])/gm, '$1\n</ul>\n\n$2');
+					text = text.replace(/^\-\s(.+)/gm, '<li>$1</li>');
+
+					//ol
+					text = text.replace(/^\s*\n\d\.\s/gm, '<ol>\n1. ');
+					text = text.replace(/^(\d\.\s.+)\s*\n([^\d\.])/gm, '$1\n</ol>\n\n$2');
+					text = text.replace(/^\d\.\s(.+)/gm, '<li>$1</li>');
+
+					//h
+					text = text.replace(/^[\#]{3}\s(.+)\n/gm, '<h3>$1</h3>');
+					text = text.replace(/^[\#]{2}\s(.+)\n/gm, '<h2>$1</h2>');
+					text = text.replace(/^[\#]{1}\s(.+)\n/gm, '<h1>$1</h1>');
+
+					//hr
+					text = text.replace(/[\-]{3}/g, '<hr>');
+
+					return text
+				}
+
 				if (!props.plain) {
-
-					function minmark(text) {
-						//ul
-						text = text.replace(/^\s*\n\*\s/gm, '<ul>\n* ');
-						text = text.replace(/^(\*\s.+)\s*\n([^\*])/gm, '$1\n</ul>\n\n$2');
-						text = text.replace(/^\*\s(.+)/gm, '<li>$1</li>');
-
-						//ul
-						text = text.replace(/^\s*\n\-\s/gm, '<ul>\n* ');
-						text = text.replace(/^(\-\s.+)\s*\n([^\-])/gm, '$1\n</ul>\n\n$2');
-						text = text.replace(/^\-\s(.+)/gm, '<li>$1</li>');
-
-						//ol
-						text = text.replace(/^\s*\n\d\.\s/gm, '<ol>\n1. ');
-						text = text.replace(/^(\d\.\s.+)\s*\n([^\d\.])/gm, '$1\n</ol>\n\n$2');
-						text = text.replace(/^\d\.\s(.+)/gm, '<li>$1</li>');
-
-						//h
-						text = text.replace(/^[\#]{3}(.+)/gm, '<h3>$1</h3>');
-						text = text.replace(/^[\#]{2}(.+)/gm, '<h2>$1</h2>');
-						text = text.replace(/^[\#]{1}(.+)/gm, '<h1>$1</h1>');
-
-						//hr
-						text = text.replace(/[\-]{3}/g, '<hr>');
-
-						return text
-					}
 					
 					if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text) || /\n\n\|([\s\S]+)\|$/.test(text) || /^\|([\s\S]+)\|$/.test(text) ) {
 						var result = text.replace(/\|{5}/g, '</td><td colspan="5">')
@@ -149,6 +149,7 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 						return res;
 					}
 				} else {
+					text = minmark(text)
 					return [text.replace(/\n/g, ' ')];
 				}
 			}
