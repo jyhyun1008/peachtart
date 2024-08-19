@@ -5,7 +5,6 @@
 
 import { Injectable } from '@nestjs/common';
 import * as mfm from 'mfm-js';
-import { marked } from "marked";
 import { MfmService } from '@/core/MfmService.js';
 import type { MiNote } from '@/models/Note.js';
 import { bindThis } from '@/decorators.js';
@@ -36,7 +35,7 @@ export class ApMfmService {
 			noMisskeyContent = true;
 		}
 
-		const content = marked.parse(this.mfmService.toHtml(parsed, JSON.parse(note.mentionedRemoteUsers)));
+		const content = this.mfmService.toHtml(parsed, JSON.parse(note.mentionedRemoteUsers));
 
 		return {
 			content,
