@@ -46,8 +46,8 @@ importers:
         specifier: 5.5.4
         version: 5.5.4
       marked:
-        specifier: 14.0.0
-        version: 14.0.0
+        specifier: 13.0.3
+        version: 13.0.3
     optionalDependencies:
       '@tensorflow/tfjs-core':
         specifier: 4.4.0
@@ -8746,6 +8746,11 @@ packages:
 
   mfm-js@0.24.0:
     resolution: {integrity: sha512-6m8N0ElH9/4CA1izhVqmxTfLj5Z9RspdqM/lMew4xU/UTgm4Pf//VpDunpasxbRFjeJSVW+zoVwL4ZPfPtfiQg==}
+
+  marked@13.0.3:
+    resolution: {integrity: sha512-rqRix3/TWzE9rIoFGIn8JmsVfhiuC8VIQ8IdX5TfzmeBucdY05/0UlzKaw0eVtpcN/OdVFpBk7CjKGo9iHJ/zA==}
+    engines: {node: '>= 18'}
+    hasBin: true
 
   microformats-parser@2.0.2:
     resolution: {integrity: sha512-tUf9DmN4Jq/tGyp1YH2V6D/Cud+9Uc0WhjjUFirqVeHTRkkfLDacv6BQFT7h7HFsD0Z8wja5eKkRgzZU8bv0Fw==}
