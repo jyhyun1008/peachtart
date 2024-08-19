@@ -114,7 +114,8 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 					text = text.replace(/[\-]{3}/g, '<hr>');
 
 					//br
-					text = text.replace(/\>\n/gm, '')
+					text = text.replace(/\>\n\n/gm, '')
+					text = text.replace(/\>\n\</gm, '')
 
 					return text
 				}
