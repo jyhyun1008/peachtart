@@ -106,12 +106,15 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 					text = text.replace(/^\d\.\s(.+)/gm, '<li>$1</li>');
 
 					//h
-					text = text.replace(/^[\#]{3}\s(.+)\n/gm, '<h3>$1</h3>');
-					text = text.replace(/^[\#]{2}\s(.+)\n/gm, '<h2>$1</h2>');
-					text = text.replace(/^[\#]{1}\s(.+)\n/gm, '<h1>$1</h1>');
+					text = text.replace(/^[\#]{3}\s(.+)/gm, '<h3>$1</h3>');
+					text = text.replace(/^[\#]{2}\s(.+)/gm, '<h2>$1</h2>');
+					text = text.replace(/^[\#]{1}\s(.+)/gm, '<h1>$1</h1>');
 
 					//hr
 					text = text.replace(/[\-]{3}/g, '<hr>');
+
+					//br
+					text = text.replace(/\>\n\</gm, '')
 
 					return text
 				}
