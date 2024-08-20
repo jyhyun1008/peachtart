@@ -980,13 +980,13 @@ table a {
 	border-radius: 10px 10px 0 0 !important;
 }
 
-.x48yH .xagin,.xpUJO .xagin,.main .xagin {
+.x48yH .xagin,.xpUJO .xagin,.main .xagin,.xFeJ0 .xagin {
   height: 2em;
   vertical-align: middle;
   transition: transform .2s ease;
 }
 
-.x48yH .xagin:hover,.xpUJO .xagin:hover,.main .xagin:hover {
+.x48yH .xagin:hover,.xpUJO .xagin:hover,.main .xagin:hover,.xFeJ0 .xagin:hover {
     transform: scale(1.2);
 }
 
@@ -1004,6 +1004,11 @@ table a {
 }
 
 // 여기는 진짜 순전히 어드민의장난질커스텀css
+
+.banner_img {
+	height: 40px;
+	max-height: 40px;
+}
 
 .ab-conversation {
 	position: absolute;
