@@ -97,7 +97,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 					<div v-if="user.fields.length > 0" class="fields">
 						<ul v-for="(field, i) in user.fields" :key="i" class="field">
 							<li v-if="field.value.includes('![')">
-								<a :href="field.value.split('](')[1].split(')')">
+								<a :href="field.value.split('](')[1].split(')')[0]">
 									<img :src="field.value.split('![)[1].split('](')[0]" class="banner_img"/>
 								</a>
 							</li>
