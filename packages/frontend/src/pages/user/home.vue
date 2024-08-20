@@ -103,10 +103,10 @@ SPDX-License-Identifier: AGPL-3.0-only
 							</li>
 						</ul>
 						<dl v-for="(field, i) in user.fields" :key="i" class="field">
-							<dt class="name">
+							<dt v-if="!field.value.includes('![') && !field.value.includes('](')" class="name">
 								<Mfm :text="field.name" :author="user" :plain="true" :colored="false"/>
 							</dt>
-							<dd class="value">
+							<dd v-if="!field.value.includes('![') && !field.value.includes('](')" class="value">
 								<Mfm :text="field.value" :author="user" :colored="false"/>
 								<i v-if="user.verifiedLinks.includes(field.value)" v-tooltip:dialog="i18n.ts.verifiedLink" class="ti ti-circle-check" :class="$style.verifiedLink"></i>
 							</dd>

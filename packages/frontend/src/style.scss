@@ -1005,6 +1005,15 @@ table a {
 
 // 여기는 진짜 순전히 어드민의장난질커스텀css
 
+ul.field {
+	list-style:none;
+	padding-left:0px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
 .banner_img {
 	height: 40px;
 	max-height: 40px;
