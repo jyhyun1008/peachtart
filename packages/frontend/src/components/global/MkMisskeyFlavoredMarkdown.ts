@@ -90,18 +90,21 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 				}
 
 				function minmark(text) {
+
+					text = '\n'+text
+					
 					//ul
-					text = text.replace(/^[\s]{0,1}\*\s/gm, '<ul>\n* ');
+					text = text.replace(/^\n[\s]{0,1}\*\s/gm, '\n<ul>\n* ');
 					text = text.replace(/^(\*\s.+)\s*\n([^\*])/gm, '$1\n</ul>\n\n$2');
 					text = text.replace(/^\*\s(.+)/gm, '<li>$1</li>');
 
 					//ul
-					text = text.replace(/^[\s]{0,1}\-\s/gm, '<ul>\n- ');
+					text = text.replace(/^\n[\s]{0,1}\-\s/gm, '\n<ul>\n- ');
 					text = text.replace(/^(\-\s.+)\s*\n([^\-])/gm, '$1\n</ul>\n\n$2');
 					text = text.replace(/^\-\s(.+)/gm, '<li>$1</li>');
 
 					//ol
-					text = text.replace(/^[\s]{0,1}\d\.\s/gm, '<ol>\n1. ');
+					text = text.replace(/^\n[\s]{0,1}\d\.\s/gm, '\n<ol>\n1. ');
 					text = text.replace(/^(\d\.\s.+)\s*\n([^\d\.])/gm, '$1\n</ol>\n\n$2');
 					text = text.replace(/^\d\.\s(.+)/gm, '<li>$1</li>');
 
@@ -117,7 +120,7 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 					text = text.replace(/\>\n\n/gm, '>\n')
 					text = text.replace(/\>\n\</gm, '><')
 
-					return text
+					return text.substr(1)
 				}
 
 				if (!props.plain) {
