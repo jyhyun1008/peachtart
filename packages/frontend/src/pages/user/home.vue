@@ -96,17 +96,17 @@ SPDX-License-Identifier: AGPL-3.0-only
 					</div>
 					<div v-if="user.fields.length > 0" class="fields">
 						<ul v-for="(field, i) in user.fields" :key="i" class="field">
-							<li v-if="field.value.includes('![') && field.value.includes('](')">
-								<a :href="field.value.split('](')[1].split(')')[0]">
-									<img :src="field.value.split('![')[1].split('](')[0]" class="banner_img"/>
+							<li v-if="field.name.includes('![') && field.value.includes('](')">
+								<a :href="field.value">
+									<img :src="field.name.split('](')[1].split(')')[0]" class="banner_img"/>
 								</a>
 							</li>
 						</ul>
 						<dl v-for="(field, i) in user.fields" :key="i" class="field">
-							<dt v-if="!field.value.includes('![') && !field.value.includes('](')" class="name">
+							<dt v-if="!field.name.includes('![') && !field.value.includes('](')" class="name">
 								<Mfm :text="field.name" :author="user" :plain="true" :colored="false"/>
 							</dt>
-							<dd v-if="!field.value.includes('![') && !field.value.includes('](')" class="value">
+							<dd v-if="!field.name.includes('![') && !field.value.includes('](')" class="value">
 								<Mfm :text="field.value" :author="user" :colored="false"/>
 								<i v-if="user.verifiedLinks.includes(field.value)" v-tooltip:dialog="i18n.ts.verifiedLink" class="ti ti-circle-check" :class="$style.verifiedLink"></i>
 							</dd>
