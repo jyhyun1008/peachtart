@@ -461,7 +461,7 @@ export class MfmService {
 
 		function minmark(text: string) {
 
-			text = '\n'+text
+			text = '<br>'+text
 
 			if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text) || /\n\n\|([\s\S]+)\|$/.test(text) || /^\|([\s\S]+)\|$/.test(text) ) {
 				text = text.replace(/\|{5}/g, '</td><td colspan="5">')
@@ -469,42 +469,41 @@ export class MfmService {
 				text = text.replace(/\|{3}/g, '</td><td colspan="3">')
 				text = text.replace(/\|{2}/g, '</td><td colspan="2">')
 				text = text.replace(/\|{1}/g, '</td><td>')
-				text = text.replace(/\<td\>\n(.+)\-{2,}(.+)\n\<\/td\>/g, '</tr></thead><tbody><tr>')
-				text = text.replace(/\<td\>\n\<\/td\>/g, '</tr><tr>')
-				text = text.replace(/^\<\/td\>/g, '<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg); font-weight: bold;"><tr>')
-				text = text.replace(/\n\n\<\/td\>/g, '\n<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg); font-weight: bold;"><tr>')
-				text = text.replace(/\<td\>\n\n/g, '</tr></tbody></table>\n')
+				text = text.replace(/\<td\>\<\/span\>\<br\>\<\/span\>(.+)\-{2,}(.+)\<\/span\>\<br\>\<\/span\>\<\/td\>/g, '</tr></thead><tbody><tr>')
+				text = text.replace(/\<td\>\<\/span\>\<br\>\<\/span\>\<\/td\>/g, '</tr><tr>')
+				text = text.replace(/\<br\>\<\/span\>\<\/td\>/g, '<br><span><table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg); font-weight: bold;"><tr>')
+				text = text.replace(/\<td\>\<\/span\>\<br\>\<\/span\>\<\/span\>\<br\>\<\/span\>/g, '</tr></tbody></table>\n')
 				text = text.replace(/\<td\>$/g, '</tr></tbody></table>')
 			}
 			
 			//ul
-			text = text.replace(/^\n[\s]{0,1}\*\s/gm, '\n<ul>\n* ');
-			text = text.replace(/^(\*\s.+)\s*\n([^\*])/gm, '$1\n</ul>\n\n$2');
-			text = text.replace(/^\*\s(.+)/gm, '<li>$1</li>');
+			text = text.replace(/\<span\>[\s]{0,1}\*\s/gm, '<ul><li><span>* ');
+			text = text.replace(/\<span\>(\*\s[^\<]+)\<\/span\>\<br\>/gm, '<span>$1</span></li></ul><br>');
+			text = text.replace(/\<\/ul\>\<br\>\<ul\>/gm, '');
 
 			//ul
-			text = text.replace(/^\n[\s]{0,1}\-\s/gm, '\n<ul>\n- ');
-			text = text.replace(/^(\-\s.+)\s*\n([^\-])/gm, '$1\n</ul>\n\n$2');
-			text = text.replace(/^\-\s(.+)/gm, '<li>$1</li>');
+			text = text.replace(/\<span\>[\s]{0,1}\-\s/gm, '<ul><li><span>* ');
+			text = text.replace(/\<span\>(\-\s[^\<]+)\<\/span\>\<br\>/gm, '<span>$1</span></li></ul><br>');
+			text = text.replace(/\<\/ul\>\<br\>\<ul\>/gm, '');
 
 			//ol
-			text = text.replace(/^\n[\s]{0,1}\d\.\s/gm, '\n<ol>\n1. ');
-			text = text.replace(/^(\d\.\s.+)\s*\n([^\d\.])/gm, '$1\n</ol>\n\n$2');
-			text = text.replace(/^\d\.\s(.+)/gm, '<li>$1</li>');
+			text = text.replace(/\<span\>[\s]{0,1}\d\.\s/gm, '<ol><li><span>* ');
+			text = text.replace(/\<span\>(\d\.\s[^\<]+)\<\/span\>\<br\>/gm, '<span>$1</span></li></ol><br>');
+			text = text.replace(/\<\/ol\>\<br\>\<ol\>/gm, '');
 
 			//h
-			text = text.replace(/^[\#]{3}\s(.+)/gm, '<h3>$1</h3>');
-			text = text.replace(/^[\#]{2}\s(.+)/gm, '<h2>$1</h2>');
-			text = text.replace(/^[\#]{1}\s(.+)/gm, '<h1>$1</h1>');
+			text = text.replace(/\<br\>\<span\>[\#]{3}\s(.+)/gm, '<br><span><h3>$1</h3>');
+			text = text.replace(/\<br\>\<span\>[\#]{2}\s(.+)/gm, '<br><span><h2>$1</h2>');
+			text = text.replace(/\<br\>\<span\>[\#]{1}\s(.+)/gm, '<br><span><h1>$1</h1>');
 
 			//hr
-			text = text.replace(/[\-]{3}/g, '<hr>');
+			text = text.replace(/\<br\>\<span\>[\-]{3}/g, '<hr>');
 
 			//br
-			text = text.replace(/\>\n\n/gm, '>\n')
+			text = text.replace(/\>\n\n/gm, '><br><')
 			text = text.replace(/\>\n\</gm, '><')
 
-			return text.substring(1)
+			return text.substring(4)
 		}
 
 		result = result.split('```')
