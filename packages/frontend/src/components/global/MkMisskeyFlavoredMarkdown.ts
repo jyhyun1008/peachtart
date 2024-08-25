@@ -127,10 +127,10 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 					
 					if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text) || /\n\n\|([\s\S]+)\|$/.test(text) || /^\|([\s\S]+)\|$/.test(text) ) {
 						var result = text.replace(/\|{5}/g, '</td><td colspan="5">')
-					  result = result.replace(/\|{4}/g, '</td><td colspan="4">')
-					  result = result.replace(/\|{3}/g, '</td><td colspan="3">')
-					  result = result.replace(/\|{2}/g, '</td><td colspan="2">')
-					  result = result.replace(/\|{1}/g, '</td><td>')
+						result = result.replace(/\|{4}/g, '</td><td colspan="4">')
+						result = result.replace(/\|{3}/g, '</td><td colspan="3">')
+						result = result.replace(/\|{2}/g, '</td><td colspan="2">')
+						result = result.replace(/\|{1}/g, '</td><td>')
 						result = result.replace(/\<td\>\n(.+)\-{2,}(.+)\n\<\/td\>/g, '</tr></thead><tbody><tr>')
 						result = result.replace(/\<td\>\n\<\/td\>/g, '</tr><tr>')
 						result = result.replace(/^\<\/td\>/g, '<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg); font-weight: bold;"><tr>')
@@ -156,7 +156,6 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 						return res;
 					}
 				} else {
-					text = minmark(text)
 					return [text.replace(/\n/g, ' ')];
 				}
 			}
@@ -530,6 +529,8 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 			}
 		}
 	}).flat(Infinity) as (VNode | string)[];
+
+	console.log(genEl)
 
 	return h('span', {
 		// https://codeday.me/jp/qa/20190424/690106.html
