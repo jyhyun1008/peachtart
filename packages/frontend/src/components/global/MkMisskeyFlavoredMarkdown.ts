@@ -570,6 +570,7 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 	}, genEl(rootAst, props.rootScale ?? 1));
 
 	let resultplain = ''
+	console.log(result)
 
 	for (var i=0; i<result.children.length; i++) {
 		if (result.children[i].props.innerHTML) {
@@ -582,18 +583,17 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 	}
 
 	let resultarray = minmark(resultplain).split('<!-- -->')
-	
+
 	console.log(resultarray)
 
-	for (var i=0; i<result.children.length; i++) {
-		if (result.children[i].props.innerHTML) {
-			result.children[i].props.innerHTML += resultarray[i]
-		} else if (result.children[i].props.emoji) {
-			result.children[i].props.emoji += resultarray[i]
-		}
-	}
+	// for (var i=0; i<result.children.length; i++) {
+	// 	if (result.children[i].props.innerHTML) {
+	// 		result.children[i].props.innerHTML += resultarray[i]
+	// 	} else if (result.children[i].props.emoji) {
+	// 		result.children[i].props.emoji += resultarray[i]
+	// 	}
+	// }
 
-	console.log(result)
 
 	return result
 }
