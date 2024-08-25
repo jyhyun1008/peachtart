@@ -89,16 +89,74 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 					text = doNyaize(text);
 				}
 
+				function minmark(text:string) {
+
+					text = '\n'+text
+					
+					//ul
+					text = text.replace(/^\n[\s]{0,1}\*\s/gm, '\n<ul>\n* ');
+					text = text.replace(/^(\*\s.+)\s*\n([^\*])/gm, '$1\n</ul>\n\n$2');
+					text = text.replace(/^\*\s(.+)/gm, '<li>$1</li>');
+
+					//ul
+					text = text.replace(/^\n[\s]{0,1}\-\s/gm, '\n<ul>\n- ');
+					text = text.replace(/^(\-\s.+)\s*\n([^\-])/gm, '$1\n</ul>\n\n$2');
+					text = text.replace(/^\-\s(.+)/gm, '<li>$1</li>');
+
+					//ol
+					text = text.replace(/^\n[\s]{0,1}\d\.\s/gm, '\n<ol>\n1. ');
+					text = text.replace(/^(\d\.\s.+)\s*\n([^\d\.])/gm, '$1\n</ol>\n\n$2');
+					text = text.replace(/^\d\.\s(.+)/gm, '<li>$1</li>');
+
+					//h
+					text = text.replace(/^[\#]{3}\s(.+)/gm, '<h3>$1</h3>');
+					text = text.replace(/^[\#]{2}\s(.+)/gm, '<h2>$1</h2>');
+					text = text.replace(/^[\#]{1}\s(.+)/gm, '<h1>$1</h1>');
+
+					//hr
+					text = text.replace(/[\-]{3}/g, '<hr>');
+
+					//br
+					text = text.replace(/\>\n\n/gm, '>\n')
+					text = text.replace(/\>\n\</gm, '><')
+
+					return text.substring(1)
+				}
+
 				if (!props.plain) {
 					
-					const res: (VNode | string)[] = [];
-					for (const t of text.split('\n')) {
-						res.push(h('br'));
-						res.push(h('span', {innerHTML: t}));
+					if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text) || /\n\n\|([\s\S]+)\|$/.test(text) || /^\|([\s\S]+)\|$/.test(text) ) {
+						var result = text.replace(/\|{5}/g, '</td><td colspan="5">')
+					  result = result.replace(/\|{4}/g, '</td><td colspan="4">')
+					  result = result.replace(/\|{3}/g, '</td><td colspan="3">')
+					  result = result.replace(/\|{2}/g, '</td><td colspan="2">')
+					  result = result.replace(/\|{1}/g, '</td><td>')
+						result = result.replace(/\<td\>\n(.+)\-{2,}(.+)\n\<\/td\>/g, '</tr></thead><tbody><tr>')
+						result = result.replace(/\<td\>\n\<\/td\>/g, '</tr><tr>')
+						result = result.replace(/^\<\/td\>/g, '<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg); font-weight: bold;"><tr>')
+						result = result.replace(/\n\n\<\/td\>/g, '\n<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg); font-weight: bold;"><tr>')
+						result = result.replace(/\<td\>\n\n/g, '</tr></tbody></table>\n')
+						result = result.replace(/\<td\>$/g, '</tr></tbody></table>')
+						result = minmark(result)
+						var result2: (VNode | string)[] = [];
+						for (var r of result.split('\n')) {
+							result2.push(h('br'));
+							result2.push(h('span', {innerHTML: r}));
+						}
+						result2.shift();
+						return result2;
+					} else {
+						text = minmark(text)
+						const res: (VNode | string)[] = [];
+						for (const t of text.split('\n')) {
+							res.push(h('br'));
+							res.push(h('span', {innerHTML: t}));
+						}
+						res.shift();
+						return res;
 					}
-					res.shift();
-					return res;
 				} else {
+					text = minmark(text)
 					return [text.replace(/\n/g, ' ')];
 				}
 			}
@@ -473,60 +531,8 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 		}
 	}).flat(Infinity) as (VNode | string)[];
 
-	let result = h('span', {
+	return h('span', {
 		// https://codeday.me/jp/qa/20190424/690106.html
 		style: props.nowrap ? 'white-space: pre; word-wrap: normal; overflow: hidden; text-overflow: ellipsis;' : 'white-space: pre-wrap;',
 	}, genEl(rootAst, props.rootScale ?? 1));
-
-
-	function minmark(text: string) {
-
-		text = '<br>'+text
-
-		if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text) || /\n\n\|([\s\S]+)\|$/.test(text) || /^\|([\s\S]+)\|$/.test(text) ) {
-			text = text.replace(/\|{5}/g, '</td><td colspan="5">')
-			text = text.replace(/\|{4}/g, '</td><td colspan="4">')
-			text = text.replace(/\|{3}/g, '</td><td colspan="3">')
-			text = text.replace(/\|{2}/g, '</td><td colspan="2">')
-			text = text.replace(/\|{1}/g, '</td><td>')
-			text = text.replace(/\<td\>\<\/span\>\<br\>\<\/span\>(.+)\-{2,}(.+)\<\/span\>\<br\>\<\/span\>\<\/td\>/g, '</tr></thead><tbody><tr>')
-			text = text.replace(/\<td\>\<\/span\>\<br\>\<\/span\>\<\/td\>/g, '</tr><tr>')
-			text = text.replace(/\<br\>\<\/span\>\<\/td\>/g, '<br><span><table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg); font-weight: bold;"><tr>')
-			text = text.replace(/\<td\>\<\/span\>\<br\>\<\/span\>\<\/span\>\<br\>\<\/span\>/g, '</tr></tbody></table>\n')
-			text = text.replace(/\<td\>$/g, '</tr></tbody></table>')
-		}
-		
-		//ul
-		text = text.replace(/\<span\>[\s]{0,1}\*\s/gm, '<ul><li><span>* ');
-		text = text.replace(/\<span\>(\*\s[^\>]+)\>\<br\>/gm, '<span>$1></li></ul><br>');
-		text = text.replace(/\<\/ul\>\<br\>\<ul\>/gm, '');
-
-		//ul
-		text = text.replace(/\<span\>[\s]{0,1}\-\s/gm, '<ul><li><span>- ');
-		text = text.replace(/\<span\>(\-\s[^\>]+)\>\<br\>/gm, '<span>$1></li></ul><br>');
-		text = text.replace(/\<\/ul\>\<br\>\<ul\>/gm, '');
-
-		//ol
-		text = text.replace(/\<span\>[\s]{0,1}\d\.\s/gm, '<ol><li><span>1. ');
-		text = text.replace(/\<span\>(\d\.\s[^\>]+)\>\<br\>/gm, '<span>$1></li></ol><br>');
-		text = text.replace(/\<\/ol\>\<br\>\<ol\>/gm, '');
-
-		//h
-		text = text.replace(/\<br\>\<span\>[\#]{3}\s(.+)/gm, '<br><span><h3>$1</h3>');
-		text = text.replace(/\<br\>\<span\>[\#]{2}\s(.+)/gm, '<br><span><h2>$1</h2>');
-		text = text.replace(/\<br\>\<span\>[\#]{1}\s(.+)/gm, '<br><span><h1>$1</h1>');
-
-		//hr
-		text = text.replace(/\<br\>\<span\>[\-]{3}/g, '<hr>');
-
-		//br
-		text = text.replace(/\>\n\n/gm, '><br><')
-		text = text.replace(/\>\n\</gm, '><')
-
-		return text.substring(4)
-	}
-
-	result = minmark(result)
-
-	return result
 }
