@@ -457,6 +457,58 @@ export class MfmService {
 
 		appendChildren(nodes, body);
 
-		return new XMLSerializer().serializeToString(body);
+		let result = new XMLSerializer().serializeToString(body);
+
+		function minmark(text: string) {
+
+			text = '\n'+text
+			
+			//ul
+			text = text.replace(/^\n[\s]{0,1}\*\s/gm, '\n<ul>\n* ');
+			text = text.replace(/^(\*\s.+)\s*\n([^\*])/gm, '$1\n</ul>\n\n$2');
+			text = text.replace(/^\*\s(.+)/gm, '<li>$1</li>');
+
+			//ul
+			text = text.replace(/^\n[\s]{0,1}\-\s/gm, '\n<ul>\n- ');
+			text = text.replace(/^(\-\s.+)\s*\n([^\-])/gm, '$1\n</ul>\n\n$2');
+			text = text.replace(/^\-\s(.+)/gm, '<li>$1</li>');
+
+			//ol
+			text = text.replace(/^\n[\s]{0,1}\d\.\s/gm, '\n<ol>\n1. ');
+			text = text.replace(/^(\d\.\s.+)\s*\n([^\d\.])/gm, '$1\n</ol>\n\n$2');
+			text = text.replace(/^\d\.\s(.+)/gm, '<li>$1</li>');
+
+			//h
+			text = text.replace(/^[\#]{3}\s(.+)/gm, '<h3>$1</h3>');
+			text = text.replace(/^[\#]{2}\s(.+)/gm, '<h2>$1</h2>');
+			text = text.replace(/^[\#]{1}\s(.+)/gm, '<h1>$1</h1>');
+
+			//hr
+			text = text.replace(/[\-]{3}/g, '<hr>');
+
+			//br
+			text = text.replace(/\>\n\n/gm, '>\n')
+			text = text.replace(/\>\n\</gm, '><')
+
+			return text.substr(1)
+		}
+
+		result = result.split('```')
+
+		for (let i=0; i<result.length; i++) {
+			if (i%2 == 0) {
+				var result2 = result[i].split('`')
+				for (let j=0; i<result2.length; j++) {
+					if (j%2 == 0) {
+						result2[j] = minmark(result2[j])
+					}
+				}
+				result[i] = result2.join('`')
+			}
+		}
+		result = result.join('```')
+
+		return result
 	}
 }
+
