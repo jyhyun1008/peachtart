@@ -530,10 +530,66 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 		}
 	}).flat(Infinity) as (VNode | string)[];
 
+	function minmark(text:string) {
+
+		text = '\n'+text
+		
+		//ul
+		text = text.replace(/^\n[\s]{0,1}\*\s/gm, '\n<ul>\n* ');
+		text = text.replace(/^(\*\s.+)\s*\n([^\*])/gm, '$1\n</ul>\n\n$2');
+		text = text.replace(/^\*\s(.+)/gm, '<li>$1</li>');
+
+		//ul
+		text = text.replace(/^\n[\s]{0,1}\-\s/gm, '\n<ul>\n- ');
+		text = text.replace(/^(\-\s.+)\s*\n([^\-])/gm, '$1\n</ul>\n\n$2');
+		text = text.replace(/^\-\s(.+)/gm, '<li>$1</li>');
+
+		//ol
+		text = text.replace(/^\n[\s]{0,1}\d\.\s/gm, '\n<ol>\n1. ');
+		text = text.replace(/^(\d\.\s.+)\s*\n([^\d\.])/gm, '$1\n</ol>\n\n$2');
+		text = text.replace(/^\d\.\s(.+)/gm, '<li>$1</li>');
+
+		//h
+		text = text.replace(/^[\#]{3}\s(.+)/gm, '<h3>$1</h3>');
+		text = text.replace(/^[\#]{2}\s(.+)/gm, '<h2>$1</h2>');
+		text = text.replace(/^[\#]{1}\s(.+)/gm, '<h1>$1</h1>');
+
+		//hr
+		text = text.replace(/[\-]{3}/g, '<hr>');
+
+		//br
+		text = text.replace(/\>\n\n/gm, '>\n')
+		text = text.replace(/\>\n\</gm, '><')
+
+		return text.substring(1)
+	}
+
 	let result = h('span', {
 		// https://codeday.me/jp/qa/20190424/690106.html
 		style: props.nowrap ? 'white-space: pre; word-wrap: normal; overflow: hidden; text-overflow: ellipsis;' : 'white-space: pre-wrap;',
 	}, genEl(rootAst, props.rootScale ?? 1));
+
+	let resultplain = ''
+
+	for (var i=0; i<result.children.length; i++) {
+		if (result.children[i].props.innerHTML) {
+			resultplain += result.children[i].props.innerHTML + '<!-- -->'
+		} else if (result.children[i].props.emoji) {
+			resultplain += result.children[i].props.emoji + '<!-- -->'
+		} else {
+			resultplain += '<!-- -->'
+		}
+	}
+
+	let resultarray = minmark(resultplain).split('<!-- -->')
+
+	for (var i=0; i<result.children.length; i++) {
+		if (result.children[i].props.innerHTML) {
+			result.children[i].props.innerHTML += resultarray[i]
+		} else if (result.children[i].props.emoji) {
+			result.children[i].props.emoji += resultarray[i]
+		}
+	}
 
 	console.log(result)
 
