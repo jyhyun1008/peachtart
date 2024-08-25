@@ -462,6 +462,20 @@ export class MfmService {
 		function minmark(text: string) {
 
 			text = '\n'+text
+
+			if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text) || /\n\n\|([\s\S]+)\|$/.test(text) || /^\|([\s\S]+)\|$/.test(text) ) {
+				text = text.replace(/\|{5}/g, '</td><td colspan="5">')
+				text = text.replace(/\|{4}/g, '</td><td colspan="4">')
+				text = text.replace(/\|{3}/g, '</td><td colspan="3">')
+				text = text.replace(/\|{2}/g, '</td><td colspan="2">')
+				text = text.replace(/\|{1}/g, '</td><td>')
+				text = text.replace(/\<td\>\n(.+)\-{2,}(.+)\n\<\/td\>/g, '</tr></thead><tbody><tr>')
+				text = text.replace(/\<td\>\n\<\/td\>/g, '</tr><tr>')
+				text = text.replace(/^\<\/td\>/g, '<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg); font-weight: bold;"><tr>')
+				text = text.replace(/\n\n\<\/td\>/g, '\n<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg); font-weight: bold;"><tr>')
+				text = text.replace(/\<td\>\n\n/g, '</tr></tbody></table>\n')
+				text = text.replace(/\<td\>$/g, '</tr></tbody></table>')
+			}
 			
 			//ul
 			text = text.replace(/^\n[\s]{0,1}\*\s/gm, '\n<ul>\n* ');
@@ -490,7 +504,7 @@ export class MfmService {
 			text = text.replace(/\>\n\n/gm, '>\n')
 			text = text.replace(/\>\n\</gm, '><')
 
-			return text.substr(1)
+			return text.substring(1)
 		}
 
 		result = result.split('```')
