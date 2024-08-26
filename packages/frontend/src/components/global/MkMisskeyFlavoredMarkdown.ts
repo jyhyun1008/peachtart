@@ -62,11 +62,14 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 
 	//ul
 	props.text = props.text.replace(/^\*\s(.+)/gm, '<i>ul\n<i>li\n$1</i></i>')
+	props.text = props.text.replace(/\n\-\s(.+)/gm, '<i>ul\n<i>li\n$1</i></i>')
 	props.text = props.text.replace(/^\-\s(.+)/gm, '<i>ul\n<i>li\n$1</i></i>')
+	props.text = props.text.replace(/\n\-\s(.+)/gm, '<i>ul\n<i>li\n$1</i></i>')
 	props.text = props.text.replace(/\<\/i\>\n\<i\>ul\n/gm, '')
 
 	//ol
 	props.text = props.text.replace(/^\d\.\s(.+)/gm, '<i>ol\n<i>li\n$1</i></i>')
+	props.text = props.text.replace(/\n\d\.\s(.+)/gm, '<i>ol\n<i>li\n$1</i></i>')
 	props.text = props.text.replace(/\<\/i\>\n\<i\>ol\n/gm, '')
 
 	console.log(props.text)
