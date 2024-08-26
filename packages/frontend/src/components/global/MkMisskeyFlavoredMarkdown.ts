@@ -178,8 +178,8 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 					token.children[0].props.text = token.children[0].props.text.substring(3)
 					return h('tr', genEl(token.children, scale))
 				} else if (/td\d\s/.test(token.children[0].props.text)) {
-					token.children[0].props.text = token.children[0].props.text.substring(4)
 					let colspan = parseInt(token.children[0].props.text.split('td')[1].split(' ')[0])
+					token.children[0].props.text = token.children[0].props.text.substring(4)
 					return h('td', {
 						colspan: colspan,
 					}, genEl(token.children, scale))
