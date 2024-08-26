@@ -514,17 +514,17 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 		
 		//ul
 		text = text.replace(/\>[\s]{0,1}\*\s/gm, '><ul><li>');
-		text = text.replace(/\<ul\>\<li\>([^\n]+)\<\!\-\-\s\-\-\>\n/gm, '<ul><li>$1</li></ul><!-- -->\n');
+		text = text.replace(/\<ul\>\<li\>([^\n]+)\<\!\-\-\s\-\-\>$/gm, '<ul><li>$1</li></ul><!-- -->');
 		text = text.replace(/\<\/ul\>\<\!\-\-\s\-\-\>\n\<\!\-\-\s\-\-\>\<ul\>/gm, '<!-- --><br/><!-- -->');
 
 		//ul
 		text = text.replace(/\>[\s]{0,1}\-\s/gm, '><ul><li>');
-		text = text.replace(/\<ul\>\<li\>([^\n]+)\<\!\-\-\s\-\-\>\n/gm, '<ul><li>$1</li></ul><!-- -->\n');
+		text = text.replace(/\<ul\>\<li\>([^\n]+)\<\!\-\-\s\-\-\>$/gm, '<ul><li>$1</li></ul><!-- -->');
 		text = text.replace(/\<\/ul\>\<\!\-\-\s\-\-\>\n\<\!\-\-\s\-\-\>\<ul\>/gm, '<!-- --><br/><!-- -->');
 
 		//ol
 		text = text.replace(/\>[\s]{0,1}\d\.\s/gm, '><ol><li>');
-		text = text.replace(/\<ol\>\<li\>([^\n]+)\<\!\-\-\s\-\-\>\n/gm, '<ol><li>$1</li></ol><!-- -->\n');
+		text = text.replace(/\<ol\>\<li\>([^\n]+)\<\!\-\-\s\-\-\>$/gm, '<ol><li>$1</li></ol><!-- -->');
 		text = text.replace(/\<\/ol\>\<\!\-\-\s\-\-\>\n\<\!\-\-\s\-\-\>\<ol\>/gm, '<!-- --><br/><!-- -->');
 
 		//h
@@ -566,7 +566,7 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 		}
 	}
 
-	console.log(resultplain)
+	console.log(result)
 	let resultarray = minmark(resultplain).split('<!-- -->')
 
 	console.log(minmark(resultplain))
