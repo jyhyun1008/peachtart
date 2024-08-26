@@ -62,6 +62,8 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 
 	const rootAst = props.parsedNodes ?? (props.plain ? mfm.parseSimple : mfm.parse)(props.text);
 
+	console.log(rootAst)
+
 	const validTime = (t: string | boolean | null | undefined) => {
 		if (t == null) return null;
 		if (typeof t === 'boolean') return null;
@@ -542,51 +544,47 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 		return text.substring(1)
 	}
 
-
 	let result = h('span', {
 		// https://codeday.me/jp/qa/20190424/690106.html
 		style: props.nowrap ? 'white-space: pre; word-wrap: normal; overflow: hidden; text-overflow: ellipsis;' : 'white-space: pre-wrap;',
 	}, genEl(rootAst, props.rootScale ?? 1));
 
-	let resultplain = ''
+	// let resultplain = ''
 
-	if (result.children) {
-		for (var i=0; i<result.children.length; i++) {
-			if (result.children[i].type == 'br' || !result.children[i].props){
-				resultplain += '<br><!-- -->'
-			} else if (result.children[i].props) {
-				if (result.children[i].props.innerHTML) {
-					resultplain += result.children[i].props.innerHTML + '<!-- -->'
-				} else if (result.children[i].props.emoji) {
-					resultplain += result.children[i].props.emoji + '<!-- -->'
-				} else {
-					resultplain += '<!-- -->'
-				}
-			}
-		}
-	}
+	// if (result.children) {
+	// 	for (var i=0; i<result.children.length; i++) {
+	// 		if (result.children[i].type == 'br' || !result.children[i].props){
+	// 			resultplain += '<br><!-- -->'
+	// 		} else if (result.children[i].props) {
+	// 			if (result.children[i].props.innerHTML) {
+	// 				resultplain += result.children[i].props.innerHTML + '<!-- -->'
+	// 			} else if (result.children[i].props.emoji) {
+	// 				resultplain += result.children[i].props.emoji + '<!-- -->'
+	// 			} else {
+	// 				resultplain += '<!-- -->'
+	// 			}
+	// 		}
+	// 	}
+	// }
 
-	console.log(result)
-	let resultarray = minmark(resultplain).split('<!-- -->')
+	// let resultarray = minmark(resultplain).split('<!-- -->')
 
-	console.log(minmark(resultplain))
-
-	if (result.children) {
-		for (var i=0; i<result.children.length; i++) {
-			if (result.children[i].type != 'br' && result.children[i].props){
-				if (result.children[i].props.innerHTML) {
-					result.children[i].props.innerHTML = resultarray[i]
-				} else if (result.children[i].props.emoji) {
-					result.children[i].props.emoji = resultarray[i]
-				}
-			}
-			if (resultarray[i] == '<br/>') {
-				resultarray.splice(i, 1)
-				result.children.splice(i, 1)
-				i--;
-			}
-		}
-	}
+	// if (result.children) {
+	// 	for (var i=0; i<result.children.length; i++) {
+	// 		if (result.children[i].type != 'br' && result.children[i].props){
+	// 			if (result.children[i].props.innerHTML) {
+	// 				result.children[i].props.innerHTML = resultarray[i]
+	// 			} else if (result.children[i].props.emoji) {
+	// 				result.children[i].props.emoji = resultarray[i]
+	// 			}
+	// 		}
+	// 		if (resultarray[i] == '<br/>') {
+	// 			resultarray.splice(i, 1)
+	// 			result.children.splice(i, 1)
+	// 			i--;
+	// 		}
+	// 	}
+	// }
 
 	return result
 }
