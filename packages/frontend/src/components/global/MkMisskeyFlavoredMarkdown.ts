@@ -61,8 +61,8 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 	if (props.text == null || props.text === '') return;
 
 	//ul
-	props.text = props.text.replace(/^\*\s([\s\S]+)\n[^\*]/gm, '<i>ul\n* $1\n</i>\n')
-	props.text = props.text.replace(/^\*\s(.+)$/gm, '<i>li\n$1\n</i>')
+	props.text = props.text.replace(/^\*\s([\s\S]+)\n[^\*]/gm, '<i>ul\n* $1</i>\n')
+	props.text = props.text.replace(/\n\*\s(.+)$/gm, '<i>li\n$1</i>')
 
 	const rootAst = props.parsedNodes ?? (props.plain ? mfm.parseSimple : mfm.parse)(props.text);
 
@@ -139,9 +139,11 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 			}
 
 			case 'italic': {
-				if (token.children[0].props.text == 'ul\n') {
+				if (token.children[0].props.text.includes('ul\n')) {
+					token.children[0].props.text = token.children[0].props.text.substring(3)
 					return h('ul', genEl(token.children, scale))
 				} else if (token.children[0].props.text.includes('li\n')) {
+					token.children[0].props.text = token.children[0].props.text.substring(3)
 					return h('li', genEl(token.children, scale))
 				} else {
 					return h('i', {
