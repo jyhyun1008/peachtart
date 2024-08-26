@@ -548,7 +548,7 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 	}, genEl(rootAst, props.rootScale ?? 1));
 
 	let resultplain = ''
-	console.log(result)
+	console.log(resultplain)
 
 	if (result.children) {
 		for (var i=0; i<result.children.length; i++) {
