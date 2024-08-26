@@ -60,6 +60,10 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 	if (props.text == null || props.text === '') return;
 
+	//ul
+	props.text = props.text.replace(/^\*\s([\s\S]+)\n[^\*]/gm, '<i>ul\n* $1\n</i>\n')
+	props.text = props.text.replace(/^\*\s(.+)$/gm, '<i>li\n$1\n</i>')
+
 	const rootAst = props.parsedNodes ?? (props.plain ? mfm.parseSimple : mfm.parse)(props.text);
 
 	console.log(rootAst)
@@ -135,9 +139,15 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 			}
 
 			case 'italic': {
-				return h('i', {
-					style: 'font-style: oblique;',
-				}, genEl(token.children, scale));
+				if (token.children[0].props.text == 'ul\n') {
+					return h('ul', genEl(token.children, scale))
+				} else if (token.children[0].props.text.includes('li\n')) {
+					return h('li', genEl(token.children, scale))
+				} else {
+					return h('i', {
+						style: 'font-style: oblique;',
+					}, genEl(token.children, scale));
+				}
 			}
 
 			case 'fn': {
