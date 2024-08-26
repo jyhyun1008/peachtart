@@ -165,16 +165,16 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 				} else if (token.children[0].props.text.includes('li\n')) {
 					token.children[0].props.text = token.children[0].props.text.substring(3)
 					return h('li', genEl(token.children, scale))
-				} else if (token.children[0].props.text.includes('table\s')) {
+				} else if (token.children[0].props.text.includes('table ')) {
 					token.children[0].props.text = token.children[0].props.text.substring(6)
 					return h('table', genEl(token.children, scale))
-				} else if (token.children[0].props.text.includes('thead\s')) {
+				} else if (token.children[0].props.text.includes('thead ')) {
 					token.children[0].props.text = token.children[0].props.text.substring(6)
 					return h('thead', genEl(token.children, scale))
-				} else if (token.children[0].props.text.includes('tbody\s')) {
+				} else if (token.children[0].props.text.includes('tbody ')) {
 					token.children[0].props.text = token.children[0].props.text.substring(6)
 					return h('tbody', genEl(token.children, scale))
-				} else if (token.children[0].props.text.includes('tr\s')) {
+				} else if (token.children[0].props.text.includes('tr ')) {
 					token.children[0].props.text = token.children[0].props.text.substring(3)
 					return h('tr', genEl(token.children, scale))
 				} else if (/td\d\s/.test(token.children[0].props.text)) {
