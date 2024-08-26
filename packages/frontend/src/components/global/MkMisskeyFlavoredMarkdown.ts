@@ -498,33 +498,35 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 
 		text = '<br>'+text
 
+		text = text.replace(/\<br\>/gm, '\n')
+
 		if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text) || /\n\n\|([\s\S]+)\|$/.test(text) || /^\|([\s\S]+)\|$/.test(text) ) {
 			text = text.replace(/\|{5}/g, '</td><td colspan="5">')
 			text = text.replace(/\|{4}/g, '</td><td colspan="4">')
 			text = text.replace(/\|{3}/g, '</td><td colspan="3">')
 			text = text.replace(/\|{2}/g, '</td><td colspan="2">')
 			text = text.replace(/\|{1}/g, '</td><td>')
-			text = text.replace(/\<td\>\<br\>(.+)\-{2,}(.+)\<br\>\<\/td\>/g, '</tr></thead><tbody><tr>')
-			text = text.replace(/\<td\>\<br\>\<\/td\>/g, '</tr><tr>')
-			text = text.replace(/\<br\>\<\/td\>/g, '<br><span><table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg); font-weight: bold;"><tr>')
-			text = text.replace(/\<td\>\<br\>\<br\>/g, '</tr></tbody></table>\n')
+			text = text.replace(/\<td\>\n(.+)\-{2,}(.+)\n\<\/td\>/g, '</tr></thead><tbody><tr>')
+			text = text.replace(/\<td\>\n\<\/td\>/g, '</tr><tr>')
+			text = text.replace(/\n\<\/td\>/g, '<br><span><table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg); font-weight: bold;"><tr>')
+			text = text.replace(/\<td\>\n\n\>/g, '</tr></tbody></table>\n')
 			text = text.replace(/\<td\>$/g, '</tr></tbody></table>')
 		}
 		
 		//ul
-		text = text.replace(/\>[\s]{0,1}\*\s/gm, '><ul><li>* ');
-		text = text.replace(/\>(\*\s[^\<]+)\<\!\-\-\s\-\-\>\<br\>/gm, '>$1</li></ul><!-- --><br>');
-		text = text.replace(/\<\/ul\>\<\!\-\-\s\-\-\>\<br\>\<br\>\<\!\-\-\s\-\-\>\<br\>\<ul\>/gm, '');
+		text = text.replace(/\>[\s]{0,1}\*\s/gm, '><ul><li>');
+		text = text.replace(/\>(\*\s[^\n]+)\<\!\-\-\s\-\-\>\n/gm, '>$1</li></ul><!-- -->\n');
+		text = text.replace(/\<\/ul\>\<\!\-\-\s\-\-\>\n\<\!\-\-\s\-\-\>\<ul\>/gm, '<!-- --><br/><!-- -->');
 
 		//ul
-		text = text.replace(/\>[\s]{0,1}\-\s/gm, '><ul><li>- ');
-		text = text.replace(/\>(\-\s[^\<]+)\<\!\-\-\s\-\-\>\<br\>\<br\>/gm, '>$1</li></ul><!-- --><br>');
-		text = text.replace(/\<\/ul\>\<\!\-\-\s\-\-\>\<br\>\<br\>\<\!\-\-\s\-\-\>\<br\>\<ul\>/gm, '');
+		text = text.replace(/\>[\s]{0,1}\-\s/gm, '><ul><li>');
+		text = text.replace(/\>(\-\s[^\n]+)\<\!\-\-\s\-\-\>\n/gm, '>$1</li></ul><!-- -->\n');
+		text = text.replace(/\<\/ul\>\<\!\-\-\s\-\-\>\n\<\!\-\-\s\-\-\>\<ul\>/gm, '<!-- --><br/><!-- -->');
 
 		//ol
-		text = text.replace(/\>[\s]{0,1}\d\.\s/gm, '><ol><li>1. ');
-		text = text.replace(/\>(\d\.\s[^\<]+)\<\!\-\-\s\-\-\>\<br\>\<br\>/gm, '>$1</li></ol><!-- --><br>');
-		text = text.replace(/\<\/ol\>\<\!\-\-\s\-\-\>\<br\>\<br\>\<\!\-\-\s\-\-\>\<br\>\<ol\>/gm, '');
+		text = text.replace(/\>[\s]{0,1}\d\.\s/gm, '><ol><li>');
+		text = text.replace(/\>(\d\.\s[^\n]+)\<\!\-\-\s\-\-\>\n/gm, '>$1</li></ol><!-- -->\n');
+		text = text.replace(/\<\/ol\>\<\!\-\-\s\-\-\>\n\<\!\-\-\s\-\-\>\<ol\>/gm, '<!-- --><br/><!-- -->');
 
 		//h
 		text = text.replace(/\<br\>[\#]{3}\s(.+)/gm, '<br><h3>$1</h3>');
@@ -578,6 +580,10 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 				} else if (result.children[i].props.emoji) {
 					result.children[i].props.emoji = resultarray[i]
 				}
+			}
+			if (resultarray[i] == '<br/>') {
+				result.children.splice(i, 1)
+				i--;
 			}
 		}
 	}
