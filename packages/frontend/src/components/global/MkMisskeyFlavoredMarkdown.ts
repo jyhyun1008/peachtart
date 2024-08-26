@@ -69,6 +69,8 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 	props.text = props.text.replace(/^\d\.\s(.+)/gm, '<i>ol\n<i>li\n$1</i></i>')
 	props.text = props.text.replace(/\<\/i\>\n\<i\>ol\n/gm, '')
 
+	console.log(props.text)
+
 	const rootAst = props.parsedNodes ?? (props.plain ? mfm.parseSimple : mfm.parse)(props.text);
 
 	console.log(rootAst)
