@@ -568,7 +568,7 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 
 	let resultarray = minmark(resultplain).split('<!-- -->')
 
-	console.log(resultarray)
+	console.log(minmark(resultplain))
 
 	if (result.children) {
 		for (var i=0; i<result.children.length; i++) {
