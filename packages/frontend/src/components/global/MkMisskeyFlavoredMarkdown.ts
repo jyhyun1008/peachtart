@@ -61,8 +61,13 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 	if (props.text == null || props.text === '') return;
 
 	//ul
-	props.text = props.text.replace(/^\*\s([\s\S]+)\n[^\*]/gm, '<i>ul\n* $1</i>\n')
-	props.text = props.text.replace(/\n\*\s(.+)$/gm, '<i>li\n$1</i>')
+	props.text = props.text.replace(/^\*\s(.+)/gm, '<i>ul\n<i>li\n$1</i></i>')
+	props.text = props.text.replace(/^\-\s(.+)/gm, '<i>ul\n<i>li\n$1</i></i>')
+	props.text = props.text.replace(/\<\/i\>\n\<i\>ul\n/gm, '')
+
+	//ol
+	props.text = props.text.replace(/^\d\.\s(.+)/gm, '<i>ol\n<i>li\n$1</i></i>')
+	props.text = props.text.replace(/\<\/i\>\n\<i\>ol\n/gm, '')
 
 	const rootAst = props.parsedNodes ?? (props.plain ? mfm.parseSimple : mfm.parse)(props.text);
 
@@ -142,6 +147,9 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 				if (token.children[0].props.text.includes('ul\n')) {
 					token.children[0].props.text = token.children[0].props.text.substring(3)
 					return h('ul', genEl(token.children, scale))
+				} else if (token.children[0].props.text.includes('ol\n')) {
+					token.children[0].props.text = token.children[0].props.text.substring(3)
+					return h('ol', genEl(token.children, scale))
 				} else if (token.children[0].props.text.includes('li\n')) {
 					token.children[0].props.text = token.children[0].props.text.substring(3)
 					return h('li', genEl(token.children, scale))
