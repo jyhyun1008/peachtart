@@ -82,14 +82,15 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 	props.text = props.text.replace(/\<i\>td1\s\n\<\/i\>/g, '</i><i>tr ')
 	props.text = props.text.replace(/^\<\/i\>/gm, '<i>table <i>thead <i>tr ')
 	props.text = props.text.replace(/\<i\>td1\s$/g, '</i></i></i>')
+	props.text = props.text.replace(/\<i\>td1\s\n/g, '</i></i></i>')
 
 	// hr
 	props.text = props.text.replace(/^\-{3,}$/gm, '<i>hr </i>')
 
 	// h
-	props.text = props.text.replace(/^\#{3}(.+)/gm, '<i>h3 $1</i>')
-	props.text = props.text.replace(/^\#{2}(.+)/gm, '<i>h2 $1</i>')
-	props.text = props.text.replace(/^\#{1}(.+)/gm, '<i>h1 $1</i>')
+	props.text = props.text.replace(/^\#{3}\s(.+)/gm, '<i>h3 $1</i>')
+	props.text = props.text.replace(/^\#{2}\s(.+)/gm, '<i>h2 $1</i>')
+	props.text = props.text.replace(/^\#{1}\s(.+)/gm, '<i>h1 $1</i>')
 
 	const rootAst = (props.plain ? mfm.parseSimple : mfm.parse)(props.text);
 	console.log(rootAst)
@@ -106,7 +107,6 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 	};
 
 	const useAnim = defaultStore.state.advancedMfm && defaultStore.state.animatedMfm;
-
 	/**
 	 * Gen Vue Elements from MFM AST
 	 * @param ast MFM AST
