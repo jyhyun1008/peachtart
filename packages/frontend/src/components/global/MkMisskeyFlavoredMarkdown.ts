@@ -85,15 +85,14 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 	props.text = props.text.replace(/\<i\>td1\s\n/g, '</i></i></i>')
 
 	// hr
-	props.text = props.text.replace(/^\-{3,}$/gm, '<i>hr </i>')
+	props.text = props.text.replace(/^\-{3,}\n/gm, '<i>hr </i>')
 
 	// h
-	props.text = props.text.replace(/^\#{3}\s(.+)/gm, '<i>h3 $1</i>')
-	props.text = props.text.replace(/^\#{2}\s(.+)/gm, '<i>h2 $1</i>')
-	props.text = props.text.replace(/^\#{1}\s(.+)/gm, '<i>h1 $1</i>')
+	props.text = props.text.replace(/^\#{3}\s(.+)\n/gm, '<i>h3 $1</i>')
+	props.text = props.text.replace(/^\#{2}\s(.+)\n/gm, '<i>h2 $1</i>')
+	props.text = props.text.replace(/^\#{1}\s(.+)\n/gm, '<i>h1 $1</i>')
 
 	const rootAst = (props.plain ? mfm.parseSimple : mfm.parse)(props.text);
-	console.log(rootAst)
 
 	const validTime = (t: string | boolean | null | undefined) => {
 		if (t == null) return null;
