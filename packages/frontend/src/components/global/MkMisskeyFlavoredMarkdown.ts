@@ -496,9 +496,7 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 
 	function minmark(text: string) {
 
-		text = '<br>'+text
-
-		text = text.replace(/\<br\>/gm, '\n')
+		text = '\n'+text
 
 		if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text) || /\n\n\|([\s\S]+)\|$/.test(text) || /^\|([\s\S]+)\|$/.test(text) ) {
 			text = text.replace(/\|{5}/g, '</td><td colspan="5">')
@@ -515,17 +513,17 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 		
 		//ul
 		text = text.replace(/\>[\s]{0,1}\*\s/gm, '><ul><li>');
-		text = text.replace(/\>(\*\s[^\n]+)\<\!\-\-\s\-\-\>\n/gm, '>$1</li></ul><!-- -->\n');
+		text = text.replace(/\<ul\>\<li\>([^\n]+)\<\!\-\-\s\-\-\>\n/gm, '<ul><li>$1</li></ul><!-- -->\n');
 		text = text.replace(/\<\/ul\>\<\!\-\-\s\-\-\>\n\<\!\-\-\s\-\-\>\<ul\>/gm, '<!-- --><br/><!-- -->');
 
 		//ul
 		text = text.replace(/\>[\s]{0,1}\-\s/gm, '><ul><li>');
-		text = text.replace(/\>(\-\s[^\n]+)\<\!\-\-\s\-\-\>\n/gm, '>$1</li></ul><!-- -->\n');
+		text = text.replace(/\<ul\>\<li\>([^\n]+)\<\!\-\-\s\-\-\>\n/gm, '<ul><li>$1</li></ul><!-- -->\n');
 		text = text.replace(/\<\/ul\>\<\!\-\-\s\-\-\>\n\<\!\-\-\s\-\-\>\<ul\>/gm, '<!-- --><br/><!-- -->');
 
 		//ol
 		text = text.replace(/\>[\s]{0,1}\d\.\s/gm, '><ol><li>');
-		text = text.replace(/\>(\d\.\s[^\n]+)\<\!\-\-\s\-\-\>\n/gm, '>$1</li></ol><!-- -->\n');
+		text = text.replace(/\<ol\>\<li\>([^\n]+)\<\!\-\-\s\-\-\>\n/gm, '<ol><li>$1</li></ol><!-- -->\n');
 		text = text.replace(/\<\/ol\>\<\!\-\-\s\-\-\>\n\<\!\-\-\s\-\-\>\<ol\>/gm, '<!-- --><br/><!-- -->');
 
 		//h
@@ -538,9 +536,9 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 
 		//br
 		// text = text.replace(/\>\n\n/gm, '><br><')
-		// text = text.replace(/\>\n\</gm, '><')
+		text = text.replace(/\>\n\</gm, '><br><')
 
-		return text.substring(4)
+		return text.substring(1)
 	}
 
 
