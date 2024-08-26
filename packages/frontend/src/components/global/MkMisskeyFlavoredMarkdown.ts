@@ -572,13 +572,17 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 	let resultplain = ''
 	console.log(result)
 
-	for (var i=0; i<result.children.length; i++) {
-		if (result.children[i].props.innerHTML) {
-			resultplain += result.children[i].props.innerHTML + '<!-- -->'
-		} else if (result.children[i].props.emoji) {
-			resultplain += result.children[i].props.emoji + '<!-- -->'
-		} else {
-			resultplain += '<!-- -->'
+	if (result.children) {
+		for (var i=0; i<result.children.length; i++) {
+			if (result.children[i].props) {
+				if (result.children[i].props.innerHTML) {
+					resultplain += result.children[i].props.innerHTML + '<!-- -->'
+				} else if (result.children[i].props.emoji) {
+					resultplain += result.children[i].props.emoji + '<!-- -->'
+				} else {
+					resultplain += '<!-- -->'
+				}
+			}
 		}
 	}
 
