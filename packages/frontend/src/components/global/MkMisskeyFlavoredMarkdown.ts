@@ -513,18 +513,18 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 		
 		//ul
 		text = text.replace(/\>[\s]{0,1}\*\s/gm, '><ul><li>* ');
-		text = text.replace(/\>(\*\s[^\<]+)\>\<br\>/gm, '>$1</li></ul><br>');
-		text = text.replace(/\<\/ul\>\<br\>\<ul\>/gm, '');
+		text = text.replace(/\>(\*\s[^\<]+)\<\!\-\-\s\-\-\>\<br\>/gm, '>$1</li></ul><!-- --><br>');
+		text = text.replace(/\<\/ul\>\<\!\-\-\s\-\-\>\<br\>\<br\>\<\!\-\-\s\-\-\>\<br\>\<ul\>/gm, '');
 
 		//ul
 		text = text.replace(/\>[\s]{0,1}\-\s/gm, '><ul><li>- ');
-		text = text.replace(/\>(\-\s[^\<]+)\>\<br\>/gm, '>$1</li></ul><br>');
-		text = text.replace(/\<\/ul\>\<br\>\<ul\>/gm, '');
+		text = text.replace(/\>(\-\s[^\<]+)\<\!\-\-\s\-\-\>\<br\>\<br\>/gm, '>$1</li></ul><!-- --><br>');
+		text = text.replace(/\<\/ul\>\<\!\-\-\s\-\-\>\<br\>\<br\>\<\!\-\-\s\-\-\>\<br\>\<ul\>/gm, '');
 
 		//ol
 		text = text.replace(/\>[\s]{0,1}\d\.\s/gm, '><ol><li>1. ');
-		text = text.replace(/\>(\d\.\s[^\<]+)\>\<br\>/gm, '>$1</li></ol><br>');
-		text = text.replace(/\<\/ol\>\<br\>\<ol\>/gm, '');
+		text = text.replace(/\>(\d\.\s[^\<]+)\<\!\-\-\s\-\-\>\<br\>\<br\>/gm, '>$1</li></ol><!-- --><br>');
+		text = text.replace(/\<\/ol\>\<\!\-\-\s\-\-\>\<br\>\<br\>\<\!\-\-\s\-\-\>\<br\>\<ol\>/gm, '');
 
 		//h
 		text = text.replace(/\<br\>[\#]{3}\s(.+)/gm, '<br><h3>$1</h3>');
@@ -548,11 +548,10 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 	}, genEl(rootAst, props.rootScale ?? 1));
 
 	let resultplain = ''
-	console.log(resultplain)
 
 	if (result.children) {
 		for (var i=0; i<result.children.length; i++) {
-			if (result.children[i].type == 'br'){
+			if (result.children[i].type == 'br' || !result.children[i].props){
 				resultplain += '<br><!-- -->'
 			} else if (result.children[i].props) {
 				if (result.children[i].props.innerHTML) {
@@ -566,13 +565,14 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 		}
 	}
 
+	console.log(resultplain)
 	let resultarray = minmark(resultplain).split('<!-- -->')
 
 	console.log(minmark(resultplain))
 
 	if (result.children) {
 		for (var i=0; i<result.children.length; i++) {
-			if (result.children[i].type != 'br'){
+			if (result.children[i].type != 'br' || !result.children[i].props){
 				if (result.children[i].props.innerHTML) {
 					result.children[i].props.innerHTML = resultarray[i]
 				} else if (result.children[i].props.emoji) {
