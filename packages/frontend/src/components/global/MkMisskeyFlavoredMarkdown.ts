@@ -113,35 +113,13 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 				}
 
 				if (!props.plain) {
-					
-					if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text) || /\n\n\|([\s\S]+)\|$/.test(text) || /^\|([\s\S]+)\|$/.test(text) ) {
-						// var result = text.replace(/\|{5}/g, '</td><td colspan="5">')
-						// result = result.replace(/\|{4}/g, '</td><td colspan="4">')
-						// result = result.replace(/\|{3}/g, '</td><td colspan="3">')
-						// result = result.replace(/\|{2}/g, '</td><td colspan="2">')
-						// result = result.replace(/\|{1}/g, '</td><td>')
-						// result = result.replace(/\<td\>\n(.+)\-{2,}(.+)\n\<\/td\>/g, '</tr></thead><tbody><tr>')
-						// result = result.replace(/\<td\>\n\<\/td\>/g, '</tr><tr>')
-						// result = result.replace(/^\<\/td\>/g, '<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg); font-weight: bold;"><tr>')
-						// result = result.replace(/\n\n\<\/td\>/g, '\n<table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg); font-weight: bold;"><tr>')
-						// result = result.replace(/\<td\>\n\n/g, '</tr></tbody></table>\n')
-						// result = result.replace(/\<td\>$/g, '</tr></tbody></table>')
-						var result2: (VNode | string)[] = [];
-						for (var r of text.split('\n')) {
-							result2.push(h('br'));
-							result2.push(h('span', {innerHTML: r}));
-						}
-						result2.shift();
-						return result2;
-					} else {
-						const res: (VNode | string)[] = [];
+					const res: (VNode | string)[] = [];
 						for (const t of text.split('\n')) {
 							res.push(h('br'));
 							res.push(h('span', {innerHTML: t}));
 						}
 						res.shift();
 						return res;
-					}
 				} else {
 					return [text.replace(/\n/g, ' ')];
 				}
@@ -546,95 +524,10 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 		}
 	}).flat(Infinity) as (VNode | string)[];
 
-	function minmark(text: string) {
-
-		text = '\n'+text
-		text = text.replace(/\<br\>/gm, '\n')
-
-		if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text) || /\n\n\|([\s\S]+)\|$/.test(text) || /^\|([\s\S]+)\|$/.test(text) ) {
-			text = text.replace(/\|{5}/g, '</td><td colspan="5">')
-			text = text.replace(/\|{4}/g, '</td><td colspan="4">')
-			text = text.replace(/\|{3}/g, '</td><td colspan="3">')
-			text = text.replace(/\|{2}/g, '</td><td colspan="2">')
-			text = text.replace(/\|{1}/g, '</td><td>')
-			text = text.replace(/\<td\>\n(.+)\-{2,}(.+)\n\<\/td\>/g, '</tr></thead><tbody><tr>')
-			text = text.replace(/\<td\>\n\<\/td\>/g, '</tr><tr>')
-			text = text.replace(/\n\<\/td\>/g, '<br><span><table style="border: 1px solid var(--accent); border-spacing: 0px;"><thead style="background: var(--bg); font-weight: bold;"><tr>')
-			text = text.replace(/\<td\>\n\n\>/g, '</tr></tbody></table>\n')
-			text = text.replace(/\<td\>$/g, '</tr></tbody></table>')
-		}
-		
-		//ul
-		text = text.replace(/\>[\s]{0,1}\*\s/gm, '><ul><li>');
-		text = text.replace(/\<ul\>\<li\>([^\n]+)\<\!\-\-\s\-\-\>$/gm, '<ul><li>$1</li></ul><!-- -->');
-		text = text.replace(/\<\/ul\>\<\!\-\-\s\-\-\>\n\<\!\-\-\s\-\-\>\<ul\>/gm, '<!-- --><br/><!-- -->');
-
-		//ul
-		text = text.replace(/\>[\s]{0,1}\-\s/gm, '><ul><li>');
-		text = text.replace(/\<ul\>\<li\>([^\n]+)\<\!\-\-\s\-\-\>$/gm, '<ul><li>$1</li></ul><!-- -->');
-		text = text.replace(/\<\/ul\>\<\!\-\-\s\-\-\>\n\<\!\-\-\s\-\-\>\<ul\>/gm, '<!-- --><br/><!-- -->');
-
-		//ol
-		text = text.replace(/\>[\s]{0,1}\d\.\s/gm, '><ol><li>');
-		text = text.replace(/\<ol\>\<li\>([^\n]+)\<\!\-\-\s\-\-\>$/gm, '<ol><li>$1</li></ol><!-- -->');
-		text = text.replace(/\<\/ol\>\<\!\-\-\s\-\-\>\n\<\!\-\-\s\-\-\>\<ol\>/gm, '<!-- --><br/><!-- -->');
-
-		//h
-		text = text.replace(/\n[\#]{3}\s(.+)/gm, '\n<h3>$1</h3>');
-		text = text.replace(/\n[\#]{2}\s(.+)/gm, '\n<h2>$1</h2>');
-		text = text.replace(/\n[\#]{1}\s(.+)/gm, '\n<h1>$1</h1>');
-
-		//hr
-		text = text.replace(/\n[\-]{3}/g, '\n<hr>');
-
-		//br
-		// text = text.replace(/\>\n\n/gm, '><br><')
-		text = text.replace(/\>\n/gm, '><br>')
-
-		return text.substring(1)
-	}
-
 	let result = h('span', {
 		// https://codeday.me/jp/qa/20190424/690106.html
 		style: props.nowrap ? 'white-space: pre; word-wrap: normal; overflow: hidden; text-overflow: ellipsis;' : 'white-space: pre-wrap;',
 	}, genEl(rootAst, props.rootScale ?? 1));
-
-	// let resultplain = ''
-
-	// if (result.children) {
-	// 	for (var i=0; i<result.children.length; i++) {
-	// 		if (result.children[i].type == 'br' || !result.children[i].props){
-	// 			resultplain += '<br><!-- -->'
-	// 		} else if (result.children[i].props) {
-	// 			if (result.children[i].props.innerHTML) {
-	// 				resultplain += result.children[i].props.innerHTML + '<!-- -->'
-	// 			} else if (result.children[i].props.emoji) {
-	// 				resultplain += result.children[i].props.emoji + '<!-- -->'
-	// 			} else {
-	// 				resultplain += '<!-- -->'
-	// 			}
-	// 		}
-	// 	}
-	// }
-
-	// let resultarray = minmark(resultplain).split('<!-- -->')
-
-	// if (result.children) {
-	// 	for (var i=0; i<result.children.length; i++) {
-	// 		if (result.children[i].type != 'br' && result.children[i].props){
-	// 			if (result.children[i].props.innerHTML) {
-	// 				result.children[i].props.innerHTML = resultarray[i]
-	// 			} else if (result.children[i].props.emoji) {
-	// 				result.children[i].props.emoji = resultarray[i]
-	// 			}
-	// 		}
-	// 		if (resultarray[i] == '<br/>') {
-	// 			resultarray.splice(i, 1)
-	// 			result.children.splice(i, 1)
-	// 			i--;
-	// 		}
-	// 	}
-	// }
 
 	return result
 }
