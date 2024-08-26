@@ -75,7 +75,7 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 	console.log(props.text)
 	console.log(props)
 
-	const rootAst = props.parsedNodes ?? (props.plain ? mfm.parseSimple : mfm.parse)(props.text);
+	const rootAst = (props.plain ? mfm.parseSimple : mfm.parse)(props.text);
 
 	console.log(rootAst)
 
