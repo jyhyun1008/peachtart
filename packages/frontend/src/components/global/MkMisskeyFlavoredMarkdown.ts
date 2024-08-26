@@ -72,12 +72,18 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 	props.text = props.text.replace(/\n\d\.\s(.+)/gm, '<i>ol\n<i>li\n$1</i></i>')
 	props.text = props.text.replace(/\<\/i\>\n\<i\>ol\n/gm, '')
 
-	console.log(props.text)
-	console.log(props)
+	//table
+	props.text = props.text.replace(/\|{5}/gm, '</i><i>td5 ')
+	props.text = props.text.replace(/\|{4}/gm, '</i><i>td4 ')
+	props.text = props.text.replace(/\|{3}/gm, '</i><i>td3 ')
+	props.text = props.text.replace(/\|{2}/gm, '</i><i>td2 ')
+	props.text = props.text.replace(/\|/gm, '</i><i>td1 ')
+	props.text = props.text.replace(/\<i\>td1\s\n\<\/i\>\<i\>td1\s(.+)\-{2,}(.+)\<\/i\>\<i\>td1\s\n\<\/i\>/g, '</i></i><i>tbody <i>tr ')
+	props.text = props.text.replace(/\<i\>td1\s\n\<\/i\>/g, '</i><i>tr ')
+	props.text = props.text.replace(/^\<\/i\>/gm, '<i>table <i>thead <i>tr ')
+	props.text = props.text.replace(/\<i\>td1\s$/g, '</i></i></i>')
 
 	const rootAst = (props.plain ? mfm.parseSimple : mfm.parse)(props.text);
-
-	console.log(rootAst)
 
 	const validTime = (t: string | boolean | null | undefined) => {
 		if (t == null) return null;
@@ -159,6 +165,24 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 				} else if (token.children[0].props.text.includes('li\n')) {
 					token.children[0].props.text = token.children[0].props.text.substring(3)
 					return h('li', genEl(token.children, scale))
+				} else if (token.children[0].props.text.includes('table\s')) {
+					token.children[0].props.text = token.children[0].props.text.substring(6)
+					return h('table', genEl(token.children, scale))
+				} else if (token.children[0].props.text.includes('thead\s')) {
+					token.children[0].props.text = token.children[0].props.text.substring(6)
+					return h('thead', genEl(token.children, scale))
+				} else if (token.children[0].props.text.includes('tbody\s')) {
+					token.children[0].props.text = token.children[0].props.text.substring(6)
+					return h('tbody', genEl(token.children, scale))
+				} else if (token.children[0].props.text.includes('tr\s')) {
+					token.children[0].props.text = token.children[0].props.text.substring(3)
+					return h('tr', genEl(token.children, scale))
+				} else if (/td\d\s/.test(token.children[0].props.text)) {
+					token.children[0].props.text = token.children[0].props.text.substring(4)
+					let colspan = parseInt(token.children[0].props.text.split('td')[1].split(' ')[0])
+					return h('td', {
+						colspan: colspan,
+					}, genEl(token.children, scale))
 				} else {
 					return h('i', {
 						style: 'font-style: oblique;',
