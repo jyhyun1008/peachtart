@@ -537,7 +537,7 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 
 		//br
 		// text = text.replace(/\>\n\n/gm, '><br><')
-		text = text.replace(/\>\n\</gm, '><br><')
+		text = text.replace(/\>\n/gm, '><br>')
 
 		return text.substring(1)
 	}
@@ -581,6 +581,7 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 				}
 			}
 			if (resultarray[i] == '<br/>') {
+				resultarray.splice(i, 1)
 				result.children.splice(i, 1)
 				i--;
 			}
