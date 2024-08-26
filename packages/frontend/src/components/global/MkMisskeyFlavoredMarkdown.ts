@@ -497,6 +497,7 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 	function minmark(text: string) {
 
 		text = '\n'+text
+		text = text.replace(/\<br\>/gm, '\n')
 
 		if (/\n\n\|([\s\S]+)\|\n\n/.test(text) || /^\|([\s\S]+)\|\n\n/.test(text) || /\n\n\|([\s\S]+)\|$/.test(text) || /^\|([\s\S]+)\|$/.test(text) ) {
 			text = text.replace(/\|{5}/g, '</td><td colspan="5">')
@@ -527,12 +528,12 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 		text = text.replace(/\<\/ol\>\<\!\-\-\s\-\-\>\n\<\!\-\-\s\-\-\>\<ol\>/gm, '<!-- --><br/><!-- -->');
 
 		//h
-		text = text.replace(/\<br\>[\#]{3}\s(.+)/gm, '<br><h3>$1</h3>');
-		text = text.replace(/\<br\>[\#]{2}\s(.+)/gm, '<br><h2>$1</h2>');
-		text = text.replace(/\<br\>[\#]{1}\s(.+)/gm, '<br><h1>$1</h1>');
+		text = text.replace(/\n[\#]{3}\s(.+)/gm, '\n<h3>$1</h3>');
+		text = text.replace(/\n[\#]{2}\s(.+)/gm, '\n<h2>$1</h2>');
+		text = text.replace(/\n[\#]{1}\s(.+)/gm, '\n<h1>$1</h1>');
 
 		//hr
-		text = text.replace(/\<br\>[\-]{3}/g, '<hr>');
+		text = text.replace(/\n[\-]{3}/g, '\n<hr>');
 
 		//br
 		// text = text.replace(/\>\n\n/gm, '><br><')
