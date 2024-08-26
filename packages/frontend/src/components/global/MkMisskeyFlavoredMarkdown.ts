@@ -572,9 +572,7 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 
 	if (result.children) {
 		for (var i=0; i<result.children.length; i++) {
-			if (result.children[i].type == 'br'){
-				resultplain += '<br><!-- -->'
-			} else if (result.children[i].props) {
+			if (result.children[i].type != 'br'){
 				if (result.children[i].props.innerHTML) {
 					result.children[i].props.innerHTML += resultarray[i]
 				} else if (result.children[i].props.emoji) {
