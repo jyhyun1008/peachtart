@@ -343,7 +343,7 @@ defineExpose({
 
 .menu-item {
     height: 3em;
-    padding: 0.25em 1em;
+    padding: 0.5em 1em;
 }
 
 .menu-item > a {
@@ -355,6 +355,7 @@ defineExpose({
 
 .menu-item > a:hover {
 	color: #ff9899;
+	text-decoration: none;
 }
 
 .menu-item i{
