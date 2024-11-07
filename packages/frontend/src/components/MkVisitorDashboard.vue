@@ -32,7 +32,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 		<a href="https://blog.peacht.art/"><div class="link-items" style="background-image: url('https://r2.milkiyatelier.quest/contents/b6f02eb0-fc2e-4c55-8c63-876715ea53fc.webp');"><div>블로그</div></div></a>
 		<a href="https://d.peacht.art/"><div class="link-items" style="background-image: url('https://r2.milkiyatelier.quest/contents/cb5f497c-698d-4f57-8c69-eab395875205.webp');"><div>커뮤니티</div></div></a>
 		<a href="https://blog.peacht.art/pages/docs"><div class="link-items" style="background-image: url('https://r2.milkiyatelier.quest/contents/685911a9-d47e-4dab-a777-4635f880bc82.webp');"><div>문서</div></div></a>
-		<a href="https://blog.peacht.art/pages/shop"><div class="link-items" style="background-image: url('https://r2.milkiyatelier.quest/contents/510b846b-0f80-4257-9250-b88b1efb47bc.webp')"><div>쇼핑</div></a>
+		<a href="https://blog.peacht.art/pages/shop"><div class="link-items" style="background-image: url('https://r2.milkiyatelier.quest/contents/510b846b-0f80-4257-9250-b88b1efb47bc.webp')"><div>쇼핑</div></div></a>
 	</div>
 	<div v-if="stats" :class="$style.stats">
 		<div :class="[$style.statsItem, $style.panel]">
