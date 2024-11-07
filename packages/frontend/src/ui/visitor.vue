@@ -202,7 +202,7 @@ defineExpose({
 		top: 0;
 		left: 0;
 		width: 500px;
-		height: 100vh;
+    height: calc(100vh - 3em);
 		background: var(--MI_THEME-accent);
 
 		> .banner {
@@ -229,6 +229,8 @@ defineExpose({
 	> .mk-app-1 > .main {
 		flex: 1;
 		min-width: 0;
+    max-height: calc(100vh - 3em);
+    overflow: scroll;
 
 		> .header {
 			background: var(--MI_THEME-panel);
