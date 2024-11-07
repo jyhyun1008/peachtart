@@ -59,8 +59,6 @@ import { customEmojis } from '@/custom-emojis.js';
 import { MFM_TAGS, MFM_PARAMS } from '@@/js/const.js';
 import { $i } from '@/account.js';
 import { searchEmoji, EmojiDef } from '@/scripts/search-emoji.js';
-
-import { searchEmoji, EmojiDef } from '@/scripts/search-emoji.js';
 type EmojiDef = {
 	emoji: string;
 	name: string;
