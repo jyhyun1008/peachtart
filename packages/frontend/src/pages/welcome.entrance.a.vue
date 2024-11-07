@@ -114,7 +114,7 @@ misskeyApiGet('federation/instances', {
 
 	> .logo-wrapper {
 		position: fixed;
-		top: 36px;
+		top: calc(3em + 36px);
 		left: 36px;
 		flex: auto;
 		color: #fff;
