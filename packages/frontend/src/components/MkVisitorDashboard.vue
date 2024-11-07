@@ -29,10 +29,10 @@ SPDX-License-Identifier: AGPL-3.0-only
 		</div>
 	</div>
 	<div class="links-to-peachtart">
-		<div class="link-items"><a href="https://blog.peacht.art/">블로그</a></div>
-		<div class="link-items"><a href="https://d.peacht.art/">커뮤니티</a></div>
-		<div class="link-items"><a href="https://blog.peacht.art/pages/docs">문서</a></div>
-		<div class="link-items"><a href="https://blog.peacht.art/pages/shop">굿즈샵</a></div>
+		<a href="https://blog.peacht.art/"><div class="link-items" style="background-image: url('https://r2.milkiyatelier.quest/contents/b6f02eb0-fc2e-4c55-8c63-876715ea53fc.webp');"><div>블로그</div></div></a>
+		<a href="https://d.peacht.art/"><div class="link-items" style="background-image: url('https://r2.milkiyatelier.quest/contents/cb5f497c-698d-4f57-8c69-eab395875205.webp');"><div>커뮤니티</div></div></a>
+		<a href="https://blog.peacht.art/pages/docs"><div class="link-items" style="background-image: url('https://r2.milkiyatelier.quest/contents/685911a9-d47e-4dab-a777-4635f880bc82.webp');"><div>문서</div></div></a>
+		<a href="https://blog.peacht.art/pages/shop"><div class="link-items" style="background-image: url('https://r2.milkiyatelier.quest/contents/510b846b-0f80-4257-9250-b88b1efb47bc.webp')"><div>쇼핑</div></a>
 	</div>
 	<div v-if="stats" :class="$style.stats">
 		<div :class="[$style.statsItem, $style.panel]">
@@ -172,9 +172,32 @@ function showMenu(ev: MouseEvent) {
 	line-height: 28px;
 }
 
+.links-to-peachtart {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    gap: 16px;
+}
+
+.link-items {
+    background: var(--MI_THEME-buttonGradateB);
+    color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 12px 32px #00000040;
+    text-align: center;
+    aspect-ratio: 1 / 1;
+    position: relative;
+    overflow: hidden;
+		background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .stats {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
 	grid-gap: 16px;
 }
 
