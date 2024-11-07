@@ -202,7 +202,7 @@ function showMenu(ev: MouseEvent) {
     border-radius: 15px;
 }
 
-.texts:hover {
+.linkItems:hover .texts {
 		background: #000;
 		text-decoration: none;
 }
