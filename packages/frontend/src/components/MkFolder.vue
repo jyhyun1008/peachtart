@@ -38,9 +38,15 @@ SPDX-License-Identifier: AGPL-3.0-only
 			>
 				<KeepAlive>
 					<div v-show="opened">
-						<MkSpacer :marginMin="14" :marginMax="22">
+						<MkSpacer v-if="withSpacer" :marginMin="14" :marginMax="22">
 							<slot></slot>
 						</MkSpacer>
+						<div v-else>
+							<slot></slot>
+						</div>
+						<div v-if="$slots.footer" :class="$style.footer">
+							<slot name="footer"></slot>
+						</div>
 					</div>
 				</KeepAlive>
 			</Transition>
@@ -56,11 +62,12 @@ import { defaultStore } from '@/store.js';
 const props = withDefaults(defineProps<{
 	defaultOpen?: boolean;
 	maxHeight?: number | null;
+	withSpacer?: boolean;
 	className?: string;
 }>(), {
 	defaultOpen: false,
 	maxHeight: null,
-	className: 'MkFolder',
+	withSpacer: true,
 });
 
 const getBgColor = (el: HTMLElement) => {
@@ -112,7 +119,7 @@ function toggle() {
 onMounted(() => {
 	const computedStyle = getComputedStyle(document.documentElement);
 	const parentBg = getBgColor(rootEl.value!.parentElement!);
-	const myBg = computedStyle.getPropertyValue('--panel');
+	const myBg = computedStyle.getPropertyValue('--MI_THEME-panel');
 	bgSame.value = parentBg === myBg;
 });
 </script>
@@ -138,15 +145,15 @@ onMounted(() => {
 	width: 100%;
 	box-sizing: border-box;
 	padding: 9px 12px 9px 12px;
-	background: var(--buttonBg);
-	-webkit-backdrop-filter: var(--blur, blur(15px));
-	backdrop-filter: var(--blur, blur(15px));
+	background: var(--MI_THEME-folderHeaderBg);
+	-webkit-backdrop-filter: var(--MI-blur, blur(15px));
+	backdrop-filter: var(--MI-blur, blur(15px));
 	border-radius: 6px;
 	transition: border-radius 0.3s;
 
 	&:hover {
 		text-decoration: none;
-		background: var(--buttonHoverBg);
+		background: var(--MI_THEME-folderHeaderHoverBg);
 	}
 
 	&:focus-within {
@@ -154,8 +161,8 @@ onMounted(() => {
 	}
 
 	&.active {
-		color: var(--accent);
-		background: var(--buttonHoverBg);
+		color: var(--MI_THEME-accent);
+		background: var(--MI_THEME-folderHeaderHoverBg);
 	}
 
 	&.opened {
@@ -169,7 +176,7 @@ onMounted(() => {
 }
 
 .headerLower {
-	color: var(--fgTransparentWeak);
+	color: var(--MI_THEME-fgTransparentWeak);
 	font-size: .85em;
 	padding-left: 4px;
 }
@@ -203,13 +210,13 @@ onMounted(() => {
 }
 
 .headerTextSub {
-	color: var(--fgTransparentWeak);
+	color: var(--MI_THEME-fgTransparentWeak);
 	font-size: .85em;
 }
 
 .headerRight {
 	margin-left: auto;
-	color: var(--fgTransparentWeak);
+	color: var(--MI_THEME-fgTransparentWeak);
 	white-space: nowrap;
 }
 
@@ -218,12 +225,26 @@ onMounted(() => {
 }
 
 .body {
-	background: var(--panel);
+	background: var(--MI_THEME-panel);
 	border-radius: 0 0 6px 6px;
 	container-type: inline-size;
 
 	&.bgSame {
-		background: var(--bg);
+		background: var(--MI_THEME-bg);
 	}
+}
+
+.footer {
+	position: sticky !important;
+	z-index: 1;
+	bottom: var(--MI-stickyBottom, 0px);
+	left: 0;
+	padding: 12px;
+	background: var(--MI_THEME-acrylicBg);
+	-webkit-backdrop-filter: var(--MI-blur, blur(15px));
+	backdrop-filter: var(--MI-blur, blur(15px));
+	background-size: auto auto;
+	background-image: repeating-linear-gradient(135deg, transparent, transparent 5px, var(--MI_THEME-panel) 5px, var(--MI_THEME-panel) 10px);
+	border-radius: 0 0 6px 6px;
 }
 </style>

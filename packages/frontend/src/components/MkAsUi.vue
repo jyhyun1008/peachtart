@@ -58,19 +58,18 @@ SPDX-License-Identifier: AGPL-3.0-only
 			</template>
 	  </div>
 	</MkFolder>
-	<MkCustomChart v-else-if="c.type === 'customChart'"  :chartId="c.chartId" :title="c.title" :keys="c.keys" :values="c.values" :label="c.label" :className="c.className" />
-	<div v-else-if="c.type === 'container'" :class="[$style.container, { [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace' }]" :style="{ height: c.height ?? auto, textAlign: c.align ?? null, backgroundColor: c.bgColor ?? null, color: c.fgColor ?? null, borderWidth: c.borderWidth ? `${c.borderWidth}px` : 0, borderColor: c.borderColor ?? 'var(--divider)', padding: c.padding ? `${c.padding}px` : 0, borderRadius: c.rounded ? '8px' : 0 }">
-		<div  :class="['_container', c.className]" :style="{ backgroundImage: 'url('+c.img+')', height: 'inherit', backgroundSize: 'cover' }" v-bind:style="c.customCss" >
-			<template v-for="child in c.children" :key="child">
-				<MkAsUi v-if="!g(child).hidden" :component="g(child)" :components="props.components" :size="size" :align="c.align"/>
-			</template>
-		</div>
+<MkCustomChart v-else-if="c.type === 'customChart'"  :chartId="c.chartId" :title="c.title" :keys="c.keys" :values="c.values" :label="c.label" :className="c.className" />
+<div v-else-if="c.type === 'container'" :class="[$style.container, { [$style.fontSerif]: c.font === 'serif', [$style.fontMonospace]: c.font === 'monospace' }]" :style="containerStyle">
+	<div :class="['_container', c.className]" :style="{ backgroundImage: 'url('+c.img+')', height: 'inherit', backgroundSize: 'cover' }" v-bind:style="c.customCss" ></div>
+		<template v-for="child in c.children" :key="child">
+			<MkAsUi v-if="!g(child).hidden" :component="g(child)" :components="props.components" :size="size" :align="c.align"/>
+		</template>
 	</div>
 </div>
 </template>
 
 <script lang="ts" setup>
-import { Ref, ref } from 'vue';
+import { Ref, ref, computed } from 'vue';
 import * as os from '@/os.js';
 import MkButton from '@/components/MkButton.vue';
 import MkInput from '@/components/MkInput.vue';
@@ -103,6 +102,29 @@ function g(id) {
 		children: [],
 	} as AsUiRoot;
 }
+
+const containerStyle = computed(() => {
+	if (c.type !== 'container') return undefined;
+
+	// width, color, styleのうち一つでも指定があれば、枠線がちゃんと表示されるようにwidthとstyleのデフォルト値を設定
+	// radiusは単に角を丸める用途もあるため除外
+	const isBordered = c.borderWidth ?? c.borderColor ?? c.borderStyle;
+
+	const border = isBordered ? {
+		borderWidth: c.borderWidth ?? '1px',
+		borderColor: c.borderColor ?? 'var(--MI_THEME-divider)',
+		borderStyle: c.borderStyle ?? 'solid',
+	} : undefined;
+
+	return {
+		textAlign: c.align,
+		backgroundColor: c.bgColor,
+		color: c.fgColor,
+		padding: c.padding ? `${c.padding}px` : 0,
+		borderRadius: (c.borderRadius ?? (c.rounded ? 8 : 0)) + 'px',
+		...border,
+	};
+});
 
 const valueForSwitch = ref('default' in c && typeof c.default === 'boolean' ? c.default : false);
 
@@ -157,7 +179,7 @@ function openPostForm() {
 }
 
 .postForm {
-	background: var(--bg);
+	background: var(--MI_THEME-bg);
 	border-radius: 8px;
 }
 </style>
