@@ -11,8 +11,8 @@ SPDX-License-Identifier: AGPL-3.0-only
 		</div>
 		<div class="mid-menu">
 			<div class="menu-item"><a href="https://blog.peacht.art">Blog</a></div>
-			<div class="menu-item"><a href="https://docs.peacht.art/">Docs</a></div>
-			<div class="menu-item"><a href="https://marpple.shop/kr/peachtart">Shop</a></div>
+			<div class="menu-item"><a href="https://blog.peacht.art/pages/docs">Docs</a></div>
+			<div class="menu-item"><a href="https://blog.peacht.art/pages/shop">Shop</a></div>
 		</div>
 	</div>
 	<div class="mk-app-1">

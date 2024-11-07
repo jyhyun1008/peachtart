@@ -28,6 +28,12 @@ SPDX-License-Identifier: AGPL-3.0-only
 			</div>
 		</div>
 	</div>
+	<div class="links-to-peachtart">
+		<div class="link-items"><a href="https://blog.peacht.art/">블로그</a></div>
+		<div class="link-items"><a href="https://d.peacht.art/">커뮤니티</a></div>
+		<div class="link-items"><a href="https://blog.peacht.art/pages/docs">문서</a></div>
+		<div class="link-items"><a href="https://blog.peacht.art/pages/shop">굿즈샵</a></div>
+	</div>
 	<div v-if="stats" :class="$style.stats">
 		<div :class="[$style.statsItem, $style.panel]">
 			<div :class="$style.statsItemLabel">{{ i18n.ts.users }}</div>
