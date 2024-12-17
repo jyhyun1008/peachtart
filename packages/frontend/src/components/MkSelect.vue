@@ -45,7 +45,7 @@ import { useInterval } from '@@/js/use-interval.js';
 import type { MenuItem } from '@/types/menu.js';
 import * as os from '@/os.js';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
 	modelValue: string | number | null;
 	required?: boolean;
 	readonly?: boolean;
