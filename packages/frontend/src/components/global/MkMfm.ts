@@ -81,7 +81,7 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 
 	//table
 	//표로 인식되는 행
-	props.text = props.text.replace(/\|(.+)\|/gm, '<table>|$1|</table>')
+	props.text = props.text.replace(/^\|(.+)\|$/gm, '<table>|$1|</table>')
 	props.text = props.text.replace(/<table>[\s\S]*?<\/table>/g, (match) => {
 		return match.replace(/\|/g, '</i><i>td1 ');
 	});
