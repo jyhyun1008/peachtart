@@ -80,13 +80,18 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 	props.text = props.text.replace(/\<\/i\>\n/gm, '</i>')
 
 	//table
-	props.text = props.text.replace(/\|{5}/gm, '</i><i>td5 ')
-	props.text = props.text.replace(/\|{4}/gm, '</i><i>td4 ')
-	props.text = props.text.replace(/\|{3}/gm, '</i><i>td3 ')
-	props.text = props.text.replace(/\|{2}/gm, '</i><i>td2 ')
-	props.text = props.text.replace(/\|/gm, '</i><i>td1 ')
-	props.text = props.text.replace(/\<i\>td1\s\n\<\/i\>\<i\>td1\s(.+)\-{2,}(.+)\<\/i\>\<i\>td1\s\n\<\/i\>/g, '</i></i><i>tbody <i>tr ')
-	props.text = props.text.replace(/\<i\>td1\s\n\<\/i\>/g, '</i><i>tr ')
+	//표로 인식되는 행
+	props.text = props.text.replace(/\|(.+)\|/gm, '<table>|$1|</table>')
+	props.text = props.text.replace(/<table>[\s\S]*?<\/table>/g, (match) => {
+		return match.replace(/\|/g, '</i><i>td1 ');
+	});
+	props.text = props.text.replace(/\<\/i\>\<i\>td1\s\<\/i\>\<i\>td1\s\<\/i\>\<i\>td1\s\<\/i\>\<i\>td1\s\<\/i\>\<i\>td1\s/gm, '</i><i>td5 ')
+	props.text = props.text.replace(/\<\/i\>\<i\>td1\s\<\/i\>\<i\>td1\s\<\/i\>\<i\>td1\s\<\/i\>\<i\>td1\s/gm, '</i><i>td4 ')
+	props.text = props.text.replace(/\<\/i\>\<i\>td1\s\<\/i\>\<i\>td1\s\<\/i\>\<i\>td1/gm, '</i><i>td3 ')
+	props.text = props.text.replace(/\<\/i\>\<i\>td1\s\<\/i\>\<i\>td1\s/gm, '</i><i>td2 ')
+	//props.text = props.text.replace(/\|/gm, '</i><i>td1 ')
+	props.text = props.text.replace(/\<i\>td1\s<\/table>\n<table>\<\/i\>\<i\>td1\s(.+)\-{2,}(.+)\<\/i\>\<i\>td1\s<\/table>\n<table>\<\/i\>/g, '</i></i><i>tbody <i>tr ')
+	props.text = props.text.replace(/\<i\>td1\s<\/table>\n<table>\<\/i\>/g, '</i><i>tr ')
 	props.text = props.text.replace(/^\<\/i\>/gm, '<i>table <i>thead <i>tr ')
 	props.text = props.text.replace(/\<i\>td1\s$/g, '</i></i></i>')
 	props.text = props.text.replace(/\<i\>td1\s\n/g, '</i></i></i>')
