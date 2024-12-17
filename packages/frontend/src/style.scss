@@ -780,7 +780,7 @@ input:hover {
 
 .xcukqgmh > .main {
     padding: 32px;
-    background:  var(--navBg);
+    background:  var(--MI_THEME-navBg);
     border-radius: 10px;
 }
 
@@ -792,7 +792,7 @@ input:hover {
 
 .xcukqgmh .x5yeR {
     text-align: justify;
-    border: 1px solid var(--accent);
+    border: 1px solid var(--MI_THEME-accent);
     border-radius: 15px;
 }
 
@@ -967,7 +967,7 @@ table {
 }
 
 table a {
-	color: var(--accent);
+	color: var(--MI_THEME-accent);
 }
 
 .banner {
