@@ -1007,13 +1007,13 @@ table a {
 
 article table, .xEd72.xoGjR table {
 	border-radius: 10px;
-	border: 1px var(--accent) solid;
+	border: 1px var(--MI_THEME-accent) solid;
   border-spacing: 0;
 }
 
 article thead>tr>td, .xEd72.xoGjR thead>tr>td {
-	border-bottom: 1px var(--accent) solid !important;
-	background-color: var(--bg);
+	border-bottom: 1px var(--MI_THEME-accent) solid !important;
+	background-color: var(--MI_THEME-bg);
 	font-weight: 700;
   border-radius: 10px 10px 0 0;
 }
