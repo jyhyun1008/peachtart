@@ -58,7 +58,7 @@ const props = defineProps<{
 	className?: string;
 }>(), {
 	className: 'MkSelect',
-};
+});
 
 const emit = defineEmits<{
 	(ev: 'update:modelValue', value: string | number | null): void;
