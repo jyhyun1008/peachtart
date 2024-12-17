@@ -93,7 +93,7 @@ export default function (props: MfmProps, { emit }: { emit: SetupContext<MfmEven
 	props.text = props.text.replace(/\<i\>td1\s<\/table>\n<table>\<\/i\>\<i\>td1\s(.+)\-{2,}(.+)\<\/i\>\<i\>td1\s<\/table>\n<table>\<\/i\>/g, '</i></i><i>tbody <i>tr ')
 	props.text = props.text.replace(/\<i\>td1\s<\/table>\n<table>\<\/i\>/g, '</i><i>tr ')
 	props.text = props.text.replace(/^<table>\<\/i\>/gm, '<i>table <i>thead <i>tr ')
-	props.text = props.text.replace(/\<i\>td1\s<\/table>$/g, '</i></i></i>')
+	props.text = props.text.replace(/\<i\>td1\s<\/table>$/gm, '</i></i></i>')
 	props.text = props.text.replace(/\<i\>td1\s<\/table>\n<table>/g, '</i></i></i>')
 
 	// hr
