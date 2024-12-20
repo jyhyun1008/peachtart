@@ -98,6 +98,12 @@ const emojiDb = computed(() => {
 					url: char2path(x.char),
 				});
 			}
+		} else {
+			unicodeEmojiDB.push({
+				name: x.name,
+				emoji: x.char,
+				url: char2path(x.char),
+			});
 		}
 	}
 
