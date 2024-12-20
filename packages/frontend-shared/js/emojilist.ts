@@ -19,7 +19,7 @@ export const emojilist: UnicodeEmojiDef[] = _emojilist.map(x => ({
 	name: x[1] as string,
 	char: x[0] as string,
 	category: unicodeEmojiCategories[x[2] as number],
-	aliases: [x[3]]
+	aliases: typeof x[3] === 'string' ? x[3].split(' ') : []
 }));
 
 const unicodeEmojisMap = new Map<string, UnicodeEmojiDef>(
