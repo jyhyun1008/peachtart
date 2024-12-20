@@ -89,12 +89,16 @@ const emojiDb = computed(() => {
 	}));
 
 	for (const x of lib) {
-		unicodeEmojiDB.push({
-					name: x.aliases[0],
+		if (x.aliases) {
+			for (const alias of x.aliases) {
+				unicodeEmojiDB.push({
+					name: alias,
 					aliasOf: x.name,
 					emoji: x.char,
-		      url: char2path(x.char),
-		});
+					url: char2path(x.char),
+				});
+			}
+		}
 	}
 
 	for (const index of Object.values(defaultStore.state.additionalUnicodeEmojiIndexes)) {
