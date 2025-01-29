@@ -33,6 +33,7 @@ type NodeInfo = {
 			email?: unknown;
 		};
 		themeColor?: unknown;
+		googleAdsenseAccount?: 'ca-pub-8137996832293128';
 	};
 };
 
