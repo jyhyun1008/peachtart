@@ -12,7 +12,6 @@ import { misskeyApi } from '@/scripts/misskey-api.js';
 import { $i } from '@/account.js';
 import { miLocalStorage } from '@/local-storage.js';
 import { customEmojis } from '@/custom-emojis.js';
-import { url, lang } from '@@/js/config.js';
 // import { nyaize } from '@/scripts/nyaize.js';
 import * as sound from '@/scripts/sound.js';
 
