@@ -58,6 +58,7 @@ import { defaultStore } from '@/store.js';
 import { i18n } from '@/i18n.js';
 import { miLocalStorage } from '@/local-storage.js';
 import { customEmojis } from '@/custom-emojis.js';
+import { $i } from '@/account.js';
 import { searchEmoji } from '@/scripts/search-emoji.js';
 
 function isMuted(emojiName){
