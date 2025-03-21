@@ -1,11 +1,24 @@
 @charset "utf-8";
 @import url('https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css');
 @import url('https://cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.530/neodgm_code/style.css');
+
 @font-face {
-	font-family: 'HBIOS-SYS';
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/HBIOS-SYS.woff2') format('woff2');
+	font-family: 'NEXON Lv1 Gothic OTF';
+	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
+}
+
+@font-face {
+	font-family: 'NEXON Lv1 Gothic OTF';
+	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF Bold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'MaruBuri';
+	src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.eot);
+	src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff2) format("woff2"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.ttf) format("truetype");
 }
 @font-face {
 	font-family: 'DOSPilgiMedium';
@@ -59,7 +72,7 @@ html {
 	accent-color: var(--MI_THEME-accent);
 	overflow: auto;
 	overflow-wrap: break-word;
-	font-family: Galmuri11, 'Hiragino Maru Gothic Pro', "BIZ UDGothic", Roboto, HelveticaNeue, Arial, sans-serif;
+	font-family: 'NEXON Lv1 Gothic OTF', 'Hiragino Maru Gothic Pro', "BIZ UDGothic", Roboto, HelveticaNeue, Arial, sans-serif;
 	font-size:14px;
 	line-height: 1.35;
 	text-size-adjust: 100%;
@@ -481,7 +494,7 @@ rt {
 }
 
 ._monospace {
-	font-family: 'NeoDunggeunmo Code', Fira code, Fira Mono, Consolas, Menlo, Courier, monospace !important;
+	font-family: Fira code, Fira Mono, Consolas, Menlo, Courier, monospace !important;
 	font-feature-settings: 'calt' on;
 }
 
@@ -495,15 +508,15 @@ rt {
 }
 
 code {
-	font-family: 'NeoDunggeunmo Code', Fira code, Fira Mono, Consolas, Menlo, Courier, monospace !important;
+	font-family: Fira code, Fira Mono, Consolas, Menlo, Courier, monospace !important;
 }
 
 pre {
-	font-family: 'NeoDunggeunmo Code', Fira code, Fira Mono, Consolas, Menlo, Courier, monospace !important;
+	font-family: Fira code, Fira Mono, Consolas, Menlo, Courier, monospace !important;
 }
 
 .xuT74 {
-font-family: 'NeoDunggeunmo Code' !important;
+font-family: Fira code, Fira Mono, Consolas, Menlo, Courier, monospace !important;
 }
 
 .prism-editor__textarea:focus {
@@ -821,7 +834,7 @@ input:hover {
 // font family: serif
 
 .xlF22 {
-	font-family: 'HBIOS-SYS', serif;
+	font-family: 'MaruBuri', serif;
 }
 
 // kokokara ~~ custom css의 기능들입니다
