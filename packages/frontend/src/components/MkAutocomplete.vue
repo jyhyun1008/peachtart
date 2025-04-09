@@ -58,7 +58,7 @@ import { store } from '@/store.js';
 import { i18n } from '@/i18n.js';
 import { miLocalStorage } from '@/local-storage.js';
 import { customEmojis } from '@/custom-emojis.js';
-import { $i } from '@/account.js';
+import { $i } from '@/i.js';
 import { searchEmoji } from '@/utility/search-emoji.js';
 import { prefer } from '@/preferences.js';
 

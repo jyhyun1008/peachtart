@@ -25,7 +25,7 @@ import { TransitionGroup } from 'vue';
 import XReaction from '@/components/MkReactionsViewer.reaction.vue';
 import { prefer } from '@/preferences.js';
 import { DI } from '@/di.js';
-import { $i } from '@/account.js';
+import { $i } from '@/i.js';
 
 const props = withDefaults(defineProps<{
 	note: Misskey.entities.Note;
