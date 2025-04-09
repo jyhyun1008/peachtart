@@ -13,7 +13,7 @@ import { $i } from '@/i.js';
 import { miLocalStorage } from '@/local-storage.js';
 import { customEmojis } from '@/custom-emojis.js';
 // import { nyaize } from '@/scripts/nyaize.js';
-import * as sound from '@/scripts/sound.js';
+import * as sound from '@/utility/sound.js';
 
 // 사전 선언.
 
