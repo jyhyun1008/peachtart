@@ -89,7 +89,9 @@ onMounted(() => {
 
 <style>
 .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+</style>
 
+<style lang="scss" module>
 .root {
 	display: flex;
 	height: 100dvh;
@@ -142,78 +144,6 @@ onMounted(() => {
 	display: flex;
 	flex-direction: column;
 	height: 100dvh;
-}
-
-#top-menu {
-    box-sizing: border-box;
-    width: 100vw;
-    height: 3em;
-    display: flex;
-    background: var(--MI_THEME-accent);
-    position: fixed;
-    z-index: 9999999;
-    top:0;
-    left: 0;
-    padding: 0 1em;
-    color: #fff;
-    align-items: center;
-    justify-content: space-between;
-    overflow: hidden;
-    box-shadow: 5px 5px 5px #00000011;
-}
-
-#top-menu img {
-    height: 3em !important;
-		width: 3em !important;
-}
-
-.mid-menu {
-    height: 3em;
-    display: flex;
-}
-
-.logo-item:hover {
-    opacity: 0.6;
-}
-
-.menu-item {
-    height: 3em;
-    padding: 0.5em 1em;
-}
-
-.menu-item > a {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    transition: color .5s;
-}
-
-.menu-item > a:hover {
-	color: var(--MI_THEME-accent);
-	text-decoration: none;
-}
-
-.menu-item i{
-    font-size: 1.5em;
-}
-
-.menu-item .fullname {
-	display: none;
-}
-
-.menu-item:hover {
-    background: #ffddcc;
-}
-
-.menu-item:hover .fullname {
-	display: inline;
-}
-
-.mk-app-1 {
-	height: calc( 100vh - 3em );
-	margin-top: 3em;
-  display: flex;
-    width: 100%;
 }
 
 
