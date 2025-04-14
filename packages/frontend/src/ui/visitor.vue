@@ -151,7 +151,7 @@ onMounted(() => {
     width: 100vw;
     height: 3em;
     display: flex;
-    background: #ff9899;
+    background: var(--MI_THEME-accent);
     position: fixed;
     z-index: 9999999;
     top:0;
@@ -165,7 +165,8 @@ onMounted(() => {
 }
 
 #top-menu img {
-    height: 3em;
+    height: 3em !important;
+		width: 3em !important;
 }
 
 .mid-menu {
@@ -190,7 +191,7 @@ onMounted(() => {
 }
 
 .menu-item > a:hover {
-	color: #ff9899;
+	color: var(--MI_THEME-accent);
 	text-decoration: none;
 }
 
